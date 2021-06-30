@@ -8,7 +8,6 @@ wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
-!wp-content/uploads/
 
 # ignore these plugins
 # wp-content/plugins/hello.php
