@@ -1,0 +1,3666 @@
+# Copyright (C) 2021 Automattic
+# This file is distributed under the same license as the WooCommerce Payments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Payments 2.5.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/woocommerce-payments\n"
+"POT-Creation-Date: 2021-06-02 13:38:34+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: node-wp-i18n 1.2.5\n"
+
+#. Plugin Name of the plugin/theme
+#: client/components/payment-methods-list/delete-button.js:95
+#: client/connect-account-page-variant/strings.js:11
+#: client/connect-account-page/strings.js:9
+#: client/index.js:36
+#: client/settings/payment-method-settings/index.js:78
+msgid "WooCommerce Payments"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin-sections-overwrite.php:82
+msgid "All payment methods"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:76
+#: client/index.js:160
+msgid "Payments"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:100
+#: client/index.js:53
+msgid "Overview"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:113
+#: client/index.js:76
+msgid "Deposits"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:126
+#: client/index.js:101
+#: client/transactions/list/index.js:406
+msgid "Transactions"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:139
+#: client/disputes/index.js:181
+#: client/index.js:136
+msgid "Disputes"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:157
+#: includes/admin/class-wc-payments-admin.php:167
+#: includes/class-wc-payments.php:464
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:177
+#: client/index.js:78
+#: client/transactions/list/deposit.js:32
+msgid "Deposit details"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:185
+#: client/index.js:103
+msgid "Payment details"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:193
+#: client/index.js:125
+msgid "Dispute details"
+msgstr ""
+
+#: includes/admin/class-wc-payments-admin.php:201
+#: client/disputes/details/actions.js:45
+#: client/disputes/evidence/index.js:234
+#: client/index.js:138
+msgid "Challenge dispute"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-orders-controller.php:73
+msgid "Order not found"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-orders-controller.php:80
+msgid "The payment cannot be captured"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-orders-controller.php:107
+#. translators: %s: the error message.
+msgid "Payment capture failed to complete with the following message: %s"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-orders-controller.php:108
+msgid "Unknown error"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-orders-controller.php:122
+msgid "Unexpected server error"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:65
+msgid "If WooCommerce Payments should be enabled."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:70
+msgid "Payment method IDs that should be enabled. Other methods will be disabled."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:79
+msgid "If WooCommerce Payments manual capture of charges should be enabled."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:84
+msgid "WooCommerce Payments test mode setting."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:89
+msgid ""
+"WooCommerce Payments bank account descriptor to be displayed in customers' "
+"bank accounts."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:94
+msgid "If WooCommerce Payments express checkouts should be enabled."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-settings-controller.php:99
+msgid "Express checkout locations that should be enabled."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-tos-controller.php:108
+msgid "ToS accept parameter is missing"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-webhook-controller.php:181
+#: includes/admin/class-wc-rest-payments-webhook-controller.php:224
+#. translators: %1: charge ID
+msgid "Could not find order via charge ID: %1$s"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-webhook-controller.php:191
+#. translators: %1: the refund amount, %2: ID of the refund
+msgid ""
+"A refund of %1$s was <strong>unsuccessful</strong> using WooCommerce "
+"Payments (<code>%2$s</code>)."
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-webhook-controller.php:255
+#. translators: %1: charge ID
+msgid "Could not find order via intent ID: %1$s"
+msgstr ""
+
+#: includes/admin/class-wc-rest-payments-webhook-controller.php:281
+#. translators: %1: ID being fetched
+msgid "%1$s not found in array"
+msgstr ""
+
+#: includes/class-payment-information.php:104
+msgid "Invalid payment method. Please input a new card number."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:113
+msgid "Accept payments via credit card."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:114
+msgid "Credit card"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:115
+msgid "Enter your card details"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:124
+#: includes/class-wc-payment-gateway-wcpay.php:177
+msgid "Enable/disable"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:125
+#: client/settings/general-settings/index.js:42
+msgid "Enable WooCommerce Payments"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:135
+#: client/settings/general-settings/index.js:72
+msgid "Customer bank statement"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:137
+msgid ""
+"Edit the way your store name appears on your customers’ bank statements "
+"(read more about requirements <a>here</a>)."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:142
+msgid "Manual capture"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:143
+msgid "Issue an authorization on checkout, and capture later."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:145
+#: client/settings/general-settings/index.js:57
+msgid ""
+"Charge must be captured within 7 days of authorization, otherwise the "
+"authorization and order will be canceled."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:149
+msgid "Saved Cards"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:150
+msgid "Enable Payment via Saved Cards"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:152
+msgid ""
+"If enabled, users will be able to pay with a saved card during checkout. "
+"Card details are saved on our platform, not on your store."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:157
+#: client/settings/test-mode-settings/index.js:22
+msgid "Test mode"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:158
+msgid "Enable test mode"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:160
+msgid "Simulate transactions using test card numbers."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:165
+msgid "Debug log"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:166
+msgid "When enabled debug notes will be added to the log."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:172
+msgid "Payment request buttons"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:180
+#. translators: 1) br tag 2) Stripe anchor tag 3) Apple anchor tag
+msgid ""
+"Enable payment request buttons (Apple Pay, Google Pay, and more). %1$sBy "
+"using Apple Pay, you agree to %2$s and %3$s's terms of service."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:186
+msgid ""
+"If enabled, users will be able to pay using Apple Pay, Google Pay or the "
+"Payment Request API if supported by the browser."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:191
+msgid "Button type"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:193
+msgid "Select the button type you would like to show."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:197
+msgid "Default"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:198
+#: client/settings/payment-method-settings/digital-wallets-settings.js:34
+msgid "Buy"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:199
+#: client/settings/payment-method-settings/digital-wallets-settings.js:38
+msgid "Donate"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:200
+msgid "Branded"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:201
+msgid "Custom"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:205
+msgid "Button theme"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:207
+msgid "Select the button theme you would like to show."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:211
+#: client/settings/payment-method-settings/digital-wallets-settings.js:48
+msgid "Dark"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:212
+#: client/settings/payment-method-settings/digital-wallets-settings.js:52
+msgid "Light"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:213
+msgid "Light-Outline"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:217
+msgid "Button height"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:219
+msgid ""
+"Enter the height you would like the button to be in pixels. Width will "
+"always be 100%."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:224
+msgid "Custom button label"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:226
+msgid "Enter the custom text you would like the button to have."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:227
+msgid "Buy now"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:231
+msgid "Branded button format"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:233
+msgid "Select the branded button label format."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:237
+msgid "Logo only"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:238
+msgid "Text and logo"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:242
+msgid "Button locations"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:244
+msgid "Select where you would like to display the button."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:252
+msgid "Product"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:253
+#: client/settings/digital-wallets/index.js:139
+msgid "Cart"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:254
+#: client/settings/digital-wallets/index.js:114
+msgid "Checkout"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:257
+msgid "Select pages"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:264
+#: client/settings/settings-manager/index.js:28
+msgid "Payments accepted on checkout"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:276
+msgid "Enable/disable Giropay"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:277
+msgid "Enable WooCommerce Giropay"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:287
+msgid "Enable/disable SEPA"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:288
+msgid "Enable WooCommerce SEPA Direct Debit"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:298
+msgid "Enable/disable Sofort"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:299
+msgid "Enable WooCommerce Sofort"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:437
+msgid "Test mode active: "
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:438
+msgid ""
+"All transactions are simulated. Customers can't make real purchases through "
+"WooCommerce Payments."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:496
+msgid ""
+"There was a problem processing the payment. Please check your email inbox "
+"and refresh the page to try again."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:546
+msgid "Save payment information to my account for future purchases."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:634
+#. translators: link to Stripe testing page
+msgid ""
+"<strong>Test mode:</strong> use the test VISA card 4242424242424242 with "
+"any expiry date and CVC, or any test card numbers listed <a>here</a>."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:670
+#: includes/payment-methods/class-giropay-payment-gateway.php:191
+#: includes/payment-methods/class-sepa-payment-gateway.php:126
+#: includes/payment-methods/class-sofort-payment-gateway.php:191
+#: includes/payment-methods/class-upe-payment-gateway.php:346
+msgid ""
+"An error was encountered when preparing the payment form. Please try again "
+"later."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:694
+#: includes/payment-methods/class-giropay-payment-gateway.php:236
+#: includes/payment-methods/class-sofort-payment-gateway.php:236
+msgid ""
+"There was an error while processing the payment. If you continue to see "
+"this notice, please contact the admin."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:696
+#: includes/class-wc-payment-gateway-wcpay.php:1658
+msgid ""
+"We're not able to process this payment. Please refresh the page and try "
+"again."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:707
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:155
+#: includes/payment-methods/class-giropay-payment-gateway.php:247
+#: includes/payment-methods/class-sofort-payment-gateway.php:247
+#. translators: %1: the failed payment amount, %2: error message
+msgid ""
+"A payment of %1$s <strong>failed</strong> to complete with the following "
+"message: <code>%2$s</code>."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:839
+#. translators: %1: the last 4 digit of the credit card
+msgid "Payment method is changed to: <strong>Credit Card ending in %1$s</strong>."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:973
+#: includes/class-wc-payment-gateway-wcpay.php:1712
+#. translators: %1: the successfully charged amount, %2: transaction ID of the
+#. payment
+msgid ""
+"A payment of %1$s was <strong>successfully charged</strong> using "
+"WooCommerce Payments (<a>%2$s</a>)."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:992
+#: includes/class-wc-payment-gateway-wcpay.php:1734
+#. translators: %1: the authorized amount, %2: transaction ID of the payment
+msgid ""
+"A payment of %1$s was <strong>authorized</strong> using WooCommerce "
+"Payments (<a>%2$s</a>)."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1011
+#. translators: %1: the authorized amount, %2: transaction ID of the payment
+msgid ""
+"A payment of %1$s was <strong>started</strong> using WooCommerce Payments "
+"(<code>%2$s</code>)."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1099
+#. translators: an error message which will appear if a user tries to refund an
+#. order which is has been authorized but not yet charged.
+msgid ""
+"This payment is not captured yet. To cancel this order, please go to 'Order "
+"Actions' > 'Cancel Authorization'. To proceed with a refund, please go to "
+"'Order Actions' > 'Capture charge' to charge the payment card, and then "
+"trigger a refund via the 'Refund' button."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1117
+#. translators: %1: the successfully charged amount, %2: error message
+msgid "A refund of %1$s failed to complete: %2$s"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1132
+#. translators: %1: the successfully charged amount
+msgid "A refund of %1$s was successfully processed using WooCommerce Payments."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1138
+#. translators: %1: the successfully charged amount, %2: reason
+msgid ""
+"A refund of %1$s was successfully processed using WooCommerce Payments. "
+"Reason: %2$s"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1166
+#: client/settings/test-mode-settings/index.js:29
+msgid ""
+"Dev mode is active so all transactions will be in test mode. This setting "
+"is only available to live accounts."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1171
+#: client/settings/advanced-settings/index.js:96
+msgid "Dev mode is active so logging is on by default."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1310
+msgid "Failed to update Statement descriptor. "
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1338
+msgid ""
+"Customer bank statement is invalid. Statement should be between 5 and 22 "
+"characters long, contain at least single Latin character and does not "
+"contain special characters: ' \" * &lt; &gt;"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1353
+#. translators: 1) dashboard login URL
+msgid "View and edit account details"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1358
+msgid ""
+"You will automatically be <em>signed in to Stripe</em> with your "
+"WooCommerce Payments account."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1362
+#: includes/class-wc-payment-gateway-wcpay.php:1366
+#: client/components/account-status/index.js:50
+msgid "Error determining the connection status."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1373
+msgid "Account"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1400
+msgid "Capture charge"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1401
+msgid "Cancel authorization"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1457
+#. translators: %1: the successfully charged amount
+msgid ""
+"A payment of %1$s was <strong>successfully captured</strong> using "
+"WooCommerce Payments."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1471
+#. translators: %1: the failed capture amount, %2: error message
+msgid ""
+"A capture of %1$s <strong>failed</strong> to complete with the following "
+"message: <code>%2$s</code>."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1488
+#. translators: %1: the failed capture amount
+msgid "A capture of %1$s <strong>failed</strong> to complete."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1542
+msgid "Payment authorization was successfully <strong>cancelled</strong>."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1550
+#. translators: %1: error message
+msgid ""
+"Canceling authorization <strong>failed</strong> to complete with the "
+"following message: <code>%1$s</code>."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1565
+msgid "Canceling authorization <strong>failed</strong> to complete."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1667
+#: includes/class-wc-payment-gateway-wcpay.php:1680
+#: includes/class-wc-payment-gateway-wcpay.php:1694
+#: includes/payment-methods/class-upe-payment-gateway.php:224
+msgid "We're not able to process this payment. Please try again later."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1676
+#. translators: This will be used to indicate an unknown value for an ID.
+#: client/payment-details/payment-method/card-present/index.js:42
+#: client/payment-details/payment-method/card/index.js:49
+msgid "unknown"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1758
+#. translators: %1: the authorized amount, %2: transaction ID of the payment
+msgid ""
+"A payment of %1$s <strong>failed</strong> using WooCommerce Payments "
+"(<a>%2$s</a>)."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1786
+#. translators: %1: the authorized amount, %2: transaction ID of the payment
+msgid ""
+"A payment of %1$s <strong>failed</strong> using WooCommerce Payments "
+"(<code>%2$s</code>)."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1837
+#. translators: %1: transaction ID of the payment or a translated string
+#. indicating an unknown ID.
+msgid ""
+"A payment with ID <code>%1$s</code> was used in an attempt to pay for this "
+"order. This payment intent ID does not match any payments for this order, "
+"so it was ignored and the order was not updated."
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1881
+msgid "A WooCommerce Payments payment method was not provided"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1893
+msgid "We're not able to add this payment method. Please try again later"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1902
+msgid "Failed to add the provided payment method. Please try again later"
+msgstr ""
+
+#: includes/class-wc-payment-gateway-wcpay.php:1998
+msgid ""
+"We're not able to add this payment method. Please refresh the page and try "
+"again."
+msgstr ""
+
+#: includes/class-wc-payment-token-wcpay-sepa.php:53
+#. translators: last 4 digits of IBAN account
+msgid "SEPA IBAN ending in %s"
+msgstr ""
+
+#: includes/class-wc-payments-account.php:66
+msgid "Clear WooCommerce Payments account cache"
+msgstr ""
+
+#: includes/class-wc-payments-account.php:67
+msgid "Clear"
+msgstr ""
+
+#: includes/class-wc-payments-account.php:68
+msgid "This tool will clear the account cached values used in WooCommerce Payments."
+msgstr ""
+
+#: includes/class-wc-payments-account.php:135
+msgid "Failed to detect connection status"
+msgstr ""
+
+#: includes/class-wc-payments-account.php:324
+msgid ""
+"There was a problem redirecting you to the account dashboard. Please try "
+"again."
+msgstr ""
+
+#: includes/class-wc-payments-account.php:339
+msgid ""
+"Connection to WordPress.com failed. Please connect to WordPress.com to "
+"start using WooCommerce Payments."
+msgstr ""
+
+#: includes/class-wc-payments-account.php:349
+#. translators: error message.
+msgid "There was a problem connecting this site to WordPress.com: \"%s\""
+msgstr ""
+
+#: includes/class-wc-payments-account.php:359
+msgid ""
+"There was a problem redirecting you to the account connection page. Please "
+"try again."
+msgstr ""
+
+#: includes/class-wc-payments-account.php:555
+msgid "There was a problem processing your account data. Please try again."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:158
+msgid "Unable to create domain association folder to domain root."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:163
+msgid "Unable to copy domain association file to domain root."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:183
+#. translators: expected domain association file URL
+msgid "To enable Apple Pay, domain association file must be hosted at %s."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:186
+msgid "Domain association file updated."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:259
+msgid "Your domain has been verified with Apple Pay!"
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:349
+msgid ""
+"Payment Request Buttons are enabled. To use Apple Pay, please use a live "
+"WooCommerce Payments account."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:382
+msgid "Payment Request Button:"
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:383
+msgid "Apple Pay domain verification failed."
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:384
+msgid "Apple Pay domain verification failed with the following error:"
+msgstr ""
+
+#: includes/class-wc-payments-apple-pay-registration.php:387
+#. translators: 1) HTML anchor open tag 2) HTML anchor closing tag
+msgid ""
+"Please check the %1$slogs%2$s for more details on this issue. Debug log "
+"must be enabled to see recorded logs."
+msgstr ""
+
+#: includes/class-wc-payments-customer-service.php:270
+#. translators: %1$s Name, %2$s Username.
+msgid "Name: %1$s, Username: %2$s"
+msgstr ""
+
+#: includes/class-wc-payments-customer-service.php:274
+#. translators: %1$s Name.
+msgid "Name: %1$s, Guest"
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:273
+#: includes/class-wc-payments-payment-request-button-handler.php:942
+#: includes/class-wc-payments-payment-request-button-handler.php:1345
+msgid "Tax"
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:281
+#: includes/class-wc-payments-payment-request-button-handler.php:950
+#: includes/class-wc-payments-payment-request-button-handler.php:1352
+msgid "Shipping"
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:288
+#: includes/class-wc-payments-payment-request-button-handler.php:957
+#: client/deposits/strings.js:15
+#: client/transactions/list/deposit.js:35
+msgid "Pending"
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:673
+msgid "OR"
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:793
+#: includes/class-wc-payments-payment-request-button-handler.php:806
+msgid "Unable to find shipping method for address."
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:904
+#. translators: product ID
+msgid "Product with the ID (%d) cannot be found."
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:925
+#. translators: 1: product name 2: quantity in stock
+msgid ""
+"You cannot add that amount of \"%1$s\"; to the cart because there is not "
+"enough stock (%2$s remaining)."
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:1179
+#. translators: %s: country.
+msgid ""
+"The Payment Request button is not supported in %s because some required "
+"fields couldn't be verified. Please proceed to the checkout page and try "
+"again."
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:1192
+msgid "Empty cart"
+msgstr ""
+
+#: includes/class-wc-payments-payment-request-button-handler.php:1359
+msgid "Discount"
+msgstr ""
+
+#: includes/class-wc-payments-token-service.php:200
+msgid "SEPA IBAN"
+msgstr ""
+
+#: includes/class-wc-payments-translations-loader.php:103
+#: includes/class-wc-payments-translations-loader.php:134
+msgid "Could not access filesystem."
+msgstr ""
+
+#: includes/class-wc-payments-utils.php:196
+#. translators: %1: transaction ID of the payment
+msgid "Payment authorization has <strong>expired</strong> (<code>%1$s</code>)."
+msgstr ""
+
+#: includes/class-wc-payments-utils.php:216
+#: includes/wc-payment-api/class-wc-payments-api-client.php:586
+#: client/disputes/index.js:52
+#: client/transactions/list/index.js:92
+msgid "Order #"
+msgstr ""
+
+#: includes/class-wc-payments-utils.php:226
+#: includes/wc-payment-api/class-wc-payments-api-client.php:584
+#: client/transactions/list/index.js:98
+msgid "Subscription #"
+msgstr ""
+
+#: includes/class-wc-payments.php:341
+msgid "WooCommerce Payments requires <a>WooCommerce</a> to be installed and active."
+msgstr ""
+
+#: includes/class-wc-payments.php:349
+msgid "Install WooCommerce"
+msgstr ""
+
+#: includes/class-wc-payments.php:353
+msgid "Activate WooCommerce"
+msgstr ""
+
+#: includes/class-wc-payments.php:369
+#. translators: %1: required WC version number, %2: currently installed WC
+#. version number
+msgid ""
+"WooCommerce Payments requires <strong>WooCommerce %1$s</strong> or greater "
+"to be installed (you are using %2$s)."
+msgstr ""
+
+#: includes/class-wc-payments.php:378
+msgid "Update WooCommerce"
+msgstr ""
+
+#: includes/class-wc-payments.php:390
+msgid ""
+"WooCommerce Payments requires WooCommerce Admin to be enabled. Please "
+"remove the <code>woocommerce_admin_disabled</code> filter to use "
+"WooCommerce Payments."
+msgstr ""
+
+#: includes/class-wc-payments.php:404
+#. translators: %1: required WC-Admin version number, %2: currently installed
+#. WC-Admin version number
+msgid ""
+"WooCommerce Payments requires <strong>WooCommerce Admin %1$s</strong> or "
+"greater to be installed (you are using %2$s)."
+msgstr ""
+
+#: includes/class-wc-payments.php:412
+msgid "There is a newer version of WooCommerce Admin bundled with WooCommerce."
+msgstr ""
+
+#: includes/class-wc-payments.php:415
+msgid "Use the bundled version of WooCommerce Admin"
+msgstr ""
+
+#: includes/class-wc-payments.php:428
+#. translators: %1: required WP version number, %2: currently installed WP
+#. version number
+msgid ""
+"WooCommerce Payments requires <strong>WordPress %1$s</strong> or greater "
+"(you are using %2$s)."
+msgstr ""
+
+#: includes/class-wc-payments.php:435
+msgid "Update WordPress"
+msgstr ""
+
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:201
+msgid "Saved payment method"
+msgstr ""
+
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:240
+msgid "A customer saved payment method was not selected for this order."
+msgstr ""
+
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:249
+msgid "The saved payment method selected is invalid or does not exist."
+msgstr ""
+
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:256
+msgid "The saved payment method selected does not belong to this order's customer."
+msgstr ""
+
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:316
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:386
+msgid "Please select a payment method"
+msgstr ""
+
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:420
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:439
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:480
+#: includes/compat/subscriptions/class-wc-payment-gateway-wcpay-subscriptions-compat.php:488
+#. translators: 1: payment method likely credit card, 2: last 4 digit.
+msgid "%1$s ending in %2$s"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-instant-deposits-eligible.php:35
+msgid "Instant deposits available"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-instant-deposits-eligible.php:36
+msgid ""
+"You are now eligible for Instant Deposits! Skip the wait and get paid "
+"instantly."
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-instant-deposits-eligible.php:43
+#: includes/notes/class-wc-payments-notes-set-https-for-checkout.php:59
+#: includes/notes/class-wc-payments-notes-set-up-refund-policy.php:43
+msgid "Read more"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-qualitative-feedback.php:48
+msgid "Help us make improvements to WooCommerce Payments"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-qualitative-feedback.php:49
+msgid ""
+"Share your feedback in this 2 minute survey about how we can make the "
+"process of accepting payments more useful for your store."
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-qualitative-feedback.php:56
+msgid "Share feedback"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-set-https-for-checkout.php:51
+msgid "Force secure checkout"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-set-https-for-checkout.php:52
+msgid ""
+"Protect your customers data and increase trustworthiness of your store by "
+"forcing HTTPS on checkout pages."
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-set-up-refund-policy.php:35
+msgid "Set up refund policy"
+msgstr ""
+
+#: includes/notes/class-wc-payments-notes-set-up-refund-policy.php:36
+msgid ""
+"Protect your merchant account from fraudulent disputes by defining the "
+"policy and making it accessible to customers."
+msgstr ""
+
+#: includes/payment-methods/class-digital-wallets-payment-gateway.php:41
+msgid "WooCommerce Payments - Digital Wallets"
+msgstr ""
+
+#: includes/payment-methods/class-digital-wallets-payment-gateway.php:42
+msgid "Accept payments via Digital Wallets."
+msgstr ""
+
+#: includes/payment-methods/class-digital-wallets-payment-gateway.php:43
+msgid "Digital Wallets"
+msgstr ""
+
+#: includes/payment-methods/class-digital-wallets-payment-gateway.php:44
+#: includes/payment-methods/class-sepa-payment-gateway.php:47
+msgid "Mandate Information."
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:46
+msgid "WooCommerce Payments - Giropay"
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:47
+msgid "Accept payments via Giropay."
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:48
+msgid "Giropay"
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:49
+msgid "You will be redirected to Giropay."
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:113
+#: includes/payment-methods/class-giropay-payment-gateway.php:124
+#. translators: localized exception message
+msgid "Giropay payment failed: %s"
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:116
+msgid ""
+"Giropay payment has failed. If you continue to see this notice, please "
+"contact the admin."
+msgstr ""
+
+#: includes/payment-methods/class-giropay-payment-gateway.php:177
+#: includes/payment-methods/class-sofort-payment-gateway.php:177
+#. translators: link to Stripe testing page
+msgid ""
+"<strong>Test mode:</strong> You will be redirected to a test Stripe page to "
+"approve or deny payment."
+msgstr ""
+
+#: includes/payment-methods/class-sepa-payment-gateway.php:44
+msgid "WooCommerce Payments - SEPA"
+msgstr ""
+
+#: includes/payment-methods/class-sepa-payment-gateway.php:45
+msgid "Accept payments via SEPA Direct Debit."
+msgstr ""
+
+#: includes/payment-methods/class-sepa-payment-gateway.php:46
+msgid "SEPA Direct Debit"
+msgstr ""
+
+#: includes/payment-methods/class-sepa-payment-gateway.php:82
+#. translators: %s: statement descriptor.
+msgid ""
+"By providing your IBAN and confirming this payment, you are authorizing %s "
+"and Stripe, our payment service provider, to send instructions to your bank "
+"to debit your account and your bank to debit your account in accordance "
+"with those instructions. You are entitled to a refund from your bank under "
+"the terms and conditions of your agreement with your bank. A refund must be "
+"claimed within 8 weeks starting from the date on which your account was "
+"debited."
+msgstr ""
+
+#: includes/payment-methods/class-sepa-payment-gateway.php:90
+#. translators: link to Stripe testing page
+msgid ""
+"<strong>Test mode:</strong> use the test SEPA card DE89370400440532013000 "
+"with account number 000123456, or any test card numbers listed <a>here</a>."
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:46
+msgid "WooCommerce Payments - Sofort"
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:47
+msgid "Accept payments via Sofort."
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:48
+#: client/payment-methods/index.js:50
+#: client/settings/payment-method-icon/index.js:31
+msgid "Sofort"
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:49
+msgid "You will be redirected to Sofort."
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:94
+#. translators: %1: the successfully charged amount, %2: transaction ID of the
+#. payment
+msgid ""
+"A payment of %1$s is <strong>in processing</strong> using WooCommerce "
+"Payments (<a>%2$s</a>)."
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:113
+#: includes/payment-methods/class-sofort-payment-gateway.php:124
+#. translators: localized exception message
+msgid "Sofort payment failed: %s"
+msgstr ""
+
+#: includes/payment-methods/class-sofort-payment-gateway.php:116
+msgid ""
+"Sofort payment has failed. If you continue to see this notice, please "
+"contact the admin."
+msgstr ""
+
+#: includes/payment-methods/class-upe-payment-gateway.php:47
+msgid "WooCommerce Payments - UPE"
+msgstr ""
+
+#: includes/payment-methods/class-upe-payment-gateway.php:48
+msgid "Accept payments via Stripe."
+msgstr ""
+
+#: includes/payment-methods/class-upe-payment-gateway.php:50
+msgid "You will be redirected to Stripe."
+msgstr ""
+
+#: includes/payment-methods/class-upe-payment-gateway.php:67
+msgid "Something terrible has happened. Please refresh the page and try again."
+msgstr ""
+
+#: includes/payment-methods/class-upe-payment-gateway.php:265
+#. translators: localized exception message
+msgid "UPE payment failed: %s"
+msgstr ""
+
+#: includes/payment-methods/class-upe-payment-gateway.php:309
+#. translators: link to Stripe testing page
+msgid ""
+"<strong>Test mode:</strong> use the test VISA card 4242424242424242 with "
+"any expiry date and CVC. Other payment methods may redirect to a Stripe "
+"test page to authorize payment. More test card numbers are listed "
+"<a>here</a>."
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-api-client.php:720
+msgid "Max file size exceeded."
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-api-client.php:885
+msgid "Customer ID is required"
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1117
+msgid "Unable to encode body for request to WooCommerce Payments API."
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1219
+msgid "Unable to decode response from WooCommerce Payments API"
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1238
+msgid "Server error. Please try again."
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-http.php:55
+msgid "Site is not connected to WordPress.com"
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-http.php:93
+#. translators: %1: original error message.
+msgid "Http request failed. Reason: %1$s"
+msgstr ""
+
+#: woocommerce-payments.php:125
+msgid ""
+"The version of Jetpack installed is too old to be used with WooCommerce "
+"Payments. WooCommerce Payments has been disabled. Please deactivate or "
+"update Jetpack."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://woocommerce.com/payments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Accept payments via credit card. Manage transactions within WordPress."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Automattic"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://woocommerce.com/"
+msgstr ""
+
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1243
+#. translators: This is an error API response.
+msgctxt "API error message to throw as Exception"
+msgid "Error: %1$s"
+msgstr ""
+
+#: client/additional-methods-setup/index.js:22
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:150
+msgid "Set up additional payment methods"
+msgstr ""
+
+#: client/additional-methods-setup/index.js:35
+msgid "Offer your customers preferred payment methods with WooCommerce Payments"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:111
+msgid "Please select at least one method"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:158
+msgid ""
+"Increase your store's conversion by offering your customers preferred and "
+"convenient payment methods on checkout. You can manage them later in "
+"{{settingsLink /}}."
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:167
+msgid "settings"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:179
+msgid "Popular with customers in %1$s"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:204
+msgid "Additional payment methods"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:253
+msgid "Enable Apple Pay & Google Pay"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:258
+msgid ""
+"By enabling this feature, you agree to {{stripeLink /}}, {{appleLink /}}, "
+"{{googleLink /}} and {{microsoftLink /}}'s terms of use."
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:270
+msgid "Stripe"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:282
+msgid "Apple"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:294
+msgid "Google"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:306
+msgid "Microsoft"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/add-payment-methods-task.js:322
+msgid "Continue"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:101
+msgid "View payment settings"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:47
+msgid "Setup complete"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:52
+msgid "You're ready to begin accepting payments with the new methods!."
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:59
+msgid ""
+"{{vatInformationLink /}} and {{setupTaxesLink /}} to ensure smooth "
+"transactions if you plan to sell to customers in Europe."
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:67
+msgid "Enter your VAT account information"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:75
+msgid "set up taxes"
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:85
+msgid ""
+"To manage other payment settings or update your payment information, visit "
+"the payment settings."
+msgstr ""
+
+#: client/additional-methods-setup/methods-selector/setup-complete-task.js:92
+msgid "Go to WooCommerce Home"
+msgstr ""
+
+#: client/banner/index.js:37
+msgid "Recommended"
+msgstr ""
+
+#: client/checkout/blocks/index.js:45
+msgid "Credit Card"
+msgstr ""
+
+# %1: total payment volume until this promotion expires %2: End date of the promotion
+#: client/components/account-status/account-fees/expiration-description.js:23
+msgid ""
+"Discounted base fee expires after the first %1$s of total payment volume or "
+"on %2$s."
+msgstr ""
+
+# %1: total payment volume until this promotion expires
+#: client/components/account-status/account-fees/expiration-description.js:33
+msgid "Discounted base fee expires after the first %1$s of total payment volume."
+msgstr ""
+
+# %1: End date of the promotion
+#: client/components/account-status/account-fees/expiration-description.js:42
+msgid "Discounted base fee expires on %1$s."
+msgstr ""
+
+#: client/components/account-status/account-fees/index.js:31
+#: client/connect-account-page-variant/strings.js:13
+msgid "Learn more"
+msgstr ""
+
+#: client/components/account-status/index.js:102
+msgid "Base Fee:"
+msgstr ""
+
+#: client/components/account-status/index.js:64
+msgid "Account details"
+msgstr ""
+
+#: client/components/account-status/index.js:71
+msgid "Edit details"
+msgstr ""
+
+#: client/components/account-status/index.js:81
+msgid "Connected email:"
+msgstr ""
+
+#: client/components/account-status/index.js:87
+msgid "Payments:"
+msgstr ""
+
+#: client/components/account-status/index.js:94
+msgid "Deposits:"
+msgstr ""
+
+#: client/components/account-status/status-chip.js:17
+#: client/components/deposits-status/index.js:55
+msgid "Unknown"
+msgstr ""
+
+#: client/components/account-status/status-chip.js:20
+msgid "Complete"
+msgstr ""
+
+#: client/components/account-status/status-chip.js:23
+msgid "Restricted soon"
+msgstr ""
+
+#: client/components/account-status/status-chip.js:26
+msgid "Restricted"
+msgstr ""
+
+#: client/components/account-status/status-chip.js:29
+msgid "Rejected"
+msgstr ""
+
+#: client/components/deposits-information/index.tsx:43
+msgid "%s balance"
+msgstr ""
+
+#: client/components/deposits-information/index.tsx:46
+msgid "Deposit schedule:"
+msgstr ""
+
+#: client/components/deposits-information/index.tsx:51
+msgid "Pending balance"
+msgstr ""
+
+#: client/components/deposits-information/index.tsx:52
+msgid "Next deposit"
+msgstr ""
+
+#: client/components/deposits-information/index.tsx:54
+msgid "Last deposit"
+msgstr ""
+
+#: client/components/deposits-information/index.tsx:55
+msgid "Available balance"
+msgstr ""
+
+#: client/components/deposits-information/loading.tsx:16
+#: client/deposits/details/index.js:67
+msgid "Deposits overview"
+msgstr ""
+
+#: client/components/deposits-status/index.js:23
+#: client/components/payments-status/index.js:32
+msgid "Disabled"
+msgstr ""
+
+#: client/components/deposits-status/index.js:27
+msgid "Daily"
+msgstr ""
+
+#: client/components/deposits-status/index.js:29
+msgid "Weekly"
+msgstr ""
+
+#: client/components/deposits-status/index.js:31
+msgid "Monthly"
+msgstr ""
+
+# <a> - suspended accounts FAQ URL
+#: client/components/deposits-status/index.js:37
+#: client/deposits/utils/index.js:96
+msgid "Temporarily suspended (<a>learn more</a>)"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:12
+msgid "Inquiry: Needs response"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:16
+msgid "Inquiry: Under review"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:20
+msgid "Inquiry: Closed"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:24
+msgid "Needs response"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:28
+msgid "Under review"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:32
+msgid "Charge refunded"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:36
+msgid "Won"
+msgstr ""
+
+#: client/components/dispute-status-chip/mappings.js:40
+msgid "Lost"
+msgstr ""
+
+#: client/components/payment-methods-list/delete-button.js:109
+msgid "Delete %1$s from checkout"
+msgstr ""
+
+#: client/components/payment-methods-list/delete-button.js:40
+msgid "Remove %1$s from checkout"
+msgstr ""
+
+#: client/components/payment-methods-list/delete-button.js:55
+msgid "Remove"
+msgstr ""
+
+#: client/components/payment-methods-list/delete-button.js:61
+#: client/deposits/instant-deposits/modal.js:77
+#: client/settings/payment-methods-selector/index.js:91
+msgid "Cancel"
+msgstr ""
+
+#: client/components/payment-methods-list/delete-button.js:73
+msgid ""
+"Are you sure you want to remove {{strong}}%s{{/strong}}? Your customers "
+"will no longer be able to pay using %s."
+msgstr ""
+
+#: client/components/payment-methods-list/delete-button.js:88
+msgid "You can add it again at any time in {{wooCommercePaymentsLink /}}"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:22
+msgid "Disputed: %s"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:35
+msgid "Partial refund"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:39
+#: client/payment-details/summary/index.js:122
+#: client/payment-details/timeline/map-events.js:349
+msgid "Refunded"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:43
+#: client/deposits/strings.js:14
+#: client/payment-details/timeline/map-events.js:307
+msgid "Paid"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:47
+msgid "Payment authorized"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:51
+msgid "Payment failed"
+msgstr ""
+
+#: client/components/payment-status-chip/mappings.js:55
+msgid "Payment blocked"
+msgstr ""
+
+#: client/components/payments-status/index.js:21
+msgid "Enabled"
+msgstr ""
+
+#: client/components/risk-level/strings.js:10
+msgid "Elevated"
+msgstr ""
+
+#: client/components/risk-level/strings.js:11
+msgid "Highest"
+msgstr ""
+
+#: client/components/risk-level/strings.js:9
+msgid "Normal"
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:14
+msgid "WooCommerce Payments is in test mode."
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:18
+msgid ""
+"Viewing test transactions. To view live transactions, disable test mode in "
+"WooCommerce Payments settings."
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:22
+msgid "Test payment:"
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:23
+msgid ""
+"Viewing test deposits. To view live deposits, disable test mode in "
+"WooCommerce Payments settings."
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:27
+msgid "Test deposit:"
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:28
+msgid ""
+"Viewing test disputes. To view live disputes, disable test mode in "
+"WooCommerce Payments settings."
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:32
+msgid "Test dispute:"
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:53
+msgid "View WooCommerce Payments settings"
+msgstr ""
+
+#: client/components/test-mode-notice/index.js:69
+msgid "WooCommerce Payments was in test mode when this order was placed."
+msgid_plural "WooCommerce Payments was in test mode when these orders were placed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: client/connect-account-page-variant/strings.js:16
+msgid "Finish setup to enable credit card payments"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:20
+msgid ""
+"With WooCommerce Payments, you can securely accept major cards, Apple Pay, "
+"and payments in over 100 currencies. Track cash flow and manage recurring "
+"revenue directly from your store’s dashboard - with no setup costs or "
+"monthly fees."
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:26
+msgid "Accepted payment methods"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:31
+msgid "You’re only steps away from getting paid"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:37
+msgid "Create and connect your account"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:41
+msgid "To ensure safe and secure transactions, a WordPress.com account is required."
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:48
+msgid "Provide a few business details"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:49
+msgid ""
+"Next we’ll ask you to verify your business and payment details to enable "
+"deposits."
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:56
+msgid "Setup complete!"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:57
+msgid ""
+"You’re ready to start using the features and benefits of WooCommerce "
+"Payments."
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:63
+#: client/connect-account-page/strings.js:27
+msgid "By clicking “Set up,” you agree to the <a>Terms of Service</a>"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:80
+#: client/connect-account-page/strings.js:43
+msgid "We've temporarily paused new account creation."
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:84
+#: client/connect-account-page/strings.js:47
+msgid "We'll notify you when we resume!"
+msgstr ""
+
+#: client/connect-account-page-variant/strings.js:9
+msgid "Finish Setup"
+msgstr ""
+
+#: client/connect-account-page/index.js:65
+msgid "Set up"
+msgstr ""
+
+#: client/connect-account-page/strings.js:11
+msgid ""
+"Accept credit card payments the easy way! <a>No set up fees. No monthly "
+"fees.</a>"
+msgstr ""
+
+#: client/data/deposits/actions.js:129
+msgid "Instant deposit for %s in transit."
+msgstr ""
+
+#: client/data/deposits/actions.js:138
+msgid "View details"
+msgstr ""
+
+#: client/data/deposits/actions.js:150
+msgid "Error creating instant deposit."
+msgstr ""
+
+#: client/data/deposits/resolvers.js:125
+msgid "Error retrieving deposits."
+msgstr ""
+
+#: client/data/deposits/resolvers.js:42
+msgid "Error retrieving deposit."
+msgstr ""
+
+#: client/data/deposits/resolvers.js:60
+msgid "Error retrieving deposits overview."
+msgstr ""
+
+#: client/data/deposits/resolvers.js:79
+msgid "Error retrieving all deposits' overviews."
+msgstr ""
+
+# #%s is an order number, e.g. 15
+#: client/data/disputes/actions.js:57
+msgid "You have accepted the dispute for order #%s."
+msgstr ""
+
+#: client/data/disputes/actions.js:63
+msgid "You have accepted the dispute."
+msgstr ""
+
+#: client/data/disputes/actions.js:66
+msgid "There has been an error accepting the dispute. Please try again later."
+msgstr ""
+
+#: client/data/disputes/resolvers.js:31
+msgid "Error retrieving dispute."
+msgstr ""
+
+#: client/data/disputes/resolvers.js:61
+msgid "Error retrieving disputes."
+msgstr ""
+
+#: client/data/settings/actions.js:93
+msgid "Settings saved."
+msgstr ""
+
+#: client/data/settings/actions.js:99
+msgid "Error saving settings."
+msgstr ""
+
+#: client/data/settings/resolvers.js:27
+msgid "Error retrieving settings."
+msgstr ""
+
+#: client/deposits/details/index.js:111
+msgid "Net deposit amount"
+msgstr ""
+
+#: client/deposits/details/index.js:58
+msgid "Deposit date"
+msgstr ""
+
+#: client/deposits/details/index.js:59
+msgid "Instant deposit date"
+msgstr ""
+
+#: client/deposits/details/index.js:85
+msgid "Deposit amount"
+msgstr ""
+
+# %s - amount representing the fee percentage
+#: client/deposits/details/index.js:98
+msgid "%s service fee"
+msgstr ""
+
+#: client/deposits/filters/config.js:14
+msgid "All"
+msgstr ""
+
+#: client/deposits/filters/config.js:8
+#: client/transactions/filters/config.js:19
+msgid "Deposit currency"
+msgstr ""
+
+#: client/deposits/instant-deposits/index.js:47
+#: client/deposits/instant-deposits/modal.js:48
+msgid "Instant deposit"
+msgstr ""
+
+#: client/deposits/instant-deposits/modal.js:28
+msgid ""
+"Need cash in a hurry? Instant deposits are available within 30 minutes for "
+"a nominal %s service fee. <a>Learn more</a>"
+msgstr ""
+
+#: client/deposits/instant-deposits/modal.js:55
+msgid "Balance available for instant deposit: "
+msgstr ""
+
+# %s - amount representing the fee percentage
+#: client/deposits/instant-deposits/modal.js:64
+msgid "%s service fee: "
+msgstr ""
+
+#: client/deposits/instant-deposits/modal.js:70
+msgid "Net deposit amount: "
+msgstr ""
+
+# %s: Monetary amount to deposit
+#: client/deposits/instant-deposits/modal.js:87
+msgid "Deposit %s now"
+msgstr ""
+
+#: client/deposits/list/index.js:147
+msgid "deposits"
+msgstr ""
+
+#: client/deposits/list/index.js:154
+#: client/transactions/list/index.js:367
+msgid "total"
+msgstr ""
+
+#: client/deposits/list/index.js:172
+msgid "Deposit history"
+msgstr ""
+
+#: client/deposits/list/index.js:37
+#: client/payment-details/summary/index.js:37
+#: client/transactions/filters/config.js:79
+msgid "Date"
+msgstr ""
+
+#: client/deposits/list/index.js:48
+#: client/payment-details/payment-method/card-present/index.js:129
+#: client/payment-details/payment-method/card/index.js:146
+#: client/transactions/filters/config.js:118
+#: client/transactions/list/index.js:65
+msgid "Type"
+msgstr ""
+
+#: client/deposits/list/index.js:54
+#: client/disputes/index.js:32
+#: client/transactions/list/index.js:71
+msgid "Amount"
+msgstr ""
+
+#: client/deposits/list/index.js:62
+#: client/disputes/index.js:37
+msgid "Status"
+msgstr ""
+
+#: client/deposits/list/index.js:69
+msgid "Bank account"
+msgstr ""
+
+#: client/deposits/strings.js:10
+msgid "Withdrawal"
+msgstr ""
+
+#: client/deposits/strings.js:17
+#: client/deposits/utils/index.js:38
+msgid "In transit"
+msgstr ""
+
+#: client/deposits/strings.js:18
+msgid "Canceled"
+msgstr ""
+
+#: client/deposits/strings.js:19
+#: client/payment-details/payment-method/card/check.js:16
+#: client/payment-details/timeline/map-events.js:372
+msgid "Failed"
+msgstr ""
+
+#: client/deposits/strings.js:20
+msgid "Estimated"
+msgstr ""
+
+#: client/deposits/strings.js:9
+#: client/transactions/list/index.js:135
+msgid "Deposit"
+msgstr ""
+
+#: client/deposits/utils/index.js:119
+msgid "%s – your first deposit is held for seven days (<a>learn more</a>)"
+msgstr ""
+
+#: client/deposits/utils/index.js:21
+msgid "%d deposit"
+msgid_plural "%d deposits"
+msgstr[0] ""
+msgstr[1] ""
+
+#: client/deposits/utils/index.js:32
+msgid "Est."
+msgstr ""
+
+#: client/deposits/utils/index.js:49
+msgid "Automatic, every business day"
+msgstr ""
+
+#: client/deposits/utils/index.js:56
+msgid "Automatic, every week on %s"
+msgstr ""
+
+#: client/deposits/utils/index.js:75
+msgid "Automatic, every month on the %s"
+msgstr ""
+
+#: client/disputes/details/actions.js:26
+msgid ""
+"Are you sure you'd like to accept this dispute? This action can not be "
+"undone."
+msgstr ""
+
+#: client/disputes/details/actions.js:46
+msgid "View submitted evidence"
+msgstr ""
+
+#: client/disputes/details/actions.js:55
+msgid "Accept dispute"
+msgstr ""
+
+#: client/disputes/details/index.js:111
+msgid "Required to overturn dispute"
+msgstr ""
+
+#: client/disputes/details/index.js:123
+msgid "How to respond"
+msgstr ""
+
+#: client/disputes/details/index.js:52
+#: client/disputes/evidence/index.js:220
+msgid "Dispute not loaded"
+msgstr ""
+
+#: client/disputes/details/index.js:66
+msgid "Dispute overview"
+msgstr ""
+
+# heading for dispute category information section
+#: client/disputes/details/index.js:92
+msgid "Dispute: %s"
+msgstr ""
+
+#: client/disputes/details/index.js:98
+msgid "Dispute type"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:101
+msgid "Refund refusal explanation"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:106
+msgid "Your explanation for why the customer is not entitled to a refund."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:116
+msgid "Duplicate charge info"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:120
+msgid "Duplicate charge ID"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:122
+msgid ""
+"The charge ID for the previous payment that appears to be a duplicate of "
+"the one that is disputed."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:129
+msgid "Explanation of duplicate charge"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:13
+msgid "General evidence"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:134
+msgid ""
+"An explanation of the difference between the disputed payment and the prior "
+"one that appears to be a duplicate."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:14
+msgid "Provide general evidence about the customer and the order."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:141
+msgid "Duplicate charge documentation"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:146
+msgid ""
+"Upload documentation for the prior payment that can uniquely identify it, "
+"such as a separate receipt. This document should be paired with a similar "
+"document from the disputed payment that proves the two are separate. This "
+"should also include a separate shipping label or receipt for the other "
+"payment. If multiple products were shipped together, provide a packing list "
+"that shows each purchase."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:153
+msgid "Shipping documentation"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:155
+msgid "A shipping label or receipt for the disputed payment."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:164
+msgid "Service documentation"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:166
+msgid "A copy of a service agreement or documentation for the disputed payment."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:178
+msgid "Shipping information"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:182
+msgid "Shipping carrier"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:184
+msgid ""
+"The delivery service that shipped a physical product, such as Fedex, UPS, "
+"USPS, etc. If multiple carriers were used for this purchase, please "
+"separate them with commas."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:191
+msgid "Tracking number"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:193
+msgid ""
+"The tracking number (if available) for a physical product, obtained from "
+"the delivery service. If multiple tracking numbers were generated for this "
+"purchase, please separate them with commas. When we compile your evidence "
+"into a single document, these tracking numbers will be expanded to include "
+"detailed delivery information from the carrier."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:200
+msgid "Proof of shipping"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:202
+msgid ""
+"Provide documentation as proof that a product was shipped to the cardholder "
+"at the same address the cardholder provided to you. This could include a "
+"copy of the shipment receipt or label, and show the full shipping address "
+"of the cardholder, if possible."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:209
+msgid "Date of shipment"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:21
+msgid "Product description"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:211
+msgid ""
+"The date on which a physical product began its route to the shipping "
+"address. This date should be prior to the date of the dispute."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:218
+msgid "Shipping address"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:220
+msgid ""
+"The address to which a physical product was shipped. The shipping address "
+"must match a billing address verified with AVS. (A signature is not "
+"required as evidence of delivery)."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:23
+msgid ""
+"A description of the product or service and any relevant details on how "
+"this was presented to the customer at the time of purchase."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:236
+msgid "Cancellation policy info"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:240
+msgid "Cancellation policy"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:242
+msgid "Your subscription cancellation policy, as shown to the customer."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:249
+msgid "Cancellation policy disclosure"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:254
+msgid ""
+"An explanation of how and when the customer was shown your cancellation "
+"policy prior to purchase."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:261
+msgid "Cancellation rebuttal"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:263
+msgid "A justification for why the customer's subscription was not canceled."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:279
+msgid "Provide at least two of the following pieces of information:"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:283
+msgid ""
+"• Customer's IP address and their device's geographical location at the "
+"time of purchase"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:287
+msgid "• Device ID and name of the device"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:291
+msgid "• Customer name and email address linked to their customer profile"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:295
+msgid ""
+"• Evidence that the customer logged into their account for your business "
+"before the transaction date"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:299
+msgid ""
+"• Evidence that your website or app was accessed by the cardholder for "
+"purchase or services on or after the transaction date"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:30
+msgid "Customer name"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:303
+msgid ""
+"• Evidence that the same device and card used in the disputed payment was "
+"used in a previous payment that was not disputed"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:315
+msgid "Download and activity logs"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:320
+msgid ""
+"Any server or activity logs showing proof that the cardholder accessed or "
+"downloaded the purchased digital product. This information should include "
+"IP addresses, corresponding timestamps, and any detailed recorded activity."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:336
+msgid "Service details"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:340
+msgid "Service date"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:342
+msgid ""
+"The date on which the cardholder received or began receiving the purchased "
+"service."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:349
+msgid "Proof of service"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:35
+msgid "Customer email"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:351
+msgid ""
+"Documentation showing proof that a service was provided to the cardholder. "
+"This could include a copy of a signed contract, work order, or other form "
+"of written agreement."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:369
+msgid ""
+"Provide any extra evidence or statements you'd like the bank to see, either "
+"as text or by uploading a document."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:376
+msgid "Additional details"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:381
+msgid "Additional document"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:40
+msgid "Customer signature"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:42
+msgid ""
+"A relevant document or contract showing the customer's signature (if "
+"available)."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:49
+msgid "Customer billing address"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:54
+msgid "Customer IP address"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:59
+msgid "Receipt"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:61
+msgid ""
+"Any receipt or message sent to the customer notifying them of the charge. "
+"This field will be automatically filled with a Stripe generated email "
+"receipt if any such receipt was sent."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:68
+msgid "Customer communication"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:70
+msgid ""
+"Any communication with the customer that you feel is relevant to your case "
+"(e.g. emails proving that they received the product or service, or "
+"demonstrating their use of or satisfaction with the product or service)."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:79
+msgid "Refund policy info"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:83
+msgid "Refund policy"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:85
+msgid "Your refund policy, as shown or provided to the customer."
+msgstr ""
+
+#: client/disputes/evidence/fields.js:92
+msgid "Refund policy disclosure"
+msgstr ""
+
+#: client/disputes/evidence/fields.js:94
+msgid ""
+"An explanation of how and when the customer was shown or provided your "
+"refund policy prior to purchase."
+msgstr ""
+
+#: client/disputes/evidence/file-upload.js:64
+msgid "Upload file"
+msgstr ""
+
+#: client/disputes/evidence/file-upload.js:78
+msgid "Remove file"
+msgstr ""
+
+#: client/disputes/evidence/index.js:135
+msgid ""
+"Are you sure you're ready to submit this evidence? Evidence submissions are "
+"final."
+msgstr ""
+
+#: client/disputes/evidence/index.js:149
+msgid ""
+"When you submit your evidence, we'll format it and send it to the "
+"cardholder's bank, then email you once the dispute has been decided."
+msgstr ""
+
+#: client/disputes/evidence/index.js:157
+msgid "Evidence submission is final."
+msgstr ""
+
+#: client/disputes/evidence/index.js:162
+msgid ""
+"You can also save this evidence for later instead of submitting it "
+"immediately."
+msgstr ""
+
+#: client/disputes/evidence/index.js:167
+msgid "We will automatically submit any saved evidence at the due date."
+msgstr ""
+
+#: client/disputes/evidence/index.js:178
+msgid "Submit evidence"
+msgstr ""
+
+#: client/disputes/evidence/index.js:187
+msgid "Save for later"
+msgstr ""
+
+#: client/disputes/evidence/index.js:250
+msgid "Product type"
+msgstr ""
+
+#: client/disputes/evidence/index.js:264
+msgid "Select one…"
+msgstr ""
+
+#: client/disputes/evidence/index.js:272
+msgid "Physical product"
+msgstr ""
+
+#: client/disputes/evidence/index.js:279
+msgid "Digital product or service"
+msgstr ""
+
+#: client/disputes/evidence/index.js:286
+msgid "Offline service"
+msgstr ""
+
+#: client/disputes/evidence/index.js:293
+msgid "Multiple product types"
+msgstr ""
+
+#: client/disputes/evidence/index.js:375
+msgid ""
+"There are unsaved changes on this page. Are you sure you want to leave and "
+"discard the unsaved changes?"
+msgstr ""
+
+#: client/disputes/evidence/index.js:470
+msgid "Evidence submitted!"
+msgstr ""
+
+#: client/disputes/evidence/index.js:471
+msgid "Evidence saved!"
+msgstr ""
+
+#: client/disputes/evidence/index.js:499
+msgid "Failed to submit evidence. (%s)"
+msgstr ""
+
+#: client/disputes/evidence/index.js:500
+msgid "Failed to save evidence. (%s)"
+msgstr ""
+
+#: client/disputes/evidence/index.js:510
+msgid "Please wait until file upload is finished"
+msgstr ""
+
+#: client/disputes/index.js:42
+#: client/disputes/info/index.js:26
+msgid "Reason"
+msgstr ""
+
+#: client/disputes/index.js:47
+#: client/transactions/list/index.js:107
+msgid "Source"
+msgstr ""
+
+#: client/disputes/index.js:55
+#: client/disputes/info/index.js:28
+#: client/payment-details/summary/index.js:46
+#: client/transactions/list/index.js:112
+msgid "Customer"
+msgstr ""
+
+#: client/disputes/index.js:58
+#: client/transactions/list/index.js:117
+msgid "Email"
+msgstr ""
+
+#: client/disputes/index.js:63
+#: client/transactions/list/index.js:123
+msgid "Country"
+msgstr ""
+
+#: client/disputes/index.js:68
+msgid "Disputed on"
+msgstr ""
+
+#: client/disputes/index.js:73
+#: client/disputes/info/index.js:25
+msgid "Respond by"
+msgstr ""
+
+#: client/disputes/info/index.js:23
+msgid "Dispute date"
+msgstr ""
+
+#: client/disputes/info/index.js:24
+msgid "Disputed amount"
+msgstr ""
+
+#: client/disputes/info/index.js:27
+#: client/payment-details/summary/index.js:50
+msgid "Order"
+msgstr ""
+
+#: client/disputes/info/index.js:31
+msgid "Transaction ID"
+msgstr ""
+
+#: client/disputes/strings.js:103
+msgid "Fraudulent"
+msgstr ""
+
+#: client/disputes/strings.js:109
+msgid ""
+"If you believe the payment was actually made using a stolen credit card, "
+"you will need to accept the dispute. The credit card networks place "
+"liability for accepting fraudulent payments with you, the business."
+msgstr ""
+
+#: client/disputes/strings.js:115
+msgid ""
+"This is the most common reason for a dispute, and happens when a cardholder "
+"claims that they didn’t authorize the payment. This can happen if the card "
+"was lost or stolen and used to make a fraudulent purchase. It can also "
+"happen if the cardholder doesn’t recognize the payment as it appears on the "
+"billing statement from their card issuer."
+msgstr ""
+
+#: client/disputes/strings.js:121
+msgid ""
+"Provide adequate payment and order details so that a legitimate customer "
+"recognizes it, or proves to the card issuer that their cardholder "
+"authorized the transaction."
+msgstr ""
+
+#: client/disputes/strings.js:127
+msgid ""
+"Try to get in touch with your customer. Sometimes people forget about "
+"payments they make or don’t recognize the way they appear on their card "
+"statement. If this is the case, ask them to contact their card issuer and "
+"let them know they no longer dispute the transaction."
+msgstr ""
+
+#: client/disputes/strings.js:13
+msgid "Bank cannot process"
+msgstr ""
+
+#: client/disputes/strings.js:142
+msgid "General"
+msgstr ""
+
+#: client/disputes/strings.js:150
+msgid ""
+"This is an uncategorized dispute, so you should contact the customer for "
+"additional details to find out why the payment was disputed."
+msgstr ""
+
+#: client/disputes/strings.js:157
+msgid "Incorrect account details"
+msgstr ""
+
+#: client/disputes/strings.js:16
+msgid "Check returned"
+msgstr ""
+
+#: client/disputes/strings.js:160
+msgid "Insufficient funds"
+msgstr ""
+
+#: client/disputes/strings.js:163
+msgid "Product not received"
+msgstr ""
+
+#: client/disputes/strings.js:169
+msgid ""
+"If you can not prove the customer received their product or service, you "
+"should accept the dispute. You cannot issue a refund while a payment is "
+"being disputed. The credit card networks place liability for accepting "
+"disputed payments with you, the business."
+msgstr ""
+
+#: client/disputes/strings.js:175
+msgid "The customer claims they did not receive the products or services purchased."
+msgstr ""
+
+#: client/disputes/strings.js:181
+msgid ""
+"Prove that the customer received a physical product or offline service, or "
+"made use of a digital product or online service. This must have occurred "
+"prior to the date the dispute was initiated."
+msgstr ""
+
+#: client/disputes/strings.js:187
+msgid ""
+"First, get in touch with your customer. Understanding why they filed the "
+"dispute will be important for helping make sure your customer gets the "
+"product and will give you critical information to prevent this from "
+"happening to others."
+msgstr ""
+
+#: client/disputes/strings.js:19
+msgid "Credit not processed"
+msgstr ""
+
+#: client/disputes/strings.js:198
+msgid "Product unacceptable"
+msgstr ""
+
+#: client/disputes/strings.js:204
+msgid ""
+"If you can not prove the customer received their product or service as "
+"described, you should accept the dispute. You cannot issue a refund while a "
+"payment is being disputed. The credit card networks place liability for "
+"accepting disputed payments with you, the business."
+msgstr ""
+
+#: client/disputes/strings.js:210
+msgid ""
+"The product or service was received but was defective, damaged, or not as "
+"described."
+msgstr ""
+
+#: client/disputes/strings.js:216
+msgid ""
+"Demonstrate that the product or service was delivered as described at the "
+"time of purchase."
+msgstr ""
+
+#: client/disputes/strings.js:222
+msgid ""
+"If the product or service is as described, provide specific information "
+"(invoice, contract, etc.) to refute the cardholder’s claims. Quality "
+"disputes are where the customer does not agree with the condition of "
+"merchandise or service received (e.g., a car repair situation or quality of "
+"a hotel room). There may be instances where you will need to obtain a "
+"neutral third-party opinion to help corroborate your claim against the "
+"cardholder. Provide as much specific information and documentation as "
+"possible to refute the cardholder’s claims. It is recommended that you "
+"address each point that the cardholder has made."
+msgstr ""
+
+#: client/disputes/strings.js:226
+msgid ""
+"If the customer has not yet returned the product or canceled the service, "
+"provide specific information to that effect. You should double-check your "
+"incoming shipping records to verify that you have not received a return "
+"before you respond. If you have processed a credit or reversal for this "
+"transaction, provide evidence of this which includes the amount and date "
+"processed."
+msgstr ""
+
+#: client/disputes/strings.js:230
+msgid ""
+"For products that have been repaired or replaced, provide evidence that the "
+"cardholder agreed to a repair or replacement, it has been received by the "
+"customer, and the repair or replacement has not since been disputed."
+msgstr ""
+
+#: client/disputes/strings.js:234
+msgid ""
+"If your customer made no attempt to return the product or cancel the "
+"service, or if you provided a replacement product or service, make sure to "
+"note that as well."
+msgstr ""
+
+#: client/disputes/strings.js:238
+msgid ""
+"If the customer withdraws their dispute you should still submit evidence "
+"using the forms on the next screen. Be sure to provide a letter or email "
+"from the cardholder stating that they are no longer in dispute."
+msgstr ""
+
+#: client/disputes/strings.js:245
+msgid "Subscription canceled"
+msgstr ""
+
+#: client/disputes/strings.js:25
+msgid ""
+"If your customer was not refunded appropriately, you will need to accept "
+"the dispute, or resolve the issue with your customer. The credit card "
+"networks place liability for accepting disputed payments with you, the "
+"business."
+msgstr ""
+
+#: client/disputes/strings.js:257
+msgid ""
+"The customer claims that you continued to charge them after a subscription "
+"was canceled."
+msgstr ""
+
+#: client/disputes/strings.js:263
+msgid ""
+"Prove that the subscription was still active and that the customer was "
+"aware of, and did not follow, your cancellation procedure."
+msgstr ""
+
+#: client/disputes/strings.js:269
+msgid ""
+"First, get in touch with your customer. If you understand what they believe "
+"happened, there is a chance for you to explain the misunderstanding or to "
+"make it right. "
+msgstr ""
+
+#: client/disputes/strings.js:273
+msgid ""
+"Even if your customer agrees to withdraw the dispute, you must still submit "
+"appropriate evidence using the forms on the next screen. Simply saying that "
+"your customer is going to withdraw the dispute is not sufficient evidence."
+msgstr ""
+
+#: client/disputes/strings.js:277
+msgid ""
+"Otherwise, use the forms on the next screen to submit evidence that the "
+"subscription was still active and that the customer was aware of, and did "
+"not follow, your cancellation procedure."
+msgstr ""
+
+#: client/disputes/strings.js:284
+msgid "Unrecognized"
+msgstr ""
+
+#: client/disputes/strings.js:286
+msgid ""
+"If you believe the dispute is invalid, you can challenge it by submitting "
+"the appropriate evidence using the response forms on the next screen."
+msgstr ""
+
+#: client/disputes/strings.js:290
+msgid ""
+"If you can not prove the customer’s subscription was canceled, and or they "
+"did not follow your cancelation policy, you should accept the dispute. You "
+"cannot issue a refund while a payment is being disputed. The credit card "
+"networks place liability for accepting disputed payments with you, the "
+"business."
+msgstr ""
+
+#: client/disputes/strings.js:296
+msgid ""
+"The customer doesn’t recognize the payment appearing on their card "
+"statement."
+msgstr ""
+
+#: client/disputes/strings.js:302
+msgid ""
+"As with fraudulent disputes, get your customer to withdraw the dispute by "
+"helping them identify the payment. Otherwise challenge the dispute with "
+"appropriate evidence that proves the purchase was legitimate. "
+msgstr ""
+
+#: client/disputes/strings.js:308
+msgid ""
+"First, try to get in touch with your customer. Sometimes people forget "
+"about payments they make or don’t recognize the way they appear on their "
+"card statement. If this is the case, ask them to contact their card issuer "
+"and let them know they no longer dispute the transaction. Even if your "
+"customer agrees to withdraw the dispute, you must still submit appropriate "
+"evidence. Simply saying that your customer is going to withdraw the dispute "
+"is not sufficient evidence."
+msgstr ""
+
+#: client/disputes/strings.js:31
+msgid ""
+"The customer claims that the purchased product was returned or the "
+"transaction was otherwise canceled, but you have not yet provided a refund "
+"or credit."
+msgstr ""
+
+#: client/disputes/strings.js:312
+msgid ""
+"It may be more efficient—and provide a better customer experience—to accept "
+"an accidental dispute and charge the customer again, if appropriate. Even "
+"when a dispute is withdrawn, it usually takes approximately 75 days to be "
+"finalized. Remember, it doesn’t matter to the card networks whether you win "
+"or lose a dispute; what matters is how many disputes a business receives, "
+"regardless of how many disputes are won."
+msgstr ""
+
+#: client/disputes/strings.js:37
+msgid ""
+"Demonstrate that you have refunded your customer through other means or "
+"that your customer is not entitled to a refund. You cannot issue a refund "
+"while a payment is being disputed. If you believe that your customer was "
+"entitled a refund that you did not provide, you can accept the dispute."
+msgstr ""
+
+#: client/disputes/strings.js:43
+msgid ""
+"You should first get in touch with your customer. If you understand what "
+"their complaint is, there is a chance for you to explain the "
+"misunderstanding or to make it right. If you’re able to resolve the issue "
+"with your customer, you can ask that they withdraw the dispute."
+msgstr ""
+
+#: client/disputes/strings.js:47
+msgid ""
+"If the cardholder agrees to withdraw the dispute, you should still submit "
+"evidence for the dispute using the forms on the next screen. In addition to "
+"the following evidence, your submission should include correspondence with "
+"the cardholder saying they would withdraw the dispute and a written "
+"statement from their card issuer confirming that the dispute has been "
+"withdrawn."
+msgstr ""
+
+#: client/disputes/strings.js:54
+msgid "Customer initiated"
+msgstr ""
+
+#: client/disputes/strings.js:57
+msgid "Debit not authorized"
+msgstr ""
+
+#: client/disputes/strings.js:60
+msgid "Duplicate"
+msgstr ""
+
+#: client/disputes/strings.js:66
+msgid ""
+"If there were duplicate payments, you should accept the dispute. You cannot "
+"issue a refund while a payment is being disputed. The credit card networks "
+"place liability for accepting disputed payments with you, the business."
+msgstr ""
+
+#: client/disputes/strings.js:72
+msgid ""
+"The customer claims they were charged multiple times for the same product "
+"or service."
+msgstr ""
+
+#: client/disputes/strings.js:78
+msgid "Demonstrate that each payment was for a separate product or service."
+msgstr ""
+
+#: client/disputes/strings.js:84
+msgid "Determine if your customer was incorrectly charged multiple times."
+msgstr ""
+
+#: client/disputes/strings.js:88
+msgid ""
+"If they were not, collect any and all information documenting that each "
+"payment was made separately, such as copies of receipts. If the receipts "
+"don’t include the items purchased, be sure to include an itemized list. "
+"Each receipt should clearly indicate that the payments are for separate "
+"purchases of items or services. If you’ve been able to get in touch with "
+"the customer you should be sure to address any concerns they had in your "
+"evidence."
+msgstr ""
+
+#: client/disputes/strings.js:92
+msgid ""
+"If there have been two or more separate payments, you should get in touch "
+"with your customer. If you understand what their complaint is, there is a "
+"chance for you to explain the misunderstanding or to make it right. If "
+"you’re able to resolve the issue with your customer, you can ask that they "
+"withdraw the dispute."
+msgstr ""
+
+#: client/index.js:37
+msgid "Connect"
+msgstr ""
+
+#: client/overview/index.js:40
+msgid ""
+"Thanks for verifying your business details. You're ready to start taking "
+"payments!"
+msgstr ""
+
+#: client/overview/task-list/index.js:26
+msgid "Things to do"
+msgstr ""
+
+#: client/overview/task-list/index.js:36
+msgid "Hide tasks"
+msgstr ""
+
+#: client/overview/task-list/index.js:37
+msgid "Show tasks"
+msgstr ""
+
+# %s - formatted requirements current deadline (date)
+#: client/overview/task-list/tasks.js:19
+msgid "Update by %s to avoid a disruption in deposits."
+msgstr ""
+
+# <a> - dashboard login URL
+#: client/overview/task-list/tasks.js:31
+msgid ""
+"Payments and deposits are disabled for this account until missing business "
+"information is updated."
+msgstr ""
+
+#: client/overview/task-list/tasks.js:40
+msgid "Update WooCommerce Payments business details"
+msgstr ""
+
+#: client/payment-details/index.js:33
+msgid "Payment details not loaded"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:108
+#: client/payment-details/payment-method/card/index.js:125
+msgid "Number"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:115
+#: client/payment-details/payment-method/card/index.js:132
+#: client/payment-details/payment-method/sepa/index.js:87
+msgid "Fingerprint"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:122
+#: client/payment-details/payment-method/card/index.js:139
+msgid "Expires"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:136
+#: client/payment-details/payment-method/card/index.js:153
+#: client/payment-details/payment-method/giropay/index.js:80
+#: client/payment-details/payment-method/sepa/index.js:94
+#: client/payment-details/payment-method/sofort/index.js:92
+msgid "ID"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:145
+#: client/payment-details/payment-method/card/index.js:162
+#: client/payment-details/payment-method/giropay/index.js:89
+#: client/payment-details/payment-method/sepa/index.js:103
+#: client/payment-details/payment-method/sofort/index.js:136
+msgid "Owner"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:152
+#: client/payment-details/payment-method/card/index.js:169
+#: client/payment-details/payment-method/giropay/index.js:96
+#: client/payment-details/payment-method/sepa/index.js:110
+#: client/payment-details/payment-method/sofort/index.js:143
+msgid "Owner email"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:159
+#: client/payment-details/payment-method/card/index.js:176
+#: client/payment-details/payment-method/giropay/index.js:103
+#: client/payment-details/payment-method/sepa/index.js:117
+#: client/payment-details/payment-method/sofort/index.js:150
+msgid "Address"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:170
+#: client/payment-details/payment-method/card/index.js:187
+#: client/payment-details/payment-method/sepa/index.js:128
+#: client/payment-details/payment-method/sofort/index.js:161
+msgid "Origin"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:39
+#: client/payment-details/payment-method/card/index.js:46
+msgid "credit"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:40
+#: client/payment-details/payment-method/card/index.js:47
+msgid "debit"
+msgstr ""
+
+#: client/payment-details/payment-method/card-present/index.js:41
+#: client/payment-details/payment-method/card/index.js:48
+msgid "prepaid"
+msgstr ""
+
+# %1$s card brand, %2$s card funding (prepaid, credit, etc.).
+#: client/payment-details/payment-method/card-present/index.js:46
+#: client/payment-details/payment-method/card/index.js:53
+msgid "%1$s %2$s card"
+msgstr ""
+
+#: client/payment-details/payment-method/card/check.js:14
+msgid "Passed"
+msgstr ""
+
+#: client/payment-details/payment-method/card/check.js:18
+msgid "Unavailable"
+msgstr ""
+
+#: client/payment-details/payment-method/card/check.js:20
+msgid "Not checked"
+msgstr ""
+
+#: client/payment-details/payment-method/card/index.js:194
+msgid "CVC check"
+msgstr ""
+
+#: client/payment-details/payment-method/card/index.js:201
+msgid "Street check"
+msgstr ""
+
+#: client/payment-details/payment-method/card/index.js:208
+msgid "Zip check"
+msgstr ""
+
+#: client/payment-details/payment-method/giropay/index.js:66
+msgid "Bank Name"
+msgstr ""
+
+#: client/payment-details/payment-method/giropay/index.js:73
+#: client/payment-details/payment-method/sofort/index.js:113
+msgid "BIC"
+msgstr ""
+
+#: client/payment-details/payment-method/index.js:49
+#: client/payment-details/summary/index.js:68
+msgid "Payment method"
+msgstr ""
+
+#: client/payment-details/payment-method/sepa/index.js:80
+#: client/payment-details/payment-method/sofort/index.js:120
+msgid "IBAN"
+msgstr ""
+
+#: client/payment-details/payment-method/sofort/index.js:106
+msgid "Bank name"
+msgstr ""
+
+#: client/payment-details/payment-method/sofort/index.js:129
+msgid "Verified name"
+msgstr ""
+
+#: client/payment-details/payment-method/sofort/index.js:99
+msgid "Bank code"
+msgstr ""
+
+#: client/payment-details/summary/index.js:139
+msgid "Fee"
+msgstr ""
+
+#: client/payment-details/summary/index.js:154
+#: client/transactions/list/index.js:85
+msgid "Net"
+msgstr ""
+
+#: client/payment-details/summary/index.js:172
+msgid "Payment ID"
+msgstr ""
+
+#: client/payment-details/summary/index.js:54
+msgid "Subscription"
+msgstr ""
+
+#: client/payment-details/summary/index.js:76
+msgid "Risk evaluation"
+msgstr ""
+
+#: client/payment-details/timeline/index.js:27
+msgid "Timeline"
+msgstr ""
+
+#: client/payment-details/timeline/index.js:33
+msgid "Error while loading timeline"
+msgstr ""
+
+# %s - formatted amount
+#: client/payment-details/timeline/map-events.js:104
+msgid "%s will be added to a future deposit."
+msgstr ""
+
+# %s - formatted amount
+#: client/payment-details/timeline/map-events.js:109
+msgid "%s will be deducted from a future deposit."
+msgstr ""
+
+# %1$s is the total fee amount, %2$f%% is the fee percentage, and %3$s is the fixed fee amount.
+#: client/payment-details/timeline/map-events.js:197
+msgid "Fee (%2$.1f%% + %3$s): %1$s"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:245
+msgid "Authorized"
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:251
+msgid "A payment of %s was successfully authorized."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:265
+msgid "Authorization Voided"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:270
+msgid "Authorization for %s was voided."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:285
+msgid "Authorization Expired"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:290
+msgid "Authorization for %s expired."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:313
+msgid "A payment of %s was successfully charged."
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:327
+msgid "Net deposit: %s"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:350
+msgid "Partial Refund"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:356
+msgid "A payment of %s was successfully refunded."
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:378
+msgid "A payment of %s failed."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:386
+msgid "Payment disputed"
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:393
+msgid "Payment disputed as %s."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:409
+msgid "No funds have been withdrawn yet."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:414
+msgid ""
+"The cardholder's bank is requesting more information to decide whether to "
+"return these funds to the cardholder."
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:439
+msgid "Disputed amount: %s"
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:445
+msgid "Fee: %s"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:455
+msgid "Disputed: Needs Response"
+msgstr ""
+
+# %s new status, for example Authorized, Refunded, etc
+#: client/payment-details/timeline/map-events.js:46
+msgid "Payment status changed to %s."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:466
+msgid "View dispute"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:475
+msgid "Disputed: In Review"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:479
+msgid "Challenge evidence submitted."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:495
+msgid "Disputed: Won"
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:500
+msgid "Dispute reversal: %s"
+msgstr ""
+
+# %s is a monetary amount
+#: client/payment-details/timeline/map-events.js:505
+msgid "Fee refund: %s"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:511
+msgid "Dispute won! The bank ruled in your favor."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:523
+msgid "Disputed: Lost"
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:527
+msgid "Dispute lost. The bank ruled in favor of your customer."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:539
+msgid "Dispute inquiry closed. The bank chose not to pursue this dispute."
+msgstr ""
+
+#: client/payment-details/timeline/map-events.js:551
+msgid "The disputed charge has been refunded."
+msgstr ""
+
+# %1$s - formatted amount, %2$s - deposit arrival date, <a> - link to the deposit
+#: client/payment-details/timeline/map-events.js:74
+msgid "%1$s was added to your <a>%2$s deposit</a>."
+msgstr ""
+
+# %1$s - formatted amount, %2$s - deposit arrival date, <a> - link to the deposit
+#: client/payment-details/timeline/map-events.js:79
+msgid "%1$s was deducted from your <a>%2$s deposit</a>."
+msgstr ""
+
+#: client/payment-gateways/disable-confirmation-modal.js:24
+#: client/tos/modal/index.js:85
+msgid "Disable WooCommerce Payments"
+msgstr ""
+
+#: client/payment-gateways/disable-confirmation-modal.js:43
+msgid ""
+"WooCommerce Payments is currently powering multiple popular payment methods "
+"on your store. Without it, they will no longer be available to your "
+"customers which may {{strong}}influence conversions and sales on your "
+"store.{{/strong}}"
+msgstr ""
+
+#: client/payment-gateways/disable-confirmation-modal.js:56
+msgid ""
+"You can enable WooCommerce Payments again at any time in "
+"{{settingsLink}}settings{{/settingsLink}}."
+msgstr ""
+
+#: client/payment-gateways/disable-confirmation-modal.js:70
+msgid "Payment methods that need WooCommerce Payments:"
+msgstr ""
+
+#: client/payment-gateways/disable-confirmation-modal.js:85
+msgid ""
+"{{strong}}Need help?{{/strong}} Learn more about "
+"{{wooCommercePaymentsLink}}WooCommerce Payments{{/wooCommercePaymentsLink}} "
+"or {{contactSupportLink}}contact WooCommerce Support{{/contactSupportLink}}."
+msgstr ""
+
+#: client/payment-methods/index.js:30
+#: client/settings/payment-method-icon/index.js:19
+msgid "Credit card / debit card"
+msgstr ""
+
+#: client/payment-methods/index.js:31
+msgid ""
+"Let your customers pay with major credit and debit cards without leaving "
+"your store."
+msgstr ""
+
+#: client/payment-methods/index.js:40
+msgid "giropay"
+msgstr ""
+
+#: client/payment-methods/index.js:41
+msgid ""
+"Expand your business with giropay — Germany’s second most popular payment "
+"system."
+msgstr ""
+
+#: client/payment-methods/index.js:51
+msgid ""
+"Accept secure bank transfers from Austria, Belgium, Germany, Italy, and "
+"Netherlands."
+msgstr ""
+
+#: client/payment-methods/index.js:60
+msgid "Direct debit payment"
+msgstr ""
+
+#: client/payment-methods/index.js:61
+msgid ""
+"Reach 500 million customers and over 20 million businesses across the "
+"European Union."
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:100
+msgid "Log error messages"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:105
+msgid ""
+"When enabled, payment error logs will be saved to WooCommerce > Status > "
+"Logs."
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:114
+msgid "Block appearance"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:120
+msgid ""
+"Customize or override the appearance of the payment methods block on "
+"checkout."
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:125
+msgid "Learn how"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:136
+msgid ""
+"We couldn't find your store’s theme font to use in this block so we've "
+"replaced it with a fitting alternative. If you want to use your custom "
+"font, enter a link to where it's located."
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:145
+msgid "Use a custom font"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:151
+msgid "Custom font URL"
+msgstr ""
+
+# %s - example of URL for custom font - text is used as placeholder
+#: client/settings/advanced-settings/index.js:160
+msgid "Example: %1$s"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:172
+msgid "Add CSS styling"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:178
+msgid "Additional CSS styling"
+msgstr ""
+
+#: client/settings/advanced-settings/index.js:80
+msgid "Advanced settings"
+msgstr ""
+
+#: client/settings/digital-wallets/index.js:100
+msgid "Show express checkouts on:"
+msgstr ""
+
+#: client/settings/digital-wallets/index.js:125
+msgid "Product page"
+msgstr ""
+
+#: client/settings/digital-wallets/index.js:150
+msgid "Customize appearance"
+msgstr ""
+
+#: client/settings/digital-wallets/index.js:54
+msgid "Enable express checkouts"
+msgstr ""
+
+#: client/settings/digital-wallets/index.js:60
+msgid ""
+"By enabling this feature, you agree to {{stripeLink}}Stripe{{/stripeLink}}, "
+"{{appleLink}}Apple{{/appleLink}}, {{googleLink}}Google{{/googleLink}} and "
+"{{microsoftLink}}Microsoft{{/microsoftLink}}'s terms of use."
+msgstr ""
+
+#: client/settings/general-settings/index.js:48
+msgid "Transaction preferences"
+msgstr ""
+
+#: client/settings/general-settings/index.js:53
+msgid "Issue an authorization on checkout, and capture later"
+msgstr ""
+
+#: client/settings/general-settings/index.js:68
+msgid "Edit the way your store name appears on your customers' bank statements."
+msgstr ""
+
+#: client/settings/general-settings/index.js:87
+msgid "Bank account information"
+msgstr ""
+
+#: client/settings/general-settings/index.js:93
+msgid ""
+"Manage and update your bank account information to receive payments and "
+"payouts."
+msgstr ""
+
+#: client/settings/general-settings/index.js:98
+msgid "Manage in Stripe"
+msgstr ""
+
+#: client/settings/index.js:28
+msgid ""
+"When manual capture is enabled, charges must be captured within 7 days of "
+"authorization, otherwise the authorization and order will be canceled. Are "
+"you sure you want to enable it?"
+msgstr ""
+
+#: client/settings/payment-method-icon/index.js:23
+msgid "GiroPay"
+msgstr ""
+
+#: client/settings/payment-method-icon/index.js:27
+msgid "Direct Debit Payments"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:16
+msgid "Default (40 px)"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:20
+msgid "Medium (48 px)"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:24
+msgid "Large (56 px)"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:30
+msgid "Only icon"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:42
+msgid "Book"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:64
+msgid "Call to action"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:66
+msgid ""
+"Select a button label that fits best with the flow of purchase or payment "
+"experience on your store."
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:74
+msgid "Appearance"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:76
+msgid "Note that larger buttons are more suitable for mobile use."
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:80
+msgid "Size"
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:86
+msgid ""
+"Dark is recommended for white or light-colored backgrounds and light is "
+"recommended for dark or colored backgrounds."
+msgstr ""
+
+#: client/settings/payment-method-settings/digital-wallets-settings.js:91
+msgid "Theme"
+msgstr ""
+
+#: client/settings/payment-method-settings/index.js:27
+#: client/settings/settings-manager/index.js:43
+msgid "Express checkouts"
+msgstr ""
+
+#: client/settings/payment-method-settings/index.js:29
+msgid ""
+"Decide how buttons for digital wallets like Apple Pay and Google Pay are "
+"displayed in your store."
+msgstr ""
+
+#: client/settings/payment-method-settings/index.js:36
+msgid "View Apple Pay Guidelines"
+msgstr ""
+
+#: client/settings/payment-method-settings/index.js:44
+msgid "View Google Pay Guidelines"
+msgstr ""
+
+#: client/settings/payment-method-settings/index.js:64
+msgid "Invalid payment method ID specified."
+msgstr ""
+
+#: client/settings/payment-methods-selector/index.js:103
+msgid "Add selected"
+msgstr ""
+
+#: client/settings/payment-methods-selector/index.js:109
+msgid ""
+"Increase your store's conversion by offering your customers preferred and "
+"convenient payment methods."
+msgstr ""
+
+#: client/settings/payment-methods-selector/index.js:137
+msgid "Add payment method"
+msgstr ""
+
+#: client/settings/payment-methods-selector/index.js:80
+msgid "Add payment methods"
+msgstr ""
+
+#: client/settings/save-settings-section/index.js:27
+msgid "Save changes"
+msgstr ""
+
+#: client/settings/settings-manager/index.js:31
+msgid ""
+"Add and edit payments available to customers at checkout. Based on their "
+"device type, location, and purchase history, your customers will only see "
+"the most relevant payment methods."
+msgstr ""
+
+#: client/settings/settings-manager/index.js:53
+msgid ""
+"Let your customers use their favorite express payment methods and digital "
+"wallets for faster, more secure checkouts across different parts of your "
+"store."
+msgstr ""
+
+#: client/settings/settings-manager/index.js:60
+msgid "How it works?"
+msgstr ""
+
+#: client/settings/settings-manager/index.js:67
+msgid "General settings"
+msgstr ""
+
+#: client/settings/settings-manager/index.js:69
+msgid ""
+"Change WooCommerce Payments settings and update your store's configuration "
+"to ensure smooth transactions."
+msgstr ""
+
+#: client/settings/settings-manager/index.js:75
+msgid "View Frequently Asked Questions"
+msgstr ""
+
+#: client/settings/test-mode-settings/index.js:34
+msgid "Enable test mode for payments on the store"
+msgstr ""
+
+#: client/settings/test-mode-settings/index.js:40
+msgid ""
+"Use {{testCardHelpLink}}test card numbers{{/testCardHelpLink}} to simulate "
+"various transactions. {{learnMoreLink}}Learn more{{/learnMoreLink}}."
+msgstr ""
+
+#: client/tos/disabled-notice.js:29
+msgid "Disabled WooCommerce Payments"
+msgstr ""
+
+#: client/tos/disabled-notice.js:33
+msgid "Undo"
+msgstr ""
+
+#: client/tos/modal/index.js:111
+msgid "Something went wrong. Please try again!"
+msgstr ""
+
+#: client/tos/modal/index.js:124
+msgid "Back"
+msgstr ""
+
+#: client/tos/modal/index.js:128
+msgid "Disable"
+msgstr ""
+
+#: client/tos/modal/index.js:32
+msgid "WooCommerce Payments: Terms of Service"
+msgstr ""
+
+#: client/tos/modal/index.js:37
+msgid ""
+"To continue using WooCommerce Payments, please review and agree to our "
+"{{link}}Terms of Service{{/link}}. By clicking “Accept” you agree to the "
+"Terms of Service."
+msgstr ""
+
+#: client/tos/modal/index.js:60
+msgid "Something went wrong. Please try accepting the Terms of Service again!"
+msgstr ""
+
+#: client/tos/modal/index.js:72
+msgid "Decline"
+msgstr ""
+
+#: client/tos/modal/index.js:76
+msgid "Accept"
+msgstr ""
+
+#: client/tos/modal/index.js:87
+msgid ""
+"By declining our {{link}}Terms of Service{{/link}}, you’ll no longer be "
+"able to capture credit card payments using WooCommerce Payments. Your "
+"previous transaction and deposit data will still be available."
+msgstr ""
+
+#: client/transactions/autocompleter.js:45
+msgid ""
+"All transactions with customer names or billing emails that include {{query "
+"/}}"
+msgstr ""
+
+#: client/transactions/filters/config.js:101
+msgid "Before"
+msgstr ""
+
+#: client/transactions/filters/config.js:105
+msgid "After"
+msgstr ""
+
+#: client/transactions/filters/config.js:109
+msgid "Between"
+msgstr ""
+
+#: client/transactions/filters/config.js:119
+msgid "Remove transaction type filter"
+msgstr ""
+
+#: client/transactions/filters/config.js:123
+msgid "Select a transaction type filter match"
+msgstr ""
+
+# A sentence describing a Transaction type filter. See screen shot for context: https://d.pr/i/NcGpwL
+#: client/transactions/filters/config.js:128
+msgid "{{title}}Type{{/title}} {{rule /}} {{filter /}}"
+msgstr ""
+
+#: client/transactions/filters/config.js:132
+msgid "Select a transaction type"
+msgstr ""
+
+#: client/transactions/filters/config.js:37
+msgid "All currencies"
+msgstr ""
+
+#: client/transactions/filters/config.js:45
+msgid "Show"
+msgstr ""
+
+#: client/transactions/filters/config.js:58
+msgid "All transactions"
+msgstr ""
+
+#: client/transactions/filters/config.js:62
+msgid "Advanced filters"
+msgstr ""
+
+#: client/transactions/filters/config.js:72
+msgid "Transactions match {{select /}} filters"
+msgstr ""
+
+#: client/transactions/filters/config.js:80
+msgid "Remove transaction date filter"
+msgstr ""
+
+#: client/transactions/filters/config.js:84
+msgid "Select a transaction date filter match"
+msgstr ""
+
+# A sentence describing a Transaction date filter. See screen shot for context: https://d.pr/i/NcGpwL
+#: client/transactions/filters/config.js:89
+msgid "{{title}}Date{{/title}} {{rule /}} {{filter /}}"
+msgstr ""
+
+#: client/transactions/filters/config.js:93
+msgid "Select a transaction date"
+msgstr ""
+
+# %s is a monetary amount
+#: client/transactions/list/converted-amount.js:19
+msgid "Converted from %s"
+msgstr ""
+
+#: client/transactions/list/index.js:129
+msgid "Risk level"
+msgstr ""
+
+#: client/transactions/list/index.js:305
+msgid "Search by order number, subscription number, customer name, or billing email"
+msgstr ""
+
+#: client/transactions/list/index.js:309
+msgid "Search by order number, customer name, or billing email"
+msgstr ""
+
+#: client/transactions/list/index.js:337
+msgid "Search by customer name"
+msgstr ""
+
+#: client/transactions/list/index.js:359
+msgid "transactions"
+msgstr ""
+
+#: client/transactions/list/index.js:374
+msgid "fees"
+msgstr ""
+
+#: client/transactions/list/index.js:381
+msgid "net"
+msgstr ""
+
+#: client/transactions/list/index.js:405
+msgid "Deposit transactions"
+msgstr ""
+
+#: client/transactions/list/index.js:441
+msgid "Download"
+msgstr ""
+
+#: client/transactions/list/index.js:48
+msgid "Transaction Id"
+msgstr ""
+
+#: client/transactions/list/index.js:53
+msgid "Date / Time"
+msgstr ""
+
+#: client/transactions/list/index.js:54
+msgid "Date and time"
+msgstr ""
+
+#: client/transactions/list/index.js:78
+msgid "Fees"
+msgstr ""
+
+#: client/transactions/list/index.js:93
+msgid "Order number"
+msgstr ""
+
+#: client/transactions/list/index.js:99
+msgid "Subscription number"
+msgstr ""
+
+#: client/transactions/strings.js:11
+msgid "Charge"
+msgstr ""
+
+#: client/transactions/strings.js:12
+msgid "Payment"
+msgstr ""
+
+#: client/transactions/strings.js:13
+msgid "Payment failure refund"
+msgstr ""
+
+#: client/transactions/strings.js:17
+msgid "Payment refund"
+msgstr ""
+
+#: client/transactions/strings.js:18
+msgid "Refund"
+msgstr ""
+
+#: client/transactions/strings.js:19
+msgid "Refund failure"
+msgstr ""
+
+#: client/transactions/strings.js:20
+msgid "Dispute"
+msgstr ""
+
+#: client/transactions/strings.js:21
+msgid "Dispute reversal"
+msgstr ""
+
+# %1: Percentage part of the fee. %2: Fixed part of the fee
+#: client/utils/account-fees.js:26
+msgid "%1$.1f%% + %2$s per transaction"
+msgstr ""
+
+# %1 Base fee (that don't apply to this account at this moment), %2 and %3: Current fee (e.g: 2.9% + $.30)
+#: client/utils/account-fees.js:47
+msgid "<s>%1$s</s> %2$.1f%% + %3$s per transaction"
+msgstr ""
+
+# %d percentage discount to apply
+#: client/utils/account-fees.js:61
+msgid "(%1$d%% discount)"
+msgstr ""
+
+# Sentence fragment, logical, "Is" refers to searching for transactions matching a chosen transaction type. Screenshot for context: https://d.pr/i/NcGpwL
+#: client/transactions/filters/config.js:141
+msgctxt "transaction type"
+msgid "Is"
+msgstr ""
+
+# Sentence fragment, logical, "Is not" refers to searching for transactions that don\'t match a chosen transaction type. Screenshot for context: https://d.pr/i/NcGpwL
+#: client/transactions/filters/config.js:150
+msgctxt "transaction type"
+msgid "Is not"
+msgstr ""
+

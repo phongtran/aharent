@@ -1,0 +1,14 @@
+.task-collapsible-body{max-height:0;overflow:hidden;opacity:0;transition:max-height 500ms ease-out, opacity 500ms ease-out}.task-collapsible-body.is-active{overflow:visible;max-height:500px;opacity:1;transition:max-height 500ms ease-in, opacity 500ms ease-in}
+
+.wcpay-wizard-task{margin-bottom:0}.wcpay-wizard-task:first-child .wcpay-wizard-task__top-border{display:none}.wcpay-wizard-task:last-child .wcpay-wizard-task__body{border-left:none}.wcpay-wizard-task__top-border{min-height:16px;border-left:1px solid #c3c4c7;margin:0 12px}.wcpay-wizard-task__headline{display:flex;align-items:center;flex-direction:row;margin-bottom:4px;font-weight:600;font-size:16px;color:#2c3338}.is-active .wcpay-wizard-task__headline{color:var(--wp-admin-theme-color)}.wcpay-wizard-task__title{padding:0 16px}.wcpay-wizard-task__icon-wrapper{position:relative;width:24px;height:24px;padding:0;border-radius:9999px;border:1px solid #c3c4c7;display:flex;justify-content:center;align-items:center}.is-active .wcpay-wizard-task__icon-wrapper{border-color:var(--wp-admin-theme-color)}.is-completed .wcpay-wizard-task__icon-wrapper{border-color:var(--wp-admin-theme-color);background-color:var(--wp-admin-theme-color)}.wcpay-wizard-task__icon-text{font-size:13px}.is-completed .wcpay-wizard-task__icon-text{opacity:0}.wcpay-wizard-task__icon-checkmark{opacity:0;transition:opacity 500ms ease;position:absolute;top:0;right:0;width:100%;height:100%;fill:#fff}.is-completed .wcpay-wizard-task__icon-checkmark{opacity:1}.wcpay-wizard-task__body{display:flex;flex-direction:column;margin:0 12px;padding:0 30px;border-left:1px solid #c3c4c7;font-size:14px}.wcpay-wizard-task__description-element{margin-top:0;margin-bottom:1em}.wcpay-wizard-task__description-element.is-muted-color{color:#757575}
+
+.woocommerce-payments__payment-method-icon{display:inline-flex;align-items:center;vertical-align:middle;max-width:160px}.woocommerce-payments__payment-method-icon svg{width:41px;height:auto}@media (min-width: 661px){.woocommerce-payments__payment-method-icon{max-width:inherit}}.woocommerce-payments__payment-method-icon__label{margin-left:4px}
+
+.payment-method-checkbox{display:flex;justify-content:space-between;align-items:center;width:100%}.payment-method-checkbox>*{margin:0 3px}.payment-method-checkbox__fees{margin-left:auto;text-transform:uppercase;border-radius:16px;padding:0 8px;border:1px solid #3c434a;color:#3c434a;font-size:12px}.payment-method-checkbox__info{margin:0;fill:#3c434a}
+
+.add-payment-methods-task__payment-selector-wrapper{max-height:300px;width:100%;overflow:hidden auto}.add-payment-methods-task__payment-selector-title{font-weight:bold;color:#1d2327;font-size:14px}.add-payment-methods-task hr.components-card__divider{width:100%}
+
+.setup-complete-task__buttons .components-button:not(:last-child){margin-right:20px}
+
+.methods-selector{max-width:680px;margin:0 auto}
+
