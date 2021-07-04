@@ -182,7 +182,7 @@ function create_product_custom_field()
 	// Security deposit checkbox
 	woocommerce_wp_checkbox( 
 		array( 
-			'id'            => '_security_deposit_checkbox', 
+			'id'            => '_security_deposit', 
 			'wrapper_class' => 'show_if_simple', 
 			'label'         => __('Security deposit', 'woocommerce' ),
 			)
@@ -207,11 +207,27 @@ function create_product_custom_field()
 	// Security deposit amount
 	woocommerce_wp_text_input( 
 		array( 
-			'id'          => '_deposit_amount', 
-			'label'       => __( 'Deposit amount', 'woocommerce' ),
+			'id'          => '_platform_fee', 
+			'label'       => __( 'Platform fee', 'woocommerce' ),
 		)
 	);
 	
 	
 }
 add_action( 'woocommerce_product_options_general_product_data', 'create_product_custom_field' );
+
+function cfwc_save_custom_field( $post_id ) {
+	$product = wc_get_product( $post_id );
+	
+	// $security_deposit_checkbox = isset( $_POST['_security_deposit'] ) ? $_POST['_security_deposit'] : '' ;
+
+	
+	$security_deposit_amount = isset( $_POST['_security_deposit_amount'] ) ? $_POST['_security_deposit_amount'] : '';
+	$product->update_meta_data( '_security_deposit_amount', sanitize_text_field( $security_deposit_amount ) );
+	
+	$platform_fee = isset ( $_POST['_platform_fee'] ) ? $_POST['_platform_fee'] : '' ;
+	$product->update_meta_data( '_platform_fee', sanitize_text_field( $platform_fee));
+
+	$product->save();
+   }
+   add_action( 'woocommerce_process_product_meta', 'cfwc_save_custom_field' );
