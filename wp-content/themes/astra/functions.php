@@ -179,6 +179,21 @@ require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
  */
 function create_product_custom_field()
 {
+
+	// Rental time unit	
+	// woocommerce_wp_select( 
+	// 	array( 
+	// 		'id'      => '_rental_time_unit', 
+	// 		'label'   => __( 'Rental time unit', 'woocommerce' ), 
+	// 		'options' => array(
+	// 			'hour'   => __( 'Hour', 'woocommerce' ),
+	// 			'day'   => __( 'Day', 'woocommerce' ),
+	// 			'month' => __( 'Month', 'woocommerce' )
+	// 			)
+	// 		)
+	// 	);
+
+
 	// Security deposit checkbox
 	woocommerce_wp_checkbox( 
 		array( 
@@ -221,6 +236,7 @@ function cfwc_save_custom_field( $post_id ) {
 	
 	// $security_deposit_checkbox = isset( $_POST['_security_deposit'] ) ? $_POST['_security_deposit'] : '' ;
 
+	// $rental_period_unit = isset( $_POST['_rental_period_unit'])
 	
 	$security_deposit_amount = isset( $_POST['_security_deposit_amount'] ) ? $_POST['_security_deposit_amount'] : '';
 	$product->update_meta_data( '_security_deposit_amount', sanitize_text_field( $security_deposit_amount ) );

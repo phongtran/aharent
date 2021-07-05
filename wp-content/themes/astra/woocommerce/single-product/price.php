@@ -22,4 +22,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 
 ?>
-<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
+<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
+	Rental price: <?php echo $product->get_price_html(); ?>
+</p>
+
+<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
+	Security deposit: <?php echo wc_price( $product->get_meta( '_security_deposit_amount' )); ?>
+</p>
+
+<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
+	Deposit: <?php echo wc_price( $product->get_meta( '_platform_fee' )); ?>
+</p>
