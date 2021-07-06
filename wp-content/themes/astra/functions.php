@@ -245,5 +245,44 @@ function cfwc_save_custom_field( $post_id ) {
 	$product->update_meta_data( '_platform_fee', sanitize_text_field( $platform_fee));
 
 	$product->save();
-   }
-   add_action( 'woocommerce_process_product_meta', 'cfwc_save_custom_field' );
+}
+add_action( 'woocommerce_process_product_meta', 'cfwc_save_custom_field' );
+
+
+// Re-calculating cart values
+function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, $variation_id )
+{
+	$product = get_product( $product_id );
+	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
+	$cart_item_data['rental_price'] = $product->get_price();
+	$cart_item_data['deposit'] = $product->get_meta( '_platform_fee' ); 
+
+	return $cart_item_data;
+}
+add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data_with_optional_prices', 10, 3);
+
+
+
+
+
+function set_cart_calculation( $cart )
+{
+	foreach ( $cart->get_cart() as $cart_item )
+	{	
+		$cart_item['data']->set_price( $cart_item['deposit'] );
+	}
+		
+	
+}
+add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
+
+// function product_subtotal( $product_subtotal, $product, $quantity, $cart )
+// {
+	
+// 	$deposit = $product->get_meta( '_platform_fee' );
+// 	$row_price = $deposit * $quantity;
+// 	$product_subtotal = wc_price( $row_price );
+
+// 	return $product_subtotal;
+// }
+// add_filter( 'woocommerce_cart_product_subtotal', 'product_subtotal', 10, 4 );

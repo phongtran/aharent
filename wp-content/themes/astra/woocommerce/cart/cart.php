@@ -28,8 +28,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 				<th class="product-remove">&nbsp;</th>
 				<th class="product-thumbnail">&nbsp;</th>
 				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
 				<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
+				<th class="product-price"><?php esc_html_e( 'Rental price', 'woocommerce' ); ?></th>
+				<th class="product-security-deposit"><?php esc_html_e( 'Security deposit', 'woocommerce' ); ?></th>
+				<!-- <th class="product-deposit"><?php esc_html_e( 'Pay at delivery/pick-up', 'woocommerce' ); ?></th> -->
+				<th class="product-deposit"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
 				<th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
 			</tr>
 		</thead>
@@ -94,11 +97,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 						</td>
 
-						<td class="product-price" data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
-							<?php
-								echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
-							?>
-						</td>
+						
 
 						<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
 						<?php
@@ -121,6 +120,27 @@ do_action( 'woocommerce_before_cart' ); ?>
 						echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 						?>
 						</td>
+
+
+						<td class="product-price" data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
+							<?php
+								echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] );
+							?>
+						</td>
+
+						<td class="product-security-deposit" data-title="<?php esc_attr_e( 'Security deposit', 'woocommerce' ); ?>">
+							<?php
+								echo wc_price( $cart_item['security_deposit'] * $cart_item['quantity'] );
+							?>
+						</td>
+
+						<td class="product-deposit" data-title="<?php esc_attr_e( 'Deposit', 'woocommerce' ); ?>">
+							<?php
+								echo wc_price( $cart_item['deposit'] * $cart_item['quantity']);
+							?>
+						</td>
+
+						
 
 						<td class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
 							<?php
