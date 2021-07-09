@@ -276,13 +276,41 @@ function set_cart_calculation( $cart )
 }
 add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
 
-// function product_subtotal( $product_subtotal, $product, $quantity, $cart )
-// {
-	
-// 	$deposit = $product->get_meta( '_platform_fee' );
-// 	$row_price = $deposit * $quantity;
-// 	$product_subtotal = wc_price( $row_price );
 
-// 	return $product_subtotal;
-// }
-// add_filter( 'woocommerce_cart_product_subtotal', 'product_subtotal', 10, 4 );
+function save_order_custom_values_of_items( $item, $cart_item_key, $values, $order )
+{
+	$item->add_meta_data( '_rental_price', $values['rental_price'] );
+}
+add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_values_of_items', 10, 4 );
+
+
+
+function woocommerce_admin_order_item_headers()
+{
+    // set the column name
+    $column_name = 'Rental price';
+
+    // display the column name
+    echo '<th>' . $column_name . '</th>';
+}
+add_action('woocommerce_admin_order_item_headers', 'woocommerce_admin_order_item_headers');
+
+// Add custom column values here
+
+
+function woocommerce_admin_order_item_values($_product, $item, $item_id = null)
+{
+    // get the post meta value from the associated product
+	$rental_price = wc_get_order_item_meta( $item_id, '_rental_price');
+    
+	// display the value
+    echo '<td>' . wc_price( $rental_price ) . '</td>';
+}
+add_action('woocommerce_admin_order_item_values', 'woocommerce_admin_order_item_values', 10, 3);
+
+
+function custom_woocommerce_hidden_order_itemmeta( $arr ) {
+    $arr[] = '_rental_price';
+    return $arr;
+}
+add_filter('woocommerce_hidden_order_itemmeta', 'custom_woocommerce_hidden_order_itemmeta', 10, 1);
