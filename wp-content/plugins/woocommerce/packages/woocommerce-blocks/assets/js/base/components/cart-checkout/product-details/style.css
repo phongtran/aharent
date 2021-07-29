@@ -1,0 +1,23 @@
+.wc-block-components-product-details.wc-block-components-product-details {
+  list-style: none;
+  margin: 0.5em 0;
+  padding: 0;
+}
+
+.wc-block-components-product-details.wc-block-components-product-details:last-of-type {
+  margin-bottom: 0;
+}
+
+.wc-block-components-product-details.wc-block-components-product-details li {
+  margin-left: 0;
+}
+
+.wc-block-components-product-details__name,
+.wc-block-components-product-details__value {
+  display: inline-block;
+}
+
+.is-large:not(.wc-block-checkout) .wc-block-components-product-details__name {
+  font-weight: bold;
+}
+/*# sourceMappingURL=style.css.map */

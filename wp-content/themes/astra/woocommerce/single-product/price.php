@@ -31,5 +31,13 @@ global $product;
 </p>
 
 <p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
-	Deposit: <?php echo wc_price( $product->get_meta( '_platform_fee' )); ?>
+	<?php
+		$vendor_id = get_post_field( 'post_author',$product->id );
+		$dokan_admin_percentage = get_user_meta( $vendor_id, 'dokan_admin_percentage' );
+		
+		if (!empty($dokan_admin_percentage))
+			$dokan_admin_percentage = $dokan_admin_percentage[0];
+	
+	?>
+	Deposit: <?php echo wc_price( $product->get_price() * $dokan_admin_percentage / 100 ); ?>
 </p>

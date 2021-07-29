@@ -1,0 +1,17 @@
+.wc-block-components-checkout-return-to-cart-button {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  color: inherit;
+  padding-left: calc(24px + 0.25em);
+  position: relative;
+  text-decoration: none;
+}
+
+.wc-block-components-checkout-return-to-cart-button svg {
+  left: 0;
+  position: absolute;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  top: 50%;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Golden Shoe Image Carousel</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+    <!-- Primary carousel image -->
+
+     <div class="show" href="1.jpg">
+       <img src="images/1.png" id="show-img">
+     </div>
+
+     <!-- Secondary carousel image thumbnail gallery -->
+
+     <div class="small-img">
+      <img src="images/next-icon.png" class="icon-left" alt="" id="prev-img">
+       <div class="small-container">
+        <div id="small-img-roll">
+          <img src="images/1.png" class="show-small-img" alt="">
+          <img src="images/2.png" class="show-small-img" alt="">
+          <img src="images/3.png" class="show-small-img" alt="">
+          <img src="images/4.png" class="show-small-img" alt="">
+        </div>
+       </div>
+      <img src="images/next-icon.png" class="icon-right" alt="" id="next-img">
+     </div>
+
+     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+        crossorigin="anonymous"></script>
+     <script src="scripts/zoom-image.js"></script>
+     <script src="scripts/main.js"></script>
+
+  </body>
+</html>

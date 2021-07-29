@@ -1,0 +1,238 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ .tpwpg-main *{
+    box-sizing: border-box;
+}
+
+.tpwpg-main{
+    position: relative;
+    font-size: 2px;
+    line-height: 2px;
+    padding: 0 !important;
+    display: flow-root;
+}
+.tpwpg-vertical .slider-for{
+    width: 80%;
+    float: right;
+}
+.tpwpg-vertical .slider-nav{
+    width: 20%;
+    float: right;
+}
+.tp_lity-iframe-container iframe{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.tpwpg-main section {
+    padding: 0 0;
+}
+
+.tpwpg-main .tpwpg-thumbnail{
+    padding: 2px;
+}
+
+.tpwpg-big,
+.tpwpg-thumbnail{
+    position: relative;
+}
+.tpwpg-big img{
+    width: 100%;
+}
+.tpwpg-big span{
+    width: 100%;
+}
+.tpwpg_youtube_url_play{
+
+}
+.tpwpg_youtube_url_display{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background: #222;
+}
+.tpwpg_youtube_url_thumbnail {
+    position: absolute;
+    top: 50%;
+    margin: -12px -18px 0 0;
+    right: 50%;
+    z-index: 9;
+}
+.launchGallery {
+    font-size: 5px;
+    position: absolute;
+    top: 34px;
+    padding: 0;
+    right: 4px;
+    z-index: 1;
+    cursor: pointer;
+}
+.launchGallery svg {
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+    background: #6f7173;
+}
+.launchGallery svg g{
+    fill: #fff;
+}
+.lg-outer .lg{
+    direction: ltr;
+}
+.tpwpg_triangle_bottomright {
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-bottom: 70px solid red;
+    border-left: 70px solid transparent;
+    right: 0;
+    bottom: 112px;
+}
+.tpwpg_magnifying_glass {
+    font-size: 10em;
+    display: inline-block;
+    width: 0.4em;
+    box-sizing: content-box;
+    height: 0.4em;
+    border: 0.1em solid red;
+    position: relative;
+    border-radius: 0.35em;
+}
+.tpwpg_magnifying_glass:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -0.25em;
+    bottom: -0.1em;
+    border-width: 0;
+    background: red;
+    width: 0.35em;
+    height: 0.08em;
+    transform: rotate(45deg);
+}
+
+#lg-share,
+#lg-actual-size,
+.lg-fullscreen,
+#lg-download {
+    display:none !important;
+}
+
+/* .slick-active{
+    border: 2px solid #DC4539;
+} */
+
+.yt {
+    width: 100px;
+    height: 60px;
+    padding: 0;
+    background: #DC4539;
+    position: relative;
+    border-radius: 15px 15px 15px 15px / 45px 45px 45px 45px;
+    display: table;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -30px 0 0 -50px;
+    z-index: 2;
+}
+.yt:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-left: 26px solid #fff;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    margin: -15px 0 0 -13px;
+}
+
+.ytsmall {
+    width: 36px;
+    height: 24px;
+    margin: 0 auto;
+    background: #DC4539;
+    position: relative;
+    border-radius: 15px 15px 15px 15px / 45px 45px 45px 45px;
+}
+.ytsmall:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -6px;
+    margin-top: -6px;
+    border-left: 12px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.tpwpg-big p {
+    position: absolute;
+    top: 15px;
+    right: 38px;
+    color: #555;
+    font: bold 10px/1 sans-serif;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+}
+
+/* these styles are for the demo, but are not required for the plugin */
+.tpwpg_zoom {
+    display:inline-block;
+    position: relative;
+}
+
+.tpwpg_zoom svg {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 9;
+    padding: 3px;
+    background: #6f7173;
+}
+.tpwpg_zoom svg g{
+    fill: #fff;
+}
+
+/* magnifying glass icon */
+/* .tpwpg_zoom:after {
+    content:'';
+    display:block; 
+    width:33px; 
+    height:33px; 
+    position:absolute; 
+    top:0;
+    right:0;
+    background:url(../images/icon.png);
+} */
+
+.tpwpg_zoom img {
+    display: block;
+}
+
+.tpwpg_zoom img::selection {
+    background-color: transparent;
+}
+
+.tpwpg_grab img:hover {
+    cursor: url(../images/grab.cur), default;
+}
+.tpwpg_grab img:active {
+    cursor: url(../images/grabbed.cur), default;
+}
+
+@media (min-width: 768px) {
+    .tpwpg-main{
+        /* width: 48%;    */
+    }
+}

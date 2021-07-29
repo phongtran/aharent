@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		
 	astra_footer();
 		
-	astra_footer_after(); 
+	astra_footer_after();
 ?>
 	</div><!-- #page -->
 <?php 

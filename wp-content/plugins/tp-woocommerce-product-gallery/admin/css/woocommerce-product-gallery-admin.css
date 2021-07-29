@@ -1,0 +1,398 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+.tpwpg-warp{
+    direction: ltr;
+    text-align: left;
+}
+.tpwpg-warp h2{
+    padding: 10px 0 15px 0 !important;
+}
+#tpwpg-tab-nav {
+    background: #333;
+}
+#tpwpg-tab-nav span.tabnav {
+    display: inline-block;
+    padding: 20px 15px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+#tpwpg-tab-nav span.active {
+    background: #96588a;
+}
+.tpwpg_admin_settings_right {
+    width: 48%;
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+.tpwpg_admin_settings_left {
+    width: 48%;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+/* [CONTENTS] */
+#tpwpg-tab-contents {
+    padding: 20px;
+    margin: 0 0 15px 0;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+    background: #fff;
+    min-height: 250px;
+}
+#tpwpg-tab-contents div.tabtxt {
+    display: none;
+}
+#tpwpg-tab-contents div.active {
+    display: block;
+}
+
+.tps-gcf-submit{
+    color: #fff;
+    background: #0073aa;
+    border: 0;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+.tps_admin_section .dashicons {
+    margin: 0 10px 0 0;
+}
+.tpwpg_admin_settings_desc{
+    font-size: 12px;
+    width: 100%;
+    float: left;
+    margin: 10px 0;
+}
+.tpwpg_admin_settings_row_2{
+    width: 35%;
+    float: left;
+    margin: 0;
+    padding: 0 15px 0 0;
+}
+.tpwpg-container-text {
+    display: block;
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Customize the label (the tpwpg-container-checkbox) */
+.tpwpg-container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.tpwpg-container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.tpwpg_admin_settings_row{
+    width: 100%;
+    float: left;
+    background: #f5f5f5;
+    padding: 15px;
+    margin: 0 0 10px 0;
+    position: relative;
+}
+.tpwpg_triangle_topright_box{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.tpwpg_triangle_topright {
+    width: 0;
+    height: 0;
+    border-top: 60px solid #96588a;
+    border-left: 80px solid transparent;
+}
+.tpwpg_triangle_topright span{
+    position: absolute;
+    top: 8px;
+    color: #fff;
+    right: 10px;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.tpwpg-container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.tpwpg-container-checkbox input:checked ~ .checkmark {
+    background-color: #96588a;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.tpwpg-container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.tpwpg-container-checkbox .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.tp_video_radio{
+    float: left !important;
+}
+.tp_video_radio input{
+    margin: 5px 5px 0 15px !important;
+    float: left !important;
+}
+
+.dashicons-admin-tp{
+    background: url(../images/tp.png) no-repeat center center;
+}
+
+.tpwpg_save_license_key{
+    width: auto;
+    padding: 7px 20px;
+    background: #96588a;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.tps_admin_section input{
+    width: 200px;
+}
+.tpwpg_full{
+    width: 100%;
+}
+.tpwpg_clear{
+    float: left;
+    margin: 15px 0;
+}
+.tpa_error_desc,
+.tpa_error_warning,
+.tpa_success_desc{
+    padding: 5px 10px;
+    margin: 15px 0;
+    font-size: 15px;
+    display: inline-block;
+    border: 1px solid;
+    width: auto;
+}
+
+.tpa_success_desc{
+    color: green;
+}
+.tpa_error_desc{
+    color: #e21818;
+}
+.tpa_error_warning{
+    color: #ff8c15;
+}
+
+.tpwpg_lkey_expiresat{
+    padding:0;
+    margin: 15px 0;
+    font-size: 15px;
+    display: inline-block;
+    /* border: 1px solid; */
+    width: 100%;
+}
+
+.license_key_expires_message{
+    padding: 10px 15px;
+    width: auto;
+    color: #e21818;
+    float: left;
+    border: 1px solid;
+}
+.tpwpg-ring-mask{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    display: none;
+}
+
+/* <div class="tpwpg-ring"><div></div><div></div><div></div><div></div></div> */
+.tpwpg-ring {
+    margin: 30px 0;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.tpwpg-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fcf;
+    border-radius: 50%;
+    animation: tpwpg-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fcf transparent transparent transparent;
+}
+.tpwpg-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.tpwpg-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.tpwpg-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes tpwpg-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* <div class="tpwpg-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */
+.tpwpg-roller {
+    margin: 30px 0;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.tpwpg-roller div {
+    animation: tpwpg-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+}
+.tpwpg-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fcf;
+    margin: -4px 0 0 -4px;
+}
+.tpwpg-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+}
+.tpwpg-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+}
+.tpwpg-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+}
+.tpwpg-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+}
+.tpwpg-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+}
+.tpwpg-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+}
+.tpwpg-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+}
+.tpwpg-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+}
+.tpwpg-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+}
+.tpwpg-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+}
+.tpwpg-roller div:nth-child(6) {
+animation-delay: -0.216s;
+}
+.tpwpg-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+}
+.tpwpg-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+}
+.tpwpg-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+}
+.tpwpg-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+}
+.tpwpg-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+}
+@keyframes tpwpg-roller {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.tps_admin_section input[type=checkbox].disabled,
+.tps_admin_section input[type=checkbox].disabled:checked:before,
+.tps_admin_section input[type=checkbox]:disabled,
+.tps_admin_section input[type=checkbox]:disabled:checked:before,
+.tps_admin_section input[type=radio].disabled,
+.tps_admin_section input[type=radio].disabled:checked:before,
+.tps_admin_section input[type=radio]:disabled,
+.tps_admin_section input[type=radio]:disabled:checked:before {
+    opacity: 0;
+}

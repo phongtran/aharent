@@ -1,0 +1,501 @@
+# Copyright (C) 2021 WP Desk
+# This file is distributed under the same license as the Flexible Checkout Fields plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flexible Checkout Fields 3.0.10\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flexible-checkout-fields\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-05-20T15:30:41+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: flexible-checkout-fields\n"
+
+#. Plugin Name of the plugin
+#: classes/settings.php:27
+#: classes/settings.php:30
+#: classes/settings.php:33
+#: classes/settings.php:41
+#: templates/views/admin-page.php:20
+msgid "Flexible Checkout Fields"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://www.wpdesk.net/products/flexible-checkout-fields-pro-woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Manage your WooCommerce checkout fields. Change order, labels, placeholders and add new fields."
+msgstr ""
+
+#. Author of the plugin
+msgid "WP Desk"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.wpdesk.net/"
+msgstr ""
+
+#: classes/display-options.php:103
+#: classes/user-profile.php:207
+msgid "Additional Information"
+msgstr ""
+
+#: classes/field-options.php:58
+msgid "Select option"
+msgstr ""
+
+#: classes/filed-validation.php:73
+#: src/Settings/Option/ValidationOption.php:26
+#: src/Settings/Option/ValidationPostcodeOption.php:64
+msgid "Default"
+msgstr ""
+
+#: classes/filed-validation.php:74
+#: src/Settings/Option/ValidationOption.php:27
+#: src/Settings/Option/ValidationPostcodeOption.php:65
+msgid "None"
+msgstr ""
+
+#: classes/filed-validation.php:75
+msgid "Email"
+msgstr ""
+
+#: classes/filed-validation.php:76
+#: src/Settings/Option/ValidationOption.php:29
+#: src/Settings/Option/ValidationPostcodeOption.php:67
+msgid "Phone"
+msgstr ""
+
+#: classes/filed-validation.php:79
+#: src/Settings/Option/ValidationPostcodeOption.php:68
+msgid "Postcode"
+msgstr ""
+
+#: classes/plugin.php:296
+#: src/Settings/Menu.php:75
+msgid "Billing"
+msgstr ""
+
+#: classes/plugin.php:303
+#: src/Settings/Menu.php:76
+msgid "Shipping"
+msgstr ""
+
+#: classes/plugin.php:310
+#: src/Settings/Menu.php:77
+msgid "Order"
+msgstr ""
+
+#: classes/plugin.php:325
+#: src/Field/Type/TextType.php:59
+msgid "Single Line Text"
+msgstr ""
+
+#: classes/plugin.php:329
+#: src/Field/Type/TextareaType.php:59
+msgid "Paragraph Text"
+msgstr ""
+
+#: classes/plugin.php:337
+#: classes/plugin.php:342
+#: src/Field/Type/CheckboxType.php:35
+msgid "Checkbox"
+msgstr ""
+
+#: classes/plugin.php:347
+msgid "Radio button"
+msgstr ""
+
+#: classes/plugin.php:352
+#: src/Field/Type/SelectType.php:38
+msgid "Select (Drop Down)"
+msgstr ""
+
+#: classes/plugin.php:357
+#: src/Field/Type/Multiselect.php:35
+msgid "Multi-select"
+msgstr ""
+
+#: classes/plugin.php:362
+#: src/Field/Type/DateType.php:35
+msgid "Date"
+msgstr ""
+
+#: classes/plugin.php:367
+#: src/Field/Type/TimeType.php:35
+msgid "Time"
+msgstr ""
+
+#: classes/plugin.php:372
+#: src/Field/Type/ColorType.php:35
+msgid "Color Picker"
+msgstr ""
+
+#: classes/plugin.php:377
+#: src/Field/Type/HeadingType.php:35
+msgid "Headline"
+msgstr ""
+
+#: classes/plugin.php:382
+#: src/Field/Type/HtmlType.php:35
+msgid "HTML"
+msgstr ""
+
+#: classes/plugin.php:387
+#: src/Field/Type/FileType.php:35
+msgid "File Upload"
+msgstr ""
+
+#: classes/plugin.php:934
+msgid "Uploading file..."
+msgstr ""
+
+#: classes/plugin.php:1007
+#: src/Settings/Menu.php:40
+msgid "Settings"
+msgstr ""
+
+#: classes/plugin.php:1008
+msgid "Docs"
+msgstr ""
+
+#: classes/plugin.php:1009
+msgid "Support"
+msgstr ""
+
+#: classes/plugin.php:1013
+msgid "Upgrade"
+msgstr ""
+
+#: classes/tracker.php:332
+msgid "Opt-in"
+msgstr ""
+
+#: classes/tracker.php:336
+msgid "Opt-out"
+msgstr ""
+
+#: classes/user-profile.php:100
+#: src/Settings/Page.php:192
+msgid "Yes"
+msgstr ""
+
+#: classes/user-profile.php:101
+#: src/Settings/Page.php:193
+msgid "No"
+msgstr ""
+
+#: src/Field/Type/DefaultType.php:57
+msgid "Default Field"
+msgstr ""
+
+#: src/Field/Type/RadioType.php:35
+msgid "Radio Button"
+msgstr ""
+
+#: src/Field/Type/Wc/WcAddress2Type.php:53
+#: src/Field/Type/Wc/WcContactType.php:53
+#: src/Field/Type/Wc/WcCountryType.php:50
+#: src/Field/Type/Wc/WcDefaultType.php:53
+#: src/Field/Type/Wc/WcNotesType.php:52
+#: src/Field/Type/Wc/WcPostcodeType.php:51
+#: src/Field/Type/Wc/WcStateType.php:51
+msgid "WooCommerce Default Field"
+msgstr ""
+
+#: src/Settings/Form/EditFieldsForm.php:91
+msgid "Order Notes"
+msgstr ""
+
+#: src/Settings/Form/EditFieldsForm.php:92
+msgid "Notes about your order, e.g. special notes for delivery."
+msgstr ""
+
+#: src/Settings/Menu.php:41
+msgid "Checkout Sections"
+msgstr ""
+
+#: src/Settings/Option/CssOption.php:54
+msgid "CSS class"
+msgstr ""
+
+#: src/Settings/Option/CssOption.php:63
+msgid "Enter CSS classes separated by a space."
+msgstr ""
+
+#: src/Settings/Option/DisplayOnAccountAddressOption.php:44
+msgid "My Account - address"
+msgstr ""
+
+#: src/Settings/Option/DisplayOnAccountOrderOption.php:44
+msgid "My Account - order"
+msgstr ""
+
+#: src/Settings/Option/DisplayOnEmailsOption.php:44
+msgid "E-mails"
+msgstr ""
+
+#: src/Settings/Option/DisplayOnOption.php:58
+msgid "Pages/e-mails"
+msgstr ""
+
+#: src/Settings/Option/DisplayOnThankYouOption.php:44
+msgid "Thank You Page"
+msgstr ""
+
+#: src/Settings/Option/EnabledOption.php:54
+msgid "Enable field"
+msgstr ""
+
+#: src/Settings/Option/ExternalFieldInfoOption.php:67
+msgid "Another plugin has added this field but FCF is taking control of it. Editing is OK but keep in mind the functioning of the plugin that uses it."
+msgstr ""
+
+#: src/Settings/Option/FormattingFieldLabelOption.php:44
+msgid "Display field label"
+msgstr ""
+
+#: src/Settings/Option/FormattingNewLineOption.php:44
+msgid "Display the field on a new line"
+msgstr ""
+
+#: src/Settings/Option/FormattingOption.php:56
+msgid "Formatting on pages/e-mails"
+msgstr ""
+
+#: src/Settings/Option/FormattingStateAbbrOption.php:44
+msgid "Display state abbreviations"
+msgstr ""
+
+#: src/Settings/Option/FormattingStateCommaOption.php:44
+msgid "Display a comma before if the field is not on a new line"
+msgstr ""
+
+#: src/Settings/Option/FormattingStateOption.php:56
+msgid "State/County formatting"
+msgstr ""
+
+#: src/Settings/Option/LabelOption.php:56
+#: src/Settings/Page.php:197
+msgid "This field is required."
+msgstr ""
+
+#: src/Settings/Option/LabelOption.php:66
+#: src/Settings/Page.php:195
+msgid "Label"
+msgstr ""
+
+#. translators: %1$s: anchor opening tag, %2$s: anchor closing tag, %3$s: anchor opening tag, %4$s: anchor closing tag, %5$s: anchor opening tag, %6$s: anchor closing tag, %7$s: break line, %8$s: anchor opening tag, %9$s: anchor closing tag
+#: src/Settings/Option/LogicAdvOption.php:60
+msgid "Add conditional logic based on %1$sproducts and categories%2$s as well as %3$sFCF fields%4$s and %5$sshipping methods%6$s set. %7$s%8$sUpgrade to PRO%9$s"
+msgstr ""
+
+#: src/Settings/Option/NameOption.php:63
+msgid "Meta name"
+msgstr ""
+
+#: src/Settings/Option/PlaceholderOption.php:54
+msgid "Placeholder"
+msgstr ""
+
+#. translators: %1$s: break line, %2$s: anchor opening tag, %3$s: anchor closing tag
+#: src/Settings/Option/PricingAdvOption.php:57
+msgid "Add a fixed or percentage price to the field and set the tax on this price.%1$s %2$sUpgrade to PRO%3$s"
+msgstr ""
+
+#: src/Settings/Option/RequiredHiddenOption.php:33
+msgid "Requirement of this field is controlled by WooCommerce and cannot be changed."
+msgstr ""
+
+#: src/Settings/Option/RequiredOption.php:54
+msgid "Required field"
+msgstr ""
+
+#: src/Settings/Option/SettingJqueryCssOption.php:45
+msgid "Disable jquery-ui.css on the frontend"
+msgstr ""
+
+#: src/Settings/Option/SettingJqueryCssOption.php:54
+msgid "Remember that some fields, i.e. datepicker use jQuery UI CSS. The plugin adds a default CSS but sometimes it can create some visual glitches."
+msgstr ""
+
+#: src/Settings/Option/SettingJqueryOption.php:45
+msgid "jQuery UI"
+msgstr ""
+
+#: src/Settings/Option/SettingSectionsAdvOption.php:45
+msgid "Get Flexible Checkout Fields PRO to use Custom Sections"
+msgstr ""
+
+#: src/Settings/Option/SettingSectionsAdvOption.php:47
+msgid "Extend the form with additional fields. Insert Text inputs and Headings. Add Checkboxes and fields with options like DropDown or Radio."
+msgstr ""
+
+#: src/Settings/Option/SettingSectionsAdvOption.php:48
+msgid "Add conditional logic based on products and categories as well as FCF fields and shipping methods."
+msgstr ""
+
+#: src/Settings/Option/SettingSectionsAdvOption.php:49
+msgid "Add a fixed or percentage price to the field and set the tax on this price."
+msgstr ""
+
+#: src/Settings/Option/SettingSectionsAdvOption.php:51
+msgid "Upgrade to PRO"
+msgstr ""
+
+#. translators: %1$s: anchor opening tag, %2$s: anchor closing tag
+#: src/Settings/Option/ValidationInfoOption.php:57
+msgid "You can to add custom validation in the functions.php file. %1$sRead more%2$s"
+msgstr ""
+
+#: src/Settings/Option/ValidationOption.php:28
+#: src/Settings/Option/ValidationPostcodeOption.php:66
+msgid "E-mail"
+msgstr ""
+
+#: src/Settings/Option/ValidationPostcodeOption.php:54
+msgid "Validation"
+msgstr ""
+
+#: src/Settings/Page.php:66
+msgid "Checkout Fields Settings"
+msgstr ""
+
+#: src/Settings/Page.php:67
+msgid "Checkout Fields"
+msgstr ""
+
+#: src/Settings/Page.php:183
+msgid "Edit form"
+msgstr ""
+
+#: src/Settings/Page.php:184
+msgid "Add new field"
+msgstr ""
+
+#: src/Settings/Page.php:185
+msgid "Edit section"
+msgstr ""
+
+#: src/Settings/Page.php:186
+msgid "Edit settings"
+msgstr ""
+
+#: src/Settings/Page.php:187
+msgid "Add Field"
+msgstr ""
+
+#: src/Settings/Page.php:188
+msgid "Add New"
+msgstr ""
+
+#: src/Settings/Page.php:189
+msgid "Save Changes"
+msgstr ""
+
+#: src/Settings/Page.php:190
+msgid "Reset Section Settings"
+msgstr ""
+
+#: src/Settings/Page.php:191
+msgid "Read more"
+msgstr ""
+
+#: src/Settings/Page.php:194
+msgid "Field Type"
+msgstr ""
+
+#: src/Settings/Page.php:196
+msgid "Name"
+msgstr ""
+
+#: src/Settings/Page.php:198
+msgid "Field name should contains only lowercase letters, numbers and underscore sign."
+msgstr ""
+
+#: src/Settings/Page.php:199
+msgid "Select..."
+msgstr ""
+
+#: src/Settings/Page.php:200
+msgid "Loading..."
+msgstr ""
+
+#: src/Settings/Page.php:201
+msgid "No options."
+msgstr ""
+
+#. translators: %1$s: break line, %2$s: anchor opening tag, %3$s: anchor closing tag
+#: src/Settings/Page.php:204
+msgid "This field is available in the PRO version.%1$s %2$sUpgrade to PRO%3$s"
+msgstr ""
+
+#: src/Settings/Page.php:209
+msgid "Are you sure you want to delete this field? Deleting a field will remove it from all orders."
+msgstr ""
+
+#: src/Settings/Page.php:210
+msgid "Do you really want to reset section settings? Resetting a section remove all added fields from orders."
+msgstr ""
+
+#: src/Settings/Page.php:211
+msgid "No fields available."
+msgstr ""
+
+#: src/Settings/Page.php:212
+msgid "Failed to connect to WordPress REST API."
+msgstr ""
+
+#: src/Settings/Route/RouteIntegration.php:86
+msgid "An unknown error occurred while processing the request."
+msgstr ""
+
+#: src/Settings/Tab/AdvancedTab.php:35
+msgid "Advanced"
+msgstr ""
+
+#: src/Settings/Tab/AppearanceTab.php:35
+msgid "Appearance"
+msgstr ""
+
+#: src/Settings/Tab/DisplayTab.php:35
+msgid "Display On"
+msgstr ""
+
+#: src/Settings/Tab/GeneralTab.php:35
+msgid "General"
+msgstr ""
+
+#: src/Settings/Tab/LogicTab.php:35
+msgid "Conditional Logic"
+msgstr ""
+
+#: src/Settings/Tab/PricingTab.php:35
+msgid "Pricing"
+msgstr ""
+
+#: templates/notices/review.php:19
+msgid "Thanks for using the free version of Flexible Checkout Fields!"
+msgstr ""
+
+#. translators: %1$s: dashicon, %2$s: break-line tag
+#: templates/notices/review.php:26
+msgid "We are glad that (with our little help %1$s) the shop is now better suited to the needs. We will be grateful for the rating and feedback. %2$sIt will take less than reading this and it will help us a lot!"
+msgstr ""
+
+#: templates/notices/review.php:37
+msgid "Add review"
+msgstr ""
+
+#: templates/notices/review.php:41
+msgid "I added review, do not show again"
+msgstr ""
+
+#. translators: %$1s: love icon, %$2s: anchor opening tag, %$3s: anchor closing tag, %$4s: anchor opening tag, %$5s: anchor closing tag
+#: templates/views/admin-page.php:66
+msgid "Created with %1$s by Rangers from %2$sWP Desk%3$s - if you like FCF %4$srate us%5$s"
+msgstr ""

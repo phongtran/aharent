@@ -1,0 +1,18 @@
+.wc-block-components-payment-method-label--with-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.wc-block-components-payment-method-label--with-icon > img,
+.wc-block-components-payment-method-label--with-icon > svg {
+  vertical-align: middle;
+  margin: -2px 4px 0 0;
+}
+
+.is-mobile .wc-block-components-payment-method-label--with-icon > img,
+.is-mobile .wc-block-components-payment-method-label--with-icon > svg,
+.is-small .wc-block-components-payment-method-label--with-icon > img,
+.is-small .wc-block-components-payment-method-label--with-icon > svg {
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */

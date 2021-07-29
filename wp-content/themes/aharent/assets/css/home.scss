@@ -1,0 +1,61 @@
+.mega-sale {
+    background-color: #fff;
+}
+
+.container {
+
+    
+
+    .renting-instructions {
+        
+        margin: 20px;
+        
+        .title {
+
+            background-color: #fff;
+            border-radius: 5px;
+
+            padding: 15px 20px 15px;
+
+            
+        }
+
+        .renting-steps {
+
+            margin-top: 20px;
+            padding: 30px 30px;
+            
+            background-color: #fff;
+            border-radius: 5px;
+
+            .single-step {
+
+                margin: 0 20px;
+
+                .step-icon {
+                    margin-left: 20px;
+                }
+
+                .step-notes {
+                    .step-notes-title {
+                        margin: 30px 0 20px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .popular-products {
+
+        margin: 20px;
+
+        .title {
+            background-color: #fff;
+            border-radius: 5px;
+
+            padding: 15px 20px 15px;
+        }
+
+        
+    }
+}

@@ -31,10 +31,14 @@ if ( $product->is_in_stock() ) : ?>
 
 	<form class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-
+		<div class="quantity-wrapper">
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
+		?>
 
+		<label style="font-size: 1.5rem; font-weight: 700; float: left; padding-right: 10px; ">Quantity: </label>
+		<?php
+		
 		woocommerce_quantity_input(
 			array(
 				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
@@ -44,7 +48,25 @@ if ( $product->is_in_stock() ) : ?>
 		);
 
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
+		?>	
+		</div>
+		
+		<?php 
+			// wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/minified/jquery.datetimepicker.css' );
+			// wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/minified/jquery.datetimepicker.js', array ( 'jquery' ));	
+			wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/unminified/rental-time-period.css' );
+			wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/unminified/rental-time-period.js');	
 		?>
+		
+		<div style="clear: left; " class="time-period">
+			<label for="date-from">From</label>
+			<input  type="text" id="date-from" name="_date_from" value="">
+			<label for="date-to">to</label>
+			<input  type="text" id="date-to" name="_date_to" value="">
+		</div>
+
+		
+
 
 		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 
