@@ -41,7 +41,11 @@
             "plugin",
             "theme",
             "wordpress"
-        ]
+        ],
+        "support": {
+            "issues": "https://github.com/Appsero/client/issues",
+            "source": "https://github.com/Appsero/client/tree/v1.2.0"
+        }
     },
     {
         "name": "jakeasmith/http_build_url",
@@ -76,6 +80,10 @@
                 "email": "theman@jakeasmith.com"
             }
         ],
-        "description": "Provides functionality for http_build_url() to environments without pecl_http."
+        "description": "Provides functionality for http_build_url() to environments without pecl_http.",
+        "support": {
+            "issues": "https://github.com/jakeasmith/http_build_url/issues",
+            "source": "https://github.com/jakeasmith/http_build_url"
+        }
     }
 ]

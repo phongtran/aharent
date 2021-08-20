@@ -22,11 +22,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! empty( $breadcrumb ) ) {
 
-	echo $wrap_before;
+	// echo $wrap_before;
+	echo '<nav class="breadcrumb"><ul class="items-list d-flex">';
 
 	foreach ( $breadcrumb as $key => $crumb ) {
 
-		echo $before;
+		// echo $before;
+		if ( 0 == $key)
+			echo '<li>';
+		else
+			echo '<li class="tail">';
+
 
 		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
 			echo '<a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>';
@@ -34,13 +40,16 @@ if ( ! empty( $breadcrumb ) ) {
 			echo esc_html( $crumb[0] );
 		}
 
-		echo $after;
+		// echo $after;
+		echo '</li>';
 
-		if ( sizeof( $breadcrumb ) !== $key + 1 ) {
-			echo $delimiter;
-		}
+		// if ( sizeof( $breadcrumb ) !== $key + 1 ) {
+		// 	// echo $delimiter;
+		// 	echo '>';
+		// }
 	}
 
-	echo $wrap_after;
+	// echo $wrap_after;
+	echo '</ul></nav>';
 
 }

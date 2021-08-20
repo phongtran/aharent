@@ -1,0 +1,168 @@
+.aha-cart {
+  margin: 20px 0;
+  padding: 0 0 20px 0;
+}
+
+.aha-cart table.shop_table {
+  border: 0;
+}
+
+.aha-cart .cart_totals {
+  background-color: #fff;
+  padding: 5px 10px;
+}
+
+.aha-cart .cart_totals p {
+  margin: 0;
+}
+
+.aha-cart .cart_totals .cart_totals-title {
+  background-color: #fff;
+  padding: 15px 20px;
+}
+
+.aha-cart .cart-step .cart-step-title {
+  padding: 15px 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.aha-cart .cart-step .cart-step-content {
+  background-color: #fff;
+  margin: 20px 0;
+}
+
+.aha-cart .cart-step .cart-step-content .item-break {
+  height: 1px;
+  border-bottom: 1px solid #ececec;
+  margin: 10px;
+}
+
+.aha-cart .cart-step .cart-step-content .control-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.aha-cart .cart-step .cart-step-content .control-section button {
+  margin: 15px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item {
+  padding: 15px 0;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .delete-icon {
+  background: url(../img/dustbin.png) left top no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-thumbnail {
+  padding: 5px 20px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-thumbnail .security-deposit-policy {
+  margin-top: 20px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-thumbnail .security-deposit-policy span {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-thumbnail .security-deposit-policy span::before {
+  width: 16px;
+  height: 16px;
+  background: url(../img/information.png) center center no-repeat;
+  content: "";
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-title {
+  margin-bottom: 15px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-title h4 {
+  font-size: 18px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description {
+  width: 100%;
+  padding-right: 15px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  margin-top: 20px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section table td {
+  padding: 5px 10px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section .rental-price {
+  margin-right: 20px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section h3.price {
+  margin-top: 5px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section .deposit-price h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #258c69;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section td {
+  padding: 5px 0;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section td.label {
+  padding-right: 15px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .quantity input {
+  max-width: 80px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period .date-picker-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period .date-picker-input .delimeter {
+  margin: 0 15px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period input {
+  max-width: 150px;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.aha-cart .cart-summary {
+  margin-left: 20px;
+}
+
+.aha-cart .cart-summary .cart_totals {
+  float: left;
+  width: 100%;
+}
+/*# sourceMappingURL=cart.css.map */

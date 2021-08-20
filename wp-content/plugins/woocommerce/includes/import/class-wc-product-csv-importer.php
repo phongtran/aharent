@@ -378,6 +378,8 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 		return wc_clean( $value );
 	}
 
+	
+
 	/**
 	 * Parse a category field from a CSV.
 	 * Categories are separated by commas and subcategories are "parent > subcategory".

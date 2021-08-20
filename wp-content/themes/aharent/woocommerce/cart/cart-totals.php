@@ -22,24 +22,32 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-	<h2><?php esc_html_e( 'Cart totals', 'woocommerce' ); ?></h2>
+	<div class="cart_totals-title">
+		<h3><?php esc_html_e( 'CART SUMMARY', 'woocommerce' ); ?></h3>
+	</div>
 
 	<table cellspacing="0" class="shop_table shop_table_responsive">
 
 		<tr class="cart-subtotal">
-			<th><?php esc_html_e( 'Booking fee (pay at checkout)', 'woocommerce' ); ?></th>
+			<th>
+				<p><?php esc_html_e( 'Booking fee', 'woocommerce' ); ?></p>
+				<p>(<?php esc_html_e( 'pay at checkout', 'woocommerce' ); ?>)</p>
+			</th>
 			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php $total_deposit = wc_price( calculate_cart_total_deposit() ); echo $total_deposit; ?></td>
 		</tr>
 
 		<tr class="cart-subtotal">
-			<th><?php esc_html_e( 'Rental fee (pay at receiving item)', 'woocommerce' ); ?></th>
+			<th>
+				<p><?php esc_html_e( 'Rental fee', 'woocommerce' ); ?></p>
+				<p>(<?php esc_html_e( 'pay at receiving items', 'woocommerce' ); ?>)</p>
+			</th>
 			<td data-title="<?php esc_attr_e( 'Rental fee', 'woocommerce' ) ?>"><?php echo wc_price( calculate_cart_total_rental_fee() ); ?></td>
 		</tr>
 
-		<tr class="cart-subtotal">
+		<!-- <tr class="cart-subtotal">
 			<th><?php esc_html_e( 'Security deposit (pay at receiving item, get back when returning item', 'woocommerce' ); ?></th>
 			<td data-title="<?php esc_attr_e( 'Security deposit', 'woocommerce' ) ?>"><?php echo wc_price( calculate_cart_total_security_deposit() ); ?></td>
-		</tr>
+		</tr> -->
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
 			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">

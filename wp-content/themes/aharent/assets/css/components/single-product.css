@@ -158,6 +158,10 @@
   margin-top: 20px;
 }
 
+.product-info .summary .price-wrapper .deposit {
+  display: none !important;
+}
+
 .product-info .summary .price-wrapper .price-item {
   border: 1px solid #dcdcdc;
   border-radius: 10px;

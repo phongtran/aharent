@@ -51,9 +51,11 @@ header .container .search-box input {
 }
 
 header .container .search-box button.search-btn {
+  width: auto !important;
+  height: auto !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border: 1px solid #258c69;
+  border: 3px solid #258c69;
   background-color: #258c69;
 }
 
@@ -97,13 +99,6 @@ footer h4 {
   font-weight: bold;
 }
 
-html {
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
 html body {
   background-color: #f5f5f5;
   color: #5a5d5a;
@@ -111,6 +106,8 @@ html body {
 
 html body .container {
   max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-control:focus {
@@ -149,9 +146,6 @@ a:hover {
 
 .breadcrumb {
   margin: 10px 0;
-}
-
-.breadcrumb .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -162,7 +156,7 @@ a:hover {
       align-content: center;
 }
 
-.breadcrumb .container ul {
+.breadcrumb ul {
   list-style-type: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -173,35 +167,39 @@ a:hover {
   -ms-flex-line-pack: center;
       align-content: center;
   margin: 0;
+  padding: 0;
 }
 
-.breadcrumb .container ul li.tail {
+.breadcrumb ul li.tail {
   margin-left: 10px;
 }
 
-.breadcrumb .container ul li.tail:before {
+.breadcrumb ul li.tail:before {
   content: ">";
   margin-right: 10px;
 }
 
 ul.products {
   max-width: 100%;
-  margin: 10px 0;
   padding: 0;
   list-style-type: none;
 }
 
 ul.products li.product-item {
   background-color: #fff;
-  max-width: 19%;
-  width: 19%;
-  padding: 10px 0;
-  margin: 10px 11px 10px 0;
+  max-width: 18%;
+  width: 18%;
+  margin: 0 11px 20px 0;
+  padding: 5px;
 }
 
-ul.products li.product-item a img {
-  width: 200px;
-  height: 200px;
+ul.products li.product-item .thumbnail {
+  padding: 5px 3px;
+}
+
+ul.products li.product-item .thumbnail a img {
+  width: 100%;
+  height: auto;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -220,9 +218,83 @@ ul.products li.product-item .price {
   padding: 0;
 }
 
+.related .title {
+  margin-bottom: 20px;
+}
+
 .related .title h2 {
   color: #258c69;
   font-size: 16px;
   font-weight: bold;
+}
+
+ul.nav-tabs .nav-item {
+  padding: 15px 20px;
+}
+
+ul.nav-tabs .nav-item.active {
+  border-bottom: 2px solid #258c69;
+}
+
+ul.nav-tabs .nav-item:hover {
+  background-color: #f5f5f5;
+}
+
+button[type="submit"].aha-button, button[type="button"].aha-button {
+  width: 200px;
+  height: 56px;
+  border-radius: 5px;
+  border: 0;
+  font-size: 18px;
+  background-color: #258c69;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.woocommerce-pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 20px;
+}
+
+.woocommerce-pagination ul.page-numbers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+}
+
+.woocommerce-pagination ul.page-numbers li {
+  margin: 0 10px;
+}
+
+.woocommerce-pagination ul.page-numbers li span {
+  padding: 8px 15px;
+}
+
+.woocommerce-pagination ul.page-numbers li span.current {
+  background-color: #258c69;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.dokan-dashboard {
+  margin: 20px 0;
+}
+
+.dokan-form-group .dokan-w5.text-editor {
+  width: 60%;
 }
 /*# sourceMappingURL=global.css.map */

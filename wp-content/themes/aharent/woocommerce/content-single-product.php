@@ -22,27 +22,7 @@ global $product;
 
 ?>
 
-<nav class="breadcrumb">
-	<div class="container">
-		<ul class="items-list d-flex">
-			<li><a href="/">Trang chủ</a></li>
-			<li class="tail">
-				<?php
-
-				$cats = get_the_terms( $product->id, 'product_cat' );
-				if ( !empty($cats[0]) )
-					$cat = $cats[0];
-				?>
-				<a href="<?php echo (!empty($cat)) ? esc_url( get_term_link( $cat->term_id, 'product_cat') ) : "#" ?>">
-					<?php echo (!empty($cat)) ? $cat->name : "" ?>
-				</a>
-			</li>
-		</ul>
-	</div>
-</nav>
-
 <?php
-
 
 /**
  * Hook: woocommerce_before_single_product.
@@ -62,7 +42,7 @@ if ( post_password_required() ) {
 
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
 
-	<div class="product-info container">
+	<div class="product-info">
 		<?php
 		/**
 		 * Hook: woocommerce_before_single_product_summary.

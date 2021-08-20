@@ -10,7 +10,9 @@
 
         <header>
             <div class="container h-100 d-flex align-items-center">
-                <div class="logo col-sm-1"></div>
+                <a class="logo-link" href="/">
+                    <div class="logo col-sm-1"></div>
+                </a>
 
                 <div class="product-categories d-flex col-sm-2">
                     
@@ -29,7 +31,7 @@
 
                 <div class="search-box col-sm-4 d-flex align-items-center">
                     <input name="search-box" class="form-control" type="text" placeholder="Search your product" />
-                    <button name="search-button" class="btn btn-outline-secondary search-btn" type="button">
+                    <button name="search-button" class="aha-button btn btn-outline-secondary search-btn" type="button">
                         <img src="<?php echo get_template_directory_uri() . '/assets/img/lookup.png' ?>" />
                     </button>
                 </div>
@@ -39,7 +41,17 @@
                         <a href="<?php echo wc_get_cart_url(); ?>">
                             <img src="<?php echo get_template_directory_uri() . '/assets/img/shopping-cart.png' ?>" />
                         </a>
+
+                        <?php $cart_item_count = WC()->cart->get_cart_contents_count(); ?>
+
+                        <?php if ( $cart_item_count > 0 ) : ?>
+                            <div class="cart-quantity">
+                                <span><?php echo $cart_item_count ?></span>
+                            </div>
+                        <?php endif ?>
                     </span>
+
+                    
                 </div>
 
                 <!-- <div class="user-account col-sm-1"></div> -->

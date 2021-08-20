@@ -20,7 +20,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 ?>
+<div class="result-count">
 <p class="woocommerce-result-count">
 	<?php
 	// phpcs:disable WordPress.Security
@@ -38,3 +40,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	// phpcs:enable WordPress.Security
 	?>
 </p>
+</div>

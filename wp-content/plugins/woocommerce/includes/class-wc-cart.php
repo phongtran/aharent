@@ -1119,7 +1119,7 @@ class WC_Cart extends WC_Legacy_Cart {
 					throw new Exception( sprintf( _n( '%s is a required field', '%s are required fields', count( $missing_attributes ), 'woocommerce' ), wc_format_list_of_items( $missing_attributes ) ) );
 				}
 			}
-
+			
 			// Validate variation ID.
 			if (
 				0 < $variation_id && // Only check if there's any variation_id.

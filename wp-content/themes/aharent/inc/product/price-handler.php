@@ -1,0 +1,47 @@
+<?php
+    function get_price_from_ibookcar( $product_id, $date_from, $date_to, $quantity )
+    {
+        $total_price = 0;
+        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+
+        $product = new WC_Product_Variable( $product_id );
+        $variations = $product->get_available_variations();
+
+        $price = [];
+
+        foreach ( $variations as $variation )
+        {
+            $price[$variation['attributes']['attribute_day']] = $variation['display_price'];
+        }
+            
+
+        $step = 7;
+        if ($duration < 7)
+            $step = $duration;
+        
+        $day = $date_from;
+
+        for ( $i = 0; $i < $step; $i++ )
+        {
+            $day_name = $day->format('l');
+            $count = floor( ($duration - $i) / 7 ) + 1;
+
+            if ( ($duration - $i) > 7 )
+                $count += 1;
+            
+            $total_price += $count * $price[$day_name];
+
+            $day->add(new DateInterval('P1D'));
+        }
+
+        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $deposit = $vendor_percentage * $total_price / 100;
+
+        return array (
+            "price"     => wc_price( $total_price ),
+            "deposit"   => wc_price( $deposit ),
+        );
+    }
+
+
+?>

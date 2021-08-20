@@ -1,6 +1,22 @@
 <?php
 
+define( 'THEME_DIR', trailingslashit( get_template_directory() ) );
+define( 'THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
 
+// Importer functions
+require_once THEME_DIR . 'inc/importer/product-tabs-mapping.php';
+
+// Add dokan vendor custom settings
+require_once THEME_DIR . 'inc/dokan/vendor-custom-settings.php';
+
+// single-product ajax
+require_once THEME_DIR . 'inc/ajax/single-product.php';
+
+
+function wpai_is_xml_preprocess_enabled( $is_enabled ) {
+    return false;
+}
+add_filter( 'is_xml_preprocess_enabled', 'wpai_is_xml_preprocess_enabled', 10, 1 );
 
 function mytheme_add_woocommerce_support() {
     add_theme_support( 'woocommerce' );
@@ -13,7 +29,6 @@ add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 
 // Product loop column
-
 if ( !function_exists('loop_columns') ) {
 	function loop_columns() {
 		return 5; // 5 products per row
@@ -21,11 +36,47 @@ if ( !function_exists('loop_columns') ) {
 }
 add_filter('loop_shop_columns', 'loop_columns', 999);
 
+
+function lw_loop_shop_per_page( $products )
+{
+ 	$products = 5;
+ 	return $products;
+}
+add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+
+
+
+
+
+/**
+ * Remove product data tabs
+ */
+function woo_remove_product_tabs( $tabs )
+{
+    // woocommerce tabs
+	unset( $tabs[ 'reviews' ] ); 			// Remove the reviews tab
+    unset( $tabs[ 'additional_information' ] );  	// Remove the additional information tab
+	
+	// Dokan tabs
+	unset( $tabs[ 'seller' ]);
+	unset( $tabs[ 'more_seller_product' ]);
+
+    return $tabs;
+}
+add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+
+// Remove tab title
+add_filter( 'yikes_woocommerce_custom_repeatable_product_tabs_heading', '__return_false', 99 );
+
+
 // Load theme stylesheets
 function load_stylesheets()
 {
     wp_register_style ( 'bootstrap', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap.min.css', '', '5.0.2', 'all' );
     wp_enqueue_style( 'bootstrap' );
+
+	wp_register_style ( 'bootstrap-utilities', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap-utilities.min.css', '', '5.0.2', 'all' );
+    wp_enqueue_style( 'bootstrap-utilities' );
 
     wp_register_style( 'app', get_template_directory_uri() . '/assets/css/app.css', array('bootstrap'), '1', 'all' );
     wp_enqueue_style( 'app' );
@@ -33,16 +84,39 @@ function load_stylesheets()
 	wp_register_style( 'jquery-zoom-image-carousel-style', get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/style.css', '', '1', 'all' );
     wp_enqueue_style( 'jquery-zoom-image-carousel-style' );
 
+
 	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', 'all' );
     wp_enqueue_style( 'datetimepicker' );
+
 
 }
 add_action( 'wp_enqueue_scripts', 'load_stylesheets' );
 
 
+function aharent_widgets_init() {
+    register_sidebar( array(
+        'name'          => __( 'Shop Sidebar', 'aharent' ),
+        'id'            => 'shop',
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</aside>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+}
+add_action( 'widgets_init', 'aharent_widgets_init' );
+
+
 // Load theme javascripts
 function load_scripts()
 {
+	wp_enqueue_script( 'wp-util' );
+
+	wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js', array(), '1', 'all' );
+	wp_enqueue_script( 'tinymce-editor' );
+
+	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', 'all' );
+	wp_enqueue_script( 'bootstrap-bundle-js-min' );	
+
 	wp_register_script( 'jquery-zoom-image-carousel-zoom', get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/scripts/zoom-image.js', array('jquery-core'), '1', 'all' );
 	wp_enqueue_script( 'jquery-zoom-image-carousel-zoom' );
 
@@ -55,7 +129,7 @@ function load_scripts()
 	wp_register_script( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.full.min.js', array('jquery'), '1', 'all' );
 	wp_enqueue_script( 'datetimepicker' );
 
-	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array('jquery', 'datetimepicker'), '1', 'all' );
+	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery', 'datetimepicker' ), '1', 'all' );
 	wp_enqueue_script( 'custom-script' );
 }
 add_action ('wp_enqueue_scripts', 'load_scripts' );
@@ -161,8 +235,8 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	if (isset($_POST['_date_to']))
 	$cart_item_data['date-to'] = $_POST['_date_to'];
 
-	$date_from = new DateTime( $cart_item_data['date-from'] );
-	$date_to = new DateTime( $cart_item_data['date-to'] );
+	$date_from = new DateTime( str_replace( '/', '-', $cart_item_data['date-from'] ) );
+	$date_to = new DateTime( str_replace( '/', '-', $cart_item_data['date-to'] ) );
 	$cart_item_data['number_of_days'] = $date_from->diff( $date_to )->format("%a");
 
 
@@ -243,6 +317,7 @@ function calculate_cart_total_security_deposit()
 	$cart = $woocommerce->cart->get_cart();
 
 	$_total_security_deposit = 0;
+	// var_dump($cart); 
 	foreach ( $cart as $item => $values )
 		$_total_security_deposit += $values['security_deposit'] * $values['quantity'] * $values['number_of_days'];
 
@@ -283,6 +358,52 @@ function customize_checkout_billing_kyc( $fields )
     return $fields;
 }
 add_filter( 'woocommerce_checkout_fields', 'customize_checkout_billing_kyc' );
+
+
+function get_new_price( $product_id, $date_from, $date_to, $quantity )
+{
+	$product 		= wc_get_product ( $product_id );
+	$vendor 		= get_user_by( 'id', $product->post->post_author );
+	$vendor_name 	= $vendor->user_login;	
+
+	$price_handler = 'get_price_from_' . $vendor_name;
+
+	require_once THEME_DIR . 'inc/product/price-handler.php';
+
+	if ( function_exists( $price_handler ) )
+		return $price_handler( $product_id, $date_from, $date_to, $quantity );
+	
+	return 0;
+}
+
+function get_vendor_percentage( $vendor_id )
+{
+	$dokan_admin_percentage = get_user_meta( $vendor_id, 'dokan_admin_percentage' );
+				
+	if (!empty($dokan_admin_percentage))
+		return $dokan_admin_percentage[0];
+
+	return false;
+}
+
+
+function aha_woocommerce_show_page_title() {
+	return false;
+}
+add_filter( 'woocommerce_show_page_title', 'aha_woocommerce_show_page_title' );
+
+
+function get_product_default_variation ( $product_id )
+{
+	$product				= wc_get_product( $product_id );
+	$default_attributes		= $product->get_default_attributes();
+	$variations 			= $product->get_available_variations();
+
+	foreach ( $variations as $variation )
+		return $variation['variation_id'];
+
+	return false;
+}
 
 
 ?>

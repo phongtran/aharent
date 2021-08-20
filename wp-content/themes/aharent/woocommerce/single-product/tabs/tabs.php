@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+require_once THEME_DIR . 'inc/product-tabs/security-deposit-tab.php';
+
 /**
  * Filter tabs and allow third parties to add their own.
  *
@@ -26,18 +29,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see woocommerce_default_product_tabs()
  */
+
 $product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
-unset( $product_tabs[ 'seller' ]);
-unset( $product_tabs[ 'more_seller_product' ]);
 
 if ( ! empty( $product_tabs ) ) : ?>
 
 <div class="product-description container">
 	<div class="woocommerce-tabs wc-tabs-wrapper">
-		<ul class="nav nav-tabs tabs wc-tabs" role="tablist">
-			<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
-				<li class="nav-item <?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
+		
+		<ul class="nav nav-tabs mb-3 tabs wc-tabs" role="tablist">
+			
+		<?php foreach ( $product_tabs as $key => $product_tab ) : ?>		
+				<li class="nav-item <?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="presentation" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
 					<a href="#tab-<?php echo esc_attr( $key ); ?>">
 						<h3 class="text-uppercase"><?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
 						</h3>

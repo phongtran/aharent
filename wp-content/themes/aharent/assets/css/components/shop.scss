@@ -1,0 +1,36 @@
+.shop-container {
+    
+    display: flex;
+    margin-top: 20px;
+
+    .shop-sidebar {
+        
+        width: 15%;
+        margin-right: 20px;
+        
+        .title {
+            
+            margin-bottom: 20px;
+        }
+
+        .bapf_sfilter {
+
+            .bapf_head {
+                margin-bottom: 10px;
+            }
+
+            .bapf_body {
+                
+                ul {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+
+    .shop-product-listing {
+        
+        max-width: 80%;
+    }
+
+}

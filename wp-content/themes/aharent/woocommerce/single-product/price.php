@@ -32,10 +32,16 @@ global $product;
 		</div>
 		
 		<div class="price-item-value rental">
-			<?php echo $product->get_price_html(); ?><span class="rental-time">/ngày</span>
+			<span class="price-value"><?php echo $product->get_price_html(); ?></span><span class="rental-time">/ngày</span>
 		</div>
 	</div>
 
+
+	<?php
+		$_security_deposit = $product->get_meta( '_security_deposit_amount' );
+		
+		if ( !empty($_security_deposit) && ($_security_deposit > 0) ) :
+	?>
 
 	<div class="price-item">
 		
@@ -48,23 +54,17 @@ global $product;
 		</div>
 	</div>
 
+	<?php endif ?>
 
-	<div class="price-item">
+
+	<div class="price-item deposit">
 		
 		<div class="price-item-title">
 			<span>Đặt cọc</span>
 		</div>
 		
 		<div class="price-item-value">
-			<?php
-				$vendor_id = get_post_field( 'post_author',$product->id );
-				$dokan_admin_percentage = get_user_meta( $vendor_id, 'dokan_admin_percentage' );
-				
-				if (!empty($dokan_admin_percentage))
-					$dokan_admin_percentage = $dokan_admin_percentage[0];
-
-				echo wc_price( $product->get_price() * $dokan_admin_percentage / 100 );
-			?>
+			
 		</div>
 	</div>
 

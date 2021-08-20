@@ -1,0 +1,28 @@
+.shop-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+}
+
+.shop-container .shop-sidebar {
+  width: 15%;
+  margin-right: 20px;
+}
+
+.shop-container .shop-sidebar .title {
+  margin-bottom: 20px;
+}
+
+.shop-container .shop-sidebar .bapf_sfilter .bapf_head {
+  margin-bottom: 10px;
+}
+
+.shop-container .shop-sidebar .bapf_sfilter .bapf_body ul {
+  padding-left: 10px;
+}
+
+.shop-container .shop-product-listing {
+  max-width: 80%;
+}
+/*# sourceMappingURL=shop.css.map */

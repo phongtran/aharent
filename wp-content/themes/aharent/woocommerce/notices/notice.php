@@ -23,6 +23,7 @@ if ( ! $notices ) {
 	return;
 }
 
+return;
 ?>
 
 <?php foreach ( $notices as $notice ) : ?>

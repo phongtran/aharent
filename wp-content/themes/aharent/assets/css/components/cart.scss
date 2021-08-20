@@ -1,0 +1,202 @@
+.aha-cart {
+    
+    margin: 20px 0;
+    padding: 0 0 20px 0; 
+
+    // background-color: #fff;
+        
+    table.shop_table {
+        border: 0;
+    }
+
+    .cart_totals {
+        background-color: #fff;
+        padding: 5px 10px;
+
+        p {
+            margin: 0;
+        }
+
+        .cart_totals-title {
+            background-color: #fff;
+            padding: 15px 20px;
+        }
+    }
+
+    .cart-step{
+        
+        .cart-step-title {
+            padding: 15px 20px;
+            border-radius: 8px;
+    
+            background-color: #fff;
+        }
+
+        .cart-step-content {
+            background-color: #fff;
+            margin: 20px 0;
+
+            .item-break {
+                height: 1px;
+                border-bottom: 1px solid #ececec;
+                margin: 10px;
+            }
+
+            .control-section {
+                display: flex;
+                
+
+                button {
+                    margin: 15px;
+                }
+            }
+
+            .cart-item {
+
+                padding: 15px 0;
+
+                .delete-icon {
+                    background: url(../img/dustbin.png) left top no-repeat;
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                }
+
+                
+                .cart-item-thumbnail {
+                    padding: 5px 20px;
+
+                    .security-deposit-policy {
+                        margin-top: 20px;
+
+                        span {
+
+                            font-size: 14px;
+                            font-style: italic;
+                            
+
+                            &::before {
+                                width: 16px;
+                                height: 16px;
+                                background: url(../img/information.png) center center no-repeat;
+                                content: "";
+                                display: block;
+                                float:left;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .cart-item-title {
+
+                    margin-bottom: 15px;
+                    
+                    h4 {
+                        font-size: 18px;
+                    }
+                }
+
+                .cart-item-description {
+
+                    width: 100%;
+                    padding-right: 15px;
+
+                    .price-section {
+                        display: flex;
+                        justify-content: right;
+                        margin-top: 20px;
+    
+                        table {
+                            td {
+                                padding: 5px 10px;
+                            }
+                        }
+
+                        .rental-price {
+                            margin-right: 20px;
+                        }
+
+                        h3.price {
+                            margin-top: 5px;                           
+                        }
+
+                        .deposit-price {
+                            h2 {
+                                font-size: 24px;
+                                font-weight: bold;
+                                color: #258c69;
+                            }
+                        }
+                    }
+
+                   
+    
+
+                    .info-section {
+
+                        td {
+                            padding: 5px 0;
+
+                            &.label {
+                                padding-right: 15px;
+                            }
+
+                        }
+
+                        .quantity {
+
+                            input {
+
+                                max-width: 80px;
+                            
+                            }
+
+                        }
+
+                        .time-period {
+
+                            .date-picker-input {
+                                display: flex;
+                                
+                                justify-content: center;
+                                align-items: center;
+
+                                .delimeter {
+                                    margin: 0 15px;
+                                }
+                            }
+
+                            input {
+                                max-width: 150px;
+                                font-size: 14px;
+                                padding: 8px 10px; 
+                            }
+                        }
+
+                        
+
+                        
+                        
+                    }
+                }
+
+                
+            }
+        }
+
+    }
+
+    
+
+    .cart-summary {
+        margin-left: 20px;
+
+        .cart_totals {
+            float: left;
+            width: 100%;
+        }
+
+    }
+    
+}

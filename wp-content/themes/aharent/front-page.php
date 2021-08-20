@@ -97,9 +97,7 @@
             <h3>SẢN PHẨM NỔI BẬT</h3>
         </div>
 
-        
-
-
+    
             <?php
 
             woocommerce_product_loop_start();
@@ -107,7 +105,7 @@
                 $args = array(
                     'post_type'   => 'product',
                     'stock'       => 1,
-                    'showposts'   => 12,
+                    'showposts'   => 15,
                     'orderby'     => 'date',
                     'order'       => 'DESC' ,
                 );
@@ -124,6 +122,12 @@
 
                 woocommerce_product_loop_end();
             ?>
+
+        <div class="button-more">
+            <a href="/store">
+                <button class="aha-button" type="button">Xem thêm</button>
+            </a>
+        </div>
         
     </div>
 

@@ -105,23 +105,7 @@
         .add-to-cart {
             margin-top: 20px;
 
-            button[type="submit"] {
-                width: 200px;
-                height: 56px;
-
-                border-radius: 5px;
-                border: 0;
-
-                font-size: 18px;
-
-                background-color: #258c69;
-                color: #fff;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-            }
+            
 
             .form-row {
 
@@ -168,9 +152,11 @@
 
         .price-wrapper {
 
-
-
             margin-top: 20px;
+
+            .deposit {
+                display: none !important;
+            }
 
             .price-item {
 

@@ -25,7 +25,56 @@ $variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_j
 
 do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
+<div class="add-to-cart">
+
 <form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo $variations_attr; // WPCS: XSS ok. ?>">
+		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+		<?php
+		do_action( 'woocommerce_before_add_to_cart_quantity' );
+		?>
+	
+			
+			<div class="form-row">
+				<div class="form-label">
+					<label>Số lượng: </label>
+				</div>
+
+				<div class="form-input quantity-input-increment">
+					<input id="quantity-input" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+				</div>
+			</div>
+
+		<?php do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>	
+
+		
+		<div class="form-row">
+			<div class="form-label">
+				<label>Thời gian thuê:</label>
+			</div>
+
+			<div class="form-input time-period">
+		
+				
+					<input type="text" id="date-from" name="_date_from" value="" placeholder="Từ ngày">
+					<input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày">
+				
+			</div>
+		</div>
+
+		
+		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
+
+		<input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
+		<input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
+
+
+		<input type="hidden" name="variation_id" class="variation_id" value="<?php echo get_product_default_variation( $product->id ); ?>" />
+		
+		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
+	</form>
+</div>
+
+<!-- <form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo $variations_attr; // WPCS: XSS ok. ?>">
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
 	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
@@ -78,7 +127,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	<?php endif; ?>
 
 	<?php do_action( 'woocommerce_after_variations_form' ); ?>
-</form>
+</form> -->
 
 <?php
 do_action( 'woocommerce_after_add_to_cart_form' );

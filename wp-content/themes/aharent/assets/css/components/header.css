@@ -51,9 +51,11 @@ header .container .search-box input {
 }
 
 header .container .search-box button.search-btn {
+  width: auto !important;
+  height: auto !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border: 1px solid #258c69;
+  border: 3px solid #258c69;
   background-color: #258c69;
 }
 
@@ -64,5 +66,29 @@ header .container .cart {
 
 header .container .cart img {
   height: 100%;
+}
+
+header .container .cart .shopping-cart {
+  position: relative;
+}
+
+header .container .cart .shopping-cart .cart-quantity {
+  position: absolute;
+  z-index: 5;
+  top: -10px;
+  right: -10px;
+  height: 20px;
+  width: 20px;
+  background-color: #e36d60;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=header.css.map */
