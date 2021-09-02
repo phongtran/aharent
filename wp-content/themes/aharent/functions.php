@@ -28,7 +28,7 @@ add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 // add_theme_support( 'wc-product-gallery-slider' );
 
 
-// Product loop column
+// Product loop column in shop page
 if ( !function_exists('loop_columns') ) {
 	function loop_columns() {
 		return 5; // 5 products per row
@@ -39,7 +39,7 @@ add_filter('loop_shop_columns', 'loop_columns', 999);
 
 function lw_loop_shop_per_page( $products )
 {
- 	$products = 5;
+ 	$products = 20; // number of products per page
  	return $products;
 }
 add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
