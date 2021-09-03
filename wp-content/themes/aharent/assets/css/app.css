@@ -577,6 +577,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: -ms-flexbox;
   display: flex;
   padding: 20px;
+  margin-bottom: 20px;
 }
 
 .product-info .product-image-gallery {
@@ -785,7 +786,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-description {
-  margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
   background-color: #fff;
