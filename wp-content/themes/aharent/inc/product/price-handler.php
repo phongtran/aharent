@@ -38,8 +38,8 @@
         $deposit = $vendor_percentage * $total_price / 100;
 
         return array (
-            "price"     => wc_price( $total_price ),
-            "deposit"   => wc_price( $deposit ),
+            "price"     => wc_price( $total_price * $quantity ),
+            "deposit"   => wc_price( $deposit * $quantity ),
         );
     }
     
@@ -55,8 +55,8 @@
         $deposit = $vendor_percentage * $total_price / 100;
 
         return array (
-            "price"     => wc_price( $total_price ),
-            "deposit"   => wc_price( $deposit ),
+            "price"     => wc_price( $total_price * $quantity ),
+            "deposit"   => wc_price( $deposit * $quantity ),
         );
     }
 
