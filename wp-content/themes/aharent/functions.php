@@ -362,13 +362,21 @@ add_filter( 'woocommerce_checkout_fields', 'customize_checkout_billing_kyc' );
 
 function get_new_price( $product_id, $date_from, $date_to, $quantity )
 {
-	$product 		= wc_get_product ( $product_id );
-	$vendor 		= get_user_by( 'id', $product->post->post_author );
-	$vendor_name 	= $vendor->user_login;	
-
-	$price_handler = 'get_price_from_' . $vendor_name;
-
 	require_once THEME_DIR . 'inc/product/price-handler.php';
+
+	$product 		= wc_get_product ( $product_id );
+
+	if ( $product->is_type( 'simple' ))
+	{
+		$price_handler = 'get_price_from_simple_product';
+	}
+	else
+	{
+		$vendor 		= get_user_by( 'id', $product->post->post_author );
+		$vendor_name 	= $vendor->user_login;	
+
+		$price_handler = 'get_price_from_' . $vendor_name;
+	}
 
 	if ( function_exists( $price_handler ) )
 		return $price_handler( $product_id, $date_from, $date_to, $quantity );

@@ -42,6 +42,22 @@
             "deposit"   => wc_price( $deposit ),
         );
     }
+    
+    function get_price_from_simple_product( $product_id, $date_from, $date_to, $quantity )
+    {
+        $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
+        $product = get_product ( $product_id );
+        $price = $product->get_price();
+        $total_price = $price * $duration;
+
+        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $deposit = $vendor_percentage * $total_price / 100;
+
+        return array (
+            "price"     => wc_price( $total_price ),
+            "deposit"   => wc_price( $deposit ),
+        );
+    }
 
 ?>
