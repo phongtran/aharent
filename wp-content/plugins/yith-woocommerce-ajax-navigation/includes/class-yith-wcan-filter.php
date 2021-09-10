@@ -6,7 +6,7 @@
  * Subclasses may define methods specific to a certain type of filter, and output for the filter
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product FIlter
+ * @package YITH\AjaxProductFilter\Classes
  * @version 4.0.0
  */
 
@@ -244,7 +244,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 		public function get_formatted_taxonomy( $context = 'view' ) {
 			$formatted_taxonomy = $this->get_taxonomy( $context );
 
-			if ( in_array( $formatted_taxonomy, wc_get_attribute_taxonomy_names() ) ) {
+			if ( in_array( $formatted_taxonomy, wc_get_attribute_taxonomy_names(), true ) ) {
 				$formatted_taxonomy = str_replace( 'pa_', 'filter_', $formatted_taxonomy );
 			}
 
@@ -379,8 +379,8 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 					$terms = get_terms(
 						array_merge(
 							array(
-								'taxonomy' => $taxonomy,
-								'fields' => $fields,
+								'taxonomy'   => $taxonomy,
+								'fields'     => $fields,
 								'hide_empty' => false,
 							),
 							$this->use_all_terms() ? array() : array(
@@ -400,8 +400,8 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 					} else {
 						$term_ids = get_terms(
 							array(
-								'taxonomy' => $taxonomy,
-								'fields' => 'ids',
+								'taxonomy'   => $taxonomy,
+								'fields'     => 'ids',
 								'hide_empty' => false,
 							)
 						);
@@ -410,7 +410,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 							return array();
 						}
 
-						$terms = array();
+						$terms                = array();
 						$default_term_options = $this->get_default_term_options();
 
 						foreach ( $term_ids as $term_id ) {
@@ -587,7 +587,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 		public function is_hierarchical( $context = 'view' ) {
 			$hierarchical = $this->get_hierarchical( $context );
 
-			return in_array( $hierarchical, array( 'collapsed', 'expanded', 'open' ) );
+			return in_array( $hierarchical, array( 'collapsed', 'expanded', 'open' ), true );
 		}
 
 		/**
@@ -865,7 +865,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 		 * @return array Array of fields
 		 */
 		public static function get_fields() {
-			return include( YITH_WCAN_DIR . 'plugin-options/filter-options.php' );
+			return include YITH_WCAN_DIR . 'plugin-options/filter-options.php';
 		}
 
 		/**
@@ -1005,7 +1005,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'label',
 			);
 
-			if ( ! in_array( $filter_design, $supported_designs ) ) {
+			if ( ! in_array( $filter_design, $supported_designs, true ) ) {
 				return;
 			}
 
@@ -1024,7 +1024,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'hide',
 			);
 
-			if ( ! in_array( $label_position, $supported_positions ) ) {
+			if ( ! in_array( $label_position, $supported_positions, true ) ) {
 				return;
 			}
 
@@ -1073,7 +1073,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'opened',
 			);
 
-			if ( ! in_array( $toggle_style, $supported_styles ) ) {
+			if ( ! in_array( $toggle_style, $supported_styles, true ) ) {
 				return;
 			}
 
@@ -1094,7 +1094,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'include',
 			);
 
-			if ( ! in_array( $order_by, $supported_orders ) ) {
+			if ( ! in_array( $order_by, $supported_orders, true ) ) {
 				return;
 			}
 
@@ -1112,7 +1112,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'desc',
 			);
 
-			if ( ! in_array( $order, $supported_orders ) ) {
+			if ( ! in_array( $order, $supported_orders, true ) ) {
 				return;
 			}
 
@@ -1144,7 +1144,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'open',
 			);
 
-			if ( ! in_array( $hierarchical, $supported_options ) ) {
+			if ( ! in_array( $hierarchical, $supported_options, true ) ) {
 				return;
 			}
 
@@ -1173,7 +1173,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'or',
 			);
 
-			if ( ! in_array( $relation, $supported_relations ) ) {
+			if ( ! in_array( $relation, $supported_relations, true ) ) {
 				return;
 			}
 
@@ -1191,7 +1191,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				'or',
 			);
 
-			if ( ! in_array( $adoptive, $supported_adoptive ) ) {
+			if ( ! in_array( $adoptive, $supported_adoptive, true ) ) {
 				return;
 			}
 
@@ -1240,7 +1240,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 		 * @param string $design Slider/Fields or both; if none of them, fallbacks to slider.
 		 */
 		public function set_price_slider_design( $design ) {
-			if ( ! in_array( $design, array( 'slider', 'fields', 'both' ) ) ) {
+			if ( ! in_array( $design, array( 'slider', 'fields', 'both' ), true ) ) {
 				$design = 'slider';
 			}
 
@@ -1387,7 +1387,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 				return '';
 			}
 
-			$title_tag = apply_filters( 'yith_wcan_filter_title_tag', 'h4', $this );
+			$title_tag          = apply_filters( 'yith_wcan_filter_title_tag', 'h4', $this );
 			$additional_classes = array( 'filter-title' );
 
 			if ( $this->is_collapsable() ) {
@@ -1414,7 +1414,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter' ) ) {
 			$atts = array(
 				'preset' => $this->get_preset(),
 				'filter' => $this,
-				'count' => $count,
+				'count'  => $count,
 			);
 
 			return yith_wcan_get_template( 'filters/global/count.php', $atts, false );

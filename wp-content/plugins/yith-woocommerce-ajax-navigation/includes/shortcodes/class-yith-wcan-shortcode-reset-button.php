@@ -5,7 +5,7 @@
  * Defines shortcode that output Reset Filters button
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Shortcodes
  * @version 4.0
  */
 
@@ -43,7 +43,7 @@ if ( ! class_exists( 'YITH_WCAN_Shortcode_Reset_Button' ) ) {
 			add_action( 'yith_plugin_fw_gutenberg_before_do_shortcode', array( __CLASS__, 'fix_for_gutenberg_block' ), 10, 1 );
 
 			$blocks = array(
-				'yith-wcan-reset-button'   => array(
+				'yith-wcan-reset-button' => array(
 					'style'          => 'yith-wcan-shortcodes',
 					'script'         => 'yith-wcan-shortcodes',
 					'title'          => _x( 'YITH Reset Filters Button', '[GUTENBERG]: block name', 'yith-woocommerce-ajax-navigation' ),

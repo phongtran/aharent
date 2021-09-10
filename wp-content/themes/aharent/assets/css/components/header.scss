@@ -1,5 +1,5 @@
-$header-bg-color: #45b08c;
-$header-text-color: #f3faf7;
+$header-bg-color: $main-color;
+$header-text-color: $text-color;
 
 header {
     background-color: $header-bg-color;
@@ -8,7 +8,8 @@ header {
 
     .container {
         .logo {
-            background: url('../img/aharent-logo.png');
+            background: url('../img/aharent-logo.png') no-repeat center center;
+            background-size: cover;
             width: 144px;
             height: 28px;
 
@@ -22,7 +23,7 @@ header {
 
                 .top-bar, .middle-bar, .bottom-bar {
                     height: 3px;
-                    background-color: #fff;
+                    background-color: $main-button-color;
                 }
 
                 .top-bar {
@@ -44,7 +45,7 @@ header {
                     height: 0;
                     border-left: 5px solid transparent;
                     border-right: 5px solid transparent;
-                    border-top: 8px solid #fff;
+                    border-top: 8px solid $main-button-color;
                     content: "";
                 }
             }
@@ -66,14 +67,14 @@ header {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
 
-                border: 3px solid #258c69;
-                background-color: #258c69;
+                border: 3px solid $main-button-color;
+                background-color: $main-button-color;
             }
         }
 
         .cart {
             margin-left: 20px;
-            height: 30px;
+            
 
             img {
                 height: 100%;
@@ -83,18 +84,28 @@ header {
 
                 position: relative;
 
+                display: block;
+                height: 40px;
+                width: 40px;
+
+                padding: 8px;
+
+                background-color: $bright-text-color;
+                border-radius: 50%;
+
                 .cart-quantity {
                 
                     position: absolute;
                     z-index: 5;
     
-                    top: -10px;
-                    right: -10px;
+                    top: -5px;
+                    right: -5px;
     
                     height: 20px;
                     width: 20px;
     
-                    background-color: #e36d60;
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
                     border-radius: 50%;
     
                     display: flex;

@@ -3,7 +3,7 @@
  * Reset button widget
  *
  * @author  Your Inspiration Themes
- * @package YITH WooCommerce Ajax Navigation
+ * @package YITH\AjaxProductFilter\Classes\Widgets
  * @version 1.3.2
  */
 
@@ -30,7 +30,7 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 				'description' => _x( 'Reset all filters set by YITH WooCommerce AJAX Product Filter', '[Plugin Name]', 'yith-woocommerce-ajax-navigation' ),
 			);
 			$control_ops = array(
-				'width' => 400,
+				'width'  => 400,
 				'height' => 350,
 			);
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 			 * @ return void
 			 */
 			$deprecated_filters_map = array(
-				'yith-wcan-reset-navigation-label' => array(
+				'yith-wcan-reset-navigation-label'        => array(
 					'since'  => '3.11.7',
 					'use'    => 'yith_wcan_reset_navigation_label',
 					'params' => 3,
@@ -84,14 +84,15 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$_attributes_array = yit_wcan_get_product_taxonomy();
+			$request           = $_GET; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( apply_filters( 'yith_wcan_show_widget', ! is_post_type_archive( 'product' ) && ! is_tax( $_attributes_array ), $instance ) ) {
 				return;
 			}
 
 			// Price.
-			$min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
-			$max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
+			$min_price = isset( $request['min_price'] ) ? (float) $request['min_price'] : 0;
+			$max_price = isset( $request['max_price'] ) ? (float) $request['max_price'] : 0;
 
 			$after_widget  = apply_filters( 'yith_wcan_after_reset_widget', $after_widget );
 			$before_widget = apply_filters( 'yith_wcan_before_reset_widget', $before_widget );
@@ -103,14 +104,14 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 				$link = '';
 
 				// clean the url.
-				if ( ! isset( $_GET['source_id'] ) ) {
+				if ( ! isset( $request['source_id'] ) ) {
 					$link = '';
 
 					// Check if the user have enabled only WC PRice Filter.
-					if ( yit_is_filtered_uri() && ( isset( $_GET['min_price'] ) || isset( $_GET['max_price'] ) ) && is_product_taxonomy() ) {
+					if ( yit_is_filtered_uri() && ( isset( $request['min_price'] ) || isset( $request['max_price'] ) ) && is_product_taxonomy() ) {
 						$queried_object = $wp_query instanceof WP_Query ? $wp_query->get_queried_object() : false;
 
-						if ( $queried_object instanceof WP_Term && ! isset( $_GET[ $queried_object->taxonomy ] ) ) {
+						if ( $queried_object instanceof WP_Term && ! isset( $request[ $queried_object->taxonomy ] ) ) {
 							$link = get_term_link( $queried_object );
 						}
 					}
@@ -127,8 +128,8 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 					// Start filter from Product category Page.
 					$term = null;
 
-					if ( ! empty( $_GET['source_id'] ) && ! empty( $_GET['source_tax'] ) ) {
-						$term = get_term_by( 'term_id', sanitize_text_field( wp_unslash( $_GET['source_id'] ) ), sanitize_text_field( wp_unslash( $_GET['source_tax'] ) ) );
+					if ( ! empty( $request['source_id'] ) && ! empty( $request['source_tax'] ) ) {
+						$term = get_term_by( 'term_id', sanitize_text_field( wp_unslash( $request['source_id'] ) ), sanitize_text_field( wp_unslash( $request['source_tax'] ) ) );
 					}
 
 					if ( $term instanceof WP_Term ) {
@@ -136,12 +137,12 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 					}
 				}
 
-				if ( is_search() && isset( $_GET['s'] ) && isset( $_GET['post_type'] ) ) {
-					$s    = urlencode( sanitize_text_field( wp_unslash( $_GET['s'] ) ) );
+				if ( is_search() && isset( $request['s'] ) && isset( $request['post_type'] ) ) {
+					$s    = urlencode( sanitize_text_field( wp_unslash( $request['s'] ) ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
 					$link = add_query_arg(
 						array(
-							's' => $s,
-							'post_type' => sanitize_text_field( wp_unslash( $_GET['post_type'] ) ),
+							's'         => $s,
+							'post_type' => sanitize_text_field( wp_unslash( $request['post_type'] ) ),
 						),
 						get_home_url()
 					);
@@ -215,8 +216,8 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 		 */
 		public function update( $new_instance, $old_instance ) {
 			$instance          = $old_instance;
-			$instance['title'] = strip_tags( $new_instance['title'] );
-			$instance['label'] = strip_tags( $new_instance['label'] );
+			$instance['title'] = wp_strip_all_tags( $new_instance['title'] );
+			$instance['label'] = wp_strip_all_tags( $new_instance['label'] );
 
 			return $instance;
 		}

@@ -5,7 +5,7 @@
  * Defines all the widgets supported by the plugin
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes
  * @version 4.0.2
  */
 
@@ -21,9 +21,9 @@ if ( ! class_exists( 'YITH_WCAN_Widgets' ) ) {
 		/**
 		 * A list of available plugin widgets
 		 *
-		 * @var array $_available_widgets
+		 * @var array $available_widgets
 		 */
-		private static $_available_widgets;
+		private static $available_widgets;
 
 		/**
 		 * Register shortcode and performs all shortcodes related ops
@@ -32,7 +32,7 @@ if ( ! class_exists( 'YITH_WCAN_Widgets' ) ) {
 		 */
 		public static function init() {
 			// init available shortcodes.
-			self::$_available_widgets = apply_filters(
+			self::$available_widgets = apply_filters(
 				'yith_wcan_widgets',
 				array(
 					'YITH_WCAN_Navigation_Widget',
@@ -50,13 +50,13 @@ if ( ! class_exists( 'YITH_WCAN_Widgets' ) ) {
 		 * @return void
 		 */
 		public static function init_widgets() {
-			if ( empty( self::$_available_widgets ) ) {
+			if ( empty( self::$available_widgets ) ) {
 				return;
 			}
 
-			foreach ( self::$_available_widgets as $classname ) {
-				$filename  = 'class.' . strtolower( str_replace( '_', '-', $classname ) );
-				$filepath  = YITH_WCAN_INC . 'widgets/' . $filename . '.php';
+			foreach ( self::$available_widgets as $classname ) {
+				$filename = 'class-' . strtolower( str_replace( '_', '-', $classname ) );
+				$filepath = YITH_WCAN_INC . 'widgets/' . $filename . '.php';
 
 				if ( ! file_exists( $filepath ) ) {
 					continue;
@@ -64,14 +64,14 @@ if ( ! class_exists( 'YITH_WCAN_Widgets' ) ) {
 
 				if ( false !== strpos( $filename, '-premium' ) ) {
 					$parent_filename = str_replace( '-premium', '', $filename );
-					$parent_filepath  = YITH_WCAN_INC . 'widgets/' . $parent_filename . '.php';
+					$parent_filepath = YITH_WCAN_INC . 'widgets/' . $parent_filename . '.php';
 
 					if ( file_exists( $parent_filepath ) ) {
-						include_once( $parent_filepath );
+						include_once $parent_filepath;
 					}
 				}
 
-				include_once( $filepath );
+				include_once $filepath;
 
 				if ( class_exists( $classname ) ) {
 					register_widget( $classname );

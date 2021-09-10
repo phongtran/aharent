@@ -3,7 +3,7 @@
  * Preset options
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Options
  * @version 4.0.0
  */
 

@@ -1,9 +1,9 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * WPML plugin support
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product FIlter
+ * @package YITH\AjaxProductFilter\Classes\Compatibility
  * @version 4.0.1
  */
 
@@ -190,7 +190,7 @@ class WPML_Language_Metabox {
 			foreach ( $filters as $filter ) {
 				if ( $filter->has_terms() ) {
 					$terms_options = $filter->get_terms_options();
-					$new_terms = array();
+					$new_terms     = array();
 
 					foreach ( $terms_options as $term_id => $term_options ) {
 						$translated_term_id = apply_filters( 'wpml_object_id', $term_id, $filter->get_taxonomy(), false, $lang );
@@ -236,7 +236,7 @@ class WPML_Language_Metabox {
 			$this->panel_slug = YITH_WCAN()->admin->get_panel_page();
 		}
 
-		return ! empty( $_GET['page'] ) && ! empty( $_GET['preset'] ) && $this->get_panel_slug() === $_GET['page'];
+		return ! empty( $_GET['page'] ) && ! empty( $_GET['preset'] ) && $this->get_panel_slug() === $_GET['page']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**

@@ -5,7 +5,7 @@
  * Defines all the shortcodes supported by the plugin, and additional functions to support external compose
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes
  * @version 4.0
  */
 
@@ -21,9 +21,9 @@ if ( ! class_exists( 'YITH_WCAN_Shortcodes' ) ) {
 		/**
 		 * A list of available plugin shortcodes
 		 *
-		 * @var array $_available_shortcodes
+		 * @var array $available_shortcodes
 		 */
-		private static $_available_shortcodes;
+		private static $available_shortcodes;
 
 		/**
 		 * Register shortcode and performs all shortcodes related ops
@@ -32,7 +32,7 @@ if ( ! class_exists( 'YITH_WCAN_Shortcodes' ) ) {
 		 */
 		public static function init() {
 			// init available shortcodes.
-			self::$_available_shortcodes = apply_filters(
+			self::$available_shortcodes = apply_filters(
 				'yith_wcan_shortcodes',
 				array(
 					'yith_wcan_filters',
@@ -50,21 +50,21 @@ if ( ! class_exists( 'YITH_WCAN_Shortcodes' ) ) {
 		 * @return void
 		 */
 		public static function init_shortcodes() {
-			if ( empty( self::$_available_shortcodes ) ) {
+			if ( empty( self::$available_shortcodes ) ) {
 				return;
 			}
 
-			foreach ( self::$_available_shortcodes as $tag ) {
+			foreach ( self::$available_shortcodes as $tag ) {
 				$classname = str_replace( 'yith_wcan', 'YITH_WCAN_Shortcode', $tag );
 				$classname = str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $classname ) ) );
-				$filename  = 'class.' . strtolower( str_replace( '_', '-', $classname ) );
+				$filename  = 'class-' . strtolower( str_replace( '_', '-', $classname ) );
 				$filepath  = YITH_WCAN_INC . 'shortcodes/' . $filename . '.php';
 
 				if ( ! file_exists( $filepath ) ) {
 					continue;
 				}
 
-				include_once( $filepath );
+				include_once $filepath;
 
 				if ( class_exists( $classname ) ) {
 					add_shortcode( $tag, array( $classname, 'render' ) );
@@ -97,21 +97,21 @@ if ( ! class_exists( 'YITH_WCAN_Shortcodes' ) ) {
 		 * @return void
 		 */
 		public static function register_elementor_widgets() {
-			if ( empty( self::$_available_shortcodes ) ) {
+			if ( empty( self::$available_shortcodes ) ) {
 				return;
 			}
 
-			foreach ( self::$_available_shortcodes as $tag ) {
+			foreach ( self::$available_shortcodes as $tag ) {
 				$classname = str_replace( 'yith_wcan', 'YITH_WCAN_Elementor', $tag );
 				$classname = str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $classname ) ) );
-				$filename  = 'class.' . strtolower( str_replace( '_', '-', $classname ) );
+				$filename  = 'class-' . strtolower( str_replace( '_', '-', $classname ) );
 				$filepath  = YITH_WCAN_INC . 'elementor/' . $filename . '.php';
 
 				if ( ! file_exists( $filepath ) ) {
 					continue;
 				}
 
-				include_once( $filepath );
+				include_once $filepath;
 
 				if ( class_exists( $classname ) ) {
 					\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new $classname() );

@@ -3,7 +3,7 @@
  * Filter Presets Table class
  *
  * @author  Your Inspiration Themes
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Tables
  * @version 1.0.0
  */
 
@@ -50,7 +50,8 @@ if ( ! class_exists( 'YITH_WCAN_Filter_Presets_Table' ) ) {
 			if ( isset( $item->$column_name ) ) {
 				return esc_html( $item->$column_name );
 			} else {
-				return print_r( $item, true ); // Show the whole array for troubleshooting purposes.
+				// Show the whole array for troubleshooting purposes.
+				return print_r( $item, true ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 			}
 		}
 
@@ -112,9 +113,9 @@ if ( ! class_exists( 'YITH_WCAN_Filter_Presets_Table' ) ) {
 		 */
 		public function get_columns() {
 			$columns = array(
-				'name' => _x( 'Preset name', '[Admin] Preset table column header', 'yith-woocommerce-ajax-navigation' ),
+				'name'      => _x( 'Preset name', '[Admin] Preset table column header', 'yith-woocommerce-ajax-navigation' ),
 				'shortcode' => _x( 'Shortcode', '[Admin] Preset table column header', 'yith-woocommerce-ajax-navigation' ),
-				'actions' => '',
+				'actions'   => '',
 			);
 
 			return $columns;
@@ -191,9 +192,9 @@ if ( ! class_exists( 'YITH_WCAN_Filter_Presets_Table' ) ) {
 			} else {
 				YITH_WCAN()->admin->show_empty_content(
 					array(
-						'item_name' => _x( 'filter preset', '[Admin] Name of the item missing, shown in preset-empty-content template', 'yith-woocommerce-ajax-navigation' ),
+						'item_name'    => _x( 'filter preset', '[Admin] Name of the item missing, shown in preset-empty-content template', 'yith-woocommerce-ajax-navigation' ),
 						'button_label' => _x( 'Create a new preset', '[Admin] New preset button label', 'yith-woocommerce-ajax-navigation' ),
-						'button_url' => YITH_WCAN()->admin->get_preset_create_page(),
+						'button_url'   => YITH_WCAN()->admin->get_preset_create_page(),
 					)
 				);
 			}
@@ -210,8 +211,14 @@ if ( ! class_exists( 'YITH_WCAN_Filter_Presets_Table' ) ) {
 		public function prepare_items() {
 			$query_arg = array();
 
-			if ( ! empty( $_REQUEST['s'] ) && '' !== $_REQUEST['s'] ) {
-				$query_arg['s'] = sanitize_text_field( wp_unslash( $_REQUEST['s'] ) );
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended
+			$search_string = ! empty( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : false;
+			$orderby       = ! empty( $_REQUEST['orderby'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['orderby'] ) ) : false;
+			$order         = ! empty( $_REQUEST['order'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['order'] ) ) : false;
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+			if ( $search_string ) {
+				$query_arg['s'] = $search_string;
 			}
 
 			// sets pagination arguments.
@@ -223,8 +230,8 @@ if ( ! class_exists( 'YITH_WCAN_Filter_Presets_Table' ) ) {
 					array(
 						'limit'   => $per_page,
 						'offset'  => ( ( $current_page - 1 ) * $per_page ),
-						'orderby' => isset( $_REQUEST['orderby'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['orderby'] ) ) : 'ID',
-						'order'   => isset( $_REQUEST['order'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['order'] ) ) : 'DESC',
+						'orderby' => $orderby ? $orderby : 'ID',
+						'order'   => $order ? $order : 'DESC',
 					),
 					$query_arg
 				)

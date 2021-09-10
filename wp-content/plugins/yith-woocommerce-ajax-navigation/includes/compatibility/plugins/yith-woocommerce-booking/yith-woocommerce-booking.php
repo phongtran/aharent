@@ -1,9 +1,9 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * YITH WooCommerce Booking plugin support
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Compatibility
  * @version 4.1.0
  */
 
@@ -25,7 +25,7 @@ if ( ! class_exists( 'YITH_WCAN_Booking_Compatibility' ) ) {
 		 * @var YITH_WCAN_Booking_Compatibility
 		 * @since 4.0.0
 		 */
-		protected static $_instance = null;
+		protected static $instance = null;
 
 		/**
 		 * Init integration, hooking all required methods
@@ -45,7 +45,9 @@ if ( ! class_exists( 'YITH_WCAN_Booking_Compatibility' ) ) {
 		 * @return array Filtered post__in param.
 		 */
 		public function filter_post_in( $post_in ) {
-			if ( ! isset( $_REQUEST['yith-wcbk-booking-search'] ) || 'search-bookings' !== $_REQUEST['yith-wcbk-booking-search'] ) {
+			$request = $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( ! isset( $request['yith-wcbk-booking-search'] ) || 'search-bookings' !== $request['yith-wcbk-booking-search'] ) {
 				return $post_in;
 			}
 
@@ -55,7 +57,7 @@ if ( ! class_exists( 'YITH_WCAN_Booking_Compatibility' ) ) {
 				return $post_in;
 			}
 
-			$product_ids = $search_helper->search_booking_products( $_REQUEST );
+			$product_ids = $search_helper->search_booking_products( $request );
 
 			if ( empty( $post_in ) && ! empty( $product_ids ) ) {
 				return $product_ids;
@@ -81,7 +83,9 @@ if ( ! class_exists( 'YITH_WCAN_Booking_Compatibility' ) ) {
 		 * @return array Filtered supported vars.
 		 */
 		public function filter_supported_query_vars( $supported_params ) {
-			if ( ! function_exists( 'YITH_WCBK' ) || ! isset( $_REQUEST['yith-wcbk-booking-search'] ) || 'search-bookings' !== $_REQUEST['yith-wcbk-booking-search'] ) {
+			$request = $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( ! function_exists( 'YITH_WCBK' ) || ! isset( $request['yith-wcbk-booking-search'] ) || 'search-bookings' !== $request['yith-wcbk-booking-search'] ) {
 				return $supported_params;
 			}
 
@@ -125,11 +129,11 @@ if ( ! class_exists( 'YITH_WCAN_Booking_Compatibility' ) ) {
 		 * @return YITH_WCAN_Booking_Compatibility Class unique instance
 		 */
 		public static function instance() {
-			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self();
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
 			}
 
-			return self::$_instance;
+			return self::$instance;
 		}
 	}
 }

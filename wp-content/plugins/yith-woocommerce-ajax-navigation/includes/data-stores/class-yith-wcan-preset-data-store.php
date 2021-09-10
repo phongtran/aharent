@@ -3,7 +3,7 @@
  * Filter Preset data store
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\DataStore
  * @version 3.0.0
  */
 
@@ -23,7 +23,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset_Data_Store' ) ) {
 		 *
 		 * @var array
 		 */
-		protected $_meta_key_to_props = array(
+		protected $meta_key_to_props = array(
 			'_selector' => 'selector',
 			'_enabled'  => 'enabled',
 			'_filters'  => 'filters',
@@ -95,14 +95,14 @@ if ( ! class_exists( 'YITH_WCAN_Preset_Data_Store' ) ) {
 				$posts_object = get_posts(
 					array_merge(
 						array(
-							'post_type' => YITH_WCAN_Presets()->get_post_type(),
+							'post_type'   => YITH_WCAN_Presets()->get_post_type(),
 							'post_status' => 'publish',
 							'numberposts' => 1,
 						),
 						$data->get_id() ? array( 'p' => $data->get_id() ) : array( 'name' => $data->get_slug() )
 					)
 				);
-				$post_object = array_shift( $posts_object );
+				$post_object  = array_shift( $posts_object );
 
 				if ( ! $post_object || YITH_WCAN_Presets()->get_post_type() !== $post_object->post_type ) {
 					throw new Exception( _x( 'Invalid preset.', '[Generic] Error that happens when trying to read a filter preset that does not exist', 'yith-woocommerce-ajax-navigation' ) );
@@ -251,7 +251,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset_Data_Store' ) ) {
 		protected function read_post_meta( &$preset, $force = false ) {
 			$id                = $preset->get_id();
 			$post_meta_values  = get_post_meta( $id );
-			$meta_key_to_props = $this->_meta_key_to_props;
+			$meta_key_to_props = $this->meta_key_to_props;
 
 			$set_props = array();
 
@@ -273,7 +273,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset_Data_Store' ) ) {
 		 * @since 4.0.0
 		 */
 		protected function update_post_meta( &$preset, $force = false ) {
-			$meta_key_to_props = $this->_meta_key_to_props;
+			$meta_key_to_props = $this->meta_key_to_props;
 
 			$props_to_update = $force ? $meta_key_to_props : $this->get_props_to_update( $preset, $meta_key_to_props );
 
@@ -337,10 +337,10 @@ if ( ! class_exists( 'YITH_WCAN_Preset_Data_Store' ) ) {
 			$args = wp_parse_args( $args, $default );
 
 			$query_args = array(
-				'post_type'      => YITH_WCAN_Presets()->get_post_type(),
-				'fields'         => 'ids',
-				'post_status'    => 'publish',
-				'posts_per_page' => -1,
+				'post_type'        => YITH_WCAN_Presets()->get_post_type(),
+				'fields'           => 'ids',
+				'post_status'      => 'publish',
+				'posts_per_page'   => -1,
 				'suppress_filters' => false,
 			);
 
@@ -377,7 +377,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset_Data_Store' ) ) {
 		public function items() {
 			global $wpdb;
 
-			$results = $wpdb->get_results(
+			$results = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 				$wpdb->prepare(
 					"SELECT post_name, post_title FROM {$wpdb->posts} WHERE post_type = %s AND post_status = %s",
 					YITH_WCAN_Presets()->get_post_type(),

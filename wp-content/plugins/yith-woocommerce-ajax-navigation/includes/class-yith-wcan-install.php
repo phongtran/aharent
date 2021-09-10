@@ -3,7 +3,7 @@
  * Manage install, and performs all post update operations
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product FIlter
+ * @package YITH\AjaxProductFilter\Classes
  * @version 4.0.0
  */
 
@@ -31,14 +31,14 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 *
 		 * @var string
 		 */
-		protected static $_stored_version;
+		protected static $stored_version;
 
 		/**
 		 * Default preset slug
 		 *
 		 * @var string
 		 */
-		protected static $_default_preset_slug = 'default-preset';
+		protected static $default_preset_slug = 'default-preset';
 
 		/**
 		 * Hooks methods required to install/update plugin
@@ -57,9 +57,9 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 * @return void
 		 */
 		public static function check_version() {
-			self::$_stored_version = get_option( 'yith_wcan_version' );
+			self::$stored_version = get_option( 'yith_wcan_version' );
 
-			if ( version_compare( self::$_stored_version, YITH_WCAN_VERSION, '<' ) ) {
+			if ( version_compare( self::$stored_version, YITH_WCAN_VERSION, '<' ) ) {
 				self::update();
 				do_action( 'yith_wcan_updated' );
 			}
@@ -91,9 +91,9 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 
 			$new_preset = new YITH_WCAN_Preset();
 
-			$new_preset->set_slug( self::$_default_preset_slug );
+			$new_preset->set_slug( self::$default_preset_slug );
 			$new_preset->set_title( _x( 'Default preset', '[ADMIN] Name of default preset that is installed with the plugin', 'yith-woocommerce-ajax-navigation' ) );
-			$new_preset->set_filters( self::_get_default_filters() );
+			$new_preset->set_filters( self::get_default_filters() );
 			$new_preset->save();
 
 			update_option( 'yith_wcan_default_preset_created', true );
@@ -122,8 +122,8 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 */
 		public static function maybe_update_options() {
 			// do incremental upgrade.
-			version_compare( self::$_stored_version, '4.0.0', '<' ) && self::_do_400_upgrade();
-			version_compare( self::$_stored_version, '4.1.0', '<' ) && self::_do_410_upgrade();
+			version_compare( self::$stored_version, '4.0.0', '<' ) && self::do_400_upgrade();
+			version_compare( self::$stored_version, '4.1.0', '<' ) && self::do_410_upgrade();
 
 			// space for future revisions.
 
@@ -145,7 +145,7 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 * @return bool|YITH_WCAN_Preset
 		 */
 		public static function get_default_preset() {
-			return YITH_WCAN_Preset_Factory::get_preset( self::$_default_preset_slug );
+			return YITH_WCAN_Preset_Factory::get_preset( self::$default_preset_slug );
 		}
 
 		/**
@@ -178,7 +178,7 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 * @return void
 		 */
 		public static function maybe_flush_rules() {
-			version_compare( self::$_stored_version, '4.0.0', '<' ) && flush_rewrite_rules();
+			version_compare( self::$stored_version, '4.0.0', '<' ) && flush_rewrite_rules();
 		}
 
 		/**
@@ -201,7 +201,7 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 *
 		 * @return void.
 		 */
-		protected static function _do_400_upgrade() {
+		protected static function do_400_upgrade() {
 			$old_options = get_option( 'yit_wcan_options' );
 
 			if ( ! $old_options ) {
@@ -229,7 +229,7 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 *
 		 * @return void.
 		 */
-		protected static function _do_410_upgrade() {
+		protected static function do_410_upgrade() {
 			do_action( 'yith_wcan_did_410_upgrade' );
 		}
 
@@ -238,11 +238,11 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 *
 		 * @return array Array of filters.
 		 */
-		protected static function _get_default_filters() {
+		protected static function get_default_filters() {
 			$filters = array();
 
 			// set taxonomies filters.
-			$filters = array_merge( $filters, self::_get_taxonomies_filters() );
+			$filters = array_merge( $filters, self::get_taxonomies_filters() );
 
 			return apply_filters( 'yith_wcan_default_filters', $filters );
 		}
@@ -252,7 +252,7 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 		 *
 		 * @return array Array of filters.
 		 */
-		protected static function _get_taxonomies_filters() {
+		protected static function get_taxonomies_filters() {
 			$filters = array();
 
 			// start with taxonomy filters.
@@ -271,12 +271,12 @@ if ( ! class_exists( 'YITH_WCAN_Install' ) ) {
 					continue;
 				}
 
-				$filter = new YITH_WCAN_Filter_Tax();
+				$filter      = new YITH_WCAN_Filter_Tax();
 				$terms_array = array();
 
 				foreach ( $terms as $term ) {
 					$terms_array[ $term->term_id ] = array(
-						'label' => $term->name,
+						'label'   => $term->name,
 						'tooltip' => $term->name,
 					);
 				}

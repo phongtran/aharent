@@ -800,7 +800,7 @@
 .yith-wcan-filters.filters-modal .close-button {
   color: var(--yith-wcan-anchors_style_text, #434343);
   cursor: pointer;
-  font-size: 2.5em;
+  font-size: 1.5em;
   height: 35px;
   line-height: 1;
   position: absolute;

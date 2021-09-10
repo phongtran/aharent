@@ -5,7 +5,7 @@
  * Filters WooCommerce query, to show only products matching selection
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes
  * @version 4.0.0
  */
 
@@ -46,49 +46,42 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $_query_param = 'yith_wcan';
+		protected $query_param = 'yith_wcan';
 
 		/**
 		 * List of query vars submitted for current query
 		 *
 		 * @var array submitted query vars.
 		 */
-		protected $_query_vars = null;
+		protected $query_vars = null;
 
 		/**
 		 * Get taxonomies that will be used for filtering
 		 *
 		 * @var array
 		 */
-		protected $_supported_taxonomies = array();
+		protected $supported_taxonomies = array();
 
 		/**
 		 * Products retrieved by by last query
 		 *
 		 * @var array
 		 */
-		protected $_products = array();
+		protected $products = array();
 
 		/**
 		 * An array of product ids matcing current query, per filter
 		 *
 		 * @var array
 		 */
-		protected $_products_per_filter = array();
+		protected $products_per_filter = array();
 
 		/**
 		 * An array of currently choosen attributes
 		 *
 		 * @var array
 		 */
-		protected $_chosen_attributes;
-
-		/**
-		 * Current filtering session, if any
-		 *
-		 * @var YITH_WCAN_Session
-		 */
-		protected $_session = null;
+		protected $chosen_attributes;
 
 		/**
 		 * Main instance
@@ -96,14 +89,14 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @var YITH_WCAN_Query
 		 * @since 4.0.0
 		 */
-		protected static $_instance = null;
+		protected static $instance = null;
 
 		/**
 		 * Constructor method for the class
 		 */
 		public function __construct() {
 			// prepare query param.
-			$this->_query_param = apply_filters( 'yith_wcan_query_param', $this->_query_param );
+			$this->query_param = apply_filters( 'yith_wcan_query_param', $this->query_param );
 
 			// do all pre-flight preparation.
 			add_action( 'parse_request', array( $this, 'suppress_default_query_vars' ) );
@@ -144,7 +137,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @param mixed  $value     Value to ues for the query var.
 		 */
 		public function set( $query_var, $value ) {
-			$this->_query_vars[ $query_var ] = $value;
+			$this->query_vars[ $query_var ] = $value;
 		}
 
 		/* === GET METHODS === */
@@ -169,13 +162,13 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @return WP_Taxonomy[] Array of WP_Taxonomy objects
 		 */
 		public function get_supported_taxonomies() {
-			if ( empty( $this->_supported_taxonomies ) ) {
+			if ( empty( $this->supported_taxonomies ) ) {
 				$product_taxonomies   = get_object_taxonomies( 'product', 'objects' );
 				$supported_taxonomies = array();
 
 				if ( ! empty( $product_taxonomies ) ) {
 					foreach ( $product_taxonomies as $taxonomy_slug => $taxonomy ) {
-						if ( ! in_array( $taxonomy_slug, array( 'product_cat', 'product_tag' ) ) && 0 !== strpos( $taxonomy_slug, 'pa_' ) ) {
+						if ( ! in_array( $taxonomy_slug, array( 'product_cat', 'product_tag' ), true ) && 0 !== strpos( $taxonomy_slug, 'pa_' ) ) {
 							continue;
 						}
 
@@ -183,10 +176,10 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 					}
 				}
 
-				$this->_supported_taxonomies = apply_filters( 'yith_wcan_supported_taxonomies', $supported_taxonomies );
+				$this->supported_taxonomies = apply_filters( 'yith_wcan_supported_taxonomies', $supported_taxonomies );
 			}
 
-			return $this->_supported_taxonomies;
+			return $this->supported_taxonomies;
 		}
 
 		/**
@@ -207,11 +200,11 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * ]
 		 */
 		public function get_query_vars() {
-			if ( ! is_null( $this->_query_vars ) ) {
-				return $this->_query_vars;
+			if ( ! is_null( $this->query_vars ) ) {
+				return $this->query_vars;
 			}
 
-			$query = $this->sanitize_query( $_GET );
+			$query = $this->sanitize_query( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			// unset parameters that aren't related to filters.
 			$supported_parameters = apply_filters(
@@ -234,7 +227,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 					} elseif ( 0 === strpos( $key, 'query_type_' ) ) {
 						// include meta filtering parameters.
 						continue;
-					} elseif ( ! in_array( $key, $supported_parameters ) ) {
+					} elseif ( ! in_array( $key, $supported_parameters, true ) ) {
 						unset( $query[ $key ] );
 					}
 				}
@@ -251,7 +244,12 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				}
 			}
 
-			$this->_query_vars = apply_filters( 'yith_wcan_query_vars', $query, $this );
+			/**
+			 * We only store _query_vars once main query is executed, to be sure not to left behind any parameter.
+			 *
+			 * @since 4.1.1
+			 */
+			$this->query_vars = did_action( 'wp' ) ? apply_filters( 'yith_wcan_query_vars', $query, $this ) : null;
 
 			// return query.
 			return $query;
@@ -263,7 +261,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @return string Query param.
 		 */
 		public function get_query_param() {
-			return $this->_query_param;
+			return $this->query_param;
 		}
 
 		/**
@@ -288,10 +286,10 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @since 4.0.2
 		 */
 		public function get_active_filter( $filter ) {
-			$query_vars = $this->get_query_vars();
-			$labels = $this->get_supported_labels();
-			$taxonomies = $this->get_supported_taxonomies();
-			$label = isset( $labels[ $filter ] ) ? $labels[ $filter ] : false;
+			$query_vars    = $this->get_query_vars();
+			$labels        = $this->get_supported_labels();
+			$taxonomies    = $this->get_supported_taxonomies();
+			$label         = isset( $labels[ $filter ] ) ? $labels[ $filter ] : false;
 			$active_filter = false;
 
 			if ( ! $label ) {
@@ -324,7 +322,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 					}
 
 					$values[] = array(
-						'label' => $term->name,
+						'label'      => $term->name,
 						'query_vars' => array(
 							$filter => yith_wcan_esc_term_slug( $term_slug ),
 						),
@@ -377,8 +375,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				return $query_vars;
 			} else {
 				$active_filters = array();
-				$labels = $this->get_supported_labels();
-
+				$labels         = $this->get_supported_labels();
 
 				foreach ( $labels as $filter => $label ) {
 					$active_filter = $this->get_active_filter( $filter );
@@ -428,18 +425,18 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				$product_ids = $stored_products[ $calculate_hash ];
 			} else {
 				// store original query values, and switch to current context.
-				$tmp_query_vars           = $this->_query_vars;
-				$tmp_chosen_attributes    = $this->_chosen_attributes;
-				$this->_query_vars        = $query_vars;
-				$this->_chosen_attributes = null;
+				$tmp_query_vars          = $this->query_vars;
+				$tmp_chosen_attributes   = $this->chosen_attributes;
+				$this->query_vars        = $query_vars;
+				$this->chosen_attributes = null;
 
 				// create query to retrieve products.
 				$query = new WP_Query(
 					array(
-						'post_type' => 'product',
-						'post_status' => 'publish',
+						'post_type'      => 'product',
+						'post_status'    => 'publish',
 						'posts_per_page' => '-1',
-						'fields' => 'ids',
+						'fields'         => 'ids',
 					)
 				);
 
@@ -457,8 +454,8 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				set_transient( $cache_name, $stored_products, apply_filters( 'yith_wcan_queried_products_expiration', 30 * DAY_IN_SECONDS ) );
 
 				// reset original query values.
-				$this->_query_vars        = $tmp_query_vars;
-				$this->_chosen_attributes = $tmp_chosen_attributes;
+				$this->query_vars        = $tmp_query_vars;
+				$this->chosen_attributes = $tmp_chosen_attributes;
 			}
 
 			return $product_ids;
@@ -470,7 +467,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @return bool Whether filters should be applied.
 		 */
 		public function should_filter() {
-			$query_param = isset( $_REQUEST[ $this->get_query_param() ] ) ? intval( wp_unslash( $_REQUEST[ $this->get_query_param() ] ) ) : 0;
+			$query_param = isset( $_REQUEST[ $this->get_query_param() ] ) ? intval( wp_unslash( $_REQUEST[ $this->get_query_param() ] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			return apply_filters( 'yith_wcan_should_filter', ! ! $query_param, $this );
 		}
@@ -487,7 +484,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 			if ( ! $query instanceof WP_Query ) {
 				// skip if wrong parameter.
 				$result = false;
-			} elseif ( 'product' != $query->get( 'post_type' ) ) {
+			} elseif ( 'product' !== $query->get( 'post_type' ) ) {
 				// skip if we're not querying products.
 				$result = false;
 			} elseif ( $query->is_main_query() && ! $query->get( 'wc_query' ) ) {
@@ -636,7 +633,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 			// Set visibility tax_query.
 			$product_visibility_term_ids = wc_get_product_visibility_term_ids();
 
-			$tax_query[]  = array(
+			$tax_query[] = array(
 				'taxonomy' => 'product_visibility',
 				'field'    => 'term_taxonomy_id',
 				'terms'    => is_search() ? $product_visibility_term_ids['exclude-from-search'] : $product_visibility_term_ids['exclude-from-catalog'],
@@ -652,8 +649,8 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @return array
 		 */
 		public function get_layered_nav_chosen_attributes() {
-			if ( ! is_array( $this->_chosen_attributes ) ) {
-				$this->_chosen_attributes = array();
+			if ( ! is_array( $this->chosen_attributes ) ) {
+				$this->chosen_attributes = array();
 
 				$query_vars = $this->get_query_vars();
 
@@ -670,13 +667,13 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 
 							$query_type = $this->get( 'query_type_' . $attribute );
 
-							$this->_chosen_attributes[ $taxonomy ]['terms'] = array_map( 'sanitize_title', $filter_terms ); // Ensures correct encoding.
-							$this->_chosen_attributes[ $taxonomy ]['query_type'] = $query_type ? $query_type : apply_filters( 'woocommerce_layered_nav_default_query_type', 'and' );
+							$this->chosen_attributes[ $taxonomy ]['terms']      = array_map( 'sanitize_title', $filter_terms ); // Ensures correct encoding.
+							$this->chosen_attributes[ $taxonomy ]['query_type'] = $query_type ? $query_type : apply_filters( 'woocommerce_layered_nav_default_query_type', 'and' );
 						}
 					}
 				}
 			}
-			return $this->_chosen_attributes;
+			return $this->chosen_attributes;
 		}
 
 		/**
@@ -827,10 +824,10 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 			global $wp_query;
 
 			if ( apply_filters( 'yith_wcan_suppress_default_conditional_tags', false ) ) {
-				$wp_query->is_tax = false;
-				$wp_query->is_tag = false;
-				$wp_query->is_home = false;
-				$wp_query->is_single = false;
+				$wp_query->is_tax        = false;
+				$wp_query->is_tag        = false;
+				$wp_query->is_home       = false;
+				$wp_query->is_single     = false;
 				$wp_query->is_posts_page = false;
 			}
 		}
@@ -855,11 +852,11 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @return void
 		 */
 		public function register_products() {
-			if ( ! $this->is_filtered() || ! empty( $this->_products ) || ! apply_filters( 'yith_wcan_process_filters_intersection', true ) ) {
+			if ( ! $this->is_filtered() || ! empty( $this->products ) || ! apply_filters( 'yith_wcan_process_filters_intersection', true ) ) {
 				return;
 			}
 
-			$this->_products = $this->get_filtered_products_by_query_vars();
+			$this->products = $this->get_filtered_products_by_query_vars();
 		}
 
 		/* === ALTER DEFAULT WC QUERY === */
@@ -960,7 +957,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 
 			$query_var = $param;
 
-			if ( in_array( $param, wc_get_attribute_taxonomy_names() ) ) {
+			if ( in_array( $param, wc_get_attribute_taxonomy_names(), true ) ) {
 				$query_var = str_replace( 'pa_', 'filter_', $param );
 			}
 
@@ -978,7 +975,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 			$taxonomies = array_keys( $this->get_supported_taxonomies() );
 			$query_var  = $taxonomy;
 
-			if ( ! in_array( $taxonomy, $taxonomies ) ) {
+			if ( ! in_array( $taxonomy, $taxonomies, true ) ) {
 				return false;
 			}
 
@@ -986,7 +983,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				return true;
 			}
 
-			if ( in_array( $taxonomy, wc_get_attribute_taxonomy_names() ) ) {
+			if ( in_array( $taxonomy, wc_get_attribute_taxonomy_names(), true ) ) {
 				$query_var = str_replace( 'pa_', 'filter_', $taxonomy );
 			}
 
@@ -1029,8 +1026,8 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				return array();
 			}
 
-			if ( isset( $this->_products_per_filter[ $taxonomy ][ $term_id ] ) ) {
-				return $this->_products_per_filter[ $taxonomy ][ $term_id ];
+			if ( isset( $this->products_per_filter[ $taxonomy ][ $term_id ] ) ) {
+				return $this->products_per_filter[ $taxonomy ][ $term_id ];
 			} else {
 				$cache_name   = $this->get_object_in_terms_transient_name();
 				$stored_items = get_transient( $cache_name );
@@ -1050,10 +1047,10 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				}
 
 				if ( ! $exclude_taxonomy ) {
-					$query_vars = $this->get_query_vars();
+					$query_vars        = $this->get_query_vars();
 					$original_taxonomy = $taxonomy;
 
-					if ( in_array( $original_taxonomy, wc_get_attribute_taxonomy_names() ) ) {
+					if ( in_array( $original_taxonomy, wc_get_attribute_taxonomy_names(), true ) ) {
 						$original_taxonomy = str_replace( 'pa_', 'filter_', $original_taxonomy );
 					}
 
@@ -1067,7 +1064,8 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 				}
 
 				$match = array_intersect( $posts, $products );
-				$this->_products_per_filter[ $taxonomy ][ $term_id ] = $match;
+
+				$this->products_per_filter[ $taxonomy ][ $term_id ] = $match;
 
 				return $match;
 			}
@@ -1195,10 +1193,10 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 
 			$product_ids_in_stock = wc_get_products(
 				array(
-					'status' => 'publish',
+					'status'       => 'publish',
 					'stock_status' => 'instock',
-					'limit' => -1,
-					'return' => 'ids',
+					'limit'        => -1,
+					'return'       => 'ids',
 				)
 			);
 
@@ -1240,13 +1238,13 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 			if ( ! empty( $vars_to_add ) ) {
 				foreach ( $vars_to_add as $vars ) {
 					foreach ( $vars as $key => $value ) {
-						if ( in_array( $key, array_keys( $supported_taxonomies ) ) ) {
+						if ( in_array( $key, array_keys( $supported_taxonomies ), true ) ) {
 							if ( ! isset( $query_vars[ $key ] ) ) {
 								$query_vars[ $key ] = $value;
 							} else {
-								$glue = 'and' === $merge_mode ? '+' : ',';
+								$glue     = 'and' === $merge_mode ? '+' : ',';
 								$existing = explode( $glue, $query_vars[ $key ] );
-								$new = explode( $glue, $value );
+								$new      = explode( $glue, $value );
 
 								$query_vars[ $key ] = implode( $glue, array_unique( array_merge( $existing, $new ) ) );
 							}
@@ -1259,12 +1257,12 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 								$query_vars[ $key ] = $value;
 							} else {
 								$existing = explode( ',', $query_vars[ $key ] );
-								$new = explode( ',', $value );
+								$new      = explode( ',', $value );
 
 								$query_vars[ $key ] = implode( ',', array_unique( array_merge( $existing, $new ) ) );
 							}
 						} elseif ( is_array( $value ) ) {
-							$glue = 'and' === $merge_mode ? '+' : ',';
+							$glue               = 'and' === $merge_mode ? '+' : ',';
 							$query_vars[ $key ] = implode( $glue, array_merge( isset( $query_vars[ $key ] ) ? (array) $query_vars[ $key ] : array(), $value ) );
 						} else {
 							$query_vars[ $key ] = $value;
@@ -1291,11 +1289,11 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 			if ( ! empty( $vars_to_remove ) ) {
 				foreach ( $vars_to_remove as $vars ) {
 					foreach ( $vars as $key => $value ) {
-						if ( in_array( $key, array_keys( $supported_taxonomies ) ) ) {
+						if ( in_array( $key, array_keys( $supported_taxonomies ), true ) ) {
 							if ( isset( $query_vars[ $key ] ) ) {
-								$glue = 'and' === $merge_mode ? '+' : ',';
+								$glue     = 'and' === $merge_mode ? '+' : ',';
 								$existing = explode( $glue, $query_vars[ $key ] );
-								$new = explode( $glue, $value );
+								$new      = explode( $glue, $value );
 
 								$query_vars[ $key ] = implode( $glue, array_unique( array_diff( $existing, $new ) ) );
 							}
@@ -1310,7 +1308,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 
 							if ( isset( $query_vars[ $key ] ) ) {
 								$existing = explode( ',', $query_vars[ $key ] );
-								$new = explode( ',', $value );
+								$new      = explode( ',', $value );
 
 								$query_vars[ $key ] = implode( ',', array_unique( array_diff( $existing, $new ) ) );
 							}
@@ -1320,7 +1318,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 								unset( $query_vars[ "query_type_{$attribute}" ] );
 							}
 						} elseif ( is_array( $value ) ) {
-							$glue = 'and' === $merge_mode ? '+' : ',';
+							$glue               = 'and' === $merge_mode ? '+' : ',';
 							$query_vars[ $key ] = implode( $glue, array_diff( isset( $query_vars[ $key ] ) ? (array) $query_vars[ $key ] : array(), $value ) );
 
 							if ( empty( $query_vars[ $key ] ) ) {
@@ -1365,6 +1363,12 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @return array Filtered array of tax queries.
 		 */
 		public function reduce_tax_query( $tax_queries ) {
+			$pre = apply_filters( 'yith_wcan_pre_reduce_tax_query', false, $tax_queries );
+
+			if ( false !== $pre ) {
+				return $pre;
+			}
+
 			$result   = array();
 			$queries  = array();
 			$relation = 'AND';
@@ -1392,7 +1396,7 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 
 				if ( ! isset( $queries[ $hash ] ) ) {
 					$queries[ $hash ] = $tax_query;
-				} else {
+				} elseif ( ! empty( $tax_query['terms'] ) ) {
 					$queries[ $hash ]['terms'] = array_unique( (array) $queries[ $hash ]['terms'] + (array) $tax_query['terms'] );
 				}
 			}
@@ -1414,11 +1418,11 @@ if ( ! class_exists( 'YITH_WCAN_Query' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public static function instance() {
-			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self();
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
 			}
 
-			return self::$_instance;
+			return self::$instance;
 		}
 	}
 }
@@ -1429,7 +1433,7 @@ if ( ! function_exists( 'YITH_WCAN_Query' ) ) {
 	 *
 	 * @return YITH_WCAN_Query
 	 */
-	function YITH_WCAN_Query() {
+	function YITH_WCAN_Query() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 		if ( defined( 'YITH_WCAN_PREMIUM' ) ) {
 			return YITH_WCAN_Query_Premium::instance();
 		}

@@ -3,7 +3,7 @@
  * Manage presets, register CPT and offers utility to retrieve them
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product FIlter
+ * @package YITH\AjaxProductFilter\Classes\Presets
  * @version 4.0.0
  */
 
@@ -29,16 +29,16 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		/**
 		 * Presets post type
 		 *
-		 * @var string $_post_type
+		 * @var string $post_type
 		 */
-		protected $_post_type = 'yith_wcan_preset';
+		protected $post_type = 'yith_wcan_preset';
 
 		/**
 		 * Single instance of this class
 		 *
 		 * @var YITH_WCAN_Presets
 		 */
-		protected static $_instance;
+		protected static $instance;
 
 		/**
 		 * Constructor method for this class
@@ -81,7 +81,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function get_post_type() {
-			return apply_filters( 'yith_wcan_presets_post_type', $this->_post_type );
+			return apply_filters( 'yith_wcan_presets_post_type', $this->post_type );
 		}
 
 		/**
@@ -92,17 +92,17 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 */
 		public function register_post_type() {
 			$post_type_labels = array(
-				'name' => _x( 'Filter presets', '[Admin] name of presets custom post type', 'yith-woocommerce-ajax-navigation' ),
+				'name'          => _x( 'Filter presets', '[Admin] name of presets custom post type', 'yith-woocommerce-ajax-navigation' ),
 				'singular_name' => _x( 'Filter preset', '[Admin] singular name of presets custom post type', 'yith-woocommerce-ajax-navigation' ),
 				'add_new_item ' => _x( 'Add new preset', '[Admin] add new filter preset label', 'yith-woocommerce-ajax-navigation' ),
 			);
-			$post_type_args = array(
-				'label' => _x( 'Filter presets', '[Admin] name of presets custom post type', 'yith-woocommerce-ajax-navigation' ),
-				'labels' => $post_type_labels,
-				'public' => false,
-				'show_ui' => true,
+			$post_type_args   = array(
+				'label'        => _x( 'Filter presets', '[Admin] name of presets custom post type', 'yith-woocommerce-ajax-navigation' ),
+				'labels'       => $post_type_labels,
+				'public'       => false,
+				'show_ui'      => true,
 				'show_in_menu' => false,
-				'supports' => array( 'title' ),
+				'supports'     => array( 'title' ),
 			);
 
 			register_post_type( $this->get_post_type(), $post_type_args );
@@ -152,7 +152,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 
 			// external urls.
 			$demo_video_url = ''; // TODO: enter url when video is ready.
-			$doc_url = 'https://docs.yithemes.com/yith-woocommerce-ajax-product-filter/premium-settings/general-settings/update-yith-woocommerce-ajax-product-filter-to-version-4-0/';
+			$doc_url        = 'https://docs.yithemes.com/yith-woocommerce-ajax-product-filter/premium-settings/general-settings/update-yith-woocommerce-ajax-product-filter-to-version-4-0/';
 
 			// action urls.
 			$hide_upgrade_note_url = wp_nonce_url( add_query_arg( 'action', 'yith_wcan_hide_upgrade_note', admin_url( 'admin.php' ) ), 'hide_upgrade_note' );
@@ -193,13 +193,13 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function save_preset() {
-			$preset_id = isset( $_POST['id'] ) ? (int) $_POST['id'] : false;
-			$paged     = isset( $_POST['paged'] ) ? (int) $_POST['paged'] : false;
+			$preset_id  = isset( $_POST['id'] ) ? (int) $_POST['id'] : false;
+			$paged      = isset( $_POST['paged'] ) ? (int) $_POST['paged'] : false;
 			$return_url = YITH_WCAN()->admin->get_panel_url();
 
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'save_preset' ) ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
@@ -207,7 +207,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 			try {
 				$preset = new YITH_WCAN_Preset( $preset_id );
 			} catch ( Exception $e ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
@@ -228,7 +228,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 				$to_save = array();
 
 				foreach ( $filters as $filter ) {
-					$cleaned_filter = $this->_clear_preset_filter( $filter );
+					$cleaned_filter = $this->clear_preset_filter( $filter );
 
 					if ( ! $cleaned_filter ) {
 						continue;
@@ -260,7 +260,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 				)
 			);
 
-			wp_redirect( $return_url );
+			wp_safe_redirect( $return_url );
 			die;
 		}
 
@@ -272,19 +272,19 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function clone_preset() {
-			$preset = isset( $_GET['preset'] ) ? (int) $_GET['preset'] : false;
+			$preset     = isset( $_GET['preset'] ) ? (int) $_GET['preset'] : false;
 			$return_url = YITH_WCAN()->admin->get_panel_url();
 
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			if ( ! $preset || ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'clone_preset' ) ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
 			$preset = YITH_WCAN_Preset_Factory::get_preset( $preset );
 
 			if ( ! $preset || ! $preset->current_user_can( 'clone' ) ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
@@ -294,7 +294,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 			}
 
-			wp_redirect( $return_url );
+			wp_safe_redirect( $return_url );
 			die;
 		}
 
@@ -306,19 +306,19 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function delete_preset() {
-			$preset = isset( $_GET['preset'] ) ? (int) $_GET['preset'] : false;
+			$preset     = isset( $_GET['preset'] ) ? (int) $_GET['preset'] : false;
 			$return_url = YITH_WCAN()->admin->get_panel_url();
 
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			if ( ! $preset || ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'delete_preset' ) ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
 			$preset = YITH_WCAN_Preset_Factory::get_preset( $preset );
 
 			if ( ! $preset || ! $preset->current_user_can( 'delete' ) ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
@@ -328,7 +328,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 			}
 
-			wp_redirect( $return_url );
+			wp_safe_redirect( $return_url );
 			die;
 		}
 
@@ -346,7 +346,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 				update_option( 'yith_wcan_upgrade_note_status', 0 );
 			}
 
-			wp_redirect( $return_url );
+			wp_safe_redirect( $return_url );
 			die;
 		}
 
@@ -362,7 +362,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			if ( ! isset( $_REQUEST['_wpnonce'] ) || ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'do_widget_upgrade' ) && ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'debug_action' ) ) ) {
-				wp_redirect( $return_url );
+				wp_safe_redirect( $return_url );
 				die;
 			}
 
@@ -408,7 +408,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 						}
 
 						$widget_instance = $options[ $widget_name ][ $widget_id ];
-						$filter = false;
+						$filter          = false;
 
 						switch ( $widget_name ) {
 							case 'yith-woo-ajax-navigation-list-price-filter':
@@ -474,7 +474,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 
 								foreach ( $terms as $term ) {
 									$terms_array[ $term->term_id ] = array(
-										'label' => $term->name,
+										'label'   => $term->name,
 										'tooltip' => $term->name,
 									);
 								}
@@ -516,13 +516,13 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 										}
 										break;
 									case 'tags':
-										$option_value = array_keys( $widget_instance['tags_list'] );
-										$exclude = 'exclude' === $widget_instance['tags_list_query'];
-										$include = ! $exclude;
+										$option_value = array_map( 'intval', array_keys( $widget_instance['tags_list'] ) );
+										$exclude      = 'exclude' === $widget_instance['tags_list_query'];
+										$include      = ! $exclude;
 
 										foreach ( $terms_array as $term_id => $term_options ) {
 											// if exclude and term exists in the option, or include and term doesn't exist in the option, unset it.
-											$found = in_array( $term_id, $option_value );
+											$found = in_array( $term_id, $option_value, true );
 
 											if ( $include && ! $found || $exclude && $found ) {
 												unset( $terms_array[ $term_id ] );
@@ -570,7 +570,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 
 						if ( $filter ) {
 							$filter->set_title( $widget_instance['title'] );
-							$filter->set_show_count( isset( $widget_instance['show_count'] ) && ! $widget_instance['show_count'] && ! in_array( $widget_instance['type'], array( 'color', 'multicolor', 'label' ) ) );
+							$filter->set_show_count( isset( $widget_instance['show_count'] ) && ! $widget_instance['show_count'] && ! in_array( $widget_instance['type'], array( 'color', 'multicolor', 'label' ), true ) );
 
 							if ( ! empty( $widget_instance['dropdown'] ) ) {
 								$filter->set_show_toggle( 'yes' );
@@ -593,7 +593,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 			// we're done, hide upgrade note.
 			update_option( 'yith_wcan_upgrade_note_status', 0 );
 
-			wp_redirect( $return_url );
+			wp_safe_redirect( $return_url );
 			die;
 		}
 
@@ -605,20 +605,20 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 * @return array Cleared data.
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
-		protected function _clear_preset_filter( $filter ) {
+		protected function clear_preset_filter( $filter ) {
 			// set missing information.
-			$filter['enabled'] = isset( $filter['enabled'] ) ? 'yes' : 'no';
-			$filter['show_toggle'] = isset( $filter['show_toggle'] ) ? 'yes' : 'no';
-			$filter['show_count'] = isset( $filter['show_count'] ) ? 'yes' : 'no';
-			$filter['show_search'] = isset( $filter['show_search'] ) ? 'yes' : 'no';
-			$filter['multiple'] = isset( $filter['multiple'] ) ? 'yes' : 'no';
-			$filter['show_stock_filter'] = isset( $filter['show_stock_filter'] ) ? 'yes' : 'no';
-			$filter['show_sale_filter'] = isset( $filter['show_sale_filter'] ) ? 'yes' : 'no';
+			$filter['enabled']              = isset( $filter['enabled'] ) ? 'yes' : 'no';
+			$filter['show_toggle']          = isset( $filter['show_toggle'] ) ? 'yes' : 'no';
+			$filter['show_count']           = isset( $filter['show_count'] ) ? 'yes' : 'no';
+			$filter['show_search']          = isset( $filter['show_search'] ) ? 'yes' : 'no';
+			$filter['multiple']             = isset( $filter['multiple'] ) ? 'yes' : 'no';
+			$filter['show_stock_filter']    = isset( $filter['show_stock_filter'] ) ? 'yes' : 'no';
+			$filter['show_sale_filter']     = isset( $filter['show_sale_filter'] ) ? 'yes' : 'no';
 			$filter['show_featured_filter'] = isset( $filter['show_featured_filter'] ) ? 'yes' : 'no';
-			$filter['customize_terms'] = isset( $filter['customize_terms'] ) ? 'yes' : 'no';
+			$filter['customize_terms']      = isset( $filter['customize_terms'] ) ? 'yes' : 'no';
 
 			if ( isset( $filter['terms_order'] ) ) {
-				$filter['terms'] = $this->_get_sorted_terms( $filter['terms'], array_map( 'intval', $filter['terms_order'] ) );
+				$filter['terms'] = $this->get_sorted_terms( $filter['terms'], array_map( 'intval', $filter['terms_order'] ) );
 				unset( $filter['terms_order'] );
 			}
 
@@ -641,7 +641,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 *
 		 * @return array Array of sorted terms
 		 */
-		protected function _get_sorted_terms( $terms, $order ) {
+		protected function get_sorted_terms( $terms, $order ) {
 			$ordered_terms = array();
 
 			foreach ( $order as $term_id ) {
@@ -733,7 +733,7 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 
 			$preset_id = isset( $_POST['preset'] ) ? (int) $_POST['preset'] : false;
 			$filter_id = isset( $_POST['filter_id'] ) ? (int) $_POST['filter_id'] : false;
-			$filter    = isset( $_POST['filter'] ) ? $this->_clear_preset_filter( $_POST['filter'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$filter    = isset( $_POST['filter'] ) ? $this->clear_preset_filter( $_POST['filter'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
 			if ( ! $filter ) {
 				die( '-1' );
@@ -798,11 +798,11 @@ if ( ! class_exists( 'YITH_WCAN_Presets' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public static function instance() {
-			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self();
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
 			}
 
-			return self::$_instance;
+			return self::$instance;
 		}
 	}
 }
@@ -815,7 +815,7 @@ if ( ! function_exists( 'YITH_WCAN_Presets' ) ) {
 	 * @since 4.0.0
 	 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 	 */
-	function YITH_WCAN_Presets() {
+	function YITH_WCAN_Presets() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 		return YITH_WCAN_Presets::instance();
 	}
 }

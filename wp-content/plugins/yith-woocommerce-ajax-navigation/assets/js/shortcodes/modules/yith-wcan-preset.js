@@ -436,6 +436,7 @@ export default class YITH_WCAN_Preset {
 
 		$toggle.off( 'click' ).on( 'click', ( ev ) => {
 			ev.stopPropagation();
+			ev.preventDefault();
 
 			$target.slideToggle( 400, () => {
 				$container.toggleClass( 'opened' ).toggleClass( 'closed' );
@@ -1160,7 +1161,10 @@ export default class YITH_WCAN_Preset {
 						$dropdown.find( 'option' ).each( function () {
 							const $option = $( this );
 
-							if ( $option.val() === properties[ taxonomy ] ) {
+							if (
+								$option.val().toString() ===
+								properties[ taxonomy ].toString()
+							) {
 								$option.prop( 'selected', false );
 							}
 						} );
@@ -1181,7 +1185,10 @@ export default class YITH_WCAN_Preset {
 							? $label.find( ':input' ).val()
 							: $anchor.data( 'term-slug' );
 
-						if ( value === properties[ taxonomy ] ) {
+						if (
+							value.toString() ===
+							properties[ taxonomy ].toString()
+						) {
 							$item.children( 'label' ).children( 'a' ).click();
 							$item.removeClass( 'active' );
 						}

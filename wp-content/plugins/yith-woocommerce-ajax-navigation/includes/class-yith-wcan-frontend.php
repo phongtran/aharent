@@ -3,7 +3,7 @@
  * Frontend class
  *
  * @author  Your Inspiration Themes
- * @package YITH WooCommerce Ajax Navigation
+ * @package YITH\AjaxProductFilter\Classes
  * @version 1.3.2
  */
 
@@ -70,7 +70,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 *
 		 * @var YITH_WCAN_Query
 		 */
-		protected $_query = null;
+		protected $query = null;
 
 		/**
 		 * Constructor
@@ -80,7 +80,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 */
 		public function __construct() {
 			// new query object.
-			$this->_query = YITH_WCAN_Query();
+			$this->query = YITH_WCAN_Query();
 
 			// Legacy query methods.
 			add_filter( 'woocommerce_layered_nav_link', 'yit_plus_character_hack', 99 );
@@ -102,6 +102,17 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 
 			// YITH WCAN Loaded.
 			do_action( 'yith_wcan_loaded' );
+
+			// Deprecated filters.
+			$deprecated_filters_map = array(
+				'yith-wcan-frontend-args' => array(
+					'since'  => '4.1.1',
+					'use'    => 'yith_wcan_frontend_args',
+					'params' => 1,
+				),
+			);
+
+			yith_wcan_deprecated_filter( $deprecated_filters_map );
 		}
 
 		/* === LEGACY QUERY METHODS === */
@@ -112,7 +123,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 * @return YITH_WCAN_Query
 		 */
 		public function get_query() {
-			return $this->_query;
+			return $this->query;
 		}
 
 		/**
@@ -150,7 +161,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 				$filtered_posts   = array();
 				$queried_post_ids = array();
 
-				$problematic_theme = array(
+				$special_handling_themes = array(
 					'basel',
 					'ux-shop',
 					'aardvark',
@@ -158,26 +169,26 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 
 				$wp_theme      = wp_get_theme();
 				$template_name = $wp_theme->get_template();
+				$theme_version = $wp_theme->Version; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 				/**
 				 * Support for Flatsome Theme lower then 3.6.0
 				 */
-				if ( 'flatsome' === $template_name && version_compare( '3.6.0', $wp_theme->Version, '<' ) ) {
-					$problematic_theme[] = 'flatsome';
+				if ( 'flatsome' === $template_name && version_compare( '3.6.0', $theme_version, '<' ) ) {
+					$special_handling_themes[] = 'flatsome';
 				}
 
-				$is_qTranslateX_and_yit_core_1_0_0 = class_exists( 'QTX_Translator' ) && defined( 'YIT_CORE_VERSION' ) && '1.0.0' === YIT_CORE_VERSION;
-				$is_problematic_theme              = in_array( $template_name, $problematic_theme );
+				$needs_special_qtranslatex_handling = class_exists( 'QTX_Translator' ) && defined( 'YIT_CORE_VERSION' ) && '1.0.0' === YIT_CORE_VERSION;
+				$is_special_handling_theme          = in_array( $template_name, $special_handling_themes, true );
 
-				if ( $is_qTranslateX_and_yit_core_1_0_0 || $is_problematic_theme || class_exists( 'SiteOrigin_Panels' ) ) {
+				if ( $needs_special_qtranslatex_handling || $is_special_handling_theme || class_exists( 'SiteOrigin_Panels' ) ) {
 					add_filter( 'yith_wcan_skip_layered_nav_query', '__return_true' );
 				}
 
-				$query_filtered_posts = $this->layered_nav_query();
+				$query_filtered_posts = array_map( 'intval', $this->layered_nav_query() );
 
 				foreach ( $posts as $post ) {
-
-					if ( in_array( $post->ID, $query_filtered_posts ) ) {
+					if ( in_array( $post->ID, $query_filtered_posts, true ) ) {
 						$filtered_posts[]   = $post;
 						$queried_post_ids[] = $post->ID;
 					}
@@ -203,7 +214,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 						'post_type'              => 'product',
 						'numberposts'            => - 1,
 						'post_status'            => 'publish',
-						'meta_query'             => is_object( $current_wp_query ) ? $current_wp_query->meta_query : array(),
+						'meta_query'             => is_object( $current_wp_query ) ? $current_wp_query->meta_query : array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 						'fields'                 => 'ids',
 						'no_found_rows'          => true,
 						'update_post_meta_cache' => false,
@@ -214,7 +225,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 					)
 				);
 
-				$hide_out_of_stock_items = apply_filters( 'yith_wcan_hide_out_of_stock_items', 'yes' == get_option( 'woocommerce_hide_out_of_stock_items' ) ? true : false );
+				$hide_out_of_stock_items = apply_filters( 'yith_wcan_hide_out_of_stock_items', 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ? true : false );
 
 				if ( $hide_out_of_stock_items ) {
 					$unfiltered_args['meta_query'][] = array(
@@ -265,7 +276,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 				$queried_object      = $wp_query instanceof WP_Query ? $wp_query->get_queried_object() : false;
 				$is_product_taxonomy = false;
 
-				if( $queried_object ){
+				if ( $queried_object ) {
 					$is_product_taxonomy = array(
 						'taxonomy' => $queried_object->taxonomy,
 						'terms'    => $queried_object->slug,
@@ -299,7 +310,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 								'fields'           => 'ids',
 								'no_found_rows'    => true,
 								'suppress_filters' => true,
-								'tax_query'        => array(
+								'tax_query'        => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 									array(
 										'taxonomy' => $attribute,
 										'terms'    => $value,
@@ -353,7 +364,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 					$this->layered_nav_post__in   = $results;
 					$this->layered_nav_post__in[] = 0;
 
-					if ( count( $filtered_posts ) == 0 ) {
+					if ( ! count( $filtered_posts ) ) {
 						$filtered_posts   = $results;
 						$filtered_posts[] = 0;
 					} else {
@@ -370,17 +381,20 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 					'fields'           => 'ids',
 					'no_found_rows'    => true,
 					'suppress_filters' => true,
-					'tax_query'        => array(),
-					'meta_query'       => array(),
+					'tax_query'        => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					'meta_query'       => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				);
 
 				if ( $is_product_taxonomy ) {
 					$args['tax_query'][] = $is_product_taxonomy;
 				}
 
-				if ( isset( $_GET['min_price'] ) && isset( $_GET['max_price'] ) ) {
-					$min_price            = (float) $_GET['min_price'];
-					$max_price            = (float) $_GET['max_price'];
+				// phpcs:disable WordPress.Security.NonceVerification.Recommended
+				$min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : false;
+				$max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : false;
+				// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+				if ( $min_price && $max_price ) {
 					$args['meta_query'][] = array(
 						'key'     => '_price',
 						'value'   => array( $min_price, $max_price ),
@@ -406,7 +420,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 					$this->layered_nav_post__in   = $post_ids;
 					$this->layered_nav_post__in[] = 0;
 
-					if ( count( $filtered_posts ) == 0 ) {
+					if ( ! count( $filtered_posts ) ) {
 						$filtered_posts   = $post_ids;
 						$filtered_posts[] = 0;
 					} else {
@@ -445,13 +459,13 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 				// frontend scripts.
 				wp_register_script( 'jseldom', YITH_WCAN_URL . 'assets/js/jquery.jseldom' . $suffix . '.js', array( 'jquery' ), '0.0.2', true );
 				wp_enqueue_script( 'yith-wcan-script', YITH_WCAN_URL . 'assets/js/yith-wcan-frontend' . $suffix . '.js', array( 'jquery', 'jseldom' ), YITH_WCAN_VERSION, true );
-				wp_localize_script( 'yith-wcan-script', 'yith_wcan', apply_filters( 'yith-wcan-frontend-args', $this->_get_main_localize() ) );
+				wp_localize_script( 'yith-wcan-script', 'yith_wcan', apply_filters( 'yith_wcan_frontend_args', $this->get_main_localize() ) );
 			}
 
 			wp_enqueue_style( 'yith-wcan-shortcodes' );
-			wp_localize_script( 'yith-wcan-shortcodes', 'yith_wcan_shortcodes', $this->_get_shortcodes_localize() );
+			wp_localize_script( 'yith-wcan-shortcodes', 'yith_wcan_shortcodes', $this->get_shortcodes_localize() );
 
-			$custom_css = $this->_build_custom_css();
+			$custom_css = $this->build_custom_css();
 
 			if ( ! empty( $custom_css ) ) {
 				wp_add_inline_style( 'yith-wcan-shortcodes', $custom_css );
@@ -483,8 +497,8 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 * @return void
 		 */
 		public function add_meta() {
-			$enable_seo      = 'yes' == yith_wcan_get_option( 'yith_wcan_enable_seo' );
-			$meta_options    = yith_wcan_get_option( 'yith_wcan_seo_value', 'noindex-follow' );
+			$enable_seo   = 'yes' === yith_wcan_get_option( 'yith_wcan_enable_seo' );
+			$meta_options = yith_wcan_get_option( 'yith_wcan_seo_value', 'noindex-follow' );
 
 			if ( $enable_seo && 'disabled' !== $meta_options && ( YITH_WCAN_Query()->is_filtered() || yith_wcan_can_be_displayed() && yit_is_filtered_uri() ) ) {
 				$content = str_replace( '-', ', ', $meta_options );
@@ -499,7 +513,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 *
 		 * @return array Array of parameters.
 		 */
-		protected function _get_main_localize() {
+		protected function get_main_localize() {
 			$current_theme    = function_exists( 'wp_get_theme' ) ? wp_get_theme() : null;
 			$current_template = $current_theme instanceof WP_Theme ? $current_theme->get_template() : '';
 
@@ -517,7 +531,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 					'is_mobile'          => wp_is_mobile(),
 					'scroll_top'         => yith_wcan_get_option( 'yith_wcan_ajax_scroll_top_class', '.yit-wcan-container' ),
 					'scroll_top_mode'    => yith_wcan_get_option( 'yith_wcan_scroll_top_mode', 'mobile' ),
-					'change_browser_url' => 'yes' == yith_wcan_get_option( 'yith_wcan_change_browser_url', 'yes' ) ? true : false,
+					'change_browser_url' => 'yes' === yith_wcan_get_option( 'yith_wcan_change_browser_url', 'yes' ) ? true : false,
 					/* === Avada Theme Support === */
 					'avada'              => array(
 						'is_enabled' => class_exists( 'Avada' ),
@@ -542,12 +556,12 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 * @param string $context What the value is for. Valid values are view and edit.
 		 * @return array Array of parameters.
 		 */
-		protected function _get_shortcodes_localize( $context = 'view' ) {
+		protected function get_shortcodes_localize( $context = 'view' ) {
 			$params = array(
 				'query_param'           => YITH_WCAN_Query()->get_query_param(),
 				'supported_taxonomies'  => array_keys( YITH_WCAN_Query()->get_supported_taxonomies() ),
 				'content'               => apply_filters( 'yith_wcan_content_selector', '#content' ),
-				'change_browser_url'    => in_array( yith_wcan_get_option( 'yith_wcan_change_browser_url', 'yes' ), array( 'yes', 'custom' ) ),
+				'change_browser_url'    => in_array( yith_wcan_get_option( 'yith_wcan_change_browser_url', 'yes' ), array( 'yes', 'custom' ), true ),
 				'instant_filters'       => true,
 				'ajax_filters'          => true,
 				'show_clear_filter'     => false,
@@ -573,15 +587,15 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 				'labels'                => apply_filters(
 					'yith_wcan_shortcodes_script_labels',
 					array(
-						'empty_option' => _x( 'All', '[FRONTEND] "All" label shown when no term is selected', 'yith-woocommerce-ajax-navigation' ),
-						'search_placeholder' => _x( 'Search...', '[FRONTEND] Search placeholder shown in terms dropdown', 'yith-woocommerce-ajax-navigation' ),
-						'no_items' => _x( 'No item found', '[FRONTEND] Empty items list in the dropdown', 'yith-woocommerce-ajax-navigation' ),
+						'empty_option'         => _x( 'All', '[FRONTEND] "All" label shown when no term is selected', 'yith-woocommerce-ajax-navigation' ),
+						'search_placeholder'   => _x( 'Search...', '[FRONTEND] Search placeholder shown in terms dropdown', 'yith-woocommerce-ajax-navigation' ),
+						'no_items'             => _x( 'No item found', '[FRONTEND] Empty items list in the dropdown', 'yith-woocommerce-ajax-navigation' ),
 						// translators: 1. Number of items to show.
-						'show_more' => _x( 'Show %d more', '[FRONTEND] Show more link on terms dropdown', 'yith-woocommerce-ajax-navigation' ),
-						'close' => _x( 'Close', '[FRONTEND] Alt text for modal close button on mobile', 'yith-woocommerce-ajax-navigation' ),
-						'save' => _x( 'Save', '[FRONTEND] Label for filter button, on horizontal layout', 'yith-woocommerce-ajax-navigation' ),
-						'show_results' => _x( 'Show results', '[FRONTEND] Label for filter button, on mobile modal', 'yith-woocommerce-ajax-navigation' ),
-						'clear_selection' => _x( 'Clear', '[FRONTEND] Label for clear selection link, that appears above filter after selection', 'yith-woocommerce-ajax-navigation' ),
+						'show_more'            => _x( 'Show %d more', '[FRONTEND] Show more link on terms dropdown', 'yith-woocommerce-ajax-navigation' ),
+						'close'                => _x( 'Close', '[FRONTEND] Alt text for modal close button on mobile', 'yith-woocommerce-ajax-navigation' ),
+						'save'                 => _x( 'Save', '[FRONTEND] Label for filter button, on horizontal layout', 'yith-woocommerce-ajax-navigation' ),
+						'show_results'         => _x( 'Show results', '[FRONTEND] Label for filter button, on mobile modal', 'yith-woocommerce-ajax-navigation' ),
+						'clear_selection'      => _x( 'Clear', '[FRONTEND] Label for clear selection link, that appears above filter after selection', 'yith-woocommerce-ajax-navigation' ),
 						'clear_all_selections' => _x( 'Clear All', '[FRONTEND] Label for clear selection link, that appears above filter after selection', 'yith-woocommerce-ajax-navigation' ),
 					)
 				),
@@ -599,13 +613,13 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 *
 		 * @return bool|string Custom CSS template, ro false when no content should be output.
 		 */
-		protected function _build_custom_css() {
+		protected function build_custom_css() {
 			$default_accent_color = apply_filters( 'yith_wcan_default_accent_color', '#A7144C' );
 
 			$variables = array();
 			$options   = array(
-				'filters_colors' => array(
-					'default' => array(
+				'filters_colors'       => array(
+					'default'  => array(
 						'titles'     => '#434343',
 						'background' => '#FFFFFF',
 						'accent'     => $default_accent_color,
@@ -624,19 +638,19 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 					},
 				),
 				'color_swatches_style' => array(
-					'default' => 'round',
+					'default'  => 'round',
 					'variable' => 'color_swatches_border_radius',
 					'callback' => function( $raw_value ) {
 						return 'round' === $raw_value ? '100%' : '5px';
 					},
 				),
-				'color_swatches_size' => array(
-					'default' => '30',
+				'color_swatches_size'  => array(
+					'default'  => '30',
 					'callback' => function( $raw_value ) {
 						return $raw_value . 'px';
 					},
 				),
-				'labels_style' => array(
+				'labels_style'         => array(
 					'default' => array(
 						'background'        => '#FFFFFF',
 						'background_hover'  => $default_accent_color,
@@ -646,10 +660,10 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 						'text_active'       => '#FFFFFF',
 					),
 				),
-				'anchors_style' => array(
+				'anchors_style'        => array(
 					'default' => array(
-						'text' => '#434343',
-						'text_hover' => $default_accent_color,
+						'text'        => '#434343',
+						'text_hover'  => $default_accent_color,
 						'text_active' => $default_accent_color,
 					),
 				),
@@ -704,7 +718,7 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 		 * @return void
 		 */
 		public function add_reset_button() {
-			$show_reset_button = 'yes' === yith_wcan_get_option( 'yith_wcan_show_reset', 'yes' );
+			$show_reset_button     = 'yes' === yith_wcan_get_option( 'yith_wcan_show_reset', 'yes' );
 			$reset_button_position = yith_wcan_get_option( 'yith_wcan_reset_button_position', 'after_filters' );
 
 			if ( ! $show_reset_button ) {
@@ -804,18 +818,18 @@ if ( ! class_exists( 'YITH_WCAN_Frontend' ) ) {
 				'yith_wcan_before_product_locations',
 				array(
 					// before shop.
-					'before_shop' => array(
-						'hook' => 'woocommerce_before_shop_loop',
+					'before_shop'               => array(
+						'hook'     => 'woocommerce_before_shop_loop',
 						'priority' => 10 + $offset,
 					),
 					// before products shortcode.
 					'shortcode_before_products' => array(
-						'hook' => 'woocommerce_shortcode_before_products_loop',
+						'hook'     => 'woocommerce_shortcode_before_products_loop',
 						'priority' => 10 + $offset,
 					),
 					// before no_products template.
-					'no_products_found' => array(
-						'hook' => 'woocommerce_no_products_found',
+					'no_products_found'         => array(
+						'hook'     => 'woocommerce_no_products_found',
 						'priority' => 5 + $offset,
 					),
 				),

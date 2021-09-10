@@ -5,7 +5,7 @@
  * Defines a couple of static methods to allow easy access to Preset classes
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Presets
  * @version 4.0
  */
 

@@ -4,7 +4,7 @@
  * Offers method to read and set properties of the preset and filters
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product FIlter
+ * @package YITH\AjaxProductFilter\Classes\Presets
  * @version 4.0.0
  */
 
@@ -97,7 +97,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset' ) ) {
 
 			$this->data_store = WC_Data_Store::load( 'filter_preset' );
 
-			if ( $this->get_id() > 0 || $this->get_slug() != '' ) {
+			if ( $this->get_id() > 0 || ! empty( $this->get_slug() ) ) {
 				$this->data_store->read( $this );
 			}
 		}
@@ -228,7 +228,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset' ) ) {
 		 * @return array Array of fields
 		 */
 		public static function get_fields() {
-			return include( YITH_WCAN_DIR . 'plugin-options/preset-options.php' );
+			return include YITH_WCAN_DIR . 'plugin-options/preset-options.php';
 		}
 
 		/* === SETTERS === */
@@ -260,7 +260,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function set_layout( $layout ) {
-			$layout = in_array( $layout, array_keys( YITH_WCAN_Preset_Factory::get_supported_layouts() ) ) ? $layout : 'default';
+			$layout = in_array( $layout, array_keys( YITH_WCAN_Preset_Factory::get_supported_layouts() ), true ) ? $layout : 'default';
 
 			$this->set_prop( 'layout', $layout );
 		}
@@ -465,7 +465,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function set_filter( $filter_id, $filter ) {
-			$filters = $this->get_raw_filters();
+			$filters               = $this->get_raw_filters();
 			$filters[ $filter_id ] = $filter;
 
 			$this->set_prop( 'filters', $filters );
@@ -573,7 +573,7 @@ if ( ! class_exists( 'YITH_WCAN_Preset' ) ) {
 				'read',
 			);
 
-			if ( ! $default && in_array( $cap, $public ) ) {
+			if ( ! $default && in_array( $cap, $public, true ) ) {
 				$default = true;
 			}
 

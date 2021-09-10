@@ -3,7 +3,7 @@
  * Filter Preset widget for Elementor
  *
  * @author Your Inspiration Themes
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Elementor
  * @version 4.0.0
  */
 
@@ -82,8 +82,8 @@ if ( ! class_exists( 'YITH_WCAN_Elementor_Filters' ) ) {
 		 * @since  1.0.0
 		 * @access protected
 		 */
-		protected function _register_controls() {
-			$presets = YITH_WCAN_Preset_Factory::list_presets();
+		protected function _register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+			$presets         = YITH_WCAN_Preset_Factory::list_presets();
 			$presets_options = array_merge(
 				array(
 					'' => _x( 'Choose an option', '[ELEMENTOR] Default preset option', 'yith-woocommerce-ajax-navigation' ),

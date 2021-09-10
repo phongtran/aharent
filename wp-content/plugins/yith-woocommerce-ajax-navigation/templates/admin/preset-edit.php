@@ -3,11 +3,13 @@
  * Preset edit page - Admin view
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Templates\Admin
  * @version 4.0.0
  */
 
 /**
+ * Variables available for this template:
+ *
  * @var $preset bool|YITH_WCAN_Preset
  */
 
@@ -40,7 +42,7 @@ $fields    = YITH_WCAN_Preset::get_fields();
 				?>
 			</h2>
 
-			<?php if ( isset( $_GET['status'] ) && 'success' === $_GET['status'] ) : ?>
+			<?php if ( isset( $_GET['status'] ) && 'success' === $_GET['status'] ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 				<div class="preset-saved">
 					<p><?php echo esc_html_x( 'Preset saved correctly', '[ADMIN] Preset save message', 'yith-woocommerce-ajax-navigation' ); ?></p>
 				</div>
@@ -58,16 +60,17 @@ $fields    = YITH_WCAN_Preset::get_fields();
 						</th>
 						<td class="forminp forminp-<?php echo esc_attr( $field['type'] ); ?>">
 							<?php
-								$field_name = str_replace( 'preset_', '', $field_slug );
-								$field_args = array_merge(
-									$field,
-									array(
-										'id'     => $field_slug,
-										'name'   => $field_slug,
-										'preset' => $preset,
-										'value'  => method_exists( $preset, "get_{$field_name}" ) ? $preset->{"get_{$field_name}"}() : '',
-									)
-								);
+							$field_name      = str_replace( 'preset_', '', $field_slug );
+							$is_valid_preset = is_string( $preset ) || is_object( $preset );
+							$field_args      = array_merge(
+								$field,
+								array(
+									'id'     => $field_slug,
+									'name'   => $field_slug,
+									'preset' => $preset,
+									'value'  => $is_valid_preset && method_exists( $preset, "get_{$field_name}" ) ? $preset->{"get_{$field_name}"}() : '',
+								)
+							);
 								yith_plugin_fw_get_field( $field_args, true );
 							?>
 							<span class="description">
@@ -82,12 +85,12 @@ $fields    = YITH_WCAN_Preset::get_fields();
 
 			<?php do_action( 'yith_wcan_preset_edit_before_filters', $preset_id, $preset ); ?>
 
-			<?php include( YITH_WCAN_DIR . 'templates/admin/preset-filters.php' ); ?>
+			<?php require YITH_WCAN_DIR . 'templates/admin/preset-filters.php'; ?>
 
 			<?php do_action( 'yith_wcan_preset_edit_after_filters', $preset_id, $preset ); ?>
 
 			<p class="submit">
-				<input type="submit" id="submit" class="button button-primary" value="<?php echo esc_attr_x( 'Save preset', '[Admin] Preset save button, in new/edit preset page', 'yith-woocommerce-ajax.navigation' ); ?>"/>
+				<input type="submit" id="submit" class="button button-primary" value="<?php echo esc_attr_x( 'Save preset', '[Admin] Preset save button, in new/edit preset page', 'yith-woocommerce-ajax-navigation' ); ?>"/>
 				<input type="hidden" name="id" id="preset_id" value="<?php echo $preset ? esc_attr( $preset->get_id() ) : ''; ?>"/>
 				<input type="hidden" name="post_ID" id="post_ID" value="<?php echo $preset ? esc_attr( $preset->get_id() ) : ''; ?>"/>
 				<input type="hidden" name="paged" id="paged" value="<?php echo $preset && $preset->needs_pagination() ? 1 : 0; ?>"/>

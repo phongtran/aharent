@@ -414,8 +414,6 @@ function YITH_WCAN_Filters( $ ) {
 								continue;
 							}
 
-							console.log( 'not found' );
-
 							$filterDesign.append(
 								$( '<option/>', {
 									value: design,
@@ -815,9 +813,13 @@ function YITH_WCAN_Filters( $ ) {
 	self.populateFilter = function ( $filter, filterData ) {
 		for ( const i in filterData ) {
 			const row_id = self.getRowIndex( $filter ),
-				nameId = `filters_${ row_id }_${ i }`,
-				$input = $filter.find( `#${ nameId }` ),
 				value = filterData[ i ];
+
+			let nameId =
+					'terms' === i
+						? `filters_${ row_id }_term_ids`
+						: `filters_${ row_id }_${ i }`,
+				$input = $filter.find( `#${ nameId }` );
 
 			if ( ! $input.length && 'price_ranges' !== i ) {
 				continue;
@@ -825,6 +827,7 @@ function YITH_WCAN_Filters( $ ) {
 
 			if ( 'terms' === i ) {
 				const terms = value;
+
 				if ( 'object' !== typeof terms ) {
 					continue;
 				}
@@ -847,12 +850,12 @@ function YITH_WCAN_Filters( $ ) {
 				$input.change();
 
 				// update term boxes
-				self.updateTerms( $filter );
+				self.updateTerms( $filter, true );
 
 				// populate options for each filter
 				for ( const j in terms ) {
 					for ( const k in terms[ j ] ) {
-						const termId = `${ nameId }_${ j }_${ k }`,
+						const termId = `filters_${ row_id }_terms_${ j }_${ k }`,
 							$termInput = $filter.find( `#${ termId }` );
 
 						if ( ! $termInput.length ) {
@@ -1225,16 +1228,18 @@ function YITH_WCAN_Filters( $ ) {
 			self.initTerm( $( this ) );
 		} );
 
-		$orderBy.on( 'change', function () {
-			const $t = $( this ),
-				v = $t.val(),
-				methodToRun =
-					'include' === v
-						? 'initTermsDragDrop'
-						: 'destroyTermsDragDrop';
+		$orderBy
+			.on( 'change', function () {
+				const $t = $( this ),
+					v = $t.val(),
+					methodToRun =
+						'include' === v
+							? 'initTermsDragDrop'
+							: 'destroyTermsDragDrop';
 
-			self[ methodToRun ]( $filter );
-		} );
+				self[ methodToRun ]( $filter );
+			} )
+			.change();
 	};
 
 	self.initTerm = function ( $term ) {
@@ -1414,10 +1419,10 @@ function YITH_WCAN_Filters( $ ) {
 			.show();
 	};
 
-	self.updateTerms = function ( $filter ) {
+	self.updateTerms = function ( $filter, ignoreVisibility ) {
 		const $termsContainer = $filter.find( '.terms-wrapper' );
 
-		if ( ! $termsContainer.is( ':visible' ) ) {
+		if ( ! ignoreVisibility && ! $termsContainer.is( ':visible' ) ) {
 			return;
 		}
 

@@ -2,9 +2,9 @@
 
 Contributors: yithemes
 Tags: woocommerce ajax product filter download, woocommerce, widget, ajax, ajax filtered nav, ajax navigation, ajax filtered navigation, woocommerce layered navigation, woocommerce layered nav, product filter, product filters, ajax product filter, woocommerce ajax product filter, woocommerce filters, sidebar filter, sidebar ajax filter, ajax price filter, price filter, product sorting, woocommerce filter, taxonomy filter, attribute filter, attributes filter, woocommerce product sort, ajax sort, woocommerce ajax product filter, advanced product filters, ajax product filters, filters, woocommerce ajax product filters, woocommerce product filters, woocommerce product filters, category filter, attribute filters, woocommerce products filter, woocommerce price filter, yit, yith, yithemes
-Requires at least: 5.3
-Tested up to: 5.7
-Stable tag: 4.1.0
+Requires at least: 5.6
+Tested up to: 5.8
+Stable tag: 4.1.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -151,6 +151,22 @@ If none of the previous listed actions helps you solve the problem, then, submit
 14. Gutenberg block
 
 == Changelog ==
+
+= 4.1.1 - Released on 04 August 2021 =
+
+* New: support for WordPress 5.8
+* New: support for WooCommerce 5.6
+* Update: YITH plugin framework
+* Tweak: code refactoring
+* Tweak: avoid caching query_vars until wp performed main query, to be sure to include all parameters available
+* Tweak: avoid possible error with Tax queries without terms
+* Fix: prevent possible error on preset edit page when running PHP 8
+* Fix: populateFilter method causing issues when loading more terms on backend
+* Fix: avoid possible notice when shop has product taxonomies with no rewrite defined
+* Fix: empty terms when using AutoPopulate options
+* Fix: plugin can now disable filters with numeric slugs
+* Dev: added second parameter to yith_wcan_filter_tax_additional_item_classes filter
+* Dev: added yith_wcan_pre_reduce_tax_query filter, to allow programmatically skip reduce_tax_query execution
 
 = 4.1.0 - Released on 18 June 2021 =
 

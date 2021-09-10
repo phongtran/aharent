@@ -3,7 +3,7 @@
  * Reset button widget for Elementor
  *
  * @author Your Inspiration Themes
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Elementor
  * @version 4.0.0
  */
 
@@ -82,7 +82,7 @@ if ( ! class_exists( 'YITH_WCAN_Elementor_Reset_Button' ) ) {
 		 * @since  1.0.0
 		 * @access protected
 		 */
-		protected function _register_controls() {
+		protected function _register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			$this->start_controls_section(
 				'fields_section',
 				array(
@@ -94,18 +94,18 @@ if ( ! class_exists( 'YITH_WCAN_Elementor_Reset_Button' ) ) {
 			$this->add_control(
 				'description',
 				array(
-					'type'    => Controls_Manager::RAW_HTML,
+					'type'       => Controls_Manager::RAW_HTML,
 					'show_label' => false,
-					'raw' => '<p style="line-height: 1.2; margin: 15px 0;">' .
-							 _x( 'This widget will display "Filters reset" button, wherever it is placed', '[ELEMENTOR] Widget description', 'yith-woocommerce-ajax-navigation' ) .
-							 '</p>' .
-							 '<p style="line-height: 1.2; margin: 15px 0;">' .
-							 _x( 'It will allow users to reset the filer selection; it will only appear when there is an active filter.', '[ELEMENTOR] Widget description', 'yith-woocommerce-ajax-navigation' ) .
-							 '</p>' .
-							 '</p>' .
-							 '<small style="color: #cdcdcd;">' .
-							 _x( 'You can use this block to place "Reset filters" button inside your page, when "Reset button position" option won\'t work for your product\'s loop', '[ELEMENTOR] Widget description', 'yith-woocommerce-ajax-navigation' ) .
-							 '</small>',
+					'raw'        => '<p style="line-height: 1.2; margin: 15px 0;">' .
+							_x( 'This widget will display "Filters reset" button, wherever it is placed', '[ELEMENTOR] Widget description', 'yith-woocommerce-ajax-navigation' ) .
+							'</p>' .
+							'<p style="line-height: 1.2; margin: 15px 0;">' .
+							_x( 'It will allow users to reset the filer selection; it will only appear when there is an active filter.', '[ELEMENTOR] Widget description', 'yith-woocommerce-ajax-navigation' ) .
+							'</p>' .
+							'</p>' .
+							'<small style="color: #cdcdcd;">' .
+							_x( 'You can use this block to place "Reset filters" button inside your page, when "Reset button position" option won\'t work for your product\'s loop', '[ELEMENTOR] Widget description', 'yith-woocommerce-ajax-navigation' ) .
+							'</small>',
 				)
 			);
 
@@ -128,11 +128,11 @@ if ( ! class_exists( 'YITH_WCAN_Elementor_Reset_Button' ) ) {
 		 * @since  1.0.0
 		 * @access protected
 		 */
-		protected function _content_template() {
+		protected function _content_template() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			$frontend = new YITH_WCAN_Frontend();
 
-			$_GET['min_price'] = 10;
-			$_GET['max_price'] = 100;
+			$_GET['min_price']     = 10;
+			$_GET['max_price']     = 100;
 			$_GET['onsale_filter'] = 1;
 
 			$_REQUEST[ YITH_WCAN_Query()->get_query_param() ] = 1;

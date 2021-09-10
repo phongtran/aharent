@@ -5,7 +5,7 @@
  * Defines a couple of static methods to allow easy access to Filter classes
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes
  * @version 4.0
  */
 
@@ -30,7 +30,7 @@ if ( ! class_exists( 'YITH_WCAN_Filter_Factory' ) ) {
 			$supported_types = self::get_supported_types();
 			$type_slugs      = array_keys( $supported_types );
 			$default_type    = current( $type_slugs );
-			$type            = isset( $filter['type'] ) && in_array( $filter['type'], $type_slugs ) ? $filter['type'] : $default_type;
+			$type            = isset( $filter['type'] ) && in_array( $filter['type'], $type_slugs, true ) ? $filter['type'] : $default_type;
 
 			$classname = self::get_filter_classname( $type, $filter );
 

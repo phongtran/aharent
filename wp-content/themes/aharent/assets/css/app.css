@@ -1,11 +1,12 @@
 header {
-  background-color: #45b08c;
+  background-color: #ffe82e;
   height: 80px;
-  color: #f3faf7;
+  color: #231f20;
 }
 
 header .container .logo {
-  background: url("../img/aharent-logo.png");
+  background: url("../img/aharent-logo.png") no-repeat center center;
+  background-size: cover;
   width: 144px;
   height: 28px;
 }
@@ -20,7 +21,7 @@ header .container .product-categories .product-categories-icon {
 
 header .container .product-categories .product-categories-icon .top-bar, header .container .product-categories .product-categories-icon .middle-bar, header .container .product-categories .product-categories-icon .bottom-bar {
   height: 3px;
-  background-color: #fff;
+  background-color: #04b950;
 }
 
 header .container .product-categories .product-categories-icon .top-bar {
@@ -41,7 +42,7 @@ header .container .product-categories .product-categories-label .product-categor
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 8px solid #fff;
+  border-top: 8px solid #04b950;
   content: "";
 }
 
@@ -55,13 +56,12 @@ header .container .search-box button.search-btn {
   height: auto !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border: 3px solid #258c69;
-  background-color: #258c69;
+  border: 3px solid #04b950;
+  background-color: #04b950;
 }
 
 header .container .cart {
   margin-left: 20px;
-  height: 30px;
 }
 
 header .container .cart img {
@@ -70,16 +70,23 @@ header .container .cart img {
 
 header .container .cart .shopping-cart {
   position: relative;
+  display: block;
+  height: 40px;
+  width: 40px;
+  padding: 8px;
+  background-color: #ddf6e8;
+  border-radius: 50%;
 }
 
 header .container .cart .shopping-cart .cart-quantity {
   position: absolute;
   z-index: 5;
-  top: -10px;
-  right: -10px;
+  top: -5px;
+  right: -5px;
   height: 20px;
   width: 20px;
-  background-color: #e36d60;
+  background-color: #04b950;
+  color: #ddf6e8;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -94,7 +101,7 @@ header .container .cart .shopping-cart .cart-quantity {
 
 footer {
   background-color: #fff;
-  color: #5a5d5a;
+  color: #231f20;
   font-size: 13px;
   line-height: 1;
   padding: 10px;
@@ -114,7 +121,7 @@ footer a {
 }
 
 footer a:hover {
-  color: #5a5d5a;
+  color: #231f20;
   opacity: 0.95;
 }
 
@@ -125,7 +132,7 @@ footer h4 {
 
 html body {
   background-color: #f5f5f5;
-  color: #5a5d5a;
+  color: #231f20;
 }
 
 html body .container {
@@ -144,8 +151,14 @@ input {
   font-size: 1.2rem;
 }
 
+h2 {
+  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 h3 {
-  color: #258c69;
+  color: #231f20;
   font-weight: bold;
   font-size: 18px;
   text-transform: capitalize;
@@ -159,13 +172,17 @@ h4 {
 }
 
 a {
-  color: #5a5d5a;
+  color: #231f20;
   text-decoration: none;
 }
 
 a:hover {
-  color: #5a5d5a;
+  color: #231f20;
   opacity: 0.95;
+}
+
+.price {
+  color: #04b950;
 }
 
 .breadcrumb {
@@ -228,12 +245,6 @@ ul.products li.product-item .thumbnail a img {
      object-fit: contain;
 }
 
-ul.products li.product-item h2 {
-  margin: 10px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
 ul.products li.product-item .price {
   margin: 0 10px;
 }
@@ -266,12 +277,12 @@ ul.nav-tabs .nav-item:hover {
 
 button[type="submit"].aha-button, button[type="button"].aha-button {
   width: 200px;
-  height: 56px;
+  height: 50px;
   border-radius: 5px;
   border: 0;
-  font-size: 18px;
-  background-color: #258c69;
-  color: #fff;
+  font-size: 20px;
+  background-color: #04b950;
+  color: #ddf6e8;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

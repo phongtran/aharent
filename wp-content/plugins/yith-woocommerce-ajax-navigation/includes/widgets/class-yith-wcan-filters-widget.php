@@ -3,7 +3,7 @@
  * Filter preset widget
  *
  * @author  YITH
- * @package YITH WooCommerce Ajax Product Filter
+ * @package YITH\AjaxProductFilter\Classes\Widgets
  * @version 4.0.0
  */
 
@@ -19,9 +19,9 @@ if ( ! class_exists( 'YITH_WCAN_Filters_Widget' ) ) {
 		/**
 		 * Widget ID
 		 *
-		 * @var string
+		 * @const string
 		 */
-		protected $_id_base = 'yith-woocommerce-ajax-navigation-filters';
+		const ID_BASE = 'yith-woocommerce-ajax-navigation-filters';
 
 		/**
 		 * Constructor method
@@ -31,7 +31,7 @@ if ( ! class_exists( 'YITH_WCAN_Filters_Widget' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function __construct() {
-			parent::__construct( $this->_id_base, _x( 'YITH AJAX Filters Preset', '[ADMIN] Name of the preset widget', 'yith-woocommerce-ajax-navigation' ) );
+			parent::__construct( self::ID_BASE, _x( 'YITH AJAX Filters Preset', '[ADMIN] Name of the preset widget', 'yith-woocommerce-ajax-navigation' ) );
 		}
 
 		/**
@@ -84,9 +84,9 @@ if ( ! class_exists( 'YITH_WCAN_Filters_Widget' ) ) {
 			$instance = $old_instance;
 
 			$preset_slug = sanitize_title_with_dashes( $new_instance['preset'] );
-			$presets = array_keys( YITH_WCAN_Preset_Factory::list_presets() );
+			$presets     = array_keys( YITH_WCAN_Preset_Factory::list_presets() );
 
-			if ( in_array( $preset_slug, $presets ) ) {
+			if ( in_array( $preset_slug, $presets, true ) ) {
 				$instance['preset'] = $preset_slug;
 			}
 
@@ -104,8 +104,8 @@ if ( ! class_exists( 'YITH_WCAN_Filters_Widget' ) ) {
 		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function widget( $args, $instance ) {
-			$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
-			$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
+			$title       = ! empty( $instance['title'] ) ? $instance['title'] : '';
+			$title       = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 			$preset_slug = ! empty( $instance['preset'] ) ? $instance['preset'] : '';
 
 			if ( ! $preset_slug ) {

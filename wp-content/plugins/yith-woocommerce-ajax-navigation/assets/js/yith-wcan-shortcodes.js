@@ -1391,6 +1391,7 @@ var YITH_WCAN_Preset = /*#__PURE__*/function () {
 
       $toggle.off('click').on('click', function (ev) {
         ev.stopPropagation();
+        ev.preventDefault();
         $target.slideToggle(400, function () {
           $container.toggleClass('opened').toggleClass('closed');
         });
@@ -2036,7 +2037,7 @@ var YITH_WCAN_Preset = /*#__PURE__*/function () {
               $dropdown.find('option').each(function () {
                 var $option = $(this);
 
-                if ($option.val() === properties[taxonomy]) {
+                if ($option.val().toString() === properties[taxonomy].toString()) {
                   $option.prop('selected', false);
                 }
               });
@@ -2054,7 +2055,7 @@ var YITH_WCAN_Preset = /*#__PURE__*/function () {
                   value;
               value = $label.length ? $label.find(':input').val() : $anchor.data('term-slug');
 
-              if (value === properties[taxonomy]) {
+              if (value.toString() === properties[taxonomy].toString()) {
                 $item.children('label').children('a').click();
                 $item.removeClass('active');
               }
