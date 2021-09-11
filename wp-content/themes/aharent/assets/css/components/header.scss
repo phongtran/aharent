@@ -16,10 +16,14 @@ header {
         }
 
         .product-categories {
+            height: 100%;
             margin-left: 20px;
 
             display: flex;
             flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
 
             &:hover {
                 .pop-up-menu {
@@ -43,12 +47,13 @@ header {
                 z-index: 2000;
 
                 top: 100px;
+                left: 250px;
 
                 background-color: $bright-bg-color;
 
                 a:hover {
-                    background-color: $main-button-color;
-                    color: $bright-text-color;
+                    background-color: $menu-hover-color;
+                    color: $text-color;
                 }
 
                 .category-item {

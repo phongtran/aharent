@@ -12,6 +12,7 @@ header .container .logo {
 }
 
 header .container .product-categories {
+  height: 100%;
   margin-left: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,6 +21,12 @@ header .container .product-categories {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 header .container .product-categories:hover .pop-up-menu {
@@ -46,12 +53,13 @@ header .container .product-categories .categories-pop-up-list {
   position: absolute;
   z-index: 2000;
   top: 100px;
+  left: 250px;
   background-color: #fff;
 }
 
 header .container .product-categories .categories-pop-up-list a:hover {
-  background-color: #04b950;
-  color: #ddf6e8;
+  background-color: #f8ee9f;
+  color: #231f20;
 }
 
 header .container .product-categories .categories-pop-up-list .category-item {

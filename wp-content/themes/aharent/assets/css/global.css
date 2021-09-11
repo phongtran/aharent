@@ -44,13 +44,13 @@ header .container .product-categories .categories-pop-up-list {
       -ms-flex-direction: column;
           flex-direction: column;
   position: absolute;
-  z-index: 100;
+  z-index: 2000;
   top: 100px;
   background-color: #fff;
 }
 
 header .container .product-categories .categories-pop-up-list a:hover {
-  background-color: #04b950;
+  background-color: #f8ee9f;
   color: #ddf6e8;
 }
 
