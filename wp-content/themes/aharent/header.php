@@ -87,10 +87,12 @@
                 </div>
 
                 <div class="search-box col-sm-7 d-flex align-items-center">
-                    <input name="search-box" class="form-control" type="text" placeholder="Tìm kiếm sản phẩm..." />
+
+                    <?php echo do_shortcode('[fibosearch]'); ?>
+                    <!-- <input name="search-box" class="form-control" type="text" placeholder="Tìm kiếm sản phẩm..." />
                     <button name="search-button" class="aha-button btn btn-outline-secondary search-btn" type="button">
                         <img src="<?php echo get_template_directory_uri() . '/assets/img/lookup.png' ?>" />
-                    </button>
+                    </button> -->
                 </div>
 
                 <div class="cart col-sm-1">
