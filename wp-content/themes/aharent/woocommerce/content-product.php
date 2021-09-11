@@ -28,7 +28,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	<div class="thumbnail d-flex justify-content-center w-100">
 		<a href="<?php echo get_permalink( $product->id ); ?>">
 			<?php $image = get_the_post_thumbnail_url( $product->id ); ?>
-			<img src="<?php echo (!empty($image)) ? $image : '/wp-content/uploads/supplier_photos/default.jpg'; ?>" />
+			<img src="<?php echo (!empty($image)) ? $image : '/wp-content/uploads/supplier_photos/default.png'; ?>" />
 		</a>
 	</div>
 

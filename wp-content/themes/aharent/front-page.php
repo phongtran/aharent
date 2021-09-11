@@ -9,7 +9,7 @@
 
 <div class="container">
     <div class="renting-instructions">
-        <div class="title d-flex align-items-center">
+        <div class="title-bar d-flex align-items-center">
             <h3>CÁCH THUÊ ĐƠN GIẢN</h3>
         </div>
         <div class="renting-steps d-flex">
@@ -91,9 +91,65 @@
         </div>
     </div>
 
+    <div class="categories">
+        <div class="title-bar d-flex align-items-center">
+            <h3>DANH MỤC</h3>
+        </div>
+        
+        <div class="categories-list">
+            <?php
+                $orderby = 'name';
+                $order = 'asc';
+                $hide_empty = false ;
+                $cat_args = array(
+                    'orderby'    => $orderby,
+                    'order'      => $order,
+                    'hide_empty' => $hide_empty,
+                );
+                 
+                $product_categories = get_terms( 'product_cat', $cat_args );
+            ?>
+
+            <?php if ( !empty( $product_categories )) : ?>
+                
+                
+                <?php foreach ( $product_categories as $key => $category ) : ?>
+                    <?php if ( $category->name == 'Others') continue; ?>
+                    
+                        <a href="/store?filters=product_cat[<?php echo $category->term_id ?>]">
+                            <?php
+                                $thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true ); 
+                                $image = wp_get_attachment_url( $thumbnail_id );
+                            ?>
+                            
+                            <div class="category-item"> 
+                                <div class="category-image">
+                                    <img src="<?php echo $image ?>" />
+                                </div>
+
+                                
+                                <div class="category-name">
+                                    <?php echo $category->name ?>
+                                </div>
+
+                            </div>
+                        </a>
+                    
+                <?php endforeach ?>
+
+                
+            <?php endif ?>
+
+        </div>
+
+
+    </div>
+
+
+
 
     <div class="popular-products">
-        <div class="title">
+        <div class="title-bar">
             <h3>SẢN PHẨM NỔI BẬT</h3>
         </div>
 

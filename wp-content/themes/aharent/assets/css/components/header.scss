@@ -18,20 +18,75 @@ header {
         .product-categories {
             margin-left: 20px;
 
+            display: flex;
+            flex-direction: column;
+
+            &:hover {
+                .pop-up-menu {
+                    display: flex;
+                }
+
+            }
+
+            .pop-up-menu {
+                display: none;
+            }
+
+            .categories-pop-up-list {
+                border: 1px solid $shadow-color;
+
+                box-shadow: 1px 1px 5px 1px $shadow-color;
+                display: flex;
+                flex-direction: column;
+                
+                position: absolute;
+                z-index: 100;
+
+                top: 100px;
+
+                background-color: $bright-bg-color;
+
+                a:hover {
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
+                }
+
+                .category-item {
+                    margin: 5px 20px;
+
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    .category-image {
+
+                        margin-right: 10px;
+                        
+                        img {
+                            width: 30px;
+                            object-fit: contain;
+                        }
+                    }
+                    
+                }
+
+                
+            }
+
             .product-categories-icon {
-                width: 30px;
+                width: 40px;
 
                 .top-bar, .middle-bar, .bottom-bar {
-                    height: 3px;
+                    height: 4px;
                     background-color: $main-button-color;
                 }
 
                 .top-bar {
-                    margin-bottom: 5px;
+                    margin-bottom: 10px;
                 }
 
                 .bottom-bar {
-                    margin-top: 5px;
+                    margin-top: 10px;
                 }
             }
 
@@ -39,6 +94,10 @@ header {
             .product-categories-label {
                 margin-left: 15px;
                 margin-right: 15px;
+
+                p {
+                    margin: 0;
+                }
 
                 .product-categories-more-icon {
                     width: 0;
@@ -49,6 +108,8 @@ header {
                     content: "";
                 }
             }
+
+            
 
             
         }

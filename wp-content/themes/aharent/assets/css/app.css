@@ -13,28 +13,95 @@ header .container .logo {
 
 header .container .product-categories {
   margin-left: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+header .container .product-categories:hover .pop-up-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+header .container .product-categories .pop-up-menu {
+  display: none;
+}
+
+header .container .product-categories .categories-pop-up-list {
+  border: 1px solid #d9d9d9;
+  -webkit-box-shadow: 1px 1px 5px 1px #d9d9d9;
+          box-shadow: 1px 1px 5px 1px #d9d9d9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  z-index: 100;
+  top: 100px;
+  background-color: #fff;
+}
+
+header .container .product-categories .categories-pop-up-list a:hover {
+  background-color: #04b950;
+  color: #ddf6e8;
+}
+
+header .container .product-categories .categories-pop-up-list .category-item {
+  margin: 5px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header .container .product-categories .categories-pop-up-list .category-item .category-image {
+  margin-right: 10px;
+}
+
+header .container .product-categories .categories-pop-up-list .category-item .category-image img {
+  width: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 header .container .product-categories .product-categories-icon {
-  width: 30px;
+  width: 40px;
 }
 
 header .container .product-categories .product-categories-icon .top-bar, header .container .product-categories .product-categories-icon .middle-bar, header .container .product-categories .product-categories-icon .bottom-bar {
-  height: 3px;
+  height: 4px;
   background-color: #04b950;
 }
 
 header .container .product-categories .product-categories-icon .top-bar {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 header .container .product-categories .product-categories-icon .bottom-bar {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 header .container .product-categories .product-categories-label {
   margin-left: 15px;
   margin-right: 15px;
+}
+
+header .container .product-categories .product-categories-label p {
+  margin: 0;
 }
 
 header .container .product-categories .product-categories-label .product-categories-more-icon {
@@ -337,14 +404,15 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   background-color: #fff;
 }
 
-.container .renting-instructions {
-  margin: 20px;
-}
-
-.container .renting-instructions .title {
+.container .title-bar {
   background-color: #fff;
   border-radius: 5px;
   padding: 15px 20px 15px;
+  margin-bottom: 20px;
+}
+
+.container .renting-instructions {
+  margin: 20px;
 }
 
 .container .renting-instructions .renting-steps {
@@ -366,15 +434,52 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin: 30px 0 20px 0;
 }
 
-.container .popular-products {
+.container .categories {
   margin: 20px;
 }
 
-.container .popular-products .title {
+.container .categories .title-bar {
+  margin-bottom: 0;
+}
+
+.container .categories .categories-list {
+  padding: 20px 0;
   background-color: #fff;
-  border-radius: 5px;
-  padding: 15px 20px 15px;
-  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.container .categories .categories-list .category-item {
+  margin: 0 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .categories .categories-list .category-item .category-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .popular-products {
+  margin: 20px;
 }
 
 .container .popular-products .button-more {

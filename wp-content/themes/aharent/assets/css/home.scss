@@ -1,8 +1,17 @@
 .mega-sale {
-    background-color: #fff;
+    background-color: $bright-bg-color;
 }
 
 .container {
+
+    .title-bar {
+        background-color: $bright-bg-color;
+        border-radius: 5px;
+
+        padding: 15px 20px 15px;
+
+        margin-bottom: 20px;
+    }
 
     
 
@@ -10,22 +19,13 @@
         
         margin: 20px;
         
-        .title {
-
-            background-color: #fff;
-            border-radius: 5px;
-
-            padding: 15px 20px 15px;
-
-            
-        }
 
         .renting-steps {
 
             margin-top: 20px;
             padding: 30px 30px;
             
-            background-color: #fff;
+            background-color: $bright-bg-color;
             border-radius: 5px;
 
             .single-step {
@@ -45,18 +45,46 @@
         }
     }
 
+    .categories {
+        margin: 20px;
+
+
+        .title-bar {
+            margin-bottom: 0;
+        }
+
+        .categories-list {
+            padding: 20px 0;
+
+            background-color: $bright-bg-color;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            
+            .category-item {
+                margin: 0 5px;
+
+                display: flex;
+                flex-direction: column;
+
+                justify-content: center;
+
+                .category-name {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }
+
+
+    }
+
     .popular-products {
 
         margin: 20px;
 
-        .title {
-            background-color: #fff;
-            border-radius: 5px;
-
-            padding: 15px 20px 15px;
-
-            margin-bottom: 20px;
-        }
+        
 
 
         .button-more {
