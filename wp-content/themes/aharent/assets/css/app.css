@@ -213,9 +213,9 @@ html body .container {
           box-shadow: none;
 }
 
-input {
-  padding: 8px 15px 8px;
-  font-size: 1.2rem;
+input, textarea {
+  padding: 6px 10px 6px;
+  font-size: 1rem;
 }
 
 h2 {
@@ -400,6 +400,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   width: 60%;
 }
 
+.woocommerce {
+  margin-bottom: 10px;
+}
+
 .mega-sale {
   background-color: #fff;
 }
@@ -530,7 +534,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .aha-cart .cart_totals {
   background-color: #fff;
-  padding: 5px 10px;
+  padding: 0 10px;
+  padding-bottom: 10px;
 }
 
 .aha-cart .cart_totals p {
@@ -539,7 +544,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .aha-cart .cart_totals .cart_totals-title {
   background-color: #fff;
-  padding: 15px 20px;
+  padding: 15px 0;
+  padding-left: 10px;
 }
 
 .aha-cart .cart-step .cart-step-title {
@@ -567,6 +573,13 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .aha-cart .cart-step .cart-step-content .control-section button {
   margin: 15px;
+  background-color: #04b950;
+  color: #ddf6e8;
+}
+
+.aha-cart .cart-step .cart-step-content .control-section button:hover {
+  background-color: #04b950;
+  color: #ddf6e8;
 }
 
 .aha-cart .cart-step .cart-step-content .cart-item {
@@ -634,6 +647,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin-right: 20px;
 }
 
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section .rental-price h3 {
+  line-height: 2;
+}
+
 .aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .price-section h3.price {
   margin-top: 5px;
 }
@@ -685,6 +702,46 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .aha-cart .cart-summary .cart_totals {
   float: left;
   width: 100%;
+}
+
+.aha-cart .cart-summary .wc-proceed-to-checkout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
+.aha-cart .cart-summary .wc-proceed-to-checkout a.button {
+  background-color: #04b950;
+  color: #ddf6e8;
+}
+
+#customer_details {
+  margin-top: 20px;
+}
+
+#payment {
+  margin-top: 20px;
+}
+
+#payment button {
+  background-color: #04b950;
+  color: #ddf6e8;
+}
+
+.woocommerce form .form-row {
+  margin-left: 20px;
+  width: 80%;
+}
+
+.woocommerce form .form-row input, .woocommerce form .form-row textarea {
+  border: 1px solid #ddd;
+}
+
+.woocommerce-additional-fields {
+  margin-top: 20px;
 }
 
 .product-info {

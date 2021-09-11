@@ -24,7 +24,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 		<div class="cart-step cart-items active">
 			<div class="cart-step-title">
-				<h3>CART ITEMS</h3>
+				<h3>SẢN PHẨM ĐẶT THUÊ</h3>
 			</div>
 
 			<div class="cart-step-content">
@@ -60,14 +60,14 @@ do_action( 'woocommerce_before_cart' ); ?>
 									}
 									?>
 
-									<div class="security-deposit-policy">
+									<!-- <div class="security-deposit-policy">
 										<span><a tabindex="0" role="button" class="popover-dismiss" data-bs-toggle="popover" data-bs-trigger="focus" title="Chính sách thế chân"
   												data-bs-content="<?php
 												  $vendor_rental_terms = get_user_meta( $_product->post->post_author, 'vendor_rental_terms', true );
 
 													if ( !empty( $vendor_rental_terms) )
 														echo $vendor_rental_terms; ?>">Chính sách thế chân</a></span>
-									</div>
+									</div> -->
 								</div>
 
 								<div class="cart-item-description">
@@ -203,7 +203,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<div class="control-section">
 										
 										
-					<button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>					
+					<button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Cập nhật', 'woocommerce' ); ?>"><?php esc_html_e( 'Cập nhật', 'woocommerce' ); ?></button>					
 										
 					<?php do_action( 'woocommerce_cart_actions' ); ?>
 					<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
@@ -225,18 +225,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 			
 			
 		</div>
-
-		<div class="cart-step cart-checkout">
-			<div class="cart-step-title">
-				<h3>CHECK-OUT INFORMATION</h3>
-			</div>
-			
-			<div class="cart-step-content">
-
-			</div>
-		</div>
-		
-
 		
 		
 		

@@ -34,8 +34,8 @@ header .container .product-categories .pop-up-menu {
 
 header .container .product-categories .categories-pop-up-list {
   border: 1px solid #d9d9d9;
-  -webkit-box-shadow: 3px 3px 5px 5px #d9d9d9;
-          box-shadow: 3px 3px 5px 5px #d9d9d9;
+  -webkit-box-shadow: 1px 1px 5px 1px #d9d9d9;
+          box-shadow: 1px 1px 5px 1px #d9d9d9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -213,9 +213,9 @@ html body .container {
           box-shadow: none;
 }
 
-input {
-  padding: 8px 15px 8px;
-  font-size: 1.2rem;
+input, textarea {
+  padding: 6px 10px 6px;
+  font-size: 1rem;
 }
 
 h2 {
@@ -398,5 +398,9 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .dokan-form-group .dokan-w5.text-editor {
   width: 60%;
+}
+
+.woocommerce {
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=global.css.map */

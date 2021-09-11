@@ -11,7 +11,8 @@
 
     .cart_totals {
         background-color: #fff;
-        padding: 5px 10px;
+        padding: 0 10px;
+        padding-bottom: 10px;
 
         p {
             margin: 0;
@@ -19,7 +20,8 @@
 
         .cart_totals-title {
             background-color: #fff;
-            padding: 15px 20px;
+            padding: 15px 0;
+            padding-left: 10px;
         }
     }
 
@@ -48,6 +50,13 @@
 
                 button {
                     margin: 15px;
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
+
+                    &:hover {
+                        background-color: $main-button-color;
+                        color: $bright-text-color;
+                    }
                 }
             }
 
@@ -115,6 +124,10 @@
 
                         .rental-price {
                             margin-right: 20px;
+
+                            h3 {
+                                line-height: 2;
+                            }
                         }
 
                         h3.price {
@@ -197,6 +210,50 @@
             width: 100%;
         }
 
+
+        .wc-proceed-to-checkout {
+            display: flex;
+            justify-content: right;
+
+            a.button {
+                background-color: $main-button-color;
+                color: $bright-text-color;
+            }
+        }
+
     }
     
 }
+
+#customer_details {
+
+    margin-top: 20px;
+
+}
+
+#payment {
+    margin-top: 20px;
+
+    button {
+        background-color: $main-button-color;
+        color: $bright-text-color;
+    }
+}
+
+.woocommerce form .form-row {
+
+    margin-left: 20px;
+    
+    width: 80%;
+
+    input, textarea {
+        border: 1px solid $form-border-color;
+    }
+
+}
+
+.woocommerce-additional-fields {
+    margin-top: 20px;
+}
+
+

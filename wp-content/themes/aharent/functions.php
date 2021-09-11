@@ -339,19 +339,24 @@ function calculate_cart_total_deposit()
 
 function customize_checkout_billing_kyc( $fields )
 {
+	$fields['billing']['billing_state']['default'] = 'Ho Chi Minh';
+	$fields['billing']['billing_state']['custom_attributes']['readonly'] = true;
+	$fields['billing']['billing_state']['custom_attributes']['disabled'] = true;
 	unset($fields['billing']['billing_company']);
-    unset($fields['billing']['billing_state']);
+    unset($fields['billing']['billing_city']);
 	unset($fields['billing']['billing_postcode']);
 	unset($fields['billing']['billing_country']);
 
 	$fields['billing']['billing_national_id'] = array(
         'label'     => __('National ID Number', 'woocommerce'),
-        'required'  => true
+        'required'  => true,
+		'priority'	=> 30,
+		
     );
 
-
+	$fields['shipping']['shipping_state']['default'] = 'Ho Chi Minh';
 	unset($fields['shipping']['shipping_company']);
-    unset($fields['shipping']['shipping_state']);
+    unset($fields['shipping']['shipping_city']);
 	unset($fields['shipping']['shipping_postcode']);
 	unset($fields['shipping']['shipping_country']);
 

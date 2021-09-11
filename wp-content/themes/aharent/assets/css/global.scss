@@ -7,6 +7,8 @@ $main-color: #ffe82e;
 $main-button-color: #04b950;
 $bright-bg-color: #fff;
 
+$form-border-color: #ddd;
+
 
 @import 'components/header';
 @import 'components/footer';
@@ -36,9 +38,9 @@ html {
     box-shadow: none;
 } 
 
-input {
-    padding: 8px 15px 8px;
-    font-size: 1.2rem;
+input, textarea {
+    padding: 6px 10px 6px;
+    font-size: 1rem;
 }
 
 h2 {
@@ -243,5 +245,9 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
     }
 }
 
+
+.woocommerce {
+    margin-bottom: 10px;
+}
 
 

@@ -24,8 +24,10 @@ defined( 'ABSPATH' ) || exit;
 		<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
 
 	<?php else : ?>
+		<div class="title-bar">
 
-		<h3><?php esc_html_e( 'Thông tin đặt thuê', 'woocommerce' ); ?></h3>
+			<h3><?php esc_html_e( 'Thông tin khách hàng', 'woocommerce' ); ?></h3>
+		</div>
 
 	<?php endif; ?>
 
@@ -37,6 +39,7 @@ defined( 'ABSPATH' ) || exit;
 
 		foreach ( $fields as $key => $field ) {
 			woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+
 		}
 		?>
 	</div>
