@@ -340,8 +340,10 @@ function calculate_cart_total_deposit()
 function customize_checkout_billing_kyc( $fields )
 {
 	$fields['billing']['billing_state']['default'] = 'Ho Chi Minh';
-	$fields['billing']['billing_state']['custom_attributes']['readonly'] = true;
-	$fields['billing']['billing_state']['custom_attributes']['disabled'] = true;
+	$fields['billing']['billing_state']['value'] = 'Ho Chi Minh';
+
+	//$fields['billing']['billing_state']['custom_attributes']['readonly'] = true;
+	//$fields['billing']['billing_state']['custom_attributes']['disabled'] = true;
 	unset($fields['billing']['billing_company']);
     unset($fields['billing']['billing_city']);
 	unset($fields['billing']['billing_postcode']);
