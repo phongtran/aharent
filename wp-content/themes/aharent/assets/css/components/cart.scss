@@ -240,6 +240,18 @@
     }
 }
 
+.payment-retry-container {
+    display: flex;
+    justify-content: center;
+
+    .payment-retry {
+        margin-top: 20px;
+        width: 50%;
+        align-self: center;
+    }
+}
+
+
 .woocommerce form .form-row {
 
     margin-left: 20px;

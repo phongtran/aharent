@@ -19,7 +19,12 @@ defined( 'ABSPATH' ) || exit;
 
 $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 ?>
-<form id="order_review" method="post">
+<div class="payment-retry-container">
+<div class="payment-retry ">
+<div class="title-bar">
+	<h3 id="order_review_heading"><?php esc_html_e( 'Đơn hàng đặt thuê & Thanh toán', 'woocommerce' ); ?></h3>
+</div>
+<form id="order_review" class="checkout woocommerce-checkout woocommerce-checkout-review-order " method="post">
 
 	<table class="shop_table">
 		<thead>
@@ -42,11 +47,11 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 							<?php
 								echo wp_kses_post( apply_filters( 'woocommerce_order_item_name', $item->get_name(), $item, false ) );
 
-								do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
+								//do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
 
-								wc_display_item_meta( $item );
+								// wc_display_item_meta( $item );
 
-								do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
+								// do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
 							?>
 						</td>
 						<td class="product-quantity"><?php echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html( $item->get_quantity() ) ) . '</strong>', $item ); ?></td><?php // @codingStandardsIgnoreLine ?>
@@ -67,7 +72,7 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 		</tfoot>
 	</table>
 
-	<div id="payment">
+	<div id="payment" class="woocommerce-checkout-payment">
 		<?php if ( $order->needs_payment() ) : ?>
 			
 			<ul class="wc_payment_methods payment_methods methods">
@@ -97,3 +102,7 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 		</div>
 	</div>
 </form>
+			</div>
+
+</div>
+</div>

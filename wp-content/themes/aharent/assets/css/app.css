@@ -44,7 +44,7 @@ header .container .product-categories .categories-pop-up-list {
       -ms-flex-direction: column;
           flex-direction: column;
   position: absolute;
-  z-index: 100;
+  z-index: 2000;
   top: 100px;
   background-color: #fff;
 }
@@ -729,6 +729,23 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 #payment button {
   background-color: #04b950;
   color: #ddf6e8;
+}
+
+.payment-retry-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.payment-retry-container .payment-retry {
+  margin-top: 20px;
+  width: 50%;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .woocommerce form .form-row {
