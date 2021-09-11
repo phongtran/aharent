@@ -54,9 +54,9 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php if ( ! WC()->cart->needs_shipping() || wc_ship_to_billing_address_only() ) : ?>
 
-			<div class="title-bar">
+			<!-- <div class="title-bar">
 				<h3><?php esc_html_e( 'Ghi chú', 'woocommerce' ); ?></h3>
-			</div>
+			</div> -->
 
 		<?php endif; ?>
 
