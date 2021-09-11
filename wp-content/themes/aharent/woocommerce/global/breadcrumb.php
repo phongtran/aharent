@@ -33,6 +33,8 @@ if ( ! empty( $breadcrumb ) ) {
 		else
 			echo '<li class="tail">';
 
+		if ( $crumb[0] == 'Home' )
+			$crumb[0] = 'Trang chủ';
 
 		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
 			echo '<a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>';
