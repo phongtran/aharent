@@ -288,6 +288,32 @@ a:hover {
   opacity: 0.95;
 }
 
+.order-complete, .link-404, .cart-empty, .notice {
+  margin-top: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.order-complete span, .link-404 span, .cart-empty span, .notice span {
+  color: #04b950;
+}
+
+.order-complete span h2, .link-404 span h2, .cart-empty span h2, .notice span h2 {
+  font-size: 1.5rem;
+}
+
 .logo {
   background: url("../img/aharent-logo.png") no-repeat center center;
   background-size: cover;
@@ -593,7 +619,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .shop-container .shop-product-listing {
-  max-width: 80%;
+  width: 80%;
 }
 
 .aha-cart {
@@ -832,31 +858,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce-additional-fields {
   margin-top: 20px;
-}
-
-.order-complete, .link-404, .cart-empty {
-  margin-top: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.order-complete span, .link-404 span, .cart-empty span {
-  color: #04b950;
-}
-
-.order-complete span h2, .link-404 span h2, .cart-empty span h2 {
-  font-size: 1.5rem;
 }
 
 .checkout-details {

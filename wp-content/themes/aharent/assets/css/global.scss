@@ -79,6 +79,23 @@ a {
 
 }
 
+.order-complete, .link-404, .cart-empty, .notice {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        color: $main-button-color;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+}
+
 .logo {
     background: url('../img/aharent-logo.png') no-repeat center center;
     background-size: cover;

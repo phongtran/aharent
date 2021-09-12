@@ -18,4 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<p class="woocommerce-info"><?php esc_html_e( 'Không tìm thấy sản phẩm phù hợp.', 'woocommerce' ); ?></p>
+<div class="notice">
+	<img src="<?php echo get_template_directory_uri() . '/assets/img/order-complete.png' ?>" />
+	<span><h2><?php esc_html_e( 'Không tìm thấy sản phẩm!', 'woocommerce'); ?></h2></span>
+</div>
