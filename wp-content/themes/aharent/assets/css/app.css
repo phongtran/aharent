@@ -186,6 +186,12 @@ footer .footer-links {
           justify-content: space-evenly;
 }
 
+footer h3 {
+  color: #7b7b7b;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
 footer .social-links {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -215,11 +221,6 @@ footer a {
 footer a:hover {
   color: #231f20;
   opacity: 0.95;
-}
-
-footer h4 {
-  font-size: 13px;
-  font-weight: bold;
 }
 
 footer .company-name p {

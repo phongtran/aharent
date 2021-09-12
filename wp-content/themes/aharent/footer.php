@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="footer-col">
-                    <div class="title"><h4>TÌM HIỂU THÊM</h4></div>
+                    <div class="title"><h3>TÌM HIỂU THÊM</h3></div>
 
                     <div class="col-items">
                         <?php
@@ -39,7 +39,7 @@
                 
                 
                 <div class="footer-col">
-                    <div class="title"><h4>PHƯƠNG THỨC THANH TOÁN</h4></div>
+                    <div class="title"><h3>PHƯƠNG THỨC THANH TOÁN</h3></div>
 
                     <div class="col-items d-flex row-cols-3">
                         <a href="#"><img src="<?php echo get_template_directory_uri() . '/assets/img/visa-icon.png' ?>" /></a>
@@ -50,7 +50,7 @@
                 </div>
                 
                 <div class="footer-col">
-                    <h4 class="text-center">KẾT NỐI VỚI CHÚNG TÔI</h4>
+                    <h3 class="text-center">KẾT NỐI VỚI CHÚNG TÔI</h3>
                     <div class="social-links">
                         
                         <?php dynamic_sidebar( 'footer-social-links' ); ?>
