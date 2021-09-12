@@ -20,7 +20,15 @@ defined( 'ABSPATH' ) || exit;
 /*
  * @hooked wc_empty_cart_message - 10
  */
-do_action( 'woocommerce_cart_is_empty' );
+//do_action( 'woocommerce_cart_is_empty' );
+?>
+
+<div class="cart-empty">
+	<img src="<?php echo get_template_directory_uri() . '/assets/img/order-complete.png' ?>" />
+	<span><h2><?php esc_html_e( 'GIỎ HÀNG TRỐNG', 'woocommerce'); ?></h2></span>
+</div>
+
+<?php
 
 if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
 	<p class="return-to-shop">

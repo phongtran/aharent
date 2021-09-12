@@ -818,7 +818,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin-top: 20px;
 }
 
-.order-complete, .link-404 {
+.order-complete, .link-404, .cart-empty {
   margin-top: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -835,11 +835,11 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
           align-items: center;
 }
 
-.order-complete span, .link-404 span {
+.order-complete span, .link-404 span, .cart-empty span {
   color: #04b950;
 }
 
-.order-complete span h2, .link-404 span h2 {
+.order-complete span h2, .link-404 span h2, .cart-empty span h2 {
   font-size: 1.5rem;
 }
 
