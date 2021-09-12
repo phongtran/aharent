@@ -898,8 +898,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .product-image-gallery .show {
-  width: auto;
-  height: auto;
   min-height: 250px;
   min-width: 250px;
 }
