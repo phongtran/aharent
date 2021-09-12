@@ -4,13 +4,6 @@ header {
   color: #231f20;
 }
 
-header .container .logo {
-  background: url("../img/aharent-logo.png") no-repeat center center;
-  background-size: cover;
-  width: 144px;
-  height: 28px;
-}
-
 header .container .product-categories {
   height: 100%;
   margin-left: 20px;
@@ -176,10 +169,45 @@ header .container .cart .shopping-cart .cart-quantity {
 
 footer {
   background-color: #fff;
-  color: #231f20;
-  font-size: 13px;
+  color: #7b7b7b;
+  font-size: 14px;
   line-height: 1;
-  padding: 10px;
+  padding: 20px 10px 10px 10px;
+}
+
+footer .footer-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+footer .svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+footer .svg-icon path,
+footer .svg-icon polygon,
+footer .svg-icon rect {
+  fill: #4691f6;
+}
+
+footer .svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}
+
+footer .social-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+footer .footer-col {
+  margin: 0 50px;
 }
 
 footer .col-items {
@@ -191,7 +219,7 @@ footer .copyright {
 }
 
 footer a {
-  color: #5a5d5a;
+  color: #7b7b7b;
   text-decoration: none;
 }
 
@@ -203,6 +231,20 @@ footer a:hover {
 footer h4 {
   font-size: 13px;
   font-weight: bold;
+}
+
+footer .company-name p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+footer .menu-footer-links-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+footer .menu-footer-links-container ul li {
+  margin: 10px 0;
 }
 
 html body {
@@ -254,6 +296,13 @@ a {
 a:hover {
   color: #231f20;
   opacity: 0.95;
+}
+
+.logo {
+  background: url("../img/aharent-logo.png") no-repeat center center;
+  background-size: cover;
+  width: 144px;
+  height: 28px;
 }
 
 .price {

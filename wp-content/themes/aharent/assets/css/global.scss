@@ -7,6 +7,8 @@ $main-color: #ffe82e;
 $main-button-color: #04b950;
 $bright-bg-color: #fff;
 
+$footer-text-color: #7b7b7b;
+
 $menu-hover-color: #f8ee9f;
 
 $form-border-color: #ddd;
@@ -74,6 +76,14 @@ a {
         color: $text-color;
         opacity: 0.95;
     }
+
+}
+
+.logo {
+    background: url('../img/aharent-logo.png') no-repeat center center;
+    background-size: cover;
+    width: 144px;
+    height: 28px;
 
 }
 

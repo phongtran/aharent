@@ -1,46 +1,42 @@
     <footer>
 
         <div class="container">
-            <div class="footer-links d-flex row-cols-5">
+            <div class="footer-links">
                 
                 <div class="footer-col">
-                    <div class="title"><h4>HỖ TRỢ KHÁCH HÀNG</h4></div>
+                    <a class="logo-link" href="/">
+                        <div class="logo"></div>
+                    </a>
 
                     <div class="col-items">
-                        <a href="#"><p>Câu hỏi thường gặp</p></a>
-                        <a href="#"><p>Yêu cầu hỗ trợ</p></a>
-                        <a href="#"><p>Hướng dẫn đặt hàng</p></a>
-                        <a href="#"><p>Phương thức vận chuyển</p></a>
-                        <a href="#"><p>Hỗ trợ khách hàng</p></a>
+                        <div class="company-name">
+                            <p>Công ty TNHH Tale</p>
+                            <p>Technologies Việt Nam</p>
+                        </div>
+
+                  
+                        
                     </div>
 
                 </div>
 
                 <div class="footer-col">
-                    <div class="title"><h4>VỀ AHARENT</h4></div>
+                    <div class="title"><h4>TÌM HIỂU THÊM</h4></div>
 
                     <div class="col-items">
-                        <a href="#"><p>Câu hỏi thường gặp</p></a>
-                        <a href="#"><p>Yêu cầu hỗ trợ</p></a>
-                        <a href="#"><p>Hướng dẫn đặt hàng</p></a>
-                        <a href="#"><p>Phương thức vận chuyển</p></a>
-                        <a href="#"><p>Hỗ trợ khách hàng</p></a>
+                        <?php
+                            wp_nav_menu(   
+                                array ( 
+                                    'theme_location' => 'footer-menu' 
+                                ) 
+                            );
+
+                            
+                        ?>
                     </div>
 
                 </div>
                 
-                <div class="footer-col">
-                    <div class="title"><h4>HỢP TÁC VÀ LIÊN KẾT</h4></div>
-
-                    <div class="col-items">
-                        <a href="#"><p>Câu hỏi thường gặp</p></a>
-                        <a href="#"><p>Yêu cầu hỗ trợ</p></a>
-                        <a href="#"><p>Hướng dẫn đặt hàng</p></a>
-                        <a href="#"><p>Phương thức vận chuyển</p></a>
-                        <a href="#"><p>Hỗ trợ khách hàng</p></a>
-                    </div>
-
-                </div>
                 
                 <div class="footer-col">
                     <div class="title"><h4>PHƯƠNG THỨC THANH TOÁN</h4></div>
@@ -53,8 +49,13 @@
 
                 </div>
                 
-                <div class="d-flex justify-content-center">
+                <div class="footer-col">
                     <h4 class="text-center">KẾT NỐI VỚI CHÚNG TÔI</h4>
+                    <div class="social-links">
+                        
+                        <?php dynamic_sidebar( 'footer-social-links' ); ?>
+
+                    </div>
                 </div>
 
             </div>

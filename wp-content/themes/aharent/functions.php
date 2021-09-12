@@ -45,6 +45,16 @@ function lw_loop_shop_per_page( $products )
 add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
 
 
+function register_menus() { 
+    register_nav_menus(
+        array(
+            'main-menu' => 'Main Menu',
+			'socials-menu' => 'Social Menu',
+            'footer-menu' => 'Footer Menu',
+        )
+    ); 
+}
+add_action( 'init', 'register_menus' );
 
 
 
@@ -101,6 +111,13 @@ function aharent_widgets_init() {
         'after_widget'  => '</aside>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
+    ) );
+
+	register_sidebar( array(
+        'name'          => __( 'Footer Social Links', 'aharent' ),
+        'id'            => 'footer-social-links',
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</aside>',
     ) );
 }
 add_action( 'widgets_init', 'aharent_widgets_init' );

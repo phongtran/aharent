@@ -1,13 +1,43 @@
-$footer-text-color: #5a5d5a;
+
 
 footer {
-    background-color: #fff;
-    color: $text-color;
+    background-color: $bright-bg-color;
+    color: $footer-text-color;
 
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1;
 
-    padding: 10px;
+    padding: 20px 10px 10px 10px;
+
+    .footer-links {
+        display: flex;
+    
+    }
+    
+    .svg-icon {
+        width: 1em;
+        height: 1em;
+      }
+      
+      .svg-icon path,
+      .svg-icon polygon,
+      .svg-icon rect {
+        fill: #4691f6;
+      }
+      
+      .svg-icon circle {
+        stroke: #4691f6;
+        stroke-width: 1;
+      }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-col {
+        margin: 0 50px;
+    }
 
     .col-items {
         margin-top: 20px;
@@ -31,6 +61,25 @@ footer {
     h4 {
         font-size: 13px;
         font-weight: bold;
+    }
+
+    .company-name {
+        p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+    }
+
+
+    .menu-footer-links-container {
+        ul {
+            list-style-type: none;
+            padding: 0;
+
+            li {
+                margin: 10px 0;
+            }
+        }
     }
 
     
