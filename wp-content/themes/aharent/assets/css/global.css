@@ -479,6 +479,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   border-radius: 5px;
 }
 
+.bapf_no_products {
+  width: 100%;
+}
+
 .dokan-dashboard {
   margin: 20px 0;
 }

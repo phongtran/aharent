@@ -22,3 +22,40 @@ defined( 'ABSPATH' ) || exit;
 	<img src="<?php echo get_template_directory_uri() . '/assets/img/order-complete.png' ?>" />
 	<span><h2><?php esc_html_e( 'Không tìm thấy sản phẩm!', 'woocommerce'); ?></h2></span>
 </div>
+
+<div class="popular-products">
+    <div class="title-bar">
+        <h3>CÁC SẢN PHẨM NỔI BẬT<?php // echo esc_html( $heading ); ?></h3>
+    </div>
+
+    <?php
+
+            woocommerce_product_loop_start();
+
+                $args = array(
+                    'post_type'   => 'product',
+                    'stock'       => 1,
+                    'showposts'   => 15,
+                    'orderby'     => 'date',
+                    'order'       => 'DESC' ,
+                );
+
+                $loop = new WP_Query( $args );
+
+                while ( $loop->have_posts() ) :
+                    $loop->the_post();
+                    
+                    wc_get_template_part( 'content', 'product' );
+                endwhile;
+
+                wp_reset_query();
+
+                woocommerce_product_loop_end();
+            ?>
+
+        <div class="button-more">
+            <a href="/store">
+                <button class="aha-button" type="button">Xem thêm</button>
+            </a>
+        </div>
+    </div>

@@ -479,6 +479,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   border-radius: 5px;
 }
 
+.bapf_no_products {
+  width: 100%;
+}
+
 .dokan-dashboard {
   margin: 20px 0;
 }
@@ -598,6 +602,9 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 20px;
 }
 

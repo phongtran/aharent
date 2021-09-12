@@ -9,7 +9,13 @@
     
     <?php if ( is_archive() ): ?>
         <div class="shop-container">
-            <?php get_sidebar( 'shop' ); ?>
+            
+            <?php
+                global $wp_query;
+
+                if ( !is_search() || ( is_search() &&  $wp_query->found_posts > 0 ))
+                    get_sidebar( 'shop' );
+            ?>
 
             <?php 
                 // Configure shop template
@@ -18,9 +24,12 @@
 
             ?>
 
-            <div class="shop-product-listing">
-                <?php woocommerce_content(); ?>
-            </div>
+            <?php if ( is_search() && 0 == $wp_query->found_posts ) : woocommerce_content();  ?>
+            <?php else : ?>
+                <div class="shop-product-listing">
+                    <?php woocommerce_content(); ?>
+                </div>
+            <?php endif ?>
         </div>
 
     <?php else: ?>
