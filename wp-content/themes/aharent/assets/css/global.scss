@@ -138,9 +138,11 @@ ul.products {
     justify-content: space-evenly;
     
     li.product, li.product-item {
-        background-color: #fff;
+        background-color: $bright-bg-color;
         max-width: 18%;
         width: 18%;
+
+        min-width: 200px;
 
         margin: 0 15px 20px 0 !important;
         padding: 5px;

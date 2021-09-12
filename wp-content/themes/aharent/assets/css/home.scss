@@ -28,6 +28,10 @@
             background-color: $bright-bg-color;
             border-radius: 5px;
 
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
             .single-step {
 
                 margin: 0 20px;

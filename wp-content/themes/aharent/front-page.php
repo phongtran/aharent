@@ -12,7 +12,7 @@
         <div class="title-bar d-flex align-items-center">
             <h3>CÁCH THUÊ ĐƠN GIẢN</h3>
         </div>
-        <div class="renting-steps d-flex">
+        <div class="renting-steps">
             
             <div class="col single-step">
                 <div class="step-icon-group d-flex">

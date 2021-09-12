@@ -367,6 +367,7 @@ ul.products li.product, ul.products li.product-item {
   background-color: #fff;
   max-width: 18%;
   width: 18%;
+  min-width: 200px;
   margin: 0 15px 20px 0 !important;
   padding: 5px;
 }
@@ -494,6 +495,14 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   padding: 30px 30px;
   background-color: #fff;
   border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .container .renting-instructions .renting-steps .single-step {
