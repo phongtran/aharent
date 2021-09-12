@@ -90,9 +90,11 @@
             {
                 $product_price = $price_value;
                 break;
-            }
-                
+            }       
         }
+
+        if ( $product_price == 0 && isset( $price_more ))
+            $product_price = $price_more;
             
         $vendor_percentage = get_vendor_percentage( $product->post->post_author );
         $deposit = $vendor_percentage * $product_price / 100;
