@@ -167,14 +167,15 @@ ul.products {
        
 
         .thumbnail {
-            height: 225px;
+            display: flex;
+            justify-content: center;
+            
             padding: 5px 3px;
             a {
-               
+                overflow: hidden;
                 
                 img {
                     width: 100%;
-                    height: 100%;
                     object-fit: contain;
                 }
             }
