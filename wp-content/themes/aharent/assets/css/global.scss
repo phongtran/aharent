@@ -142,7 +142,7 @@ ul.products {
         max-width: 18%;
         width: 18%;
 
-        min-width: 200px;
+        min-width: 150px;
 
         margin: 0 15px 20px 0 !important;
         padding: 5px;
@@ -194,7 +194,7 @@ ul.nav-tabs {
         padding: 15px 20px;
 
         &.active {
-            border-bottom: 2px solid #258c69;
+            border-bottom: 2px solid $main-button-color;
         }
 
         &:hover {

@@ -2,6 +2,7 @@
     background-color: #fff;
     
     display: flex;
+    flex-wrap: wrap;
     padding: 20px;
     margin-bottom: 20px;
 
@@ -16,8 +17,11 @@
         
 
         .show {
-            width: 400px;
-            height: 400px;
+            width: auto;
+            height: auto;
+
+            min-height: 250px;
+            min-width: 250px;
 
             img#show-img {
                 max-width: 100%;
@@ -101,8 +105,6 @@
 
     .summary {
 
-        width: 100%;
-
         .add-to-cart {
             margin-top: 20px;
 
@@ -175,15 +177,15 @@
                     justify-content: center;
                     font-size: 1.2rem;
 
-                    background-color: #258c69;
-                    color: #f0f7f5;
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
                     padding: 5px 10px;
 
                 }
 
                 .price-item-value {
                     font-size: 1.5rem;
-                    color: #258c69;
+                    color: $main-button-color;
                     padding: 5px 10px;
 
                     height: 100%;
@@ -192,7 +194,7 @@
 
 
                     &.rental {
-                        font-size: 2rem;
+                        
 
                         .rental-time {
                             font-size: 1.5rem;
@@ -205,8 +207,8 @@
         }
 
         .price {
-            font-size: 2rem;
-            color: #258c69;
+            
+            color: $main-button-color;
 
             .rental-time {
                 font-size: 1.5rem;

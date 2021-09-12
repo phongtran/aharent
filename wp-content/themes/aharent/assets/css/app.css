@@ -179,22 +179,11 @@ footer .footer-links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-footer .svg-icon {
-  width: 1em;
-  height: 1em;
-}
-
-footer .svg-icon path,
-footer .svg-icon polygon,
-footer .svg-icon rect {
-  fill: #4691f6;
-}
-
-footer .svg-icon circle {
-  stroke: #4691f6;
-  stroke-width: 1;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 footer .social-links {
@@ -367,7 +356,7 @@ ul.products li.product, ul.products li.product-item {
   background-color: #fff;
   max-width: 18%;
   width: 18%;
-  min-width: 200px;
+  min-width: 150px;
   margin: 0 15px 20px 0 !important;
   padding: 5px;
 }
@@ -406,7 +395,7 @@ ul.nav-tabs .nav-item {
 }
 
 ul.nav-tabs .nav-item.active {
-  border-bottom: 2px solid #258c69;
+  border-bottom: 2px solid #04b950;
 }
 
 ul.nav-tabs .nav-item:hover {
@@ -563,6 +552,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .container .popular-products {
   margin: 20px;
+}
+
+.container .popular-products.related {
+  margin: 20px 0;
 }
 
 .container .popular-products .button-more {
@@ -883,6 +876,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -894,8 +889,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .product-image-gallery .show {
-  width: 400px;
-  height: 400px;
+  width: auto;
+  height: auto;
+  min-height: 250px;
+  min-width: 250px;
 }
 
 .product-info .product-image-gallery .show img#show-img {
@@ -972,10 +969,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin-right: 0;
 }
 
-.product-info .summary {
-  width: 100%;
-}
-
 .product-info .summary .add-to-cart {
   margin-top: 20px;
 }
@@ -1046,14 +1039,14 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
       -ms-flex-pack: center;
           justify-content: center;
   font-size: 1.2rem;
-  background-color: #258c69;
-  color: #f0f7f5;
+  background-color: #04b950;
+  color: #ddf6e8;
   padding: 5px 10px;
 }
 
 .product-info .summary .price-wrapper .price-item .price-item-value {
   font-size: 1.5rem;
-  color: #258c69;
+  color: #04b950;
   padding: 5px 10px;
   height: 100%;
   display: -webkit-box;
@@ -1064,17 +1057,12 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
           align-items: flex-end;
 }
 
-.product-info .summary .price-wrapper .price-item .price-item-value.rental {
-  font-size: 2rem;
-}
-
 .product-info .summary .price-wrapper .price-item .price-item-value.rental .rental-time {
   font-size: 1.5rem;
 }
 
 .product-info .summary .price {
-  font-size: 2rem;
-  color: #258c69;
+  color: #04b950;
 }
 
 .product-info .summary .price .rental-time {
