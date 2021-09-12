@@ -400,6 +400,10 @@ function get_new_price( $product_id, $date_from, $date_to, $quantity )
 		$vendor_name 	= $vendor->user_login;	
 
 		$price_handler = 'get_price_from_' . $vendor_name;
+
+		if ( !function_exists($price_handler) )
+			$price_handler = 'get_price_for_duration';
+
 	}
 
 	if ( function_exists( $price_handler ) )
