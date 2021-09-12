@@ -165,13 +165,15 @@ ul.products {
         padding: 5px;
 
         .thumbnail {
+            width: 225px;
+            height: 225px;
             padding: 5px 3px;
             a {
             
                 img {
                     width: 100%;
                     height: auto;
-                    object-fit: contain;
+                    object-fit: cover;
                 }
             }
         }
