@@ -28,20 +28,41 @@ defined( 'ABSPATH' ) || exit;
 	<span><h2><?php esc_html_e( 'GIỎ HÀNG TRỐNG', 'woocommerce'); ?></h2></span>
 </div>
 
-<?php
+<div class="popular-products">
+        <div class="title-bar">
+            <h3>SẢN PHẨM NỔI BẬT</h3>
+        </div>
 
-if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
-	<p class="return-to-shop">
-		<a class="button wc-backward" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-			<?php
-				/**
-				 * Filter "Return To Shop" text.
-				 *
-				 * @since 4.6.0
-				 * @param string $default_text Default text.
-				 */
-				echo esc_html( apply_filters( 'woocommerce_return_to_shop_text', __( 'Xem sản phẩm đặt thuê', 'woocommerce' ) ) );
-			?>
-		</a>
-	</p>
-<?php endif; ?>
+    
+            <?php
+
+            woocommerce_product_loop_start();
+
+                $args = array(
+                    'post_type'   => 'product',
+                    'stock'       => 1,
+                    'showposts'   => 15,
+                    'orderby'     => 'date',
+                    'order'       => 'DESC' ,
+                );
+
+                $loop = new WP_Query( $args );
+
+                while ( $loop->have_posts() ) :
+                    $loop->the_post();
+                    
+                    wc_get_template_part( 'content', 'product' );
+                endwhile;
+
+                wp_reset_query();
+
+                woocommerce_product_loop_end();
+            ?>
+
+        <div class="button-more">
+            <a href="/store">
+                <button class="aha-button" type="button">Xem thêm</button>
+            </a>
+        </div>
+        
+    </div>
