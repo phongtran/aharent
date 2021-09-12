@@ -389,15 +389,15 @@ ul.products li.product, ul.products li.product-item {
 }
 
 ul.products li.product .thumbnail, ul.products li.product-item .thumbnail {
-  width: 225px;
+  height: 225px;
   padding: 5px 3px;
 }
 
 ul.products li.product .thumbnail a img, ul.products li.product-item .thumbnail a img {
   width: 100%;
-  height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 ul.products li.product .price, ul.products li.product-item .price {
