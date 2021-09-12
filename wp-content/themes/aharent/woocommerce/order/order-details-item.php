@@ -43,11 +43,11 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 
 		echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>', $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
+		// do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
 
-		wc_display_item_meta( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		// wc_display_item_meta( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-		do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
+		// do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
 		?>
 	</td>
 

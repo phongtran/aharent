@@ -268,4 +268,29 @@
     margin-top: 20px;
 }
 
+.order-complete, .link-404 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    span {
+        color: $main-button-color;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.checkout-details {
+
+    display: flex;
+    justify-content: space-evenly;
+
+
+    section {
+        width: 48%;
+    }
+}

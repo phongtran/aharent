@@ -21,9 +21,11 @@ $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVa
 ?>
 <div class="payment-retry-container">
 <div class="payment-retry ">
+
 <div class="title-bar">
 	<h3 id="order_review_heading"><?php esc_html_e( 'Đơn hàng đặt thuê & Thanh toán', 'woocommerce' ); ?></h3>
 </div>
+
 <form id="order_review" class="checkout woocommerce-checkout woocommerce-checkout-review-order " method="post">
 
 	<table class="shop_table">
