@@ -395,8 +395,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .woocommerce-pagination ul.page-numbers li span.current {
-  background-color: #258c69;
-  color: #fff;
+  background-color: #04b950;
+  color: #ddf6e8;
   border-radius: 5px;
 }
 

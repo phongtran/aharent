@@ -221,8 +221,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
                 padding: 8px 15px;
 
                 &.current {
-                    background-color: #258c69;
-                    color: #fff;
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
 
                     border-radius: 5px;
                 }
