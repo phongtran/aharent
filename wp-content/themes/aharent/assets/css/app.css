@@ -344,6 +344,11 @@ a:hover {
   margin-right: 10px;
 }
 
+a.button {
+  background-color: #04b950 !important;
+  color: #ddf6e8 !important;
+}
+
 ul.products {
   max-width: 100%;
   padding: 0;

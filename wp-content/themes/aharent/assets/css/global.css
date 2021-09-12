@@ -170,9 +170,44 @@ header .container .cart .shopping-cart .cart-quantity {
 footer {
   background-color: #fff;
   color: #7b7b7b;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1;
   padding: 20px 10px 10px 10px;
+}
+
+footer .footer-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+footer .svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+footer .svg-icon path,
+footer .svg-icon polygon,
+footer .svg-icon rect {
+  fill: #4691f6;
+}
+
+footer .svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}
+
+footer .social-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+footer .footer-col {
+  margin: 0 50px;
 }
 
 footer .col-items {
@@ -199,7 +234,17 @@ footer h4 {
 }
 
 footer .company-name p {
-  margin: 0;
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+footer .menu-footer-links-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+footer .menu-footer-links-container ul li {
+  margin: 10px 0;
 }
 
 html body {
@@ -297,6 +342,11 @@ a:hover {
 .breadcrumb ul li.tail:before {
   content: ">";
   margin-right: 10px;
+}
+
+a.button {
+  background-color: #04b950 !important;
+  color: #ddf6e8 !important;
 }
 
 ul.products {

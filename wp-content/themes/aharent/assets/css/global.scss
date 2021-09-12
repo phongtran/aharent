@@ -122,6 +122,11 @@ a {
     
 }
 
+a.button {
+    background-color: $main-button-color !important;
+    color: $bright-text-color !important;
+}
+
 ul.products {
     max-width: 100%;
     padding: 0;
