@@ -32,6 +32,10 @@
   .mobile-header .logo-link, .mobile-header .cart, .mobile-header .product-categories {
     width: auto;
   }
+  .mobile-header .pop-up-menu {
+    top: 40px !important;
+    right: 0 !important;
+  }
 }
 
 @media (max-width: 900px) {
