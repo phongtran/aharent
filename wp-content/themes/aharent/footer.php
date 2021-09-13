@@ -4,9 +4,7 @@
             <div class="footer-links">
                 
                 <div class="footer-col">
-                    <a class="logo-link" href="/">
-                        <div class="logo"></div>
-                    </a>
+               
 
                     <div class="col-items">
                         <div class="company-name">

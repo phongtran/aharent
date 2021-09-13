@@ -105,6 +105,16 @@ header .container .product-categories .pop-up-menu {
   z-index: 1000;
 }
 
+header .container .product-categories .pop-up-menu .dim {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #ffe82e;
+}
+
 header .container .product-categories .categories-pop-up-list {
   border: 1px solid #d9d9d9;
   -webkit-box-shadow: 1px 1px 5px 1px #d9d9d9;
@@ -116,6 +126,7 @@ header .container .product-categories .categories-pop-up-list {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  z-index: 50;
   background-color: #fff;
 }
 
