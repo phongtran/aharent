@@ -27,6 +27,12 @@
   }
 }
 
+@media (max-width: 900px) {
+  .product-categories-label {
+    display: none !important;
+  }
+}
+
 header {
   background-color: #ffe82e;
   height: 80px;

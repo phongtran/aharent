@@ -32,6 +32,14 @@ $header-text-color: $text-color;
     }
 }
 
+@media (max-width: 900px) {
+
+    .product-categories-label {
+        display: none !important;
+    }
+
+}
+
 header {
     background-color: $header-bg-color;
     height: 80px;
