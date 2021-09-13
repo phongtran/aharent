@@ -217,7 +217,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="desktop-search search-box col-sm-7 d-flex align-items-center">
+                    <div class="search-box col-sm-7 d-flex align-items-center">
 
                         <?php echo do_shortcode('[fibosearch]'); ?>
                         <!-- <input name="search-box" class="form-control" type="text" placeholder="Tìm kiếm sản phẩm..." />
