@@ -517,6 +517,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   background-color: #fff;
 }
 
+.mega-sale img {
+  width: 100%;
+}
+
 .container .title-bar {
   background-color: #fff;
   border-radius: 5px;
