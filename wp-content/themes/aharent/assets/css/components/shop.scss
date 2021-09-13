@@ -1,11 +1,12 @@
 .shop-container {
     
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
 
     .shop-sidebar {
-        
+        min-width: 200px;
         width: 15%;
         margin-right: 20px;
         

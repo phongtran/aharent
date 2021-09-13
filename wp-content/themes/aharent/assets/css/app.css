@@ -664,6 +664,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -671,6 +673,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .shop-container .shop-sidebar {
+  min-width: 200px;
   width: 15%;
   margin-right: 20px;
 }
