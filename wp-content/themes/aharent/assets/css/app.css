@@ -34,6 +34,10 @@ header {
   overflow: hidden;
 }
 
+header .container .desktop-search {
+  width: 45%;
+}
+
 header .container .product-categories {
   height: 100%;
   margin-left: 20px;
