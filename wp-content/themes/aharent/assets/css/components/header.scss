@@ -1,16 +1,46 @@
 $header-bg-color: $main-color;
 $header-text-color: $text-color;
 
+@media (max-width: 576px) {
+
+    header {
+        height: 120px !important;
+    }
+
+
+    .desktop-header {
+        display: none !important;
+    }
+
+    .mobile-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: space-evenly;
+        justify-items: space-evenly;
+
+        .row {
+            width: 100%;
+            display: flex;
+            margin: 10px 0;
+        }
+
+        .logo-link, .cart, .product-categories {
+            width: auto;
+        }
+
+        
+    }
+}
+
 header {
     background-color: $header-bg-color;
     height: 80px;
     color: $header-text-color;
 
-    @media (max-width: 576px) {
-        .product-categories-label {
-            display: none;
-        }
-    }
+    overflow: hidden;
+
+    
 
     
 
