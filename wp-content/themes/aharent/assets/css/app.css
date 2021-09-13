@@ -4,6 +4,12 @@ header {
   color: #231f20;
 }
 
+@media (max-width: 576px) {
+  header .product-categories-label {
+    display: none;
+  }
+}
+
 header .container .product-categories {
   height: 100%;
   margin-left: 20px;

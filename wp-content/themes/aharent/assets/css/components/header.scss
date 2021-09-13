@@ -6,6 +6,14 @@ header {
     height: 80px;
     color: $header-text-color;
 
+    @media (max-width: 576px) {
+        .product-categories-label {
+            display: none;
+        }
+    }
+
+    
+
     .container {
         
 
