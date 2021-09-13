@@ -423,7 +423,7 @@ ul.products li.product, ul.products li.product-item {
   background-color: #fff;
   max-width: 18%;
   width: 18%;
-  min-width: 200px;
+  min-width: 220px;
   margin: 0 15px 20px 0 !important;
   padding: 5px;
 }
@@ -451,8 +451,8 @@ ul.products li.product .thumbnail a, ul.products li.product-item .thumbnail a {
 }
 
 ul.products li.product .thumbnail a img, ul.products li.product-item .thumbnail a img {
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   -o-object-fit: cover;
      object-fit: cover;
 }
