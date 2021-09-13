@@ -159,7 +159,7 @@ ul.products {
         max-width: 18%;
         width: 18%;
 
-        min-width: 150px;
+        min-width: 200px;
 
         margin: 0 15px 20px 0 !important;
         padding: 5px;
@@ -167,26 +167,24 @@ ul.products {
        
 
         .thumbnail {
-            min-height: 200px;
-            
-            padding: 5px 3px;
 
             display: flex;
 
             align-items: center;
             justify-content: center;
 
+            overflow: hidden;
         
             
             a {
-                display: block;
+                position: relative;
+                display: inline-flex;
                 width: 100%;
                 height: 100%;
                 
                 img {
-                    width: 100%;
-                    height: 100%;
-                    max-height: 200px;
+                    width: 200px;
+                    height: 200px;
                     object-fit: cover;
                 }
             }
