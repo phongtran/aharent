@@ -608,7 +608,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .container .categories .categories-list {
-  padding: 20px 0;
+  padding: 10px 0;
   background-color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -621,7 +621,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .container .categories .categories-list .category-item {
-  margin: 0 5px;
+  margin: 10px 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
