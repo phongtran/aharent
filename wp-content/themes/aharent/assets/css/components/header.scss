@@ -14,15 +14,14 @@ $header-text-color: $text-color;
 
     .mobile-header {
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-content: space-evenly;
-        justify-items: space-evenly;
+        flex-wrap: wrap;
 
         .row {
             width: 100%;
             display: flex;
             margin: 10px 0;
+
+            justify-content: space-between;
         }
 
         .logo-link, .cart, .product-categories {
