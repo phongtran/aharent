@@ -66,10 +66,10 @@
                 </div>
                 <div class="step-notes">
                     <div class="step-notes-title">
-                        <h4>Thanh toán mỗi tháng</h4>
+                        <h4>Thanh toán mỗi ngày</h4>
                     </div>
                     <div class="notes">
-                        <p>Thanh toán theo tháng và không phải dùng nhiều ngân sách mua trọn ngay từ đầu.</p>
+                        <p>Thanh toán theo ngày và không phải dùng nhiều ngân sách mua trọn ngay từ đầu.</p>
                     </div>
                 </div>
             </div>
