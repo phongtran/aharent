@@ -1008,10 +1008,17 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .product-info .product-image-gallery .show {
   min-height: 250px;
   min-width: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .product-info .product-image-gallery .show img#show-img {
   max-width: 100%;
+  max-height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }
