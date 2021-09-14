@@ -26,6 +26,8 @@
 			});
 		},
 	}).change(function(e) {
+		e.preventDefault();
+
 		getProductPrice();
 	});
 
@@ -45,6 +47,8 @@
 
 		}
 	}).change(function(e) {
+		e.preventDefault();
+
 		getProductPrice();
 	});
 
