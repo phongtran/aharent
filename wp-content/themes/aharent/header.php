@@ -36,17 +36,17 @@
                         
                     </div>
 
-                    <div class="product-categories d-flex col-sm-2">
+                    <div class="product-categories">
                         
                         <a class="product-categories-pop-up" href="#">    
-                            <div class="d-flex">
+                            
                                 <div class="product-categories-icon flex-column align-self-center">
                                         <div class="top-bar align-self-top"></div>
                                         <div class="middle-bar align-self-center"></div>
                                         <div class="bottom-bar align-self-bottom"></div>
                                 </div>
                                     
-                            </div>            
+                            
                         </a>
 
                         <div class="pop-up-menu">

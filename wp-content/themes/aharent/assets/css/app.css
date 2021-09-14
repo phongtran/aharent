@@ -75,9 +75,7 @@ header .container .product-categories {
 }
 
 header .container .product-categories:hover .pop-up-menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
 }
 
 header .container .product-categories .product-categories-pop-up {
@@ -107,6 +105,7 @@ header .container .product-categories .pop-up-menu {
   position: absolute;
   top: 70px;
   z-index: 1000;
+  width: 250px;
 }
 
 header .container .product-categories .pop-up-menu .dim {

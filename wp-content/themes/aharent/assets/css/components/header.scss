@@ -91,7 +91,7 @@ header {
 
             &:hover {
                 .pop-up-menu {
-                    display: flex;
+                    display: block;
                 }
 
             }
@@ -120,6 +120,8 @@ header {
                 position: absolute;
                 top: 70px;
                 z-index: 1000;
+
+                width: 250px;
 
                 .dim {
                     position: fixed;
