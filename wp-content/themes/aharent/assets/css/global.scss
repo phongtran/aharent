@@ -167,6 +167,9 @@ ul.products {
             background-color: $bright-bg-color;
 
             padding: 5px;
+
+            width: 100% !important;
+            margin: 0 !important;
     
             &:hover {
                 box-shadow: 1px 1px 5px 1px $shadow-color;
@@ -317,6 +320,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce {
     margin-bottom: 10px;
+
 }
 
 

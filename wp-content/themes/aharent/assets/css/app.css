@@ -492,6 +492,8 @@ ul.products a.product-link {
 ul.products a.product-link li.product, ul.products a.product-link li.product-item {
   background-color: #fff;
   padding: 5px;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 ul.products a.product-link li.product:hover, ul.products a.product-link li.product-item:hover {
