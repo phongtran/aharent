@@ -53,10 +53,9 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			</div>
 
 			<div class="form-input time-period">
-		
-				
-					<input type="text" id="date-from" name="_date_from" value="" placeholder="Từ ngày">
-					<input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày">
+
+					<input type="text" id="date-from" name="_date_from" value="" placeholder="Từ ngày" autocomplete="off">
+					<input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off">
 				
 			</div>
 		</div>

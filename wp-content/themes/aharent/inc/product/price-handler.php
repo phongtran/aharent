@@ -34,6 +34,7 @@
             $day->add(new DateInterval('P1D'));
         }
 
+
         $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $vendor );
         $deposit = $vendor_percentage * $total_price / 100;

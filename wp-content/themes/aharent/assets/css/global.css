@@ -32,6 +32,10 @@
   .mobile-header .logo-link, .mobile-header .cart, .mobile-header .product-categories {
     width: auto;
   }
+  .mobile-header .pop-up-menu {
+    top: 40px !important;
+    right: 0 !important;
+  }
 }
 
 @media (max-width: 900px) {
@@ -71,9 +75,7 @@ header .container .product-categories {
 }
 
 header .container .product-categories:hover .pop-up-menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
 }
 
 header .container .product-categories .product-categories-pop-up {
@@ -103,6 +105,7 @@ header .container .product-categories .pop-up-menu {
   position: absolute;
   top: 70px;
   z-index: 1000;
+  width: 250px;
 }
 
 header .container .product-categories .pop-up-menu .dim {
@@ -301,6 +304,10 @@ footer a {
 footer a:hover {
   color: #231f20;
   opacity: 0.95;
+}
+
+footer .company-name {
+  font-weight: bold;
 }
 
 footer .company-name p {
@@ -525,6 +532,11 @@ ul.nav-tabs .nav-item.active {
 
 ul.nav-tabs .nav-item:hover {
   background-color: #f5f5f5;
+}
+
+button {
+  background-color: #04b950;
+  color: #ddf6e8;
 }
 
 button[type="submit"].aha-button, button[type="button"].aha-button {

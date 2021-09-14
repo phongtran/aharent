@@ -396,13 +396,12 @@ function get_new_price( $product_id, $date_from, $date_to, $quantity )
 	}
 	else
 	{
-		$vendor 		= get_user_by( 'id', $product->post->post_author );
-		$vendor_name 	= $vendor->user_login;	
+		$price_handler = 'get_price_for_duration';
 
-		$price_handler = 'get_price_from_' . $vendor_name;
-
-		if ( !function_exists($price_handler) )
-			$price_handler = 'get_price_for_duration';
+		$vendor_name 	= get_post_meta ( $product_id, '_vendor' );
+		
+		if ( isset( $vendor_name[0] ) && !empty( $vendor_name[0]) && function_exists( 'get_price_from_' . $vendor_name[0]) )
+			$price_handler = 'get_price_from_' . $vendor_name[0];
 
 	}
 

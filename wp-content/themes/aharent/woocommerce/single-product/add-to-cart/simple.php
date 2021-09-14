@@ -79,8 +79,8 @@ if ( $product->is_in_stock() ) : ?>
 			<div class="form-input time-period">
 		
 				
-					<input type="text" id="date-from" name="_date_from" value="" placeholder="Từ ngày">
-					<input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày">
+					<input type="text" id="date-from" name="_date_from" value="" placeholder="Từ ngày" autocomplete="off">
+					<input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off">
 				
 			</div>
 		</div>

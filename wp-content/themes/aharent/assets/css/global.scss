@@ -234,6 +234,11 @@ ul.nav-tabs {
     }
 }
 
+button {
+    background-color: $main-button-color;
+    color: $bright-text-color;
+}
+
 button[type="submit"].aha-button, button[type="button"].aha-button {
     width: 200px;
     height: 50px;

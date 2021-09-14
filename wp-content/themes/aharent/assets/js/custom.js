@@ -13,10 +13,11 @@
 		new bootstrap.Popover(popover, { trigger: 'focus' });
 	}
 
-	var dateFormat = "d/m/Y H:i";
+	var dateFormat = "d/m/Y"; // "d/m/Y H:i";
 
 	$('.add-to-cart :input[name="_date_from"]').datetimepicker({
 		format: dateFormat,
+		timepicker: false,
   		onShow:	function( ct ) {
 			var _dateTo = $('.add-to-cart :input[name="_date_to"]').datetimepicker("getValue");
 
@@ -31,6 +32,7 @@
 
 	$('.add-to-cart :input[name="_date_to"]').datetimepicker({
 		format: dateFormat,
+		timepicker: false,
 		onShow:	function( ct ){
 			
 			var _dateFrom = $('.add-to-cart :input[name="_date_from"]').datetimepicker("getValue");
@@ -40,10 +42,12 @@
 				minDate: _dateFromValue ? _dateFrom : false,
 				value: _dateFromValue ? _dateFrom : "",
 			});
+
 		}
 	}).change(function(e) {
 		getProductPrice();
 	});
+
 
 	$('.woocommerce-cart-form .quantity input').inputSpinner().change(function(e) {
 		cartItemChanged(e);
