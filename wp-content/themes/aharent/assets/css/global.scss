@@ -155,53 +155,54 @@ ul.products {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    
-    li.product, li.product-item {
-        background-color: $bright-bg-color;
+
+    a.product-link {
+        margin: 0 15px 20px 0 !important;
+
         max-width: 18%;
         width: 18%;
-
         min-width: 220px;
 
-        margin: 0 15px 20px 0 !important;
-        padding: 5px;
+        li.product, li.product-item {
+            background-color: $bright-bg-color;
 
-       
-
-        .thumbnail {
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-        
-            
-            a {
+            padding: 5px;
+    
+            &:hover {
+                box-shadow: 1px 1px 5px 1px $shadow-color;
+            }
+    
+    
+            .thumbnail {
+    
+                display: flex;
+    
+                align-items: center;
+                justify-content: center;
+    
+                overflow: hidden;
+    
                 position: relative;
-                display: inline-flex;
                 width: 100%;
-                height: 100%;
                 
+                    
                 img {
                     width: 220px;
                     height: 220px;
                     object-fit: cover;
                 }
+                
             }
-        }
-        
-
-        
-
-        
-
-        .price {
-            margin: 0 10px;
+                
+            .price {
+                margin: 0 10px;
+            }
+    
         }
 
     }
+    
+    
 
 }
 
@@ -239,6 +240,10 @@ ul.nav-tabs {
 button {
     background-color: $main-button-color;
     color: $bright-text-color;
+
+    &:hover {
+        box-shadow: 1px 1px 5px 1px $shadow-color;
+    }
 }
 
 button[type="submit"].aha-button, button[type="button"].aha-button {

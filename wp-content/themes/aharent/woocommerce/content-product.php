@@ -24,19 +24,17 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
+<a class="product-link" href="<?php echo get_permalink( $product->id ); ?>">
 <li <?php wc_product_class( 'product-item', $product ); ?>>
-	<div class="thumbnail">
-		<a href="<?php echo get_permalink( $product->id ); ?>">
+	
+		<div class="thumbnail">
 			<?php $image = get_the_post_thumbnail_url( $product->id ); ?>
 			<img src="<?php echo (!empty($image)) ? $image : '/wp-content/uploads/supplier_photos/default.png'; ?>" />
-		</a>
-	</div>
+		</div>
 
-	<div class="product-name">
-		<a href="<?php echo get_permalink( $product->id ); ?>">
+		<div class="product-name">
 			<h2><?php echo $product->name ?></h2>
-		</a>
-	</div>
+		</div>
 
 	<span class="price">
 		<?php echo wc_price( $product->price ); ?>/ngày
@@ -83,4 +81,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	// do_action( 'woocommerce_after_shop_loop_item' );
 	?>
+	
 </li>
+</a>
