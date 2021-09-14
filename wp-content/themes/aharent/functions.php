@@ -353,6 +353,24 @@ function calculate_cart_total_deposit()
 	return $_total_deposit;
 }
 
+function add_the_date_validation( $passed )
+{ 
+	$quantity = $_POST['quantity'];
+	$date_from = $_POST['_date_from'];
+	$date_to = $_POST['_date_to'];
+
+	if ( (!isset( $quantity ) || $quantity <= 0) ||
+		( !isset( $date_from ) || ( "" == $date_from )) || 
+		( !isset( $date_to ) || ( "" == $date_to )) )
+	{
+		wc_add_notice(  __( 'Vui lòng chọn thông tin trước khi đặt thuê.', 'woocommerce' ), 'error' );
+		$passed = false;
+	}
+		
+	return $passed;
+}
+add_filter( 'woocommerce_add_to_cart_validation', 'add_the_date_validation', 10, 5 );  
+
 
 function customize_checkout_billing_kyc( $fields )
 {
