@@ -52,6 +52,30 @@
 		getProductPrice();
 	});
 
+	$('.add-to-cart button.aha-button').click(function(e) {
+
+		var quantity 		= $("#quantity-input").val(),
+			dateFrom 		= $("#date-from").val(),
+			dateTo 			= $("#date-to").val();
+		
+		if ( "" == quantity ) {
+			$('.woocommerce-cart-form .quantity input').addClass('validate-enabled');
+			e.preventDefault();
+		}
+
+		if ( "" == dateFrom ) {
+			$('.add-to-cart :input[name="_date_from"]').addClass('validate-enabled');
+			$('.validate').show();
+			e.preventDefault();
+		}
+
+		if ( "" == dateTo ) {
+			$('.add-to-cart :input[name="_date_to"]').addClass('validate-enabled');
+			$('.validate').show();
+			e.preventDefault();
+		}
+	});
+
 
 	$('.woocommerce-cart-form .quantity input').inputSpinner().change(function(e) {
 		cartItemChanged(e);
@@ -88,7 +112,12 @@
 				.done(function(response) {
 					$(".price-item-value.rental").first().html( response['data']['price']);
 					$(".deposit .price-item-value").first().html( response['data']['deposit']);
-					$(".deposit").attr( "style", "display: flex !important; ")
+					$(".deposit").attr( "style", "display: flex !important; ");
+
+					$('.woocommerce-cart-form .quantity input').removeClass('validate-enabled');
+					$('.add-to-cart :input[name="_date_from"]').removeClass('validate-enabled');
+					$('.add-to-cart :input[name="_date_to"]').removeClass('validate-enabled');
+					$('.validate').hide();
 				});
 	}
 	

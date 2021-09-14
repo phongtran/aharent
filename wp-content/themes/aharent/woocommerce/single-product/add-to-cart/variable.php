@@ -50,6 +50,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		<div class="form-row">
 			<div class="form-label">
 				<label>Thời gian thuê:</label>
+				<div class="validate"><span>*Vui lòng chọn ngày</span></div>
 			</div>
 
 			<div class="form-input time-period">
@@ -60,7 +61,6 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			</div>
 		</div>
 
-		
 		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
 
 		<input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />

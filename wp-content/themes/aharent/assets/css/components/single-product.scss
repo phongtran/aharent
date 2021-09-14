@@ -109,6 +109,21 @@
         .add-to-cart {
             margin-top: 20px;
 
+            .validate {
+
+                display: none;
+                
+                font-style: italic;
+                font-size: 13px;
+                color: $validation-text;
+
+            }
+
+            .validate-enabled {
+                display: inline-block;
+                border: 2px solid $validation-text;
+            }
+
             
 
             .form-row {
@@ -117,8 +132,9 @@
                 margin: 20px 0;
 
                 .form-label {
-                    width: 15%;
+                    width: 150px;
                     display: flex;
+                    flex-wrap: wrap;
                     align-items: center;
                 }
 
