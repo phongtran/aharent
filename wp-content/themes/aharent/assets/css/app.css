@@ -306,6 +306,10 @@ footer a:hover {
   opacity: 0.95;
 }
 
+footer .company-name {
+  font-weight: bold;
+}
+
 footer .company-name p {
   font-size: 1rem;
   margin: 5px 0;
