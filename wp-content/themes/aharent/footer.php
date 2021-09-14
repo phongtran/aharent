@@ -12,6 +12,10 @@
                             <p>Technologies Việt Nam</p>
                         </div>
 
+                        <div class="copyright">
+                            <p>© 2021 - Bản quyền của AhaRent</p>
+                        </div>
+
                   
                         
                     </div>
@@ -58,9 +62,7 @@
 
             </div>
 
-            <div class="copyright">
-                <p>© 2021 - Bản quyền của AhaRent</p>
-            </div>
+    
         </div>
 
     </footer>
