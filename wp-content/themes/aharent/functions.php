@@ -422,6 +422,19 @@ function get_vendor_percentage( $vendor_id )
 	return false;
 }
 
+function get_product_vendor ( $post)
+{
+	$_vendor_login = get_post_meta( $post->ID, '_vendor' );
+	
+	if ( isset( $_vendor_login ) && !empty( $_vendor_login[0]))
+		$user = get_user_by( 'login', $_vendor_login[0] );
+
+	if ( isset( $user ) && !empty( $user ))
+		return $user->id;
+
+	return $post->post_author;
+}
+
 
 function aha_woocommerce_show_page_title() {
 	return false;

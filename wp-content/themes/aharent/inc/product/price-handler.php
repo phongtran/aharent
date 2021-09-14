@@ -34,7 +34,8 @@
             $day->add(new DateInterval('P1D'));
         }
 
-        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $vendor = get_product_vendor ( $product->post );
+        $vendor_percentage = get_vendor_percentage( $vendor );
         $deposit = $vendor_percentage * $total_price / 100;
 
         return array (
@@ -51,6 +52,7 @@
         $price = $product->get_price();
         $total_price = $price * $duration;
 
+        $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $product->post->post_author );
         $deposit = $vendor_percentage * $total_price / 100;
 
@@ -95,7 +97,8 @@
 
         if ( $product_price == 0 && isset( $price_more ))
             $product_price = $price_more;
-            
+         
+        $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $product->post->post_author );
         $deposit = $vendor_percentage * $product_price / 100;
 

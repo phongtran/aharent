@@ -21,7 +21,10 @@ defined( 'ABSPATH' ) || exit;
 
 global $post;
 
-$vendor_rental_terms = get_user_meta( $post->post_author, 'vendor_rental_terms', true );
+$vendor = get_product_vendor ( $post );
+
+$vendor_rental_terms = get_user_meta( $vendor, 'vendor_rental_terms', true );
+
 
 if ( !empty( $vendor_rental_terms) )
     echo $vendor_rental_terms;
