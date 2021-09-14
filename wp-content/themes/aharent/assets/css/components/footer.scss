@@ -37,6 +37,21 @@ footer {
         margin-top: 20px;
     }
 
+    .payment-links {
+        display: flex;
+        justify-content: center;
+
+        div {
+            width: 55px;
+            margin: 0 5px;
+
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
     .copyright {
         margin-top: 30px;
     }

@@ -292,6 +292,26 @@ footer .col-items {
   margin-top: 20px;
 }
 
+footer .payment-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+footer .payment-links div {
+  width: 55px;
+  margin: 0 5px;
+}
+
+footer .payment-links div img {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 footer .copyright {
   margin-top: 30px;
 }

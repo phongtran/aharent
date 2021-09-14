@@ -39,10 +39,10 @@
                 <div class="footer-col">
                     <div class="title"><h3>PHƯƠNG THỨC THANH TOÁN</h3></div>
 
-                    <div class="col-items d-flex row-cols-3">
-                        <a href="#"><img src="<?php echo get_template_directory_uri() . '/assets/img/visa-icon.png' ?>" /></a>
-                        <a href="#"><img src="<?php echo get_template_directory_uri() . '/assets/img/mastercard-icon.png' ?>" /></a>
-                        <a href="#"><img src="<?php echo get_template_directory_uri() . '/assets/img/jcb-icon.png' ?>" /></a>
+                    <div class="col-items payment-links">
+                        <div><img src="<?php echo get_template_directory_uri() . '/assets/img/visa-icon.png' ?>" /></div>
+                        <div><img src="<?php echo get_template_directory_uri() . '/assets/img/mastercard-icon.png' ?>" /></div>
+                        <div><img src="<?php echo get_template_directory_uri() . '/assets/img/jcb-icon.png' ?>" /></div>
                     </div>
 
                 </div>
