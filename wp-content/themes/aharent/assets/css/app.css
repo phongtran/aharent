@@ -256,6 +256,7 @@ footer {
   font-size: 14px;
   line-height: 1;
   padding: 20px 10px 10px 10px;
+  margin-top: auto;
 }
 
 footer .footer-links {
@@ -343,6 +344,15 @@ footer .menu-footer-links-container ul li {
 html body {
   background-color: #f5f5f5;
   color: #231f20;
+  height: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 html body .container {
@@ -414,6 +424,35 @@ a:hover {
 }
 
 .order-complete span h2, .link-404 span h2, .cart-empty span h2, .notice span h2 {
+  font-size: 1.5rem;
+}
+
+.cart-empty, .notice {
+  margin-top: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cart-empty img, .notice img {
+  width: 150px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-right: 20px;
+}
+
+.cart-empty span, .notice span {
+  color: #04b950;
+}
+
+.cart-empty span h2, .notice span h2 {
   font-size: 1.5rem;
 }
 
@@ -623,6 +662,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .dokan-form-group .dokan-w5.text-editor {
   width: 60%;
+}
+
+.woocommerce-Price-currencySymbol {
+  font-size: 12px;
 }
 
 .woocommerce {

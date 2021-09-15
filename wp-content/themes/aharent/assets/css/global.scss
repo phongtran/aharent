@@ -28,6 +28,11 @@ html {
         
         background-color: $bg-color;
         color: $text-color;
+
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         
 
         .container {
@@ -88,6 +93,29 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    span {
+        color: $main-button-color;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.cart-empty, .notice {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 150px;
+        object-fit: contain;
+
+        margin-right: 20px;
+    }
 
     span {
         color: $main-button-color;
@@ -317,9 +345,15 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
     }
 }
 
+.woocommerce-Price-currencySymbol {
+    font-size: 12px;
+}
+
 
 .woocommerce {
     margin-bottom: 10px;
+
+    
 
 }
 
