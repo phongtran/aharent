@@ -59,7 +59,7 @@
             $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
         }
 
-        $product_price = $price['full'];
+        $product_price = $price[ 'half' ];
          
         $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $vendor );
