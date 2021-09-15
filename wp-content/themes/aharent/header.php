@@ -17,6 +17,10 @@
             ?>
         </title>
 
+        <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri() ?>/assets/img/favicon.png"/>
+        <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri() ?>/assets/img/favicon.png"/>
+
+
         <?php wp_head(); ?>
     </head>
 
