@@ -70,6 +70,37 @@
             "deposit"   => wc_price( $deposit * $quantity ),
         );
     }
+
+    function get_price_from_kano( $product_id, $date_from, $date_to, $quantity )
+    {
+        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+
+        $product = new WC_Product_Variable( $product_id );
+        $variations = $product->get_available_variations();
+
+        $price = [];
+
+        foreach ( $variations as $variation )
+        {
+            $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
+        }
+
+        $product_price = 0;
+
+        if ( $duration <= 5 )
+            $product_price = $duration * $price['5'];
+        elseif ( $duration < 30 )
+            $product_price = (5 * $price['5']) + (50000 * ($duration - 5));
+         
+        $vendor = get_product_vendor ( $product->post );
+        $vendor_percentage = get_vendor_percentage( $vendor );
+        $deposit = $vendor_percentage * $product_price / 100;
+
+        return array (
+            "price"     => wc_price( $product_price * $quantity ),
+            "deposit"   => wc_price( $deposit * $quantity ),
+        );
+    }
     
     function get_price_from_simple_product( $product_id, $date_from, $date_to, $quantity )
     {
