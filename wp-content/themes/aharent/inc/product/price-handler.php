@@ -44,6 +44,32 @@
             "deposit"   => wc_price( $deposit * $quantity ),
         );
     }
+
+    function get_price_from_eventus( $product_id, $date_from, $date_to, $quantity )
+    {
+        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+
+        $product = new WC_Product_Variable( $product_id );
+        $variations = $product->get_available_variations();
+
+        $price = [];
+
+        foreach ( $variations as $variation )
+        {
+            $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
+        }
+
+        $product_price = $price['full'];
+         
+        $vendor = get_product_vendor ( $product->post );
+        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $deposit = $vendor_percentage * $product_price / 100;
+
+        return array (
+            "price"     => wc_price( $product_price * $quantity ),
+            "deposit"   => wc_price( $deposit * $quantity ),
+        );
+    }
     
     function get_price_from_simple_product( $product_id, $date_from, $date_to, $quantity )
     {
