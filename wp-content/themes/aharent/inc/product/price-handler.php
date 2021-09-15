@@ -62,7 +62,7 @@
         $product_price = $price['full'];
          
         $vendor = get_product_vendor ( $product->post );
-        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $vendor_percentage = get_vendor_percentage( $vendor );
         $deposit = $vendor_percentage * $product_price / 100;
 
         return array (
@@ -80,7 +80,7 @@
         $total_price = $price * $duration;
 
         $vendor = get_product_vendor ( $product->post );
-        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $vendor_percentage = get_vendor_percentage( $vendor );
         $deposit = $vendor_percentage * $total_price / 100;
 
         return array (
@@ -126,7 +126,7 @@
             $product_price = $price_more;
          
         $vendor = get_product_vendor ( $product->post );
-        $vendor_percentage = get_vendor_percentage( $product->post->post_author );
+        $vendor_percentage = get_vendor_percentage( $vendor );
         $deposit = $vendor_percentage * $product_price / 100;
 
         return array (
