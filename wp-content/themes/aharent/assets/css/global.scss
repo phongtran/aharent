@@ -352,9 +352,23 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce {
     margin-bottom: 10px;
+}
 
-    
+.about-image {
+    width: 100%;
 
+    img {
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.about-content {
+    margin: 20px 100px 0 100px;
+
+    .about-title {
+        color: $main-button-color;
+    }
 }
 
 

@@ -671,4 +671,22 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .woocommerce {
   margin-bottom: 10px;
 }
+
+.about-image {
+  width: 100%;
+}
+
+.about-image img {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.about-content {
+  margin: 20px 100px 0 100px;
+}
+
+.about-content .about-title {
+  color: #04b950;
+}
 /*# sourceMappingURL=global.css.map */
