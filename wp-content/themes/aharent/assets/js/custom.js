@@ -102,7 +102,8 @@
 			dateFrom 		= $("#date-from").val(),
 			dateTo 			= $("#date-to").val();
 		
-		if ( productID && dateFrom && dateTo)
+		if ( productID && dateFrom && dateTo) {
+			$('.loading-price').show();
 			wp.ajax.post( "get_product_price", {
 				id 			: productID,
 				quantity	: quantity,
@@ -110,7 +111,7 @@
 				date_to		: dateTo,	
 			} )
 				.done(function(response) {
-					$(".price-item-value.rental").first().html( response['data']['price']);
+					$(".price-item-value.rental .price-value").first().html( response['data']['price']);
 					$(".deposit .price-item-value").first().html( response['data']['deposit']);
 					$(".deposit").attr( "style", "display: flex !important; ");
 
@@ -118,7 +119,11 @@
 					$('.add-to-cart :input[name="_date_from"]').removeClass('validate-enabled');
 					$('.add-to-cart :input[name="_date_to"]').removeClass('validate-enabled');
 					$('.validate').hide();
+					$('.loading-price').hide();
 				});
+
+		}
+			
 	}
 	
 		

@@ -189,9 +189,28 @@
                 display: flex;
                 flex-direction: column;
 
+                .loading-price {
+
+                    display: none;
+                    margin-left: 5px;
+
+                    .loading-icon {
+                        display: flex;
+                        align-items: center;
+                        height: 100%;
+                        
+                        img {
+                            width: 20px;
+                            object-fit: contain;
+                        }
+                    }
+                    
+                    
+                }
+
                 .price-item-title {
                     display: flex;
-                    justify-content: center;
+                    
                     font-size: 1.2rem;
 
                     background-color: $main-button-color;
@@ -208,6 +227,10 @@
                     height: 100%;
                     display: flex;
                     align-items: flex-end;
+
+                    
+
+                    
 
 
                     &.rental {

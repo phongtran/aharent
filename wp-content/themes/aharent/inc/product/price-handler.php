@@ -87,6 +87,13 @@
 
         $product_price = 0;
 
+        $price_for_extra_day = get_post_meta( $product_id, '_extra_day' );
+
+        if ( isset( $price_for_extra_day) && !empty( $price_for_extra_day[0]) )
+            $price_for_extra_day = $price_for_extra_day[0];
+        else
+            $price_for_extra_day = 50000;
+
         if ( $duration <= 5 )
             $product_price = $duration * $price['5'];
         elseif ( $duration < 30 )
