@@ -854,6 +854,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   padding-left: 0;
 }
 
+.shop-container .shop-sidebar .bapf_sfilter .bapf_body ul li input {
+  border: 1px solid #7b7b7b;
+}
+
 .shop-container .shop-product-listing {
   width: 80%;
 }
