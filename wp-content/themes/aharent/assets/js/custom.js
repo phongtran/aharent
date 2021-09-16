@@ -111,7 +111,7 @@
 				date_to		: dateTo,	
 			} )
 				.done(function(response) {
-					$(".price-item-value.rental .price-value").first().html( response['data']['price']);
+					$(".price-item-value.rental").first().html( response['data']['price']);
 					$(".deposit .price-item-value").first().html( response['data']['deposit']);
 					$(".deposit").attr( "style", "display: flex !important; ");
 
