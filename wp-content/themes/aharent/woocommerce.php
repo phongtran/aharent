@@ -1,4 +1,4 @@
-<?php /* Template Name: Example Template */ ?>
+<?php /* Template Name: Woocommerce Template */ ?>
 
 <?php get_header(); ?>
 
