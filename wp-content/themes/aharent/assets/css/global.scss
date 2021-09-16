@@ -86,7 +86,7 @@ a {
 
 }
 
-.order-complete, .link-404, .cart-empty, .notice {
+.order-complete, .cart-empty, .notice {
     margin-top: 20px;
     width: 100%;
     display: flex;
@@ -371,4 +371,25 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
     }
 }
 
+
+.link-404 {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    margin: 50px 0;
+
+    img {
+        
+        object-fit: contain;
+    }
+
+    h3 {
+        margin: 40px 0 20px 0;
+    }
+}
 

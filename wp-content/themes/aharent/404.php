@@ -2,8 +2,9 @@
 
 <div class="container">
     <div class="link-404">
-        <img src="<?php echo get_template_directory_uri() . '/assets/img/order-complete.png' ?>" />
-        <span><h2><?php esc_html_e( 'KHÔNG TỒN TẠI', 'woocommerce'); ?></h2></span>
+        <img src="<?php echo get_template_directory_uri()?>/assets/img/404-image.png" />
+        <span><h3><?php esc_html_e( 'KHÔNG TÌM THẤY TRANG!', 'woocommerce'); ?></h3></span>
+        <span><?php esc_html_e( 'Trang bạn đang tìm kiếm không tồn tại.', 'woocommerce'); ?></span>
     </div>
 </div>
 

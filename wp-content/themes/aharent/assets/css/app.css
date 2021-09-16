@@ -401,7 +401,7 @@ a:hover {
   opacity: 0.95;
 }
 
-.order-complete, .link-404, .cart-empty, .notice {
+.order-complete, .cart-empty, .notice {
   margin-top: 20px;
   width: 100%;
   display: -webkit-box;
@@ -419,11 +419,11 @@ a:hover {
           align-items: center;
 }
 
-.order-complete span, .link-404 span, .cart-empty span, .notice span {
+.order-complete span, .cart-empty span, .notice span {
   color: #04b950;
 }
 
-.order-complete span h2, .link-404 span h2, .cart-empty span h2, .notice span h2 {
+.order-complete span h2, .cart-empty span h2, .notice span h2 {
   font-size: 1.5rem;
 }
 
@@ -688,6 +688,33 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .about-content .about-title {
   color: #04b950;
+}
+
+.link-404 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 50px 0;
+}
+
+.link-404 img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.link-404 h3 {
+  margin: 40px 0 20px 0;
 }
 
 .mega-sale {
