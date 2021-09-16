@@ -716,4 +716,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .link-404 h3 {
   margin: 40px 0 20px 0;
 }
+
+.bapf_body ul {
+  padding: 0;
+}
 /*# sourceMappingURL=global.css.map */
