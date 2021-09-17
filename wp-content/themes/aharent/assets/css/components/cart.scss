@@ -3,6 +3,10 @@
     margin: 20px 0;
     padding: 0 0 20px 0; 
 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
     // background-color: #fff;
         
     table.shop_table {
@@ -23,6 +27,10 @@
             padding: 15px 0;
             padding-left: 10px;
         }
+    }
+
+    .cart-steps {
+        width: 65%;
     }
 
     .cart-step{
@@ -203,7 +211,7 @@
     
 
     .cart-summary {
-        margin-left: 20px;
+        width: 30%;
 
         .cart_totals {
             float: left;

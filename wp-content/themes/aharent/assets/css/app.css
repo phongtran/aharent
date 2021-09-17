@@ -865,6 +865,14 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .aha-cart {
   margin: 20px 0;
   padding: 0 0 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .aha-cart table.shop_table {
@@ -885,6 +893,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   background-color: #fff;
   padding: 15px 0;
   padding-left: 10px;
+}
+
+.aha-cart .cart-steps {
+  width: 65%;
 }
 
 .aha-cart .cart-step .cart-step-title {
@@ -1035,7 +1047,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .aha-cart .cart-summary {
-  margin-left: 20px;
+  width: 30%;
 }
 
 .aha-cart .cart-summary .cart_totals {

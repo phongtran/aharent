@@ -19,8 +19,8 @@ defined( 'ABSPATH' ) || exit;
 
 do_action( 'woocommerce_before_cart' ); ?>
 
-<div class="aha-cart container d-flex">
-	<div class="cart-steps col-sm-8">
+<div class="aha-cart container">
+	<div class="cart-steps">
 
 		<div class="cart-step cart-items active">
 			<div class="cart-step-title">
@@ -233,7 +233,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 	</div>
 
-	<div class="cart-summary col-sm-4">
+	<div class="cart-summary">
 
 		<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
 
