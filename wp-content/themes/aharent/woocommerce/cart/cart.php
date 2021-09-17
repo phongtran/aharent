@@ -48,8 +48,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 								<div class="item-break"></div>
 							<?php endif ?>
-							<div class="cart-item d-flex">
-								<div class="cart-item-thumbnail col-sm-3">
+							<div class="cart-item">
+								<div class="cart-item-thumbnail">
 									<?php
 									$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
@@ -71,8 +71,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 								</div>
 
 								<div class="cart-item-description">
-									<div class="cart-item-title d-flex">
-										<div class="title col-sm-9">
+									<div class="cart-item-title">
+										<div class="title">
 										<?php
 											if ( ! $product_permalink ) {
 												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;' );
@@ -92,23 +92,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 										?>
 										</div>
 
-										<div class="button-remove d-flex justify-content-end w-100">
-
-									<?php
-										echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-											'woocommerce_cart_item_remove_link',
-											sprintf(
-												'<a href="%s" data-product_id="%s" data-product_sku="%s" data-cart_item_key="%s"><span class="delete-icon"></span></a>',
-												esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
-												esc_attr( $product_id ),
-												esc_attr( $_product->get_sku() ),
-												$cart_item_key
-				
-											),
-											$cart_item_key
-										);
-									?>
-									</div>
+										
 									</div>
 
 									<div class="info-section d-flex">
@@ -195,6 +179,24 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 								</div>
 
+								<div class="button-remove">
+
+									<?php
+										echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+											'woocommerce_cart_item_remove_link',
+											sprintf(
+												'<a href="%s" data-product_id="%s" data-product_sku="%s" data-cart_item_key="%s"><span class="delete-icon"></span></a>',
+												esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+												esc_attr( $product_id ),
+												esc_attr( $_product->get_sku() ),
+												$cart_item_key
+				
+											),
+											$cart_item_key
+										);
+									?>
+								</div>
+
 							</div>
 
 						<?php $index++; } ?>
@@ -226,10 +228,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 			
 		</div>
 		
-		
-		
-		
-
 
 	</div>
 

@@ -31,6 +31,10 @@
 
     .cart-steps {
         width: 68%;
+
+        @media (max-width: 600px) {
+            width: 100%;
+        }
     }
 
     .cart-step{
@@ -70,18 +74,36 @@
 
             .cart-item {
 
-                padding: 15px 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
 
-                .delete-icon {
-                    background: url(../img/dustbin.png) left top no-repeat;
-                    display: block;
-                    width: 16px;
-                    height: 16px;
+                position: relative;
+
+                .button-remove {
+                    display: flex;
+                    align-items: center;
+                    position: absolute;
+                    right: 0;
+                    margin: 10px 10px 0 0;
+
+                    .delete-icon {
+                        background: url(../img/dustbin.png) left top no-repeat;
+                        display: block;
+                        width: 16px;
+                        height: 16px;
+                    }
                 }
 
                 
                 .cart-item-thumbnail {
-                    padding: 5px 20px;
+                    margin: 10px;
+
+                    width: 30%;
+
+                    @media (max-width: 600px) {
+                        width: 100%;
+                    }
 
                     .security-deposit-policy {
                         margin-top: 20px;
@@ -108,16 +130,20 @@
                 .cart-item-title {
 
                     margin-bottom: 15px;
+                    display: flex;
                     
                     h4 {
                         font-size: 18px;
                     }
+
+                    
                 }
 
                 .cart-item-description {
 
-                    width: 100%;
-                    padding-right: 15px;
+                    width: 60%;
+
+                    margin: 10px; 
 
                     .price-section {
                         display: flex;
@@ -179,16 +205,18 @@
 
                             .date-picker-input {
                                 display: flex;
+                                flex-wrap: wrap;
                                 
-                                justify-content: center;
+            
                                 align-items: center;
 
                                 .delimeter {
-                                    margin: 0 15px;
+                                    margin-right: 10px;
                                 }
                             }
 
                             input {
+                                margin: 10px 10px 10px 0;
                                 max-width: 150px;
                                 font-size: 14px;
                                 padding: 8px 10px; 
@@ -212,6 +240,10 @@
 
     .cart-summary {
         width: 30%;
+
+        @media (max-width: 600px) {
+            width: 100%;
+        }
 
         .cart_totals {
             float: left;
