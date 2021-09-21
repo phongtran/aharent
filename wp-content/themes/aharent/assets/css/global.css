@@ -724,9 +724,13 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   background-color: #fff;
 }
 
-.woocommerce-notices-wrapper .woocommerce-message {
+.woocommerce-notices-wrapper .woocommerce-message, .woocommerce-notices-wrapper .woocommerce-error {
   border: 0;
   margin: 0;
   background-color: transparent;
+}
+
+.woocommerce-notices-wrapper .woocommerce-message::before, .woocommerce-notices-wrapper .woocommerce-error::before {
+  color: #04b950;
 }
 /*# sourceMappingURL=global.css.map */
