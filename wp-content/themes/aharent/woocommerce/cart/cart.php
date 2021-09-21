@@ -27,6 +27,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 				<h3>SẢN PHẨM ĐẶT THUÊ</h3>
 			</div>
 
+			<?php if ( $notices ) : ?>
+
+			<div class="woocommerce-info"<?php echo wc_get_notice_data_attr( $notice ); ?>>
+				<?php echo wc_kses_notice( $notice['notice'] ); ?>
+			</div>
+			<?php endif ?>
+
 			<div class="cart-step-content">
 
 			<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">

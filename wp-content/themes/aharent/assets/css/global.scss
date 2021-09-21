@@ -392,3 +392,21 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
         margin: 40px 0 20px 0;
     }
 }
+
+.woocommerce-notices-wrapper {
+    margin: 20px 0;
+    border-left: 5px solid $main-button-color;
+    border-radius: 5px;
+    background-color: $bright-bg-color;
+
+    .woocommerce-message {
+
+        &::before {
+            color: $main-button-color;
+        }
+        
+        border: 0;
+        margin: 0;
+        background-color: transparent;
+    }
+}

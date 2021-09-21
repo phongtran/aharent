@@ -472,4 +472,5 @@ function get_product_default_variation ( $product_id )
 }
 
 
+
 ?>
