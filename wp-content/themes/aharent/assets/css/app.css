@@ -1196,9 +1196,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .product-image-gallery {
-  max-width: 40%;
+  max-width: 38%;
   padding: 20px;
-  margin-right: 30px;
 }
 
 @media (max-width: 900px) {
@@ -1293,6 +1292,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .product-info .product-image-gallery .small-img .small-container .show-small-img:last-of-type {
   margin-right: 0;
+}
+
+.product-info .summary {
+  max-width: 60%;
 }
 
 .product-info .summary .product-title-wrapper {
