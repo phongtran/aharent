@@ -2,6 +2,24 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta property="og:site_name" content="<?php echo get_bloginfo() ?>">
+        <meta property="og:title" content="<?php echo get_bloginfo() ?>" />
+        <meta property="og:description" content="<?php echo get_bloginfo() ?>" />
+        <meta property="og:image" itemprop="image" content="<?php
+            if ( is_single() )
+            {
+                global $product;
+                echo get_the_post_thumbnail_url( $product-> ID );
+            }
+            else
+            {
+                echo get_template_directory_uri() . '/assets/img/thumb.jpg';
+            }
+        
+        ?>">
+        <meta property="og:type" content="website" />
+
         <title>
             <?php 
                 echo get_bloginfo();
