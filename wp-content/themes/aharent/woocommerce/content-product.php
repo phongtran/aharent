@@ -36,9 +36,16 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 			<h2><?php echo $product->name ?></h2>
 		</div>
 
-	<span class="price">
-		<?php echo wc_price( $product->price ); ?>/ngày
-	</span>
+	<div class="price">
+		<div class="rent-price"><?php echo wc_price( $product->price ); ?>/ngày</div>
+		<div class="rent-count">
+			<?php 
+				$total_sales = $product->get_meta( 'total_sales' );
+				if ( isset($total_sales) && $total_sales > 0 )
+					echo $total_sales . ' lượt thuê';
+			?>
+		</div>
+	</div>
 	
 	
 	<?php

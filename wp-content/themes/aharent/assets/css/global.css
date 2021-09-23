@@ -465,6 +465,31 @@ a:hover {
 
 .price {
   color: #04b950;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.price .rent-price {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.price .rent-count {
+  color: #231f20;
+  font-style: italic;
+  font-size: 13px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .breadcrumb {

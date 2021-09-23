@@ -136,6 +136,23 @@ a {
 
 .price {
     color: $main-button-color;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .rent-price {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .rent-count {
+        color: $text-color;
+        font-style: italic;
+        font-size: 13px;
+
+        display: flex;
+        align-items: center;
+    }
 }
 
 
