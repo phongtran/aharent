@@ -3,7 +3,7 @@
 
 <div class="mega-sale">
     <div class="container">
-        <a href="#"><img src="<?php echo get_template_directory_uri() . '/assets/img/mega-sale.png' ?>" /></a>
+        <img src="<?php echo get_template_directory_uri() . '/assets/img/mega-sale.png' ?>" />
     </div>
 </div>
 
