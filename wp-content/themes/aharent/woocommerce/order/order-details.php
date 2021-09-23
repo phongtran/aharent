@@ -49,8 +49,9 @@ if ( $show_downloads ) {
 
 		<thead>
 			<tr>
-				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Sản phẩm', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Phí đặt cọc', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
 			</tr>
 		</thead>
 
@@ -83,7 +84,7 @@ if ( $show_downloads ) {
 			foreach ( $order->get_order_item_totals() as $key => $total ) {
 				?>
 					<tr>
-						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
+						<th scope="row" colspan="2"><?php echo esc_html( $total['label'] ); ?></th>
 						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 					</tr>
 					<?php
@@ -91,7 +92,7 @@ if ( $show_downloads ) {
 			?>
 			<?php if ( $order->get_customer_note() ) : ?>
 				<tr>
-					<th><?php esc_html_e( 'Ghi chú:', 'woocommerce' ); ?></th>
+					<th colspan="2"><?php esc_html_e( 'Ghi chú:', 'woocommerce' ); ?></th>
 					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
 				</tr>
 			<?php endif; ?>

@@ -744,18 +744,24 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce-notices-wrapper {
   margin: 20px 0;
-  border-left: 5px solid #04b950;
-  border-radius: 5px;
-  background-color: #fff;
 }
 
 .woocommerce-notices-wrapper .woocommerce-message, .woocommerce-notices-wrapper .woocommerce-error {
+  padding: 15px 20px;
+  border-left: 5px solid #04b950 !important;
   border: 0;
   margin: 0;
-  background-color: transparent;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .woocommerce-notices-wrapper .woocommerce-message::before, .woocommerce-notices-wrapper .woocommerce-error::before {
   color: #04b950;
+  content: "";
+}
+
+.woocommerce-notices-wrapper .woocommerce-message a.button.wc-forward, .woocommerce-notices-wrapper .woocommerce-error a.button.wc-forward {
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 /*# sourceMappingURL=global.css.map */

@@ -412,18 +412,27 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce-notices-wrapper {
     margin: 20px 0;
-    border-left: 5px solid $main-button-color;
-    border-radius: 5px;
-    background-color: $bright-bg-color;
 
     .woocommerce-message, .woocommerce-error {
 
-        &::before {
-            color: $main-button-color;
-        }
+        padding: 15px 20px;
 
+        border-left: 5px solid $main-button-color !important;
         border: 0;
         margin: 0;
-        background-color: transparent;
+        background-color: $bright-bg-color;
+        border-radius: 5px;
+
+        &::before {
+            color: $main-button-color;
+            content: "";
+        }
+
+        a.button.wc-forward {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        
     }
 }

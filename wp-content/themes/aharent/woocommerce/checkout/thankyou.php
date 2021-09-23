@@ -53,7 +53,7 @@ defined( 'ABSPATH' ) || exit;
 				</li>
 
 				<li class="woocommerce-order-overview__date date">
-					<?php esc_html_e( 'Ngày:', 'woocommerce' ); ?>
+					<?php esc_html_e( 'Date:', 'woocommerce' ); ?>
 					<strong><?php echo wc_format_datetime( $order->get_date_created() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
@@ -65,7 +65,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php endif; ?>
 
 				<li class="woocommerce-order-overview__total total">
-					<?php esc_html_e( 'Tổng thanh toán trực tuyến:', 'woocommerce' ); ?>
+					<?php esc_html_e( 'Total:', 'woocommerce' ); ?>
 					<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 

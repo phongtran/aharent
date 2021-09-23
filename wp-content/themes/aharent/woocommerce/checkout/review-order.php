@@ -21,7 +21,8 @@ defined( 'ABSPATH' ) || exit;
 	<thead>
 		<tr>
 			<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-total"><?php esc_html_e( 'Payment method', 'woocommerce' ); ?></th>
+			<th class="product-name"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+			<th class="product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,6 +39,9 @@ defined( 'ABSPATH' ) || exit;
 						<?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
 						<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						<?php // echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</td>
+					<td>
+						<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['number_of_days']) ?>
 					</td>
 					<td class="product-total">
 						<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['number_of_days']); ?> 
@@ -100,7 +104,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<tr class="order-total">
-			<th><?php esc_html_e( 'Tổng', 'woocommerce' ); ?></th>
+			<th colspan="2"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 

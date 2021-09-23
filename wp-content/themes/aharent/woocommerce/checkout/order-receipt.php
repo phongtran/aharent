@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<strong><?php echo esc_html( $order->get_order_number() ); ?></strong>
 	</li>
 	<li class="date">
-		<?php esc_html_e( 'Ngày:', 'woocommerce' ); ?>
+		<?php esc_html_e( 'Date:', 'woocommerce' ); ?>
 		<strong><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></strong>
 	</li>
 	<li class="total">
