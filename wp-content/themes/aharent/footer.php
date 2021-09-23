@@ -14,6 +14,7 @@
 
                         <div class="copyright">
                             <p>© 2021 - Bản quyền của AhaRent</p>
+                            <p>Website đang ở giai đoạn Beta</p>
                         </div>
 
                   
