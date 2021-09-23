@@ -28,7 +28,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 <li <?php wc_product_class( 'product-item', $product ); ?>>
 	
 		<div class="thumbnail">
-			<?php $image = get_the_post_thumbnail_url( $product->id ); ?>
+			<?php $image = get_the_post_thumbnail_url( $product->id, 'medium' ); ?>
 			<img src="<?php echo (!empty($image)) ? $image : '/wp-content/uploads/supplier_photos/default.png'; ?>" />
 		</div>
 

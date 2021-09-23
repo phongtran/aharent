@@ -51,10 +51,10 @@
                 </div>
                 <div class="step-notes">
                     <div class="step-notes-title">
-                        <h4>Nhận hàng tại nhà</h4>
+                        <h4>Nhận hàng</h4>
                     </div>
                     <div class="notes">
-                        <p>Tiện lợi hơn với dịch vụ giao hàng đến tận nhà.</p>
+                        <p>Khách hàng có thể nhận hàng trực tiếp tại cửa hàng hoặc tại nhà.</p>
                     </div>
                 </div>
             </div>
