@@ -94,7 +94,7 @@ foreach ( $items as $item_id => $item ) :
 	if ( $show_purchase_note && $purchase_note ) {
 		?>
 		<tr>
-			<td colspan="3" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+			<td colspan="4" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
 				<?php
 				echo wp_kses_post( wpautop( do_shortcode( $purchase_note ) ) );
 				?>
