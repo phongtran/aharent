@@ -114,7 +114,7 @@
                 
                 
                 <?php foreach ( $product_categories as $key => $category ) : ?>
-                    <?php if ( $category->slug == 'others') continue; ?>
+                    <?php if ( $category->id == 15) continue; ?>
                     
                         <a href="/store?filters=product_cat[<?php echo $category->term_id ?>]">
                             <?php
