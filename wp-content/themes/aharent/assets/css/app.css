@@ -159,12 +159,6 @@ header .container .product-categories .categories-pop-up-list .category-item {
 
 header .container .product-categories .categories-pop-up-list .category-item .category-image {
   margin-right: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center !important;
-      -ms-flex-pack: center !important;
-          justify-content: center !important;
 }
 
 header .container .product-categories .categories-pop-up-list .category-item .category-image img {
@@ -852,6 +846,15 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .categories .categories-list .category-item .category-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
