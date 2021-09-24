@@ -102,7 +102,7 @@
                         
                         
                                     <?php foreach ( $product_categories as $key => $category ) : ?>
-                                        <?php if ( $category->name == 'Others') continue; ?>
+                                        <?php if ( $category->id == 15) continue; ?>
 
                                         
                                         
