@@ -162,9 +162,9 @@ header .container .product-categories .categories-pop-up-list .category-item .ca
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
 }
 
 header .container .product-categories .categories-pop-up-list .category-item .category-image img {
