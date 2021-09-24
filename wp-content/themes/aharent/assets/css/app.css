@@ -1428,6 +1428,12 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   font-size: 16px;
 }
 
+@media (max-width: 600px) {
+  .product-info .summary .add-to-cart .form-row .form-input.time-period input {
+    margin: 10px 20px 10px 0;
+  }
+}
+
 .product-info .summary h1.product_title {
   font-size: 2rem;
 }
