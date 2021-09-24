@@ -1245,14 +1245,19 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .product-image-gallery {
-  max-width: 48%;
   width: 48%;
   padding: 20px;
 }
 
+@media (max-width: 600px) {
+  .product-info .product-image-gallery {
+    width: 100%;
+  }
+}
+
 @media (max-width: 900px) {
   .product-info .product-image-gallery {
-    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -1355,7 +1360,13 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .summary {
-  max-width: 48%;
+  width: 48%;
+}
+
+@media (max-width: 900px) {
+  .product-info .summary {
+    width: 100%;
+  }
 }
 
 .product-info .summary .product-title-wrapper {

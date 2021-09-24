@@ -9,16 +9,18 @@
     
 
     .product-image-gallery {
-        max-width: 48%;
+        
         width: 48%;
 
         padding: 20px;
 
-   
+        @media (max-width: 600px) {
+            width: 100%;
+        }
         
 
         @media (max-width: 900px) {
-            max-width: 100%;
+            width: 100%;
         }
 
         
@@ -123,7 +125,12 @@
 
     .summary {
 
-        max-width: 48%;
+        @media (max-width: 900px) {
+            width: 100%;
+            
+        }
+
+        width: 48%;
 
         .product-title-wrapper {
             display: flex;
