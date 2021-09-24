@@ -64,13 +64,6 @@ if ( $product->is_in_stock() ) : ?>
 		<?php do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>	
 		
 		
-		<?php 
-			// wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/minified/jquery.datetimepicker.css' );
-			// wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/minified/jquery.datetimepicker.js', array ( 'jquery' ));	
-			wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/unminified/rental-time-period.css' );
-			wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/unminified/rental-time-period.js');	
-		?>
-		
 		<div class="form-row">
 			<div class="form-label">
 				<label>Thời gian thuê:</label>
