@@ -1403,7 +1403,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .product-info .summary .add-to-cart .form-row .form-input.time-period input {
   max-width: 170px;
-  margin: 10px;
+  margin: 10px 20px 10px 0;
   font-size: 16px;
 }
 
