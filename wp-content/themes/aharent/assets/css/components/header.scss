@@ -147,9 +147,16 @@ header {
 
                 background-color: $bright-bg-color;
 
-                a:hover {
-                    background-color: $menu-hover-color;
-                    color: $text-color;
+                a {
+                    border-left: 5px solid $bright-bg-color;
+
+                    &:hover {
+                        background-color: $menu-hover-color;
+                        color: $text-color;
+
+                        border-left: 5px solid $main-button-color;
+                    }
+
                 }
 
                 .category-item {
