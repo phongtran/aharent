@@ -16,6 +16,7 @@
 	var dateFormat = "d/m/Y"; // "d/m/Y H:i";
 
 	$('.add-to-cart :input[name="_date_from"]').datetimepicker({
+		lang: 'vi',
 		format: dateFormat,
 		timepicker: false,
   		onShow:	function( ct ) {
@@ -33,6 +34,7 @@
 
 
 	$('.add-to-cart :input[name="_date_to"]').datetimepicker({
+		lang: 'vi',
 		format: dateFormat,
 		timepicker: false,
 		onShow:	function( ct ){
