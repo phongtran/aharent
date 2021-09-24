@@ -159,6 +159,12 @@ header .container .product-categories .categories-pop-up-list .category-item {
 
 header .container .product-categories .categories-pop-up-list .category-item .category-image {
   margin-right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 header .container .product-categories .categories-pop-up-list .category-item .category-image img {

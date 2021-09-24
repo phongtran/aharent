@@ -169,6 +169,9 @@ header {
                     .category-image {
 
                         margin-right: 10px;
+
+                        display: flex;
+                        justify-content: center;
                         
                         img {
                             width: 30px;
