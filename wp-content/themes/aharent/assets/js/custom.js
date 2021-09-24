@@ -4,47 +4,35 @@
 		getProductPrice();
 	});
 
-	tinymce.init({
-        selector: '#rental-terms'
-    });
-
-	var popover = document.querySelector(".popover-dismiss");
-	if ( undefined != popover ) {
-		new bootstrap.Popover(popover, { trigger: 'focus' });
-	}
+	// tinymce.init({
+    //     selector: '#rental-terms'
+    // });s
 
 	var dateFormat = "d/m/Y"; // "d/m/Y H:i";
 
+	jQuery.datetimepicker.setLocale('vi');
+	
+
 	$('.add-to-cart :input[name="_date_from"]').datetimepicker({
-		lang: 'vi',
 		format: dateFormat,
 		timepicker: false,
-  		onShow:	function( ct ) {
-			var _dateTo = $('.add-to-cart :input[name="_date_to"]').datetimepicker("getValue");
-
-   			this.setOptions({
-				maxDate: $('.add-to-cart :input[name="_date_to"]').val() ? _dateTo : false
-			});
-		},
+		minDate: 0,
 	}).change(function(e) {
+		
 		e.preventDefault();
-
 		getProductPrice();
 	});
 
 
 	$('.add-to-cart :input[name="_date_to"]').datetimepicker({
-		lang: 'vi',
 		format: dateFormat,
 		timepicker: false,
 		onShow:	function( ct ){
 			
 			var _dateFrom = $('.add-to-cart :input[name="_date_from"]').datetimepicker("getValue");
-			var _dateFromValue = $('.add-to-cart :input[name="_date_from"]').val();
 
 			this.setOptions({
-				minDate: _dateFromValue ? _dateFrom : false,
-				value: _dateFromValue ? _dateFrom : "",
+				minDate: _dateFrom,
 			});
 
 		}
@@ -128,23 +116,6 @@
 			
 	}
 	
-		
-	// $("button.remove").click(function(e) {
-
-	// 	e.preventDefault();
-
-	// 	var productId = $(this).parent().attr("data-product_id"),
-	// 		cart_item_key = $(this).parent().attr("data-cart_item_key");
-
-
-	// 	wp.ajax.post('product_remove', {
-	// 		product_id:		productId,
-	// 		cart_item_key:	cart_item_key
-	// 	}).done( function( response ) {
-	// 		alert(response);
-	// 	});
-
-	// });
 
 })(jQuery);
 

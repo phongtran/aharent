@@ -4,7 +4,7 @@
   box-sizing: border-box
 }
 
-.show {
+.product-image-gallery .show {
   width: 400px;
   height: 400px;
 }

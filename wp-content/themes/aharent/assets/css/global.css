@@ -133,9 +133,14 @@ header .container .product-categories .categories-pop-up-list {
   background-color: #fff;
 }
 
+header .container .product-categories .categories-pop-up-list a {
+  border-left: 5px solid #fff;
+}
+
 header .container .product-categories .categories-pop-up-list a:hover {
   background-color: #f7f6e6;
   color: #231f20;
+  border-left: 5px solid #04b950;
 }
 
 header .container .product-categories .categories-pop-up-list .category-item {
@@ -763,5 +768,9 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .woocommerce-notices-wrapper .woocommerce-message a.button.wc-forward, .woocommerce-notices-wrapper .woocommerce-error a.button.wc-forward {
   padding: 5px 10px;
   border-radius: 5px;
+}
+
+.tempus-dominus-widget {
+  z-index: 10;
 }
 /*# sourceMappingURL=global.css.map */

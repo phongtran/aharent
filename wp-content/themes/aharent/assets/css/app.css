@@ -770,6 +770,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   border-radius: 5px;
 }
 
+.tempus-dominus-widget {
+  z-index: 10;
+}
+
 .mega-sale {
   background-color: #fff;
 }
