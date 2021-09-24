@@ -9,9 +9,12 @@
     
 
     .product-image-gallery {
-        max-width: 38%;
+        max-width: 48%;
+        width: 48%;
 
         padding: 20px;
+
+   
         
 
         @media (max-width: 900px) {
@@ -42,12 +45,19 @@
 
         }
 
+        .scroll-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
         .small-img {
             width: 350px;
             height: 70px;
             margin-top: 10px;
             position: relative;
             left: 25px;
+            
 
             .icon-left, .icon-right {
                 width: 12px;
@@ -113,7 +123,7 @@
 
     .summary {
 
-        max-width: 60%;
+        max-width: 48%;
 
         .product-title-wrapper {
             display: flex;
@@ -148,16 +158,18 @@
                 margin: 20px 0;
 
                 .form-label {
-                    width: 150px;
+                    // width: 150px;
+                    width: 100%;
                     display: flex;
                     flex-wrap: wrap;
                     align-items: center;
                 }
 
                 .form-input {
+                    width: 100%;
 
-                    max-width: 80%;
-                    margin-left: 30px;
+                    // max-width: 80%;
+                    // margin-left: 30px;
 
                     &.quantity-input-increment {
                     
@@ -170,7 +182,7 @@
 
                         input {
                             max-width: 170px;
-                            margin: 10px 20px 10px 0;
+                            margin-right: 20px;
 
                             font-size: 16px;
                         }

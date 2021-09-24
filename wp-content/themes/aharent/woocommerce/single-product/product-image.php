@@ -67,29 +67,31 @@ $attachment_ids = $product->get_gallery_image_ids();
 
 	<!-- Secondary carousel image thumbnail gallery -->
 
-	<div class="small-img">
+	<div class="scroll-wrapper">
+		<div class="small-img">
 
-		<img src="<?php echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-left" alt="" id="prev-img" />
-		
-		<div class="small-container">
-			<div id="small-img-roll">
-				
-				<img src="<?php echo wp_get_attachment_url( $post_thumbnail_id ); ?>" class="show-small-img" alt="">
-
-				<?php 
-					if ( $attachment_ids && $product->get_image_id() ) :
-						foreach ( $attachment_ids as $attachment_id ) : 
-				?>
-				
-				<img src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" class="show-small-img" alt="" />
-
-				<?php endforeach ?>
-				<?php endif ?>
+			<img src="<?php echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-left" alt="" id="prev-img" />
 			
-			</div>
-		</div>
-		
-		<img src="<?php echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-right" alt="" id="next-img">
+			<div class="small-container">
+				<div id="small-img-roll">
+					
+					<img src="<?php echo wp_get_attachment_url( $post_thumbnail_id ); ?>" class="show-small-img" alt="">
 
+					<?php 
+						if ( $attachment_ids && $product->get_image_id() ) :
+							foreach ( $attachment_ids as $attachment_id ) : 
+					?>
+					
+					<img src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" class="show-small-img" alt="" />
+
+					<?php endforeach ?>
+					<?php endif ?>
+				
+				</div>
+			</div>
+			
+			<img src="<?php echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-right" alt="" id="next-img">
+
+		</div>
 	</div>
 </div>

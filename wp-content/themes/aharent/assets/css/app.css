@@ -1245,7 +1245,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .product-image-gallery {
-  max-width: 38%;
+  max-width: 48%;
+  width: 48%;
   padding: 20px;
 }
 
@@ -1277,6 +1278,16 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .product-info .product-image-gallery .show img#big-img {
   z-index: 100;
+}
+
+.product-info .product-image-gallery .scroll-wrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .product-info .product-image-gallery .small-img {
@@ -1344,7 +1355,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .summary {
-  max-width: 60%;
+  max-width: 48%;
 }
 
 .product-info .summary .product-title-wrapper {
@@ -1381,7 +1392,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .summary .add-to-cart .form-row .form-label {
-  width: 150px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1393,8 +1404,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .summary .add-to-cart .form-row .form-input {
-  max-width: 80%;
-  margin-left: 30px;
+  width: 100%;
 }
 
 .product-info .summary .add-to-cart .form-row .form-input.quantity-input-increment input {
@@ -1403,7 +1413,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .product-info .summary .add-to-cart .form-row .form-input.time-period input {
   max-width: 170px;
-  margin: 10px 20px 10px 0;
+  margin-right: 20px;
   font-size: 16px;
 }
 
