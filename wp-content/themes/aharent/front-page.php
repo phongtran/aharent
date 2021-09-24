@@ -116,7 +116,7 @@
                 <?php foreach ( $product_categories as $key => $category ) : ?>
                     <?php if ( $category->term_id == 15) continue; ?>
                     
-                        <a href="/store?filters=product_cat[<?php echo $category->term_id ?>]">
+                        <a href="/store?filters=product_cat%5B<?php echo $category->slug ?>%5D">
                             <?php
                                 $thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true ); 
                                 $image = wp_get_attachment_url( $thumbnail_id );
