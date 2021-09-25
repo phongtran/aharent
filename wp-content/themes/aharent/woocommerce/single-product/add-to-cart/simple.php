@@ -44,7 +44,7 @@ if ( $product->is_in_stock() ) : ?>
 				</div>
 
 				<div class="form-input quantity-input-increment">
-					<input id="quantity-input" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+					<input id="quantity-input" class="number-spinner" name="quantity" type="number" value="1" min="1" max="10" step="1" />
 				</div>
 			</div>
 		
@@ -59,10 +59,24 @@ if ( $product->is_in_stock() ) : ?>
 			</div>
 
 			<div class="form-input time-period">
+
+					<div class="duration">
+						<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
+					</div>
 		
+					<span class="time-unit">
+						<?php
+							$time_unit = __( 'day', 'woocommerce' );
+							$time_block = $product->get_meta( '_time_block' );
+							if ( !empty( $time_block) )
+								$time_unit = __( $time_block, 'woocommerce' );
+
+							echo $time_unit;
+						?>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+					</span>
 				
-					<input type="text" id="date-from" name="_date_from"  placeholder="Từ ngày" autocomplete="off" />
-					<input type="text" id="date-to" name="_date_to" placeholder="Đến ngày" autocomplete="off" />	
+					<input type="text" class="date" id="date-from" name="_date_from"  placeholder="Ngày" autocomplete="off" />
+					<!-- <input type="text" id="date-to" name="_date_to" placeholder="Đến ngày" autocomplete="off" />	 -->
 
 
 				

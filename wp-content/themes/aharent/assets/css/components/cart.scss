@@ -191,11 +191,23 @@
 
                         }
 
-                        .quantity {
+                        .time-unit {
+                            display: flex;
+                            align-items: center;
+                            margin: 0 10px;
+                        }
+
+                        .time-period-wrapper {
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-items: center;
+                        }
+
+                        .quantity, .duration {
 
                             input {
 
-                                max-width: 80px;
+                                max-width: 40px;
                             
                             }
 
@@ -213,14 +225,17 @@
                                 .delimeter {
                                     margin-right: 10px;
                                 }
+
+                                input {
+                                    margin: 10px 10px 10px 0;
+                                    max-width: 150px;
+                                    width: 100px;
+                                    font-size: 14px;
+                                    padding: 8px 10px; 
+                                }
                             }
 
-                            input {
-                                margin: 10px 10px 10px 0;
-                                max-width: 150px;
-                                font-size: 14px;
-                                padding: 8px 10px; 
-                            }
+                            
                         }
 
                         

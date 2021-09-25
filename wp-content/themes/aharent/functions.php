@@ -251,17 +251,35 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	if (isset($_POST['_date_from']))
 		$cart_item_data['date-from'] = $_POST['_date_from'];
 
-	if (isset($_POST['_date_to']))
-	$cart_item_data['date-to'] = $_POST['_date_to'];
+	// if (isset($_POST['_date_to']))
+	// 	$cart_item_data['date-to'] = $_POST['_date_to'];
 
-	$date_from = new DateTime( str_replace( '/', '-', $cart_item_data['date-from'] ) );
-	$date_to = new DateTime( str_replace( '/', '-', $cart_item_data['date-to'] ) );
-	$cart_item_data['number_of_days'] = $date_from->diff( $date_to )->format("%a");
+	if ( isset( $_POST['duration'] ))
+		$cart_item_data['duration'] = $_POST['duration'];
+
+	// $date_from = new DateTime( str_replace( '/', '-', $cart_item_data['date-from'] ) );
+	// $date_to = new DateTime( str_replace( '/', '-', $cart_item_data['date-to'] ) );
+	// $cart_item_data['number_of_days'] = $date_from->diff( $date_to )->format("%a");
 
 
 	return $cart_item_data;
 }
 add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data_with_optional_prices', 10, 3);
+
+
+
+function update_cart_meta( $cart_updated )
+{
+	$cart_post = $_POST['cart'];
+
+	foreach ( $cart_post as $key => $cart_item_data )
+	{
+		WC()->cart->cart_contents[$key]['duration'] = $cart_item_data['duration'];
+		WC()->cart->cart_contents[$key]['date-from'] = $cart_item_data['_date_from'];
+	}
+
+}
+add_action( 'woocommerce_update_cart_action_cart_updated', 'update_cart_meta', 10, 3 );
 
 
 
@@ -271,10 +289,8 @@ function set_cart_calculation( $cart )
 {
 	foreach ( $cart->get_cart() as $cart_item )
 	{	
-		$cart_item['data']->set_price( $cart_item['deposit'] * $cart_item['number_of_days'] );
+		$cart_item['data']->set_price( $cart_item['deposit'] * $cart_item['duration'] );
 	}
-		
-	
 }
 add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
 
@@ -325,7 +341,7 @@ function calculate_cart_total_rental_fee()
 
 	$_total_rental_fee = 0;
 	foreach ( $cart as $item => $values )
-		$_total_rental_fee += $values['rental_price'] * $values['quantity'] * $values['number_of_days'];
+		$_total_rental_fee += $values['rental_price'] * $values['quantity'] * $values['duration'];
 
 	return $_total_rental_fee;
 }
@@ -338,7 +354,7 @@ function calculate_cart_total_security_deposit()
 	$_total_security_deposit = 0;
 	// var_dump($cart); 
 	foreach ( $cart as $item => $values )
-		$_total_security_deposit += $values['security_deposit'] * $values['quantity'] * $values['number_of_days'];
+		$_total_security_deposit += $values['security_deposit'] * $values['quantity'] * $values['duration'];
 
 	return $_total_security_deposit;
 }
@@ -350,7 +366,7 @@ function calculate_cart_total_deposit()
 
 	$_total_deposit = 0;
 	foreach ( $cart as $item => $values )
-		$_total_deposit += $values['deposit'] * $values['quantity'] * $values['number_of_days'];
+		$_total_deposit += $values['deposit'] * $values['quantity'] * $values['duration'];
 
 	return $_total_deposit;
 }
@@ -359,11 +375,12 @@ function add_the_date_validation( $passed )
 { 
 	$quantity = $_POST['quantity'];
 	$date_from = $_POST['_date_from'];
-	$date_to = $_POST['_date_to'];
+	$duration = $_POST['duration'];
+	// $date_to = $_POST['_date_to'];
 
 	if ( (!isset( $quantity ) || $quantity <= 0) ||
 		( !isset( $date_from ) || ( "" == $date_from )) || 
-		( !isset( $date_to ) || ( "" == $date_to )) )
+		( !isset( $duration ) || ( $duration <= 0 )) )
 	{
 		wc_add_notice(  __( 'Vui lòng chọn thông tin trước khi đặt thuê.', 'woocommerce' ), 'error' );
 		$passed = false;
@@ -404,7 +421,7 @@ function customize_checkout_billing_kyc( $fields )
 add_filter( 'woocommerce_checkout_fields', 'customize_checkout_billing_kyc' );
 
 
-function get_new_price( $product_id, $date_from, $date_to, $quantity )
+function get_new_price( $product_id, $date_from, $duration, $quantity )
 {
 	require_once THEME_DIR . 'inc/product/price-handler.php';
 
@@ -426,7 +443,7 @@ function get_new_price( $product_id, $date_from, $date_to, $quantity )
 	}
 
 	if ( function_exists( $price_handler ) )
-		return $price_handler( $product_id, $date_from, $date_to, $quantity );
+		return $price_handler( $product_id, $date_from, $duration, $quantity );
 	
 	return 0;
 }

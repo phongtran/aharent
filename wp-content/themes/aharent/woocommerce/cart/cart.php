@@ -108,6 +108,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 												<tr class="quantity">
 													<td class="label">Số lượng:</td>
 													<td>
+
 													<?php
 														if ( $_product->is_sold_individually() ) {
 															$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
@@ -118,7 +119,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 																	'input_name'   => "cart[{$cart_item_key}][qty]",
 																	'input_value'  => $cart_item['quantity'],
 																	// 'max_value'    => $_product->get_max_purchase_quantity(),
-																	'min_value'    => '0',
+																	'min_value'    => '1',
 																	'product_name' => $_product->get_name(),
 																),
 																$_product,
@@ -133,13 +134,34 @@ do_action( 'woocommerce_before_cart' ); ?>
 												<tr class="time-period">
 													<td class="label">Thời gian thuê:</td>
 													<td>
-														<div class="date-picker-input">
-															<div><input type="text" id="date-from" name="_date_from" value="<?php echo $cart_item['date-from'] ?>" placeholder="Từ ngày"></div>
-															<div class="delimeter"><span>đến</span></div>
-															<div><input type="text" id="date-to" name="_date_to" value="<?php echo $cart_item['date-to'] ?>" placeholder="Đến ngày"></div>
+														<div class="time-period-wrapper">
+															<div class="duration">
+																<input id="duration" class="number-spinner" name="cart[<?php echo $cart_item_key ?>][duration]" type="number" value="<?php echo $cart_item['duration'] ?>" min="1" max="10" step="1" />
+															</div>
+												
+															<span class="time-unit">
+																<?php
+																	$time_unit = __( 'day', 'woocommerce' );
+																	$time_block = $_product->get_meta( '_time_block' );
+																	if ( !empty( $time_block) )
+																		$time_unit = __( $time_block, 'woocommerce' );
+
+																	echo $time_unit;
+																?>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+															</span>
+
+															<div class="date-picker-input">
+																<div><input type="text" id="date-from" name="cart[<?php echo $cart_item_key ?>][_date_from]" value="<?php echo $cart_item['date-from'] ?>" placeholder="Từ ngày"></div>
+																<!-- <div class="delimeter"><span>đến</span></div>
+																<div><input type="text" id="date-to" name="_date_to" value="<?php echo $cart_item['date-to'] ?>" placeholder="Đến ngày"></div> -->
+															</div>
+															
+															
 														</div>
 
-														</div>
+														
+
+													
 														
 														
 													</td>
@@ -154,12 +176,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 									<div class="price-section">
 										<div class="rental-price">
 											<span class="label">Giá thuê</span>
-											<h3 class="price"><?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['number_of_days'] ); ?></h3>
+											<h3 class="price"><?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['duration'] ); ?></h3>
 										</div>
 
 										<div class="deposit-price">
 											<span class="label">Đặt cọc</span>
-											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['number_of_days']); ?></h2>
+											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['duration']); ?></h2>
 										</div>
 										
 										
@@ -167,13 +189,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 											<tr>
 												<td>Giá thuê:</td>
 												<td>
-													<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['number_of_days'] ); ?>
+													<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['duration'] ); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Đặt cọc:</td>
 												<td>
-													<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['number_of_days']); ?>
+													<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['duration']); ?>
 												</td>
 											</tr>
 										</table> -->

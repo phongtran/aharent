@@ -55,8 +55,23 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 			<div class="form-input time-period">
 
-					<input type="text" id="date-from" name="_date_from" value="" placeholder="Từ ngày" autocomplete="off" />
-					<input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off" />
+					<div class="duration">
+						<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
+					</div>
+		
+					<span class="time-unit">
+						<?php
+							$time_unit = __( 'day', 'woocommerce' );
+							$time_block = $product->get_meta( '_time_block' );
+							if ( !empty( $time_block) )
+								$time_unit = __( $time_block, 'woocommerce' );
+
+							echo $time_unit;
+						?>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+					</span>
+
+					<input type="text" id="date-from" name="_date_from" value="" placeholder="Ngày" autocomplete="off" />
+					<!-- <input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off" /> -->
 
 					
 				

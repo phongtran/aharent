@@ -37,7 +37,15 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		</div>
 
 	<div class="price">
-		<div class="rent-price"><?php echo wc_price( $product->price ); ?>/ngày</div>
+		<?php
+			$block_unit = __( 'day', 'woocommerce' );
+			$time_block = $product->get_meta( '_time_block' );
+
+			if ( !empty($time_block) )
+				$block_unit = __( $time_block, 'woocommerce' );
+			
+		?>
+		<div class="rent-price"><?php echo wc_price( $product->price ); ?>/<?php echo $block_unit ?></div>
 		<div class="rent-count">
 			<?php 
 				$total_sales = $product->get_meta( 'total_sales' );

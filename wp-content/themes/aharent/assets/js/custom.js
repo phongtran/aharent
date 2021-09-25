@@ -1,6 +1,9 @@
 (function($) {
 
-    $(".add-to-cart input#quantity-input").inputSpinner().change(function(e) {
+	$('input.number-spinner').inputSpinner();
+
+
+    $(".add-to-cart input.number-spinner").change(function(e) {
 		getProductPrice();
 	});
 
@@ -71,6 +74,10 @@
 		cartItemChanged(e);
 	});
 
+	$('.woocommerce-cart-form .duration input').change(function(e) {
+		cartItemChanged(e);
+	});
+
 	$('.woocommerce-cart-form .date-picker-input input').datetimepicker({
 		format: dateFormat,
 	}).change(function(e) {
@@ -89,16 +96,18 @@
 		var productIdArr 	= $(".product").first().attr("id").split("-"),
 			productID 		= productIdArr[1],
 			quantity 		= $("#quantity-input").val(),
-			dateFrom 		= $("#date-from").val(),
-			dateTo 			= $("#date-to").val();
+			duration		= $("#duration").val(),
+			dateFrom 		= $("#date-from").val();
+			// dateTo 			= $("#date-to").val();
 		
-		if ( productID && dateFrom && dateTo) {
+		if ( productID && dateFrom && duration) {
 			$('.loading-price').show();
 			wp.ajax.post( "get_product_price", {
 				id 			: productID,
 				quantity	: quantity,
+				duration	: duration,
 				date_from	: dateFrom,
-				date_to		: dateTo,	
+				// date_to		: dateTo,
 			} )
 				.done(function(response) {
 					$(".price-item-value.rental").first().html( response['data']['price']);

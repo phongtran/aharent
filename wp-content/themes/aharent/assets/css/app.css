@@ -1122,8 +1122,29 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   padding-right: 15px;
 }
 
-.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .quantity input {
-  max-width: 80px;
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-unit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 10px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .quantity input, .aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .duration input {
+  max-width: 40px;
 }
 
 .aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period .date-picker-input {
@@ -1141,9 +1162,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin-right: 10px;
 }
 
-.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period input {
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-period .date-picker-input input {
   margin: 10px 10px 10px 0;
   max-width: 150px;
+  width: 100px;
   font-size: 14px;
   padding: 8px 10px;
 }
@@ -1416,20 +1438,32 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .product-info .summary .add-to-cart .form-row .form-input {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.product-info .summary .add-to-cart .form-row .form-input.quantity-input-increment input {
+.product-info .summary .add-to-cart .form-row .form-input input.number-spinner {
   max-width: 50px;
 }
 
-.product-info .summary .add-to-cart .form-row .form-input.time-period input {
+.product-info .summary .add-to-cart .form-row .form-input .time-unit {
+  margin: 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product-info .summary .add-to-cart .form-row .form-input.time-period input.date {
   max-width: 170px;
-  margin-right: 20px;
   font-size: 16px;
 }
 
 @media (max-width: 600px) {
-  .product-info .summary .add-to-cart .form-row .form-input.time-period input {
+  .product-info .summary .add-to-cart .form-row .form-input.time-period input.date {
     margin: 10px 20px 10px 0;
   }
 }

@@ -36,8 +36,17 @@ global $product;
 			</div>
 		</div>
 		
+		<?php
+			$block_unit = __( 'day', 'woocommerce' );
+			$time_block = $product->get_meta( '_time_block' );
+			if ( !empty($time_block) )
+				$block_unit = __( $time_block, 'woocommerce' );
+			
+			
+		?>
+
 		<div class="price-item-value rental">
-			<span class="price-value"><?php echo $product->get_price_html(); ?></span><span class="rental-time">/ngày</span>
+			<span class="price-value"><?php echo $product->get_price_html(); ?></span><span class="rental-time">/<?php echo $block_unit ?></span>
 		</div>
 	</div>
 

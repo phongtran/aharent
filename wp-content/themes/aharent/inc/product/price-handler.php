@@ -1,8 +1,8 @@
 <?php
-    function get_price_from_ibookcar( $product_id, $date_from, $date_to, $quantity )
+    function get_price_from_ibookcar( $product_id, $date_from, $duration, $quantity )
     {
         $total_price = 0;
-        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+        // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = new WC_Product_Variable( $product_id );
         $variations = $product->get_available_variations();
@@ -45,9 +45,9 @@
         );
     }
 
-    function get_price_from_eventus( $product_id, $date_from, $date_to, $quantity )
+    function get_price_from_eventus( $product_id, $date_from, $duration, $quantity )
     {
-        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+        // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = new WC_Product_Variable( $product_id );
         $variations = $product->get_available_variations();
@@ -71,9 +71,9 @@
         );
     }
 
-    function get_price_from_kano( $product_id, $date_from, $date_to, $quantity )
+    function get_price_from_kano( $product_id, $date_from, $duration, $quantity )
     {
-        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+        // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = new WC_Product_Variable( $product_id );
         $variations = $product->get_available_variations();
@@ -109,9 +109,9 @@
         );
     }
     
-    function get_price_from_simple_product( $product_id, $date_from, $date_to, $quantity )
+    function get_price_from_simple_product( $product_id, $date_from, $duration, $quantity )
     {
-        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+        // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = get_product ( $product_id );
         $price = $product->get_price();
@@ -127,9 +127,9 @@
         );
     }
 
-    function get_price_for_duration ( $product_id, $date_from, $date_to, $quantity )
+    function get_price_for_duration ( $product_id, $date_from, $duration, $quantity )
     {
-        $duration = $date_to->diff( $date_from )->format("%a") + 1;
+        // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = new WC_Product_Variable( $product_id );
         $variations = $product->get_available_variations();

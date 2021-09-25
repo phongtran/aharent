@@ -7,10 +7,11 @@ function get_product_price() {
 
     $product_id     = $post_data['id'];
     $quantity       = $post_data['quantity'];
+    $duration       = $post_data['duration'];
     $date_from      = new DateTime( str_replace( '/', '-', $post_data['date_from'] ) );
-    $date_to        = new DateTime( str_replace( '/', '-', $post_data['date_to'] ) );
+    // $date_to        = new DateTime( str_replace( '/', '-', $post_data['date_to'] ) );
 
-    $new_price = get_new_price( $product_id, $date_from, $date_to, $quantity );
+    $new_price = get_new_price( $product_id, $date_from, $duration, $quantity );
 
     wp_send_json_success( array( 'data' => $new_price ) );
 

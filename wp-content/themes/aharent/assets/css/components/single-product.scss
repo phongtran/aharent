@@ -174,22 +174,26 @@
 
                 .form-input {
                     width: 100%;
+                    display: flex;
 
                     // max-width: 80%;
                     // margin-left: 30px;
-
-                    &.quantity-input-increment {
                     
-                        input {
-                            max-width: 50px;
-                        }
+                    input.number-spinner {
+                        max-width: 50px;
                     }
 
+                    .time-unit {
+                        margin: 0 20px;
+                        display: flex;
+                        align-items: center;
+                    }
+                
                     &.time-period {
 
-                        input {
+                        input.date {
                             max-width: 170px;
-                            margin-right: 20px;
+                            // margin-right: 20px;
 
                             font-size: 16px;
 
