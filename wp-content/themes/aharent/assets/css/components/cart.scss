@@ -18,8 +18,24 @@
         padding: 0 10px;
         padding-bottom: 10px;
 
+        tr.order-total {
+            background-color: $shadow-color;
+        }
+
         p {
             margin: 0;
+
+
+            &.note {
+
+                &::before {
+                    content: "*";
+                }
+                color: $footer-text-color;
+                font-size: 14px;
+                font-weight: normal;
+                font-style: italic;
+            }
         }
 
         .cart_totals-title {

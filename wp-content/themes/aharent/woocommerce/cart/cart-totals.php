@@ -30,18 +30,25 @@ defined( 'ABSPATH' ) || exit;
 
 		<tr class="cart-subtotal">
 			<th>
-				<p><?php esc_html_e( 'Đặt cọc', 'woocommerce' ); ?></p>
-				<p>(<?php esc_html_e( 'thanh toán trực tuyến', 'woocommerce' ); ?>)</p>
+				<p><?php esc_html_e( 'Price', 'woocommerce' ); ?></p>
 			</th>
-			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php $total_deposit = wc_price( calculate_cart_total_deposit() ); echo $total_deposit; ?></td>
+			<td data-title="<?php esc_attr_e( 'Phí thuê', 'woocommerce' ) ?>"><?php $total_rental = calculate_cart_total_rental_fee(); echo wc_price( $total_rental) ?></td>
 		</tr>
 
 		<tr class="cart-subtotal">
 			<th>
-				<p><?php esc_html_e( 'Phí thuê', 'woocommerce' ); ?></p>
-				<p>(<?php esc_html_e( 'thanh toán lúc nhận hàng', 'woocommerce' ); ?>)</p>
+				<p><?php esc_html_e( 'Đặt cọc', 'woocommerce' ); ?></p>
+				<p class="note"><?php esc_html_e( 'Thanh toán trực tuyến', 'woocommerce' ); ?></p>
 			</th>
-			<td data-title="<?php esc_attr_e( 'Phí thuê', 'woocommerce' ) ?>"><?php echo wc_price( calculate_cart_total_rental_fee() ); ?></td>
+			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php $total_deposit = calculate_cart_total_deposit(); echo wc_price( $total_deposit );  ?></td>
+		</tr>
+
+		<tr class="cart-subtotal">
+			<th>
+				<p><?php esc_html_e( 'Còn lại', 'woocommerce' ); ?></p>
+				<p class="note"><?php esc_html_e( 'Thanh toán khi nhận hàng', 'woocommerce' ); ?></p>
+			</th>
+			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php echo wc_price( $total_rental - $total_deposit ); ?></td>
 		</tr>
 
 		<!-- <tr class="cart-subtotal">
@@ -114,10 +121,10 @@ defined( 'ABSPATH' ) || exit;
 
 		<tr class="order-total">
 			<th>
-				<p><?php esc_html_e( 'Tổng tiền', 'woocommerce' ); ?></p>
-				<p><?php esc_html_e( 'thanh toán trực tuyến', 'woocommerce' ); ?></p>
+				<p><?php esc_html_e( 'Total', 'woocommerce' ); ?></p>
+				<p class="note"><?php esc_html_e( 'Thanh toán trực tuyến', 'woocommerce' ); ?></p>
 			</th>
-			<td data-title="<?php esc_attr_e( 'Tổng', 'woocommerce' ); ?>"><?php echo $total_deposit; ?></td>
+			<td data-title="<?php esc_attr_e( 'Tổng', 'woocommerce' ); ?>"><?php echo wc_price( $total_deposit ); ?></td>
 		</tr>
 
 		<?php do_action( 'woocommerce_cart_totals_after_order_total' ); ?>
