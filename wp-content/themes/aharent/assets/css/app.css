@@ -1484,7 +1484,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .summary .price-wrapper {
-  margin-top: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
