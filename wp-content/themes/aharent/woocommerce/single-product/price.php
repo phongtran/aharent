@@ -41,13 +41,23 @@ global $product;
 			$time_block = $product->get_meta( '_time_block' );
 			if ( !empty($time_block) )
 				$block_unit = __( $time_block, 'woocommerce' );
-			
-			
 		?>
 
 		<div class="price-item-value rental">
 
-			<?php $prices = get_product_prices( $product ); ?>
+			<?php $time_unit = $product->get_attribute( 'time_unit' ); ?>
+			<?php if ( !$time_unit) : ?>
+				<div>
+					<span class="price-value">
+						<?php echo $product->get_price_html(); ?>
+					</span>
+							
+					<span class="rental-time">/<?php echo $block_unit ?></span>
+				</div>
+				
+			<?php else: ?>
+
+				<?php $prices = get_product_prices( $product ); ?>
 				<?php foreach ( $prices as $time_unit => $price ) : ?>
 					<div>
 						<span class="price-value">
@@ -57,6 +67,8 @@ global $product;
 						<span class="rental-time">/<?php echo __( $time_unit, 'woocommerce' ); ?></span>
 					</div>
 				<?php endforeach ?>
+			
+			<?php endif ?>
 			
 		</div>
 	</div>
