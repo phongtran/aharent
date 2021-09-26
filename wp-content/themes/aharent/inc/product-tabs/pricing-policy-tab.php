@@ -9,7 +9,7 @@ function pricing_policy_tab( $tabs )
 	// Adds the new tab
 	
 	$tabs['pricing_policy_tab'] = array(
-		'title' 	=> __( 'Giá thuê', 'woocommerce' ),
+		'title' 	=> __( 'Giá thuê chi tiết', 'woocommerce' ),
 		'priority' 	=> 1,
 		'callback' 	=> 'pricing_policy_tab_content'
 	);

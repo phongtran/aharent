@@ -1549,9 +1549,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .product-info .summary .price-wrapper .price-item .price-item-value.rental .rental-time {

@@ -46,7 +46,18 @@ global $product;
 		?>
 
 		<div class="price-item-value rental">
-			<span class="price-value"><?php echo $product->get_price_html(); ?></span><span class="rental-time">/<?php echo $block_unit ?></span>
+
+			<?php $prices = get_product_prices( $product ); ?>
+				<?php foreach ( $prices as $time_unit => $price ) : ?>
+					<div>
+						<span class="price-value">
+							<?php echo wc_price( $price ) ?>
+						</span>
+						
+						<span class="rental-time">/<?php echo __( $time_unit, 'woocommerce' ); ?></span>
+					</div>
+				<?php endforeach ?>
+			
 		</div>
 	</div>
 
