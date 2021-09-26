@@ -312,3 +312,44 @@ do_action( 'woocommerce_before_cart' ); ?>
 </div>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>
+
+
+	<div class="popular-products">
+        <div class="title-bar">
+            <h3>SẢN PHẨM NỔI BẬT</h3>
+        </div>
+
+    
+            <?php
+
+            woocommerce_product_loop_start();
+
+                $args = array(
+                    'post_type'   => 'product',
+                    'stock'       => 1,
+                    'showposts'   => 15,
+                    'orderby'     => 'date',
+                    'order'       => 'DESC' ,
+                );
+
+                $loop = new WP_Query( $args );
+
+                while ( $loop->have_posts() ) :
+                    $loop->the_post();
+                    
+                    wc_get_template_part( 'content', 'product' );
+                endwhile;
+
+                wp_reset_query();
+
+                woocommerce_product_loop_end();
+            ?>
+
+        <div class="button-more">
+            <a href="/store">
+                <button class="aha-button" type="button">Xem thêm</button>
+            </a>
+        </div>
+        
+    </div>
+		

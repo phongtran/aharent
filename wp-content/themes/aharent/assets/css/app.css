@@ -774,6 +774,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   z-index: 10;
 }
 
+.woocommerce .popular-products {
+  margin: 20px 0 !important;
+}
+
 .mega-sale {
   background-color: #fff;
 }
@@ -875,10 +879,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .container .popular-products {
   margin: 20px;
-}
-
-.container .popular-products.related {
-  margin: 20px 0;
 }
 
 .container .popular-products .button-more {

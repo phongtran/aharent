@@ -773,4 +773,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .tempus-dominus-widget {
   z-index: 10;
 }
+
+.woocommerce .popular-products {
+  margin: 20px 0 !important;
+}
 /*# sourceMappingURL=global.css.map */
