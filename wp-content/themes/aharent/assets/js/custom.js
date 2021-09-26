@@ -7,9 +7,9 @@
 		getProductPrice();
 	});
 
-	// tinymce.init({
-    //     selector: '#rental-terms'
-    // });
+	tinymce.init({
+        selector: '#rental-terms'
+    });
 
 	$('.add-to-cart select.time-unit').change(function(e) {
 		$('.time-delimiter .time-unit').text($(this).find('option:selected').first().text().toLowerCase());
