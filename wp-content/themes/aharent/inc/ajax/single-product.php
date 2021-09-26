@@ -8,10 +8,16 @@ function get_product_price() {
     $product_id     = $post_data['id'];
     $quantity       = $post_data['quantity'];
     $duration       = $post_data['duration'];
-    $date_from      = new DateTime( str_replace( '/', '-', $post_data['date_from'] ) );
+    $date_from      = $post_data['date_from'];
     // $date_to        = new DateTime( str_replace( '/', '-', $post_data['date_to'] ) );
+    $time_unit      = 'day';
+    if (isset($post_data['time_unit']))
+        $time_unit = $post_data['time_unit'];
 
-    $new_price = get_new_price( $product_id, $date_from, $duration, $quantity );
+    $new_price = get_new_price( $product_id, $date_from, $duration, $time_unit );
+
+    foreach ( $new_price as $key => $price )
+        $new_price[$key] = wc_price( $price * $quantity );
 
     wp_send_json_success( array( 'data' => $new_price ) );
 

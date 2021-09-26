@@ -82,9 +82,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 										<div class="title">
 										<?php
 											if ( ! $product_permalink ) {
-												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;' );
+												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key ) . '&nbsp;' );
 											} else {
-												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s"><h4>%s</h4></a>', esc_url( $product_permalink ), $_product->get_name() ), $cart_item, $cart_item_key ) );
+												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s"><h4>%s</h4></a>', esc_url( $product_permalink ), $_product->get_title() ), $cart_item, $cart_item_key ) );
 											}
 
 											do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
@@ -105,6 +105,28 @@ do_action( 'woocommerce_before_cart' ); ?>
 									<div class="info-section d-flex">
 										<table class="item-data">
 											<tbody>
+
+												<?php
+													$product = wc_get_product( $_product->id );
+													$time_units = $product->get_attribute( 'time_unit' );
+												?>
+												<?php if ( $time_units ) : $time_units = explode( ' | ', $time_units ); ?>
+
+													<tr class="time-unit">
+														<td class="label">Thuê theo:</td>
+														<td>
+															<div class="time-unit-row">
+																<select data-key="<?php echo $cart_item_key ?>" class="form-select time-unit" id="time_unit" name="cart[<?php echo $cart_item_key ?>][time_unit]">
+																	<?php foreach ( $time_units as $time_unit ) : ?>
+																		<option <?php echo ($time_unit == $cart_item['time-unit']) ? 'selected' : '' ?> value="<?php echo $time_unit ?>"><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></option>
+																	<?php endforeach ?> 
+																</select>
+															</div>
+														</td>
+													</tr>
+
+												<?php endif ?>
+												
 												<tr class="quantity">
 													<td class="label">Số lượng:</td>
 													<td>
@@ -138,16 +160,23 @@ do_action( 'woocommerce_before_cart' ); ?>
 															<div class="duration">
 																<input id="duration" class="number-spinner" name="cart[<?php echo $cart_item_key ?>][duration]" type="number" value="<?php echo $cart_item['duration'] ?>" min="1" max="10" step="1" />
 															</div>
-												
-															<span class="time-unit">
-																<?php
-																	$time_unit = __( 'day', 'woocommerce' );
-																	$time_block = $_product->get_meta( '_time_block' );
-																	if ( !empty( $time_block) )
-																		$time_unit = __( $time_block, 'woocommerce' );
 
-																	echo $time_unit;
-																?>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+															<span class="time-unit-wrapper">
+																<span class="time-unit" data-key="<?php echo $cart_item_key ?>">
+																	<?php
+																		if (isset($cart_item['time-unit']))
+																			$time_unit = __( $cart_item['time-unit'], 'woocommerce' );
+																		else
+																		{
+																			$time_unit = __( 'day', 'woocommerce' );
+																			$time_block = $_product->get_meta( '_time_block' );
+																			if ( !empty( $time_block) )
+																				$time_unit = __( $time_block, 'woocommerce' );
+																		}
+
+																		echo $time_unit;
+																	?>
+																</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
 															</span>
 
 															<div class="date-picker-input">
@@ -176,12 +205,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 									<div class="price-section">
 										<div class="rental-price">
 											<span class="label">Giá thuê</span>
-											<h3 class="price"><?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['duration'] ); ?></h3>
+											<h3 class="price"><?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] ); ?></h3>
 										</div>
 
 										<div class="deposit-price">
 											<span class="label">Đặt cọc</span>
-											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['duration']); ?></h2>
+											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity']); ?></h2>
 										</div>
 										
 										

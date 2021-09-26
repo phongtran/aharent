@@ -235,28 +235,30 @@ add_action( 'woocommerce_process_product_meta', 'cfwc_save_custom_field' );
 // Re-calculating cart values
 function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, $variation_id )
 {
-	$product = get_product( $product_id );
-	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
-	$cart_item_data['rental_price'] = $product->get_price();
-
-	$vendor_id = get_post_field( 'post_author', $product_id );
-	$dokan_admin_percentage = get_user_meta( $vendor_id, 'dokan_admin_percentage' );
-	
-	if (!empty($dokan_admin_percentage))
-		$dokan_admin_percentage = $dokan_admin_percentage[0];
-	
-	$cart_item_data['deposit'] = $cart_item_data['rental_price'] * $dokan_admin_percentage / 100; 
-	$cart_item_data['rental_price'] -= $cart_item_data['deposit'];
-
 	if (isset($_POST['_date_from']))
 		$cart_item_data['date-from'] = $_POST['_date_from'];
+
+	if (isset($_POST['time_unit']))
+		$cart_item_data['time-unit'] = $_POST['time_unit'];
 
 	// if (isset($_POST['_date_to']))
 	// 	$cart_item_data['date-to'] = $_POST['_date_to'];
 
 	if ( isset( $_POST['duration'] ))
 		$cart_item_data['duration'] = $_POST['duration'];
+	
+	$product = get_product( $product_id );
+	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
+	
+	if (isset($cart_item_data['time-unit']))
+		$new_price = get_new_price( $product_id, $cart_item_data['date-from'], $cart_item_data['duration'], $cart_item_data['time-unit'] );
+	else
+		$new_price = get_new_price( $product_id, $cart_item_data['date-from'], $cart_item_data['duration'] );
+	
+	$cart_item_data['rental_price'] = $new_price['price'];
+	$cart_item_data['deposit'] = $new_price['deposit'];
 
+	
 	// $date_from = new DateTime( str_replace( '/', '-', $cart_item_data['date-from'] ) );
 	// $date_to = new DateTime( str_replace( '/', '-', $cart_item_data['date-to'] ) );
 	// $cart_item_data['number_of_days'] = $date_from->diff( $date_to )->format("%a");
@@ -276,6 +278,20 @@ function update_cart_meta( $cart_updated )
 	{
 		WC()->cart->cart_contents[$key]['duration'] = $cart_item_data['duration'];
 		WC()->cart->cart_contents[$key]['date-from'] = $cart_item_data['_date_from'];
+		
+		if (isset($cart_item_data['time_unit']))
+			WC()->cart->cart_contents[$key]['time-unit'] = $cart_item_data['time_unit'];
+
+		$session_item = WC()->cart->cart_contents[$key];
+
+		if (isset($session_item['time-unit']))
+			$new_price = get_new_price($session_item['product_id'], $session_item['date-from'], $session_item['duration'], $session_item['time-unit']);
+		else
+			$new_price = get_new_price($session_item['product_id'], $session_item['date-from'], $session_item['duration']);
+		
+		WC()->cart->cart_contents[$key]['deposit'] = $new_price['deposit'];
+		WC()->cart->cart_contents[$key]['rental_price'] = $new_price['price'];
+		
 	}
 
 }
@@ -289,7 +305,7 @@ function set_cart_calculation( $cart )
 {
 	foreach ( $cart->get_cart() as $cart_item )
 	{	
-		$cart_item['data']->set_price( $cart_item['deposit'] * $cart_item['duration'] );
+		$cart_item['data']->set_price( $cart_item['deposit'] );
 	}
 }
 add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
@@ -341,7 +357,7 @@ function calculate_cart_total_rental_fee()
 
 	$_total_rental_fee = 0;
 	foreach ( $cart as $item => $values )
-		$_total_rental_fee += $values['rental_price'] * $values['quantity'] * $values['duration'];
+		$_total_rental_fee += $values['rental_price'] * $values['quantity'];
 
 	return $_total_rental_fee;
 }
@@ -354,7 +370,7 @@ function calculate_cart_total_security_deposit()
 	$_total_security_deposit = 0;
 	// var_dump($cart); 
 	foreach ( $cart as $item => $values )
-		$_total_security_deposit += $values['security_deposit'] * $values['quantity'] * $values['duration'];
+		$_total_security_deposit += $values['security_deposit'] * $values['quantity'];
 
 	return $_total_security_deposit;
 }
@@ -366,7 +382,7 @@ function calculate_cart_total_deposit()
 
 	$_total_deposit = 0;
 	foreach ( $cart as $item => $values )
-		$_total_deposit += $values['deposit'] * $values['quantity'] * $values['duration'];
+		$_total_deposit += $values['deposit'] * $values['quantity'];
 
 	return $_total_deposit;
 }
@@ -421,7 +437,7 @@ function customize_checkout_billing_kyc( $fields )
 add_filter( 'woocommerce_checkout_fields', 'customize_checkout_billing_kyc' );
 
 
-function get_new_price( $product_id, $date_from, $duration, $quantity )
+function get_new_price( $product_id, $date_from, $duration, $time_unit = 'day' )
 {
 	require_once THEME_DIR . 'inc/product/price-handler.php';
 
@@ -433,7 +449,7 @@ function get_new_price( $product_id, $date_from, $duration, $quantity )
 	}
 	else
 	{
-		$price_handler = 'get_price_for_duration';
+		$price_handler = 'get_price_for_variable_product';
 
 		$vendor_name 	= get_post_meta ( $product_id, '_vendor' );
 		
@@ -441,11 +457,49 @@ function get_new_price( $product_id, $date_from, $duration, $quantity )
 			$price_handler = 'get_price_from_' . $vendor_name[0];
 
 	}
+	
+	$date_from      = new DateTime( str_replace( '/', '-', $date_from ) );
 
 	if ( function_exists( $price_handler ) )
-		return $price_handler( $product_id, $date_from, $duration, $quantity );
+		return $price_handler( $product_id, $date_from, $duration, $time_unit );
 	
 	return 0;
+}
+
+
+function get_product_prices( $product )
+{
+	if ( $product->is_type( 'simple' ))
+	{
+		$time_unit = 'day';
+		$time_block = $product->get_meta( '_time_block' );
+
+		if ( !empty($time_block) )
+			$time_unit = __( $time_block, 'woocommerce' );
+		
+		return array( $time_unit => $product->price );
+	}
+	else
+	{
+		$time_units = $product->get_attribute( 'time_unit' );
+
+		if ( !$time_units )
+			return array( 'day' => $product->price );
+
+		$variations = $product->get_available_variations();
+
+		$prices = array();
+
+		foreach ( $variations as $key => $variation )
+		{
+			if ( !isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) ||
+				(isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) && 
+					$variation['display_price'] < $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]))
+				$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]] = $variation[ 'display_price' ];
+		}
+
+		return $prices;
+	}
 }
 
 function get_vendor_percentage( $vendor_id )

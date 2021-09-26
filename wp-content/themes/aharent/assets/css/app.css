@@ -1122,7 +1122,12 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   padding-right: 15px;
 }
 
-.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-unit {
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section select.time-unit {
+  margin: 10px 0;
+  width: 120px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .cart-item-description .info-section .time-unit-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1443,11 +1448,17 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: flex;
 }
 
+.product-info .summary .add-to-cart .form-row .form-input select.time-unit {
+  max-width: 130px;
+  width: 130px;
+  margin: 0;
+}
+
 .product-info .summary .add-to-cart .form-row .form-input input.number-spinner {
   max-width: 50px;
 }
 
-.product-info .summary .add-to-cart .form-row .form-input .time-unit {
+.product-info .summary .add-to-cart .form-row .form-input .time-delimiter {
   margin: 0 20px;
   display: -webkit-box;
   display: -ms-flexbox;

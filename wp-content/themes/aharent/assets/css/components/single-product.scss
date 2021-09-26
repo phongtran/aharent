@@ -178,12 +178,18 @@
 
                     // max-width: 80%;
                     // margin-left: 30px;
+
+                    select.time-unit {
+                        max-width: 130px;
+                        width: 130px;
+                        margin: 0;
+                    }
                     
                     input.number-spinner {
                         max-width: 50px;
                     }
 
-                    .time-unit {
+                    .time-delimiter {
                         margin: 0 20px;
                         display: flex;
                         align-items: center;

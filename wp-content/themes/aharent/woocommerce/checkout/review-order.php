@@ -41,10 +41,10 @@ defined( 'ABSPATH' ) || exit;
 						<?php // echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</td>
 					<td>
-						<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['number_of_days']) ?>
+						<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity']) ?>
 					</td>
 					<td class="product-total">
-						<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['number_of_days']); ?> 
+						<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] ); ?> 
 					</td>
 				</tr>
 				<?php

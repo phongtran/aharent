@@ -20,7 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+require_once THEME_DIR . 'inc/product-tabs/pricing-policy-tab.php';
 require_once THEME_DIR . 'inc/product-tabs/security-deposit-tab.php';
+
 
 /**
  * Filter tabs and allow third parties to add their own.

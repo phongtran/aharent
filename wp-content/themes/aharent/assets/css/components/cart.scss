@@ -191,7 +191,12 @@
 
                         }
 
-                        .time-unit {
+                        select.time-unit {
+                            margin: 10px 0;
+                            width: 120px;
+                        }
+
+                        .time-unit-wrapper {
                             display: flex;
                             align-items: center;
                             margin: 0 10px;

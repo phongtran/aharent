@@ -63,16 +63,18 @@ if ( $product->is_in_stock() ) : ?>
 					<div class="duration">
 						<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
 					</div>
-		
-					<span class="time-unit">
-						<?php
-							$time_unit = __( 'day', 'woocommerce' );
-							$time_block = $product->get_meta( '_time_block' );
-							if ( !empty( $time_block) )
-								$time_unit = __( $time_block, 'woocommerce' );
 
-							echo $time_unit;
-						?>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+					<span class="time-delimiter">
+						<span class="time-unit">
+							<?php
+								$time_unit = __( 'day', 'woocommerce' );
+								$time_block = $product->get_meta( '_time_block' );
+								if ( !empty( $time_block) )
+									$time_unit = __( $time_block, 'woocommerce' );
+
+								echo $time_unit;
+							?>
+						</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
 					</span>
 				
 					<input type="text" class="date" id="date-from" name="_date_from"  placeholder="Ngày" autocomplete="off" />

@@ -29,20 +29,38 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 <form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo $variations_attr; // WPCS: XSS ok. ?>">
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-		<?php
-		do_action( 'woocommerce_before_add_to_cart_quantity' );
-		?>
-	
-			
+		
+		
+		<?php $time_units = $product->get_attribute( 'time_unit' ); ?>
+		<?php if ( $time_units ) : $time_units = explode( ' | ', $time_units ); ?>
+
 			<div class="form-row">
 				<div class="form-label">
-					<label>Số lượng: </label>
+					<label>Thuê theo: </label>
 				</div>
 
-				<div class="form-input quantity-input-increment">
-					<input id="quantity-input" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+				<div class="form-input">
+					<select class="form-select time-unit" id="time_unit" name="time_unit">
+						<?php foreach ( $time_units as $time_unit ) : ?>
+							<option value="<?php echo $time_unit ?>"><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></option>
+						<?php endforeach ?> 
+					</select>
 				</div>
 			</div>
+
+		<?php endif ?>
+		
+		<?php do_action( 'woocommerce_before_add_to_cart_quantity' ); ?>
+			
+		<div class="form-row">
+			<div class="form-label">
+				<label>Số lượng: </label>
+			</div>
+
+			<div class="form-input quantity-input-increment">
+				<input class="number-spinner" id="quantity-input" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+			</div>
+		</div>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>	
 
@@ -55,10 +73,11 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 			<div class="form-input time-period">
 
-					<div class="duration">
-						<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
-					</div>
-		
+				<div class="duration">
+					<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
+				</div>
+	
+				<span class="time-delimiter">
 					<span class="time-unit">
 						<?php
 							$time_unit = __( 'day', 'woocommerce' );
@@ -67,11 +86,12 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 								$time_unit = __( $time_block, 'woocommerce' );
 
 							echo $time_unit;
-						?>, từ <?php echo __( 'day', 'woocommerce' ); ?>
-					</span>
+						?>
+					</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+				</span>
 
-					<input type="text" id="date-from" name="_date_from" value="" placeholder="Ngày" autocomplete="off" />
-					<!-- <input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off" /> -->
+				<input type="text" id="date-from" name="_date_from" value="" placeholder="Ngày" autocomplete="off" />
+				<!-- <input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off" /> -->
 
 					
 				
