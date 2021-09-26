@@ -18,9 +18,12 @@ function security_deposit_tab( $tabs )
 
 }
 
-global $post;
+global $product;
 
-$vendor_rental_terms = get_user_meta ( $post->post_author, 'vendor_rental_terms', true );
+$vendor_login = $product->get_meta( '_vendor' );
+$vendor = get_user_by( 'login', $vendor_login );
+
+$vendor_rental_terms = get_user_meta ( $vendor->ID, 'vendor_rental_terms', true );
 
 if ( !empty($vendor_rental_terms) )
 	add_filter( 'woocommerce_product_tabs', 'security_deposit_tab' );
