@@ -1537,7 +1537,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   font-size: 1.2rem;
   background-color: #04b950;
   color: #ddf6e8;
-  padding: 5px 10px;
+  padding: 0 10px;
 }
 
 .product-info .summary .price-wrapper .price-item .price-item-value {
