@@ -1445,6 +1445,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   font-style: italic;
   font-size: 13px;
   color: #a12031;
+  margin-left: 10px;
 }
 
 .product-info .summary .add-to-cart .validate-enabled {
