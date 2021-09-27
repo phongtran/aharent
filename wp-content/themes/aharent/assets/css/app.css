@@ -1651,4 +1651,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .product-description .tab-content {
   margin-top: 20px;
 }
+
+.product-description .tab-content a {
+  color: #04b950;
+}
 /*# sourceMappingURL=app.css.map */

@@ -379,5 +379,9 @@
 
     .tab-content {
         margin-top: 20px;
+
+        a {
+            color: $main-button-color;
+        }
     }
 }
