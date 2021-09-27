@@ -68,10 +68,11 @@ if ( !isset($prices) )
 						<?php foreach ( $price as $duration => $value ) : ?>
 							<tr>
 								<td>
-									<?php echo $duration ?>
 									<?php 
 										if ( is_numeric( $duration ) )
-											echo ' ' . __( $time_unit, 'woocommerce' );
+											echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+										else
+											echo __( $duration, 'woocommerce' );
 									?>
 								</td>
 								<td><?php echo wc_price( $value )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
