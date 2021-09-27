@@ -41,7 +41,7 @@ if ( ! $product->is_purchasable() ) {
 			<thead>
 				<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
 				<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
-				<th><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+				<th><?php echo ucfirst(__( 'deposit', 'woocommerce' )) ?></th>
 			</thead>
 			<tbody>
 				<tr>
