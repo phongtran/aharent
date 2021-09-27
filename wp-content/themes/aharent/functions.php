@@ -477,26 +477,43 @@ function get_product_prices( $product )
 		if ( !empty($time_block) )
 			$time_unit = __( $time_block, 'woocommerce' );
 		
-		return array( $time_unit => $product->price );
+		return array( $time_unit => array( $product->price ) );
 	}
 	else
 	{
 		$time_units = $product->get_attribute( 'time_unit' );
-
-		if ( !$time_units )
-			return array( 'day' => $product->price );
-
 		$variations = $product->get_available_variations();
-
 		$prices = array();
 
-		foreach ( $variations as $key => $variation )
+		if ( !$time_units )
 		{
-			if ( !isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) ||
-				(isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) && 
-					$variation['display_price'] < $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]))
-				$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]] = $variation[ 'display_price' ];
+			foreach ( $variations as $key => $variation)
+				if ( isset( $variation['attributes']['attribute_duration']))
+					$prices['day'][$variation['attributes']['attribute_duration']] = $variation['display_price'];
+				elseif (isset( $variation['attributes']['attribute_day'] ))
+					$prices['day'][$variation['attributes']['attribute_day']] = $variation['display_price'];
+				else
+					$prices['day'][1] = $variation['display_price'];
 		}
+		else
+		{
+			foreach ( $variations as $key => $variation )
+			{
+				if ( !isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) ||
+					(isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) && 
+						$variation['display_price'] < $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]))
+				{
+					if ( isset( $variation['attributes']['attribute_duration'] ) )
+						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][$variation['attributes']['attribute_duration']] = $variation[ 'display_price' ];
+					else
+						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][1] = $variation[ 'display_price' ];
+				}
+					
+			}
+		}
+
+		foreach ( $prices as $key => $price )
+			sort( $price );
 
 		return $prices;
 	}
@@ -509,7 +526,7 @@ function get_product_deposit_percentage( $product )
 
 	if ( !$percentage )
 		$percentage = get_vendor_percentage( $product->post->post_author );
-		
+
 	return $percentage;
 }
 

@@ -18,8 +18,17 @@
 defined( 'ABSPATH' ) || exit;
 
 global $product;
+global $prices;
 
-if ( $product->is_in_stock()) :
+if ( !isset( $prices ))
+	$prices = get_product_prices( $product );
+
+?>
+
+
+
+
+<?php if ( $product->is_in_stock()) :
 
 $attribute_keys  = array_keys( $attributes );
 $variations_json = wp_json_encode( $available_variations );

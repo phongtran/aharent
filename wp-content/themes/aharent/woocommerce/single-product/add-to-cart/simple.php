@@ -24,39 +24,6 @@ if ( ! $product->is_purchasable() ) {
 }
 ?>
 
-<div class="form-row price-details">
-	<div class="form-label">
-		<label>Giá thuê chi tiết: </label>
-	</div>
-
-	<div class="form-input ">
-		<?php
-			$time_unit = __( 'day', 'woocommerce' );
-			$time_block = $product->get_meta( 'time_unit' );
-			if ( !empty( $time_block) )
-				$time_unit = __( $time_block, 'woocommerce' );
-		?>
-
-		<table>
-			<thead>
-				<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
-				<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
-				<th><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
-			</thead>
-			<tbody>
-				<tr>
-					<td><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></td>
-					<td><?php echo wc_price( $product->price )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
-					<td><?php echo get_product_deposit_percentage( $product ) ?>%</td>
-				</tr>
-			</tbody>
-		</table>
-		
-	</div>
-</div>
-
-
-
 <?php if ( $product->is_in_stock() ) : ?>
 
 <?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>

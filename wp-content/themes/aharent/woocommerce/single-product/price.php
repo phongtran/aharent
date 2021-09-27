@@ -20,10 +20,81 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
+global $prices; 
+if ( !isset($prices) )
+	$prices = get_product_prices( $product );
+			
 
 ?>
 
-<div class='price-wrapper d-flex'>
+<div class="form-row price-details">
+	
+	<div class="form-input ">
+
+		<?php if ( $product->is_type( 'simple' )) : ?>
+			
+			<?php
+				$time_unit = __( 'day', 'woocommerce' );
+				$time_block = $product->get_meta( 'time_unit' );
+				if ( !empty( $time_block) )
+					$time_unit = __( $time_block, 'woocommerce' );
+			?>
+
+			<table>
+				<thead>
+					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
+					<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
+					<th><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?php echo '1 ' . __( $time_unit, 'woocommerce' ) ?></td>
+						<td><?php echo wc_price( $product->price )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
+						<td><?php echo get_product_deposit_percentage( $product ) ?>%</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<?php else: ?>
+			<table>
+				<thead>
+					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
+					<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
+					<th rowspan="<?php echo 1 + count($prices, COUNT_RECURSIVE) - count( $prices ) ?>"><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+				</thead>
+				<tbody>
+					<?php $deposit = get_product_deposit_percentage( $product ); $incre = 0; ?>
+					<?php foreach ( $prices as $time_unit => $price ) :?>
+						<?php foreach ( $price as $duration => $value ) : ?>
+							<tr>
+								<td>
+									<?php echo $duration ?>
+									<?php 
+										if ( is_numeric( $duration ) )
+											echo ' ' . __( $time_unit, 'woocommerce' );
+									?>
+								</td>
+								<td><?php echo wc_price( $value )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
+								
+								<?php if ( $incre == 0 ) : $incre++; ?>
+									<td rowspan="0"><?php echo $deposit ?>%</td>
+								<?php endif ?>
+							</tr>
+						<?php endforeach ?>
+					<?php endforeach ?>
+				</tbody>
+			</table>
+		<?php endif ?>
+		
+	</div>
+</div>
+
+<?php if ( $product->is_in_stock() ) : ?>
+<div class="price-wrapper d-flex">
+
+	<div class="note">
+		<span>Chọn thông tin bên dưới để tính giá thuê.</span>
+	</div>
 
 	<div class="price-item">
 		
@@ -35,40 +106,10 @@ global $product;
 				</div>
 			</div>
 		</div>
-		
-		<?php
-			$block_unit = __( 'day', 'woocommerce' );
-			$time_block = $product->get_meta( 'time_unit' );
-			if ( !empty($time_block) )
-				$block_unit = __( $time_block, 'woocommerce' );
-		?>
 
 		<div class="price-item-value rental">
 
-			<?php $time_unit = $product->get_attribute( 'time_unit' ); ?>
-			<?php if ( !$time_unit) : ?>
-				<div>
-					<span class="price-value">
-						<?php echo $product->get_price_html(); ?>
-					</span>
-							
-					<span class="rental-time">/<?php echo $block_unit ?></span>
-				</div>
-				
-			<?php else: ?>
-
-				<?php $prices = get_product_prices( $product ); ?>
-				<?php foreach ( $prices as $time_unit => $price ) : ?>
-					<div>
-						<span class="price-value">
-							<?php echo wc_price( $price ) ?>
-						</span>
-						
-						<span class="rental-time">/<?php echo __( $time_unit, 'woocommerce' ); ?></span>
-					</div>
-				<?php endforeach ?>
-			
-			<?php endif ?>
+			-
 			
 		</div>
 	</div>
@@ -106,10 +147,9 @@ global $product;
 		</div>
 		
 		<div class="price-item-value">
-			<span class="percentage">
-				<?php echo get_product_deposit_percentage( $product ); ?>%
-			</span>
+			-
 		</div>
 	</div>
 
 </div>
+<?php endif ?>

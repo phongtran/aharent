@@ -1517,11 +1517,15 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .product-info .summary .price-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
+  margin-top: 20px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.product-info .summary .price-wrapper .note {
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .product-info .summary .price-wrapper .price-item {
@@ -1538,6 +1542,22 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
           flex-direction: column;
 }
 
+.product-info .summary .price-wrapper .price-item .price-item-value {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.5rem;
+  color: #04b950;
+  padding: 5px 10px;
+}
+
+.product-info .summary .price-wrapper .price-item .price-item-value.rental .rental-time {
+  font-size: 1.5rem;
+}
+
 .product-info .summary .price-wrapper .price-item .price-item-value span.percentage {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1545,6 +1565,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
 }
 
 .product-info .summary .price-wrapper .price-item .loading-price {
@@ -1576,28 +1600,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   background-color: #04b950;
   color: #ddf6e8;
   padding: 0 10px;
-}
-
-.product-info .summary .price-wrapper .price-item .price-item-value {
-  font-size: 1.5rem;
-  color: #04b950;
-  padding: 5px 10px;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.product-info .summary .price-wrapper .price-item .price-item-value.rental .rental-time {
-  font-size: 1.5rem;
-}
-
-.product-info .summary .price-details {
-  margin-top: 20px;
 }
 
 .product-info .summary .price-details table thead {

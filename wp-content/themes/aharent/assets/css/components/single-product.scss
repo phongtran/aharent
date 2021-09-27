@@ -235,8 +235,16 @@
         }
 
         .price-wrapper {
-            display: flex;
+
+            display: none;
+
+            margin-top: 20px;
             flex-wrap: wrap;
+
+            .note {
+                width: 100%;
+                margin-bottom: 10px;
+            }
 
 
             .price-item {
@@ -251,9 +259,29 @@
                 flex-direction: column;
 
                 .price-item-value {
+
+                    display: flex;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    color: $main-button-color;
+                    padding: 5px 10px;                    
+
+                    &.rental {
+                        
+
+                        .rental-time {
+                            font-size: 1.5rem;
+                        }
+                    }
+                    
+
                     span.percentage {
                         display: flex;
                         justify-content: center;
+                        align-items: center;
+
+                        height: 100%;
+                        
                     }
                 }
 
@@ -287,31 +315,11 @@
 
                 }
 
-                .price-item-value {
-                    font-size: 1.5rem;
-                    color: $main-button-color;
-                    padding: 5px 10px;
-
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-
-                    &.rental {
-                        
-
-                        .rental-time {
-                            font-size: 1.5rem;
-                        }
-                    }
-
-                    
-                }
+               
             }
         }
 
         .price-details {
-            
-            margin-top: 20px;
 
             table {
                 

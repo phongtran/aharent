@@ -136,6 +136,8 @@
 					$('.add-to-cart :input[name="_date_to"]').removeClass('validate-enabled');
 					$('.validate').hide();
 					$('.loading-price').hide();
+
+					//$('.price-wrapper').show().attr('style', 'display: flex;')
 				});
 
 		}
