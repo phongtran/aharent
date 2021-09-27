@@ -132,6 +132,19 @@
 
         width: 48%;
 
+        .stock-status {
+            margin: 20px 0;
+            color: $footer-text-color;
+
+            p {
+                &::before {
+                    content: "*";
+                }
+
+                font-style: italic;
+            }
+        }
+
         .product-title-wrapper {
             display: flex;
             flex-wrap: wrap;

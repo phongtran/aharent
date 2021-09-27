@@ -97,6 +97,11 @@
     .popular-products {
         margin: 20px;
 
+
+        &.related {
+            margin: 20px 0;
+        }
+
     
         .button-more {
             display: flex;

@@ -148,7 +148,6 @@
                     $price['single'] = $variation['display_price'];
             }
 
-
         $product_price = 0;
 
         if ( isset($price['single']) )
@@ -167,16 +166,20 @@
 
             foreach ( $price as $price_duration => $price_value )
             {
-                if ( $duration < $price_duration )
+                if ( $duration <= $price_duration )
                 {
                     $product_price = $price_value;
                     break;
                 }       
             }
 
-            if ( $product_price == 0 && isset( $price_more ))
-                $product_price = $price_more;
-
+            if ( $product_price == 0)
+            {
+                if ( isset( $price_more ) )
+                    $product_price = $price_more;
+                else
+                    $product_price = end( $price );
+            }
         }
 
         $product_price *= $duration;

@@ -178,29 +178,29 @@ function create_product_custom_field()
 
 
 	// Security deposit checkbox
-	woocommerce_wp_checkbox( 
-		array( 
-			'id'            => '_security_deposit', 
-			'wrapper_class' => 'show_if_simple', 
-			'label'         => __('Security deposit', 'woocommerce' ),
-			)
-		);
+	// woocommerce_wp_checkbox( 
+	// 	array( 
+	// 		'id'            => '_security_deposit', 
+	// 		'wrapper_class' => 'show_if_simple', 
+	// 		'label'         => __('Security deposit', 'woocommerce' ),
+	// 		)
+	// 	);
 
 	// Security deposit amount
-	woocommerce_wp_text_input( 
-		array( 
-			'id'          => '_security_deposit_amount', 
-			'label'       => __( 'Security deposit amount', 'woocommerce' ),
-		)
-	);
+	// woocommerce_wp_text_input( 
+	// 	array( 
+	// 		'id'          => '_security_deposit_amount', 
+	// 		'label'       => __( 'Security deposit amount', 'woocommerce' ),
+	// 	)
+	// );
 
 	// Security deposit notes
-	woocommerce_wp_textarea_input( 
-		array( 
-			'id'          => '_security_deposit_notes', 
-			'label'       => __( 'Security deposit notes', 'woocommerce' ),
-		)
-	);
+	// woocommerce_wp_textarea_input( 
+	// 	array( 
+	// 		'id'          => '_security_deposit_notes', 
+	// 		'label'       => __( 'Security deposit notes', 'woocommerce' ),
+	// 	)
+	// );
 
 	// Platform fee, collect from current vendor
 	// woocommerce_wp_text_input( 
@@ -472,7 +472,7 @@ function get_product_prices( $product )
 	if ( $product->is_type( 'simple' ))
 	{
 		$time_unit = 'day';
-		$time_block = $product->get_meta( '_time_block' );
+		$time_block = $product->get_meta( 'time_unit' );
 
 		if ( !empty($time_block) )
 			$time_unit = __( $time_block, 'woocommerce' );

@@ -119,9 +119,8 @@
 				date_from	: dateFrom,
 				// date_to		: dateTo,
 			};
-
-		if ( undefined != $('select.time-unit'))
-			postData['time_unit'] = $('select.time-unit').val();
+		
+		postData['time_unit'] = $('#time-unit').val();
 		
 		
 		if ( productID && dateFrom && duration) {

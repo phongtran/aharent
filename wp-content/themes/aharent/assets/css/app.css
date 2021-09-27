@@ -881,6 +881,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin: 20px;
 }
 
+.container .popular-products.related {
+  margin: 20px 0;
+}
+
 .container .popular-products .button-more {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1409,6 +1413,19 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   .product-info .summary {
     width: 100%;
   }
+}
+
+.product-info .summary .stock-status {
+  margin: 20px 0;
+  color: #7b7b7b;
+}
+
+.product-info .summary .stock-status p {
+  font-style: italic;
+}
+
+.product-info .summary .stock-status p::before {
+  content: "*";
 }
 
 .product-info .summary .product-title-wrapper {

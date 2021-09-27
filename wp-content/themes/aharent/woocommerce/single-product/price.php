@@ -38,7 +38,7 @@ global $product;
 		
 		<?php
 			$block_unit = __( 'day', 'woocommerce' );
-			$time_block = $product->get_meta( '_time_block' );
+			$time_block = $product->get_meta( 'time_unit' );
 			if ( !empty($time_block) )
 				$block_unit = __( $time_block, 'woocommerce' );
 		?>

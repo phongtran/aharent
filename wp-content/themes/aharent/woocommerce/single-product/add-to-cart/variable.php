@@ -19,6 +19,8 @@ defined( 'ABSPATH' ) || exit;
 
 global $product;
 
+if ( $product->is_in_stock()) :
+
 $attribute_keys  = array_keys( $attributes );
 $variations_json = wp_json_encode( $available_variations );
 $variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
@@ -32,21 +34,29 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		
 		
 		<?php $time_units = $product->get_attribute( 'time_unit' ); ?>
-		<?php if ( $time_units ) : $time_units = explode( ' | ', $time_units ); ?>
+		<?php if ( $time_units ) : ?>
+			<?php $time_units = explode( ' | ', $time_units ); ?>
 
-			<div class="form-row">
-				<div class="form-label">
-					<label>Thuê theo: </label>
+			
+			<?php if ( count( $time_units ) > 1) : ?>
+				<div class="form-row">
+					
+					<div class="form-label">
+						<label>Thuê theo: </label>
+					</div>
+
+					<div class="form-input">
+						<select class="form-select time-unit" id="time-unit" name="time_unit">
+							<?php foreach ( $time_units as $time_unit ) : ?>
+								<option value="<?php echo $time_unit ?>"><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></option>
+							<?php endforeach ?> 
+						</select>
+					</div>
 				</div>
 
-				<div class="form-input">
-					<select class="form-select time-unit" id="time_unit" name="time_unit">
-						<?php foreach ( $time_units as $time_unit ) : ?>
-							<option value="<?php echo $time_unit ?>"><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></option>
-						<?php endforeach ?> 
-					</select>
-				</div>
-			</div>
+			<?php else: ?>
+				<input type="hidden" id="time-unit" name="time_unit" value="<?php echo $time_units[0] ?>" />
+			<?php endif ?>
 
 		<?php endif ?>
 		
@@ -79,13 +89,13 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	
 				<span class="time-delimiter">
 					<span class="time-unit">
-						<?php
+						<?php							
 							$time_unit = __( 'day', 'woocommerce' );
-							$time_block = $product->get_meta( '_time_block' );
-							if ( !empty( $time_block) )
-								$time_unit = __( $time_block, 'woocommerce' );
+							if ( $time_units && count( $time_units ) > 0 )
+								$time_unit = __( $time_units[0], 'woocommerce' );
 
 							echo $time_unit;
+
 						?>
 					</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
 				</span>
@@ -167,3 +177,15 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 <?php
 do_action( 'woocommerce_after_add_to_cart_form' );
+?>
+
+<?php else: ?>
+
+
+<!-- Out of stock -->
+<div class="stock-status">
+	<?php echo wc_get_stock_html( $product ); // WPCS: XSS ok. ?>
+</div>
+
+
+<?php endif ?>

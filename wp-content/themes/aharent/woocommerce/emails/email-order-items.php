@@ -47,7 +47,7 @@ foreach ( $items as $item_id => $item ) :
 		}
 
 		// Product name.
-		echo wp_kses_post( apply_filters( 'woocommerce_order_item_name', $item->get_title(), $item, false ) );
+		echo wp_kses_post( apply_filters( 'woocommerce_order_item_name', $item->get_name(), $item, false ) );
 
 		// SKU.
 		if ( $show_sku && $sku ) {

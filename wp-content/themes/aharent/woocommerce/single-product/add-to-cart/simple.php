@@ -23,11 +23,10 @@ if ( ! $product->is_purchasable() ) {
 	return;
 }
 
-echo wc_get_stock_html( $product ); // WPCS: XSS ok.
 
 if ( $product->is_in_stock() ) : ?>
 
-	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 <div class="add-to-cart">
 
@@ -68,7 +67,7 @@ if ( $product->is_in_stock() ) : ?>
 						<span class="time-unit">
 							<?php
 								$time_unit = __( 'day', 'woocommerce' );
-								$time_block = $product->get_meta( '_time_block' );
+								$time_block = $product->get_meta( 'time_unit' );
 								if ( !empty( $time_block) )
 									$time_unit = __( $time_block, 'woocommerce' );
 
@@ -85,9 +84,6 @@ if ( $product->is_in_stock() ) : ?>
 			</div>
 		</div>
 
-		
-		
-
 		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
@@ -96,4 +92,12 @@ if ( $product->is_in_stock() ) : ?>
 
 	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
 
-<?php endif; ?>
+<?php else: ?>
+
+<!-- Out of stock -->
+<div class="stock-status">
+	<?php echo wc_get_stock_html( $product ); // WPCS: XSS ok. ?>
+</div>
+
+
+<?php endif ?>
