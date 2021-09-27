@@ -54,7 +54,7 @@ if ( $product->is_in_stock() ) : ?>
 		<div class="form-row">
 			<div class="form-label">
 				<label>Thời gian thuê:</label>
-				<div class="validate"><span>*Vui lòng chọn ngày</span></div>
+				<div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
 			</div>
 
 			<div class="form-input time-period">
