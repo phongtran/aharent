@@ -1524,10 +1524,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
       flex-wrap: wrap;
 }
 
-.product-info .summary .price-wrapper .deposit {
-  display: none !important;
-}
-
 .product-info .summary .price-wrapper .price-item {
   border: 1px solid #dcdcdc;
   border-radius: 10px;
@@ -1540,6 +1536,15 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.product-info .summary .price-wrapper .price-item .price-item-value span.percentage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .product-info .summary .price-wrapper .price-item .loading-price {
@@ -1589,6 +1594,27 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .product-info .summary .price-wrapper .price-item .price-item-value.rental .rental-time {
   font-size: 1.5rem;
+}
+
+.product-info .summary .price-details {
+  margin-top: 20px;
+}
+
+.product-info .summary .price-details table thead {
+  background-color: #04b950;
+  color: #ddf6e8;
+}
+
+.product-info .summary .price-details table thead th {
+  padding: 5px 10px;
+  text-align: center;
+  border: 1px solid #d9d9d9;
+}
+
+.product-info .summary .price-details table td {
+  padding: 5px 10px;
+  border: 1px solid #d9d9d9;
+  text-align: center;
 }
 
 .product-info .summary .price {

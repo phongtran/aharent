@@ -22,9 +22,42 @@ global $product;
 if ( ! $product->is_purchasable() ) {
 	return;
 }
+?>
+
+<div class="form-row price-details">
+	<div class="form-label">
+		<label>Giá thuê chi tiết: </label>
+	</div>
+
+	<div class="form-input ">
+		<?php
+			$time_unit = __( 'day', 'woocommerce' );
+			$time_block = $product->get_meta( 'time_unit' );
+			if ( !empty( $time_block) )
+				$time_unit = __( $time_block, 'woocommerce' );
+		?>
+
+		<table>
+			<thead>
+				<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
+				<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
+				<th><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></td>
+					<td><?php echo wc_price( $product->price )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
+					<td><?php echo get_product_deposit_percentage( $product ) ?>%</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+</div>
 
 
-if ( $product->is_in_stock() ) : ?>
+
+<?php if ( $product->is_in_stock() ) : ?>
 
 <?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
@@ -32,20 +65,23 @@ if ( $product->is_in_stock() ) : ?>
 
 	<form class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+
+		
+
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
 		?>
 	
 			
-			<div class="form-row">
-				<div class="form-label">
-					<label>Số lượng: </label>
-				</div>
-
-				<div class="form-input quantity-input-increment">
-					<input id="quantity-input" class="number-spinner" name="quantity" type="number" value="1" min="1" max="10" step="1" />
-				</div>
+		<div class="form-row">
+			<div class="form-label">
+				<label>Số lượng: </label>
 			</div>
+
+			<div class="form-input quantity-input-increment">
+				<input id="quantity-input" class="number-spinner" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+			</div>
+		</div>
 		
 
 		<?php do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>	
@@ -65,14 +101,7 @@ if ( $product->is_in_stock() ) : ?>
 
 					<span class="time-delimiter">
 						<span class="time-unit">
-							<?php
-								$time_unit = __( 'day', 'woocommerce' );
-								$time_block = $product->get_meta( 'time_unit' );
-								if ( !empty( $time_block) )
-									$time_unit = __( $time_block, 'woocommerce' );
-
-								echo $time_unit;
-							?>
+							<?php echo $time_unit; ?>
 						</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
 					</span>
 				

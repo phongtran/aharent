@@ -238,9 +238,6 @@
             display: flex;
             flex-wrap: wrap;
 
-            .deposit {
-                display: none !important;
-            }
 
             .price-item {
 
@@ -252,6 +249,13 @@
 
                 display: flex;
                 flex-direction: column;
+
+                .price-item-value {
+                    span.percentage {
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
 
                 .loading-price {
 
@@ -301,6 +305,31 @@
                     }
 
                     
+                }
+            }
+        }
+
+        .price-details {
+            
+            margin-top: 20px;
+
+            table {
+                
+                thead {
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
+
+                    th {
+                        padding: 5px 10px;
+                        text-align: center;
+                        border: 1px solid $shadow-color;
+                    }
+                }
+
+                td {
+                    padding: 5px 10px;
+                    border: 1px solid $shadow-color;
+                    text-align: center;
                 }
             }
         }

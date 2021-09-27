@@ -106,7 +106,9 @@ global $product;
 		</div>
 		
 		<div class="price-item-value">
-			
+			<span class="percentage">
+				<?php echo get_product_deposit_percentage( $product ); ?>%
+			</span>
 		</div>
 	</div>
 

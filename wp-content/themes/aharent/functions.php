@@ -502,6 +502,17 @@ function get_product_prices( $product )
 	}
 }
 
+function get_product_deposit_percentage( $product )
+{
+	$vendor = get_product_vendor( $product );
+	$percentage = get_vendor_percentage( $vendor );
+
+	if ( !$percentage )
+		$percentage = get_vendor_percentage( $product->post->post_author );
+		
+	return $percentage;
+}
+
 function get_vendor_percentage( $vendor_id )
 {
 	$dokan_admin_percentage = get_user_meta( $vendor_id, 'dokan_admin_percentage' );
