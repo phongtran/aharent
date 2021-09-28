@@ -477,7 +477,10 @@ function get_product_prices( $product )
 		if ( !empty($time_block) )
 			$time_unit = __( $time_block, 'woocommerce' );
 		
-		return array( $time_unit => array( $product->price ) );
+		return array( $time_unit => array( array( 
+			'price' => $product->price, 
+			'block-price' => false
+			)));
 	}
 	else
 	{
@@ -485,28 +488,49 @@ function get_product_prices( $product )
 		$variations = $product->get_available_variations();
 		$prices = array();
 
+		
+
 		if ( !$time_units )
 		{
 			foreach ( $variations as $key => $variation)
+			{
+				$block_price = get_post_meta( $variation['variation_id'], 'block_price' );
+				
+				$price_block = array(
+					'price'			=>	$variation['display_price'],
+					'block_price'	=>	!empty($block_price)
+				);
+
 				if ( isset( $variation['attributes']['attribute_duration']))
-					$prices['day'][$variation['attributes']['attribute_duration']] = $variation['display_price'];
+					$prices['day'][$variation['attributes']['attribute_duration']] = $price_block;
 				elseif (isset( $variation['attributes']['attribute_day'] ))
-					$prices['day'][$variation['attributes']['attribute_day']] = $variation['display_price'];
+					$prices['day'][$variation['attributes']['attribute_day']] = $price_block;
 				else
-					$prices['day'][1] = $variation['display_price'];
+					$prices['day'][1] = $price_block;
+
+
+			}
+				
 		}
 		else
 		{
 			foreach ( $variations as $key => $variation )
 			{
+				$block_price = get_post_meta( $variation['variation_id'], 'block_price' );
+				
+				$price_block = array(
+					'price'			=>	$variation['display_price'],
+					'block_price'	=>	!empty($block_price) && $block_price[0]
+				);
+
 				if ( !isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) ||
-					(isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) && 
+					( isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) && 
 						$variation['display_price'] < $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]))
 				{
-					if ( isset( $variation['attributes']['attribute_duration'] ) )
-						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][$variation['attributes']['attribute_duration']] = $variation[ 'display_price' ];
+					if ( !empty( $variation['attributes']['attribute_duration'] ) )
+						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][$variation['attributes']['attribute_duration']] = $price_block;
 					else
-						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][1] = $variation[ 'display_price' ];
+						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][1] = $price_block;
 				}
 					
 			}

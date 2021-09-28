@@ -60,22 +60,37 @@ if ( !isset($prices) )
 				<thead>
 					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
 					<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
-					<th rowspan="<?php echo 1 + count($prices, COUNT_RECURSIVE) - count( $prices ) ?>"><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+					<th rowspan="<?php echo 1 + count($prices, COUNT_RECURSIVE) ?>"><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
 				</thead>
 				<tbody>
 					<?php $deposit = get_product_deposit_percentage( $product ); $incre = 0; ?>
 					<?php foreach ( $prices as $time_unit => $price ) :?>
+						<?php $level = 1;?>
 						<?php foreach ( $price as $duration => $value ) : ?>
 							<tr>
 								<td>
 									<?php 
 										if ( is_numeric( $duration ) )
-											echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+										{
+											if ( $level < $duration )
+												echo $level . ' - ' . $duration . ' ' . __( $time_unit, 'woocommerce' );
+											else
+												echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+										}
+											
 										else
 											echo __( $duration, 'woocommerce' );
+										
+										$level = $duration + 1;
 									?>
 								</td>
-								<td><?php echo wc_price( $value )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
+								<td>
+									<?php echo wc_price( $value['price'] )  ?>
+									<?php
+										if ( isset( $value['block_price']) && !$value['block_price'] )
+											echo '/' . __( $time_unit, 'woocommerce' )
+									?>
+								</td>
 								
 								<?php if ( $incre == 0 ) : $incre++; ?>
 									<td rowspan="0"><?php echo $deposit ?>%</td>

@@ -134,41 +134,50 @@
         // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = new WC_Product_Variable( $product_id );
-        $variations = $product->get_available_variations();
+        // $variations = $product->get_available_variations();
 
-        $price = [];
+        // $price = [];
 
-        foreach ( $variations as $variation )
-            if ( (!isset($variation['attributes']['attribute_time_unit'])) ||
-                ((isset($variation['attributes']['attribute_time_unit'])) && ($time_unit == $variation['attributes']['attribute_time_unit'])))
-            {
-                if (isset($variation['attributes']['attribute_duration']))
-                    $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
-                else
-                    $price['single'] = $variation['display_price'];
-            }
+        // foreach ( $variations as $variation )
+        //     if ( (!isset($variation['attributes']['attribute_time_unit'])) ||
+        //         ((isset($variation['attributes']['attribute_time_unit'])) && ($time_unit == $variation['attributes']['attribute_time_unit'])))
+        //     {
+        //         if (isset($variation['attributes']['attribute_duration']))
+        //             $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
+        //         else
+        //             $price['single'] = $variation['display_price'];
+        //     }
 
+
+        $prices = get_product_prices( $product );
         $product_price = 0;
 
-        if ( isset($price['single']) )
+        if ( isset($prices[$time_uni][1]) )
         {
-            $product_price = $price['single'];
+            $product_price = $prices[1];
         }
         else
         {
-            if ( isset( $price['more'] ) && !empty ($price ['more']) )
+            if ( isset( $prices[$time_unit]['more'] ) && !empty ($prices[$time_unit]['more']) )
             {
-                $price_more = $price['more'];
-                unset( $price['more'] );
+                $price_more = $prices[$time_unit]['more'];
+                unset( $prices[$time_unit]['more'] );
             }
 
-            ksort( $price );
+            $temp_prices = array();
+            foreach ( $prices[$time_unit] as $key => $value )
+                $temp_prices[$key] = $value['price'];
 
-            foreach ( $price as $price_duration => $price_value )
+            ksort( $temp_prices );
+            $block_price = false;
+
+            foreach ( $temp_prices as $price_duration => $price_value )
             {
                 if ( $duration <= $price_duration )
                 {
                     $product_price = $price_value;
+                    if ( isset($prices[$time_unit][$price_duration]['block_price']) && $prices[$time_unit][$price_duration]['block_price'] )
+                        $block_price = true;
                     break;
                 }       
             }
@@ -178,11 +187,12 @@
                 if ( isset( $price_more ) )
                     $product_price = $price_more;
                 else
-                    $product_price = end( $price );
+                    $product_price = end( $temp_prices );
             }
         }
 
-        $product_price *= $duration;
+        if ( !$block_price )
+            $product_price *= $duration;
         
         $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $vendor );
