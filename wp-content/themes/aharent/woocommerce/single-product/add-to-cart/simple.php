@@ -18,6 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 global $product;
+global $time_unit;
 
 if ( ! $product->is_purchasable() ) {
 	return;
