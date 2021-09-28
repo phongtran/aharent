@@ -73,43 +73,39 @@
         );
     }
 
-    function get_price_from_kano( $product_id, $date_from, $duration, $time_unit = 'day' )
-    {
-        // $duration = $date_to->diff( $date_from )->format("%a") + 1;
+    // function get_price_from_kano( $product_id, $date_from, $duration, $time_unit = 'day' )
+    // {
+    //     // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
-        $product = new WC_Product_Variable( $product_id );
-        $variations = $product->get_available_variations();
+    //     $product = new WC_Product_Variable( $product_id );
+    //     // $variations = $product->get_available_variations();
 
-        $price = [];
+    //     // $price = [];
 
-        foreach ( $variations as $variation )
-        {
-            $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
-        }
+    //     // foreach ( $variations as $variation )
+    //     // {
+    //     //     $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
+    //     // }
+    //     $prices = get_product_prices( $product );
 
-        $product_price = 0;
+    //     $product_price = 0;
 
-        $price_for_extra_day = get_post_meta( $product_id, '_extra_day' );
+    //     $price_for_extra_day = $prices['day']['extra']['price'];
 
-        if ( isset( $price_for_extra_day) && !empty( $price_for_extra_day[0]) )
-            $price_for_extra_day = $price_for_extra_day[0];
-        else
-            $price_for_extra_day = 50000;
-
-        if ( $duration <= 5 )
-            $product_price = $duration * $price['5'];
-        elseif ( $duration < 30 )
-            $product_price = (5 * $price['5']) + (50000 * ($duration - 5));
+    //     if ( $duration <= 5 )
+    //         $product_price = $duration * $prices['5'];
+    //     elseif ( $duration < 30 )
+    //         $product_price = (5 * $price['5']) + ($price_for_extra_day * ($duration - 5));
          
-        $vendor = get_product_vendor ( $product->post );
-        $vendor_percentage = get_vendor_percentage( $vendor );
-        $deposit = $vendor_percentage * $product_price / 100;
+    //     $vendor = get_product_vendor ( $product->post );
+    //     $vendor_percentage = get_vendor_percentage( $vendor );
+    //     $deposit = $vendor_percentage * $product_price / 100;
 
-        return array (
-            "price"     => $product_price,
-            "deposit"   => $deposit,
-        );
-    }
+    //     return array (
+    //         "price"     => $product_price,
+    //         "deposit"   => $deposit,
+    //     );
+    // }
     
     function get_price_from_simple_product( $product_id, $date_from, $duration, $time_unit = 'day' )
     {
@@ -134,25 +130,11 @@
         // $duration = $date_to->diff( $date_from )->format("%a") + 1;
 
         $product = new WC_Product_Variable( $product_id );
-        // $variations = $product->get_available_variations();
-
-        // $price = [];
-
-        // foreach ( $variations as $variation )
-        //     if ( (!isset($variation['attributes']['attribute_time_unit'])) ||
-        //         ((isset($variation['attributes']['attribute_time_unit'])) && ($time_unit == $variation['attributes']['attribute_time_unit'])))
-        //     {
-        //         if (isset($variation['attributes']['attribute_duration']))
-        //             $price[$variation['attributes']['attribute_duration']] = $variation['display_price'];
-        //         else
-        //             $price['single'] = $variation['display_price'];
-        //     }
-
-
+        
         $prices = get_product_prices( $product );
         $product_price = 0;
 
-        if ( isset($prices[$time_uni][1]) )
+        if ( isset($prices[$time_unit][1]) )
         {
             $product_price = $prices[1];
         }
@@ -160,8 +142,14 @@
         {
             if ( isset( $prices[$time_unit]['more'] ) && !empty ($prices[$time_unit]['more']) )
             {
-                $price_more = $prices[$time_unit]['more'];
+                $price_more = $prices[$time_unit]['more']['price'];
                 unset( $prices[$time_unit]['more'] );
+            }
+
+            if ( isset( $prices[$time_unit]['extra'] ) && !empty ($prices[$time_unit]['extra']) )
+            {
+                $price_extra = $prices[$time_unit]['extra']['price'];
+                unset( $prices[$time_unit]['extra'] );
             }
 
             $temp_prices = array();
@@ -187,12 +175,30 @@
                 if ( isset( $price_more ) )
                     $product_price = $price_more;
                 else
+                {
                     $product_price = end( $temp_prices );
+
+                    if ( isset( $price_extra ))
+                    {
+                        $product_extra_price = ($duration - array_key_last($temp_prices)) * $price_extra;
+                    }
+                }
+                    
             }
         }
 
         if ( !$block_price )
-            $product_price *= $duration;
+        {
+            if ( $duration <= array_key_last( $temp_prices ))
+                $product_price *= $duration;
+            else
+                $product_price *= array_key_last( $temp_prices );
+        }
+            
+
+        if ( isset($product_extra_price) )
+            $product_price += $product_extra_price;
+
         
         $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $vendor );
