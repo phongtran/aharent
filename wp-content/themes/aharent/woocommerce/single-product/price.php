@@ -77,9 +77,14 @@ if ( !isset($prices) )
 											else
 												echo $duration . ' ' . __( $time_unit, 'woocommerce' );
 										}
-											
 										else
-											echo __( $duration, 'woocommerce' );
+										{
+											if ( 'more' == $duration && !empty($value['more_label']))
+												echo ucfirst(__( $value['more_label'], 'woocommerce' ));
+											else	
+												echo ucfirst(__( $duration, 'woocommerce' ));
+										}
+											
 										
 										$level = $duration + 1;
 									?>

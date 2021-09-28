@@ -501,8 +501,18 @@ function get_product_prices( $product )
 					'block_price'	=>	!empty($block_price)
 				);
 
+
 				if ( isset( $variation['attributes']['attribute_duration']))
+				{
+					if ( 'more' == $variation['attributes']['attribute_duration'] )
+					{
+						$more_label = get_post_meta( $variation['variation_id'], 'more_label' );
+						$price_block['more_label'] = $more_label;
+					}
+					
 					$prices['day'][$variation['attributes']['attribute_duration']] = $price_block;
+				}
+					
 				elseif (isset( $variation['attributes']['attribute_day'] ))
 					$prices['day'][$variation['attributes']['attribute_day']] = $price_block;
 				else
@@ -528,16 +538,22 @@ function get_product_prices( $product )
 						$variation['display_price'] < $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]))
 				{
 					if ( !empty( $variation['attributes']['attribute_duration'] ) )
+					{
+						if ( 'more' == $variation['attributes']['attribute_duration'] )
+						{
+							$more_label = get_post_meta( $variation['variation_id'], 'more_label' );
+							$price_block['more_label'] = $more_label[0];
+						}
+
 						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][$variation['attributes']['attribute_duration']] = $price_block;
+					}
+						
 					else
 						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][1] = $price_block;
 				}
 					
 			}
 		}
-
-		foreach ( $prices as $key => $price )
-			sort( $price );
 
 		return $prices;
 	}
