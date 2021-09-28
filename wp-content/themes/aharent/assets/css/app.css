@@ -463,7 +463,7 @@ a:hover {
 
 .logo {
   background: url("../img/aharent-logo.png") no-repeat center center;
-  background-size: cover;
+  background-size: contain;
   width: 144px;
   height: 28px;
 }
