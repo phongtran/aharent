@@ -79,7 +79,7 @@ if ( !isset($prices) )
 										}
 										else
 										{
-											if ( 'more' == $duration && !empty($value['more_label']))
+											if ( in_array( $duration, array( 'more', 'extra' )) && !empty($value['more_label']))
 												echo ucfirst(__( $value['more_label'], 'woocommerce' ));
 											else	
 												echo ucfirst(__( $duration, 'woocommerce' ));

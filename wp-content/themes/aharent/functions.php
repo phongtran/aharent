@@ -504,7 +504,7 @@ function get_product_prices( $product )
 
 				if ( isset( $variation['attributes']['attribute_duration']))
 				{
-					if ( 'more' == $variation['attributes']['attribute_duration'] )
+					if ( in_array( $variation['attributes']['attribute_duration'], array( 'more', 'extra' )) )
 					{
 						$more_label = get_post_meta( $variation['variation_id'], 'more_label' );
 						$price_block['more_label'] = $more_label[0];
@@ -539,7 +539,7 @@ function get_product_prices( $product )
 				{
 					if ( !empty( $variation['attributes']['attribute_duration'] ) )
 					{
-						if ( 'more' == $variation['attributes']['attribute_duration'] )
+						if ( in_array( $variation['attributes']['attribute_duration'], array( 'more', 'extra' )) )
 						{
 							$more_label = get_post_meta( $variation['variation_id'], 'more_label' );
 							$price_block['more_label'] = $more_label[0];
