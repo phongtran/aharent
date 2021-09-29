@@ -616,27 +616,47 @@ function get_product_default_variation ( $product_id )
 
 function aha_save_post_product( $post_id, $post, $update )
 {	
+	error_log('inside saving');
+	
 	if ( $post->post_parent > 0)
 		$post_id = $post->post_parent;
 
-	$product = wc_get_product( $post_id );
-	
-	if ( $product->post_type == 'product' )
-	{
-		$vendor_login = get_post_meta( $post_id, 'vendor' );
-		$user = get_user_by ( 'login', $vendor_login[0] );
+	$post = wc_get_product( $post_id );
 
-		if ( !empty($user) )
+	$vendor_login = get_post_meta( $post_id, 'vendor' );
+	$user = get_user_by ( 'login', $vendor_login[0] );
+
+	if ( !empty($user) )
+	{
+		if ( $user->ID != $post->post_author )
 		{
-			if ( $user->ID != $product->post->post_author )
-			{
-				global $wpdb;
-				$wpdb->get_results("UPDATE wp_posts SET post_author = $user->ID WHERE id = $post_id;");
-			}
+			global $wpdb;
+			$wpdb->get_results("UPDATE wp_posts SET post_author = $user->ID WHERE id = $post_id;");
+		}
+	}
+	
+}
+add_action( 'save_post_product', 'aha_save_post_product', 25, 3);
+
+
+
+function aha_after_post_meta( $meta_id, $post_id, $meta_key, $meta_value )
+{
+    $post = wc_get_product( $post_id );
+
+	$vendor_login = get_post_meta( $post_id, 'vendor' );
+	$user = get_user_by ( 'login', $vendor_login[0] );
+
+	if ( !empty($user) )
+	{
+		if ( $user->ID != $post->post_author )
+		{
+			global $wpdb;
+			$wpdb->get_results("UPDATE wp_posts SET post_author = $user->ID WHERE id = $post_id;");
 		}
 	}
 }
-add_action( 'save_post', 'aha_save_post_product', 25, 3);
+add_action( 'updated_post_meta', 'aha_after_post_meta', 10, 4 );
 
 
 
