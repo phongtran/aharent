@@ -247,7 +247,7 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	if ( isset( $_POST['duration'] ))
 		$cart_item_data['duration'] = $_POST['duration'];
 	
-	$product = get_product( $product_id );
+	$product = wc_get_product( $product_id );
 	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
 	
 	if (isset($cart_item_data['time-unit']))
@@ -451,7 +451,7 @@ function get_new_price( $product_id, $date_from, $duration, $time_unit = 'day' )
 	{
 		$price_handler = 'get_price_for_variable_product';
 
-		$vendor_name 	= get_post_meta ( $product_id, '_vendor' );
+		$vendor_name 	= get_post_meta ( $product_id, 'vendor' );
 		
 		if ( isset( $vendor_name[0] ) && !empty( $vendor_name[0]) && function_exists( 'get_price_from_' . $vendor_name[0]) )
 			$price_handler = 'get_price_from_' . $vendor_name[0];
@@ -582,13 +582,13 @@ function get_vendor_percentage( $vendor_id )
 
 function get_product_vendor ( $post )
 {
-	$_vendor_login = get_post_meta( $post->ID, '_vendor' );
+	$_vendor_login = get_post_meta( $post->ID, 'vendor' );
 
 	if ( isset( $_vendor_login ) && !empty( $_vendor_login[0] ))
 		$user = get_user_by( 'login', $_vendor_login[0] );
 
 	if ( isset( $user ) && !empty( $user ))
-		return $user->id;
+		return $user->ID;
 
 	return $post->post_author;
 }
@@ -605,12 +605,44 @@ function get_product_default_variation ( $product_id )
 	$product				= wc_get_product( $product_id );
 	$default_attributes		= $product->get_default_attributes();
 	$variations 			= $product->get_available_variations();
-
+	
 	foreach ( $variations as $variation )
 		return $variation['variation_id'];
 
 	return false;
 }
+
+
+
+function aha_save_post_product( $post_id, $post, $update )
+{	
+	if ( $post->post_parent > 0)
+		$post_id = $post->post_parent;
+
+	$product = wc_get_product( $post_id );
+	
+	if ( $product->post_type == 'product' )
+	{
+		$vendor_login = get_post_meta( $post_id, 'vendor' );
+		$user = get_user_by ( 'login', $vendor_login[0] );
+
+		if ( !empty($user) )
+		{
+			if ( $user->ID != $product->post->post_author )
+			{
+				global $wpdb;
+				$wpdb->get_results("UPDATE wp_posts SET post_author = $user->ID WHERE id = $post_id;");
+			}
+		}
+	}
+}
+add_action( 'save_post', 'aha_save_post_product', 25, 3);
+
+
+
+
+
+
 
 
 
