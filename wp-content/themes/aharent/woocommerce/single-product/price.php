@@ -45,13 +45,13 @@ if ( !isset($prices) )
 				<thead>
 					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
 					<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
-					<th><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+					<!-- <th><?php echo __( 'Deposit', 'woocommerce' ) ?></th> -->
 				</thead>
 				<tbody>
 					<tr>
 						<td><?php echo '1 ' . __( $time_unit, 'woocommerce' ) ?></td>
 						<td><?php echo wc_price( $product->price )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
-						<td><?php echo get_product_deposit_percentage( $product ) ?>%</td>
+						<!-- <td><?php echo get_product_deposit_percentage( $product ) ?>%</td> -->
 					</tr>
 				</tbody>
 			</table>
@@ -61,7 +61,7 @@ if ( !isset($prices) )
 				<thead>
 					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
 					<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
-					<th rowspan="<?php echo 1 + count($prices, COUNT_RECURSIVE) ?>"><?php echo __( 'Deposit', 'woocommerce' ) ?></th>
+					<!-- <th rowspan="<?php echo 1 + count($prices, COUNT_RECURSIVE) ?>"><?php echo __( 'Deposit', 'woocommerce' ) ?></th> -->
 				</thead>
 				<tbody>
 					<?php $deposit = get_product_deposit_percentage( $product ); $incre = 0; ?>
@@ -98,9 +98,9 @@ if ( !isset($prices) )
 									?>
 								</td>
 								
-								<?php if ( $incre == 0 ) : $incre++; ?>
-									<td rowspan="0"><?php echo $deposit ?>%</td>
-								<?php endif ?>
+								<?php //if ( $incre == 0 ) : $incre++; ?>
+									<!-- <td rowspan="0"><?php echo $deposit ?>%</td> -->
+								<?php //endif ?>
 							</tr>
 						<?php endforeach ?>
 					<?php endforeach ?>
