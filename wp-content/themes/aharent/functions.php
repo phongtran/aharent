@@ -39,7 +39,7 @@ add_filter('loop_shop_columns', 'loop_columns', 999);
 
 function lw_loop_shop_per_page( $products )
 {
- 	$products = 20; // number of products per page
+ 	$products = 52; // number of products per page
  	return $products;
 }
 add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
@@ -153,6 +153,42 @@ function load_scripts()
 }
 add_action ('wp_enqueue_scripts', 'load_scripts' );
 
+
+
+function wc_set_up_breadcrumb( $defaults )
+{
+    // Change the breadcrumb home text from 'Home' to 'Apartment'
+	$defaults['home'] = 'Trang chủ';
+	return $defaults;
+}
+add_filter( 'woocommerce_breadcrumb_defaults', 'wc_set_up_breadcrumb' );
+
+
+
+function aha_breadcrumb( $crumbs, $object_class )
+{
+    // Loop through all $crumb
+    foreach( $crumbs as $key => $crumb )
+	{
+        $taxonomy = 'product_cat'; // The product category taxonomy
+
+        // Check if it is a product category term
+        $term_array = term_exists( $crumb[0], $taxonomy );
+
+        // if it is a product category term
+        if ( $term_array !== 0 && $term_array !== null ) {
+
+            // Get the WP_Term instance object
+            $term = get_term( $term_array['term_id'], $taxonomy );
+
+            // HERE set your new link with a custom one
+            $crumbs[$key][1] = home_url( '/san-pham/?filters=product_cat%5B'.$term->slug.'%5D' ); // or use all other dedicated functions
+        }
+    }
+
+    return $crumbs;
+}
+add_filter( 'woocommerce_get_breadcrumb', 'aha_breadcrumb', 10, 2 );
 
 
 
