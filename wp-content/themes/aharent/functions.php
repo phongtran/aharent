@@ -518,7 +518,6 @@ function get_product_prices( $product )
 				else
 					$prices['day'][1] = $price_block;
 
-
 			}
 				
 		}
@@ -657,13 +656,6 @@ function aha_after_post_meta( $meta_id, $post_id, $meta_key, $meta_value )
 	}
 }
 add_action( 'updated_post_meta', 'aha_after_post_meta', 10, 4 );
-
-
-
-
-
-
-
 
 
 ?>
