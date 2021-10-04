@@ -165,30 +165,30 @@ add_filter( 'woocommerce_breadcrumb_defaults', 'wc_set_up_breadcrumb' );
 
 
 
-function aha_breadcrumb( $crumbs, $object_class )
-{
-    // Loop through all $crumb
-    foreach( $crumbs as $key => $crumb )
-	{
-        $taxonomy = 'product_cat'; // The product category taxonomy
+// function aha_breadcrumb( $crumbs, $object_class )
+// {
+//     // Loop through all $crumb
+//     foreach( $crumbs as $key => $crumb )
+// 	{
+//         $taxonomy = 'product_cat'; // The product category taxonomy
 
-        // Check if it is a product category term
-        $term_array = term_exists( $crumb[0], $taxonomy );
+//         // Check if it is a product category term
+//         $term_array = term_exists( $crumb[0], $taxonomy );
 
-        // if it is a product category term
-        if ( $term_array !== 0 && $term_array !== null ) {
+//         // if it is a product category term
+//         if ( $term_array !== 0 && $term_array !== null ) {
 
-            // Get the WP_Term instance object
-            $term = get_term( $term_array['term_id'], $taxonomy );
+//             // Get the WP_Term instance object
+//             $term = get_term( $term_array['term_id'], $taxonomy );
 
-            // HERE set your new link with a custom one
-            $crumbs[$key][1] = home_url( '/san-pham/?filters=product_cat%5B'.$term->slug.'%5D' ); // or use all other dedicated functions
-        }
-    }
+//             // HERE set your new link with a custom one
+//             $crumbs[$key][1] = home_url( '/san-pham/?filters=product_cat%5B'.$term->slug.'%5D' ); // or use all other dedicated functions
+//         }
+//     }
 
-    return $crumbs;
-}
-add_filter( 'woocommerce_get_breadcrumb', 'aha_breadcrumb', 10, 2 );
+//     return $crumbs;
+// }
+// add_filter( 'woocommerce_get_breadcrumb', 'aha_breadcrumb', 10, 2 );
 
 
 

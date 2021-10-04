@@ -160,7 +160,7 @@ if ( !isset($prices) )
 	<div class="price-item deposit">
 		
 		<div class="price-item-title">
-			<span>Đặt cọc</span>
+			<span>Phí trả trước</span>
 			<div class="loading-price">
 				<div class="loading-icon">
 					<img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
