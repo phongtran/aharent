@@ -250,6 +250,7 @@ function create_product_custom_field()
 }
 add_action( 'woocommerce_product_options_general_product_data', 'create_product_custom_field' );
 
+
 function cfwc_save_custom_field( $post_id ) {
 	$product = wc_get_product( $post_id );
 	

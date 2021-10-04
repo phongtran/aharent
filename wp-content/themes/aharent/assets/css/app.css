@@ -1655,4 +1655,39 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .product-description .tab-content a {
   color: #04b950;
 }
+
+.faq-block {
+  margin-bottom: 20px;
+}
+
+.faq-block button.accordion-button {
+  color: #04b950;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+.faq-block button.accordion-button:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.faq-block button.accordion-button::after {
+  background-image: url(../img/button-icon.png);
+}
+
+.faq-block .accordion-item {
+  background-color: transparent;
+  border: none;
+  color: #231f20;
+  margin: 5px 0;
+}
+
+.faq-block .accordion-item h2.accordion-header {
+  margin: 0;
+  border-radius: .25rem;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
 /*# sourceMappingURL=app.css.map */
