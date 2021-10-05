@@ -39,10 +39,19 @@ add_filter('loop_shop_columns', 'loop_columns', 999);
 
 function lw_loop_shop_per_page( $products )
 {
- 	$products = 52; // number of products per page
+ 	$products = 52; // number of products per page (shop page)
  	return $products;
 }
 add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+
+
+function jk_related_products_args( $args )
+{
+	$args['posts_per_page'] = 10; // 4 related products
+	$args['columns'] = 5; // arranged in 2 columns
+	return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_args', 20 );
 
 
 function register_menus() { 

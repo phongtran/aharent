@@ -19,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$category_ids = array();
+
 if ( $related_products ) : ?>
 
 	<section class="products popular-products related">
@@ -37,20 +39,23 @@ if ( $related_products ) : ?>
 
 			<?php foreach ( $related_products as $related_product ) : ?>
 
-					<?php
+				<?php
 					$post_object = get_post( $related_product->get_id() );
 
 					setup_postdata( $GLOBALS['post'] =& $post_object ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, Squiz.PHP.DisallowMultipleAssignments.Found
 
 					wc_get_template_part( 'content', 'product' );
-					?>
+					
+
+					$category_ids = $related_product->get_category_ids();
+				?>
 
 			<?php endforeach; ?>
 
 		<?php woocommerce_product_loop_end(); ?>
 
 		<div class="button-more">
-            <a href="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' )) ?>">
+            <a href="<?php echo (!empty($category_ids)) ? get_term_link( $category_ids[0]) : get_permalink( get_option( 'woocommerce_shop_page_id' )) ?>">
                 <button class="aha-button" type="button">Xem thêm</button>
             </a>
         </div>
