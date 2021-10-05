@@ -60,7 +60,7 @@ defined( 'ABSPATH' ) || exit;
             ?>
 
         <div class="button-more">
-            <a href="/store">
+            <a href="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' )); ?>">
                 <button class="aha-button" type="button">Xem thêm</button>
             </a>
         </div>
