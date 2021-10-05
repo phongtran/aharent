@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$first = ( $per_page * $current ) - $per_page + 1;
 		$last  = min( $total, $per_page * $current );
 		/* translators: 1: first result 2: last result 3: total results */
-		printf( _nx( 'Hiển thị %1$d&ndash;%2$d của %3$d kết quả', 'Hiển thị %1$d&ndash;%2$d của %3$d kết quả', $total, 'with first and last result', 'woocommerce' ), $first, $last, $total );
+		printf( _nx( 'Hiển thị %1$d&ndash;%2$d của %3$d sản phẩm', 'Hiển thị %1$d&ndash;%2$d của %3$d sản phẩm', $total, 'with first and last result', 'woocommerce' ), $first, $last, $total );
 	}
 	// phpcs:enable WordPress.Security
 	?>
