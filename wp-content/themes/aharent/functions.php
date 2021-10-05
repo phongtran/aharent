@@ -39,7 +39,7 @@ add_filter('loop_shop_columns', 'loop_columns', 999);
 
 function lw_loop_shop_per_page( $products )
 {
- 	$products = 52; // number of products per page (shop page)
+ 	$products = 60; // number of products per page (shop page)
  	return $products;
 }
 add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
@@ -702,6 +702,18 @@ function aha_after_post_meta( $meta_id, $post_id, $meta_key, $meta_value )
 	}
 }
 add_action( 'updated_post_meta', 'aha_after_post_meta', 10, 4 );
+
+
+function get_featured_products_query()
+{
+	return array(
+		'post_type'   => 'product',
+		'stock'       => 1,
+		'showposts'   => 30,
+		'orderby'     => 'rand',
+		'order'       => 'DESC' ,
+	);
+}
 
 
 ?>

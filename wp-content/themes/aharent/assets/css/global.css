@@ -552,10 +552,10 @@ ul.products {
 }
 
 ul.products a.product-link {
-  margin: 0 15px 20px 0 !important;
+  margin: 0 10px 20px 0 !important;
   max-width: 18%;
   width: 18%;
-  min-width: 220px;
+  min-width: 160px;
 }
 
 ul.products a.product-link li.product, ul.products a.product-link li.product-item {

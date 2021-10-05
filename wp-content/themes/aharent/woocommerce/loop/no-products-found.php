@@ -32,13 +32,7 @@ defined( 'ABSPATH' ) || exit;
 
             woocommerce_product_loop_start();
 
-                $args = array(
-                    'post_type'   => 'product',
-                    'stock'       => 1,
-                    'showposts'   => 15,
-                    'orderby'     => 'date',
-                    'order'       => 'DESC' ,
-                );
+                $args = get_featured_products_query();
 
                 $loop = new WP_Query( $args );
 

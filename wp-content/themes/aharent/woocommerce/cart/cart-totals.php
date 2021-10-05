@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<tr class="cart-subtotal">
 			<th>
-				<p><?php esc_html_e( 'Đặt cọc', 'woocommerce' ); ?></p>
+				<p><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></p>
 				<p class="note"><?php esc_html_e( 'Thanh toán trực tuyến', 'woocommerce' ); ?></p>
 			</th>
 			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php $total_deposit = calculate_cart_total_deposit(); echo wc_price( $total_deposit );  ?></td>

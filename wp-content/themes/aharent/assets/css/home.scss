@@ -8,6 +8,14 @@
 
 .container {
 
+    .home-container {
+        margin: 0 20px;
+
+        @media (max-width: 600px) {
+            margin: 0;
+        }
+    }
+
 
     .title-bar {
         background-color: $bright-bg-color;
@@ -22,7 +30,7 @@
 
     .renting-instructions {
         
-        margin: 20px;
+        margin: 20px 0;
         
 
         .renting-steps {
@@ -55,7 +63,7 @@
     }
 
     .categories {
-        margin: 20px;
+        margin: 20px 0;
 
 
         .title-bar {
@@ -95,7 +103,7 @@
     }
 
     .popular-products {
-        margin: 20px;
+        margin: 20px 0;
 
 
         &.related {

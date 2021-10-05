@@ -128,7 +128,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 												</td>
 											</tr>
 											<tr>
-												<td>Đặt cọc:</td>
+												<td><?php echo __( 'Deposit', 'woocommerce' ) ?>:</td>
 												<td>
 													<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['number_of_days']); ?>
 												</td>

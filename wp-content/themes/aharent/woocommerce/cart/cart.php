@@ -209,7 +209,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 										</div>
 
 										<div class="deposit-price">
-											<span class="label">Đặt cọc</span>
+											<span class="label"><?php echo __( 'Deposit', 'woocommerce' ) ?></span>
 											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity']); ?></h2>
 										</div>
 										
@@ -324,13 +324,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
             woocommerce_product_loop_start();
 
-                $args = array(
-                    'post_type'   => 'product',
-                    'stock'       => 1,
-                    'showposts'   => 15,
-                    'orderby'     => 'date',
-                    'order'       => 'DESC' ,
-                );
+                $args = get_featured_products_query();
 
                 $loop = new WP_Query( $args );
 
@@ -346,7 +340,7 @@ do_action( 'woocommerce_before_cart' ); ?>
             ?>
 
         <div class="button-more">
-            <a href="/store">
+            <a href="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' )); ?>">
                 <button class="aha-button" type="button">Xem thêm</button>
             </a>
         </div>

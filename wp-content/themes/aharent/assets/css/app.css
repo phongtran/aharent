@@ -552,10 +552,10 @@ ul.products {
 }
 
 ul.products a.product-link {
-  margin: 0 15px 20px 0 !important;
+  margin: 0 10px 20px 0 !important;
   max-width: 18%;
   width: 18%;
-  min-width: 220px;
+  min-width: 160px;
 }
 
 ul.products a.product-link li.product, ul.products a.product-link li.product-item {
@@ -786,6 +786,16 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   width: 100%;
 }
 
+.container .home-container {
+  margin: 0 20px;
+}
+
+@media (max-width: 600px) {
+  .container .home-container {
+    margin: 0;
+  }
+}
+
 .container .title-bar {
   background-color: #fff;
   border-radius: 5px;
@@ -794,7 +804,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .container .renting-instructions {
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .container .renting-instructions .renting-steps {
@@ -825,7 +835,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .container .categories {
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .container .categories .title-bar {
@@ -878,7 +888,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 .container .popular-products {
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .container .popular-products.related {
@@ -930,6 +940,12 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .shop-container .shop-product-listing {
   width: 80%;
+}
+
+@media (max-width: 900px) {
+  .shop-container .shop-product-listing {
+    width: 100%;
+  }
 }
 
 .aha-cart {
@@ -1277,6 +1293,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .checkout-details section {
   width: 48%;
+}
+
+.woocommerce ul.products li.product .price {
+  color: #04b950;
 }
 
 .product-info {

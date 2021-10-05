@@ -356,3 +356,18 @@
         width: 48%;
     }
 }
+
+
+.woocommerce {
+
+    ul.products {
+
+        li.product {
+
+            .price {
+                
+                color: $main-button-color;
+            }
+        }
+    }
+}
