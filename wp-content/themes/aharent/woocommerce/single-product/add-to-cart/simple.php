@@ -46,8 +46,10 @@ if ( ! $product->is_purchasable() ) {
 				<label>Số lượng: </label>
 			</div>
 
+			<?php $stock = $product->get_stock_quantity(); ?>
+
 			<div class="form-input quantity-input-increment">
-				<input id="quantity-input" class="number-spinner" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+				<input id="quantity-input" class="number-spinner" name="quantity" type="number" value="1" min="1" max="<?php echo $stock ?>" step="1" />
 			</div>
 		</div>
 		
@@ -63,8 +65,18 @@ if ( ! $product->is_purchasable() ) {
 
 			<div class="form-input time-period">
 
+					<?php
+						$time_min = $product->get_meta( 'time_min' );
+						if ( !$time_min) $time_min = 1;
+
+						$time_max = $product->get_meta( 'time_max' );
+						
+						$time_step = $product->get_meta( 'time_step' );
+						if ( !$time_step ) $time_step = 1;
+					?>
+
 					<div class="duration">
-						<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
+						<input id="duration" class="number-spinner" name="duration" type="number" value="<?php echo $time_min ?>" min="<?php echo $time_min ?>" <?php if ( $time_max ) echo 'max="' . $time_max .'"' ?> step="<?php echo $time_step ?>" />
 					</div>
 
 					<span class="time-delimiter">

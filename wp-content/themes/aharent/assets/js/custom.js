@@ -143,6 +143,57 @@
 		}
 			
 	}
+
+
+	$('#order_vat').change(function() {
+		
+		if ($(this).is(':checked')) {
+			$('#order_vat_company').prop('disabled', false);
+			$('#order_vat_company_field').addClass('validate-required').removeClass('woocommerce-invalid woocommerce-validated');
+
+			$('#order_vat_code').prop('disabled', false).addClass('validate-required');
+			$('#order_vat_code_field').addClass('validate-required').removeClass('woocommerce-invalid woocommerce-validated');
+			
+			$('#order_vat_address').prop('disabled', false).addClass('validate-required');
+			$('#order_vat_address_field').addClass('validate-required').removeClass('woocommerce-invalid woocommerce-validated');
+		} else {
+			$('#order_vat_company').prop('disabled', true).removeClass('validate-required');
+			$('#order_vat_company_field').removeClass('validate-required woocommerce-invalid woocommerce-validated');
+
+			$('#order_vat_code').prop('disabled', true).removeClass('validate-required');
+			$('#order_vat_code_field').removeClass('validate-required woocommerce-invalid woocommerce-validated');
+
+			$('#order_vat_address').prop('disabled', true).removeClass('validate-required');
+			$('#order_vat_address_field').removeClass('validate-required woocommerce-invalid woocommerce-validated');
+		}
+
+
+		$('body').trigger('update_checkout');
+	});
+
+
+	$('.wc_payment_methods input[type=radio]').click(function(e) {
+		if ( $( '.payment_methods input.input-radio' ).length > 1 ) {
+			var target_payment_box = $( 'div.payment_box.' + $( this ).attr( 'ID' ) ),
+				is_checked         = $( this ).is( ':checked' );
+
+			if ( is_checked && ! target_payment_box.is( ':visible' ) ) {
+				$( 'div.payment_box' ).filter( ':visible' ).slideUp( 230 );
+
+				if ( is_checked ) {
+					target_payment_box.slideDown( 230 );
+				}
+			}
+		} else {
+			$( 'div.payment_box' ).show();
+		}
+
+		if ( $( this ).data( 'order_button_text' ) ) {
+			$( '#place_order' ).text( $( this ).data( 'order_button_text' ) );
+		} else {
+			$( '#place_order' ).text( $( '#place_order' ).data( 'value' ) );
+		}
+	});
 	
 
 })(jQuery);

@@ -23,10 +23,6 @@ function mytheme_add_woocommerce_support() {
 }
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
-// add_theme_support( 'wc-product-gallery-zoom' );
-// add_theme_support( 'wc-product-gallery-lightbox' );
-// add_theme_support( 'wc-product-gallery-slider' );
-
 
 // Product loop column in shop page
 if ( !function_exists('loop_columns') ) {
@@ -287,9 +283,6 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	if (isset($_POST['time_unit']))
 		$cart_item_data['time-unit'] = $_POST['time_unit'];
 
-	// if (isset($_POST['_date_to']))
-	// 	$cart_item_data['date-to'] = $_POST['_date_to'];
-
 	if ( isset( $_POST['duration'] ))
 		$cart_item_data['duration'] = $_POST['duration'];
 	
@@ -304,11 +297,7 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	$cart_item_data['rental_price'] = $new_price['price'];
 	$cart_item_data['deposit'] = $new_price['deposit'];
 
-	
-	// $date_from = new DateTime( str_replace( '/', '-', $cart_item_data['date-from'] ) );
-	// $date_to = new DateTime( str_replace( '/', '-', $cart_item_data['date-to'] ) );
-	// $cart_item_data['number_of_days'] = $date_from->diff( $date_to )->format("%a");
-
+	WC()->customer->set_is_vat_exempt(true);
 
 	return $cart_item_data;
 }
@@ -360,18 +349,70 @@ add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1
 function save_order_custom_values_of_items( $item, $cart_item_key, $values, $order )
 {
 	$item->add_meta_data( '_rental_price', $values['rental_price'] );
+	$item->add_meta_data( 'duration', $values['duration'] );
+	if ( !$values['time-unit'] )
+		$item->add_meta_data( 'time-unit', 'day' );
+	else
+		$item->add_meta_data( 'time-unit', $values['time-unit'] );
+	$item->add_meta_data( 'date-from', $values['date-from'] );
+	
 }
 add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_values_of_items', 10, 4 );
+
+
+// Update the order meta with field value
+add_action( 'woocommerce_checkout_create_order', 'custom_checkout_field_create_order', 10, 2 );
+function custom_checkout_field_create_order( $order, $data )
+{
+	// Save national id number
+	if ( isset( $_POST['billing_nation_id'] ))
+		$order->update_meta_data( 'billing_nation_id', sanitize_text_field( $_POST['billing_national_id'] ));
+
+	// Save tax receipt options
+    if ( isset($_POST['order_vat']) && $_POST['order_vat'] )
+	{
+        $order->update_meta_data( 'order_vat', $_POST['order_vat'] );
+		$order->update_meta_data( 'order_vat_company', sanitize_text_field( $_POST['order_vat_company']) );
+		$order->update_meta_data( 'order_vat_code', sanitize_text_field( $_POST['order_vat_code']) );
+		$order->update_meta_data( 'order_vat_address', sanitize_text_field( $_POST['order_vat_address'] ) );
+    }
+}
+
+
+add_action( 'woocommerce_admin_order_data_after_billing_address', 'my_custom_checkout_field_display_admin_order_meta', 10, 1 );
+function my_custom_checkout_field_display_admin_order_meta( $order )
+{
+
+    // display order VAT options
+	if( $order_vat = $order->get_meta('order_vat') )
+	{
+        echo '<p><strong>'.__('Tax receipt', 'woocommerce').':</strong> ' . ' yes' . '</p>';
+		echo '<p><strong>'.__('Company name', 'woocommerce').':</strong> ' . $order->get_meta( 'order_vat_company' ) . '</p>';
+		echo '<p><strong>'.__('Tax code', 'woocommerce').':</strong> ' . $order->get_meta( 'order_vat_code' ) . '</p>';
+		echo '<p><strong>'.__('Address', 'woocommerce').':</strong> ' . $order->get_meta( 'order_vat_address' ) . '</p>';
+    }
+	else
+	{
+		echo '<p><strong>'.__('Tax receipt', 'woocommerce').':</strong> ' . ' no' . '</p>';
+	}
+}
 
 
 
 function woocommerce_admin_order_item_headers()
 {
     // set the column name
-    $column_name = 'Rental price';
+    $column_name = array(
+		'Rental price',
+		'Rental duration',
+		'From date'
+	 );
 
     // display the column name
-    echo '<th>' . $column_name . '</th>';
+	foreach ( $column_name as $column )
+    	echo '<th>' . $column . '</th>';
+
+
 }
 add_action('woocommerce_admin_order_item_headers', 'woocommerce_admin_order_item_headers');
 
@@ -382,15 +423,23 @@ function woocommerce_admin_order_item_values($_product, $item, $item_id = null)
 {
     // get the post meta value from the associated product
 	$rental_price = wc_get_order_item_meta( $item_id, '_rental_price');
+	$rental_duration = wc_get_order_item_meta( $item_id, 'duration' );
+	$rental_date_from = wc_get_order_item_meta( $item_id, 'date-from' );
+	$time_unit = wc_get_order_item_meta( $item_id, 'time-unit' );
     
 	// display the value
     echo '<td>' . wc_price( $rental_price ) . '</td>';
+	echo '<td>' . $rental_duration . ' ' . $time_unit . '</td>';
+	echo '<td>' . $rental_date_from . '</td>';
 }
 add_action('woocommerce_admin_order_item_values', 'woocommerce_admin_order_item_values', 10, 3);
 
 
 function custom_woocommerce_hidden_order_itemmeta( $arr ) {
     $arr[] = '_rental_price';
+	// $arr[] = 'duration';
+	// $arr[] = 'time-unit';
+	// $arr[] = 'date-from';
     return $arr;
 }
 add_filter('woocommerce_hidden_order_itemmeta', 'custom_woocommerce_hidden_order_itemmeta', 10, 1);
@@ -455,32 +504,49 @@ add_filter( 'woocommerce_add_to_cart_validation', 'add_the_date_validation', 10,
 
 function customize_checkout_billing_kyc( $fields )
 {
-	$fields['billing']['billing_state']['default'] = 'Ho Chi Minh';
-	$fields['billing']['billing_state']['value'] = 'Ho Chi Minh';
-
-	//$fields['billing']['billing_state']['custom_attributes']['readonly'] = true;
-	//$fields['billing']['billing_state']['custom_attributes']['disabled'] = true;
 	unset($fields['billing']['billing_company']);
     unset($fields['billing']['billing_city']);
 	unset($fields['billing']['billing_postcode']);
 	unset($fields['billing']['billing_country']);
+	
+
+	$fields['billing']['billing_state'] = array(
+		'label'		=>  __( 'Province', 'woocommerce' ),
+		'type'		=>	'text',
+		'required'	=>	true,
+		'default'	=> 'Hồ Chí Minh',
+		'value'		=> 'Hồ Chí Minh',
+		'custom_attributes'	=> array( 'readonly' => 'readonly' ),
+		'priority'	=> 65,
+	);
+
 
 	$fields['billing']['billing_national_id'] = array(
         'label'     => __('National ID Number', 'woocommerce'),
         'required'  => true,
-		'priority'	=> 30,
+		'priority'	=> 5,
 		
     );
 
-	$fields['shipping']['shipping_state']['default'] = 'Ho Chi Minh';
-	unset($fields['shipping']['shipping_company']);
-    unset($fields['shipping']['shipping_city']);
-	unset($fields['shipping']['shipping_postcode']);
-	unset($fields['shipping']['shipping_country']);
+	// $fields['order']['order_vat'] = array(
+	// 	'label'	=>	__( 'Tax receipt', 'woocommerce' ),
+	// 	'type'	=>	'checkbox',
+	// 	'class'	=>	array('input-checkbox'),
+	// 	'priority'	=> 111,
+	// );
+
+	// var_dump( $fields['order'] );
 
     return $fields;
 }
 add_filter( 'woocommerce_checkout_fields', 'customize_checkout_billing_kyc' );
+
+
+function add_vat_tax_option()
+{
+
+}
+add_action( 'woocommerce_after_checkout_shipping_form', 'add_vat_tax_option' );
 
 
 function get_new_price( $product_id, $date_from, $duration, $time_unit = 'day' )
@@ -558,11 +624,10 @@ function get_product_prices( $product )
 					
 					$prices['day'][$variation['attributes']['attribute_duration']] = $price_block;
 				}
-					
 				elseif (isset( $variation['attributes']['attribute_day'] ))
 					$prices['day'][$variation['attributes']['attribute_day']] = $price_block;
 				else
-					$prices['day'][1] = $price_block;
+					$prices['day']['single'] = $price_block;
 
 			}
 				
@@ -594,7 +659,7 @@ function get_product_prices( $product )
 					}
 						
 					else
-						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]][1] = $price_block;
+						$prices[ $variation[ 'attributes' ][ 'attribute_time_unit' ]]['single'] = $price_block;
 				}
 					
 			}
@@ -715,5 +780,45 @@ function get_featured_products_query()
 	);
 }
 
+
+function update_order_review( $checkout )
+{
+	$get_values = array();
+	parse_str( $checkout, $get_values );
+
+	if ( $get_values['order_vat'] )
+		WC()->customer->set_is_vat_exempt( false );
+	else
+		WC()->customer->set_is_vat_exempt( true );	
+}
+add_action( 'woocommerce_checkout_update_order_review', 'update_order_review');
+
+
+ 
+function aha_validate_checkout_fields( $fields, $errors )
+{
+	if ( $_POST['order_vat'] )
+	{
+		if ( !$_POST['order_vat_company'] || empty( $_POST['order_vat_company'])) 
+			$errors->add( 'validation', 'company name required' );
+	}
+    
+}
+add_action( 'woocommerce_after_checkout_validation', 'aha_validate_checkout_fields', 10, 2);
+
+add_filter( 'user_has_cap', 'bbloomer_order_pay_without_login', 9999, 3 );
+ 
+function bbloomer_order_pay_without_login( $allcaps, $caps, $args ) {
+   if ( isset( $caps[0], $_GET['key'] ) ) {
+      if ( $caps[0] == 'pay_for_order' ) {
+         $order_id = isset( $args[2] ) ? $args[2] : null;
+         $order = wc_get_order( $order_id );
+         if ( $order ) {
+            $allcaps['pay_for_order'] = true;
+         }
+      }
+   }
+   return $allcaps;
+}
 
 ?>

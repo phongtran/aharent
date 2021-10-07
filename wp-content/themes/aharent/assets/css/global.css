@@ -751,6 +751,11 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   margin: 20px 0;
 }
 
+.woocommerce-notices-wrapper .woocommerce-info {
+  border: 0;
+  border-left: 5px solid #04b950 !important;
+}
+
 .woocommerce-notices-wrapper .woocommerce-message, .woocommerce-notices-wrapper .woocommerce-error {
   padding: 15px 20px;
   border-left: 5px solid #04b950 !important;
@@ -776,5 +781,36 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce .popular-products {
   margin: 20px 0 !important;
+}
+
+.tax-options {
+  margin-left: 25px;
+  padding-bottom: 10px;
+  border: 1px solid #d9d9d9;
+}
+
+.tax-options .woocommerce-validated input:disabled, .tax-options .woocommerce-invalid input:disabled {
+  border: 1px solid #ddd !important;
+}
+
+.payment-retry-note {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-left: 5px solid #a12031;
+  border-radius: 5px;
+}
+
+.shipping-options .radio-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.shipping-options .radio-row label {
+  margin-left: 10px;
 }
 /*# sourceMappingURL=global.css.map */

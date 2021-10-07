@@ -413,6 +413,11 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .woocommerce-notices-wrapper {
     margin: 20px 0;
 
+    .woocommerce-info {
+        border: 0;
+        border-left: 5px solid $main-button-color !important;
+    }
+
     .woocommerce-message, .woocommerce-error {
 
         padding: 15px 20px;
@@ -444,4 +449,42 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 .woocommerce .popular-products {
     margin: 20px 0 !important;
+}
+
+
+.tax-options {
+
+    margin-left: 25px;
+    padding-bottom: 10px;
+    border: 1px solid $shadow-color;
+
+    .woocommerce-validated, .woocommerce-invalid {
+        
+        input {
+            &:disabled {
+                border: 1px solid #ddd !important;
+            }
+        }
+    }
+
+}
+
+.payment-retry-note {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: $bright-bg-color;
+    border-left: 5px solid $validation-text;
+    border-radius: 5px;
+}
+
+.shipping-options {
+    
+    .radio-row {
+
+        display: flex;
+        align-items: center;
+        label {
+            margin-left: 10px;
+        }
+    }
 }

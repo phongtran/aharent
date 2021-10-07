@@ -20,7 +20,7 @@ function security_deposit_tab( $tabs )
 
 global $product;
 
-$vendor_login = $product->get_meta( '_vendor' );
+$vendor_login = $product->get_meta( 'vendor' );
 $vendor = get_user_by( 'login', $vendor_login );
 
 $vendor_rental_terms = get_user_meta ( $vendor->ID, 'vendor_rental_terms', true );

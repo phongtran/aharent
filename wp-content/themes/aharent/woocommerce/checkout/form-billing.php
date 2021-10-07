@@ -35,12 +35,12 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="woocommerce-billing-fields__field-wrapper">
 		<?php
-		$fields = $checkout->get_checkout_fields( 'billing' );
+			$fields = $checkout->get_checkout_fields( 'billing' );
 
-		foreach ( $fields as $key => $field ) {
-			woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
-
-		}
+			foreach ( $fields as $key => $field )
+			{
+				woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+			}
 		?>
 	</div>
 
@@ -48,7 +48,7 @@ defined( 'ABSPATH' ) || exit;
 </div>
 
 <?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>
-	<div class="woocommerce-account-fields">
+	<!-- <div class="woocommerce-account-fields">
 		<?php if ( ! $checkout->is_registration_required() ) : ?>
 
 			<p class="form-row form-row-wide create-account">
@@ -73,5 +73,5 @@ defined( 'ABSPATH' ) || exit;
 		<?php endif; ?>
 
 		<?php do_action( 'woocommerce_after_checkout_registration_form', $checkout ); ?>
-	</div>
+	</div> -->
 <?php endif; ?>

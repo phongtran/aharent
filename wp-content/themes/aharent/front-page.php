@@ -82,10 +82,10 @@
                     </div>
                     <div class="step-notes">
                         <div class="step-notes-title">
-                            <h4>Sở hữu hoặc trả lại</h4>
+                            <h4>Trả lại</h4>
                         </div>
                         <div class="notes">
-                            <p>Có thể mua, đổi, hoặc trả lại sản phẩm tùy thích.</p>
+                            <p>Sản phẩm được trả lại khi hết hạn thuê.</p>
                         </div>
                     </div>
                 </div>

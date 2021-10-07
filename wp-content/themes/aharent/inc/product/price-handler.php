@@ -133,10 +133,12 @@
         
         $prices = get_product_prices( $product );
         $product_price = 0;
+        $block_price = false;
 
-        if ( isset($prices[$time_unit][1]) )
+        if ( isset($prices[$time_unit]['single']) )
         {
-            $product_price = $prices[1];
+            $product_price = $prices[$time_unit]['single']['price'] * $duration;
+            $block_price = $prices[$time_unit]['single']['block_price'];
         }
         else
         {
@@ -185,25 +187,27 @@
                 }
                     
             }
-        }
 
-        if ( !$block_price )
-        {
-            if ( $duration <= array_key_last( $temp_prices ))
-                $product_price *= $duration;
-            else
-                $product_price *= array_key_last( $temp_prices );
-        }
+            if ( !$block_price )
+            {
+                if ( $duration <= array_key_last( $temp_prices ))
+                    $product_price *= $duration;
+                else
+                    $product_price *= array_key_last( $temp_prices );
+            }
+                
+        
+            if ( isset($product_extra_price) )
+                $product_price += $product_extra_price;
+
             
-
-        if ( isset($product_extra_price) )
-            $product_price += $product_extra_price;
-
+        }
         
         $vendor = get_product_vendor ( $product->post );
         $vendor_percentage = get_vendor_percentage( $vendor );
         $deposit = $vendor_percentage * $product_price / 100;
 
+    
         return array (
             "price"     => $product_price,
             "deposit"   => $deposit,
