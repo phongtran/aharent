@@ -65,23 +65,6 @@ defined( 'ABSPATH' ) || exit;
 
 		<div class="woocommerce-additional-fields__field-wrapper">
 
-			<fieldset class="shipping-options">
-				<p class="form-row">
-					<label><?php echo __( 'Delivery/Pick-up', 'woocommerce' ) ?></label>
-					
-					<span class="radio-row">
-						<input type="radio" name="delivery-option" id="delivery-option_delivery" value="delivery" />
-						<label for="delivery-option_delivery"><?php echo __( 'Deliver to my address. (Fee might be added. We will contact to inform you.)', 'woocommerce' ) ?></label>
-					</span>
-
-					<?php $vendor_address = 'hello'; ?>
-
-					<span class="radio-row">
-						<input type="radio" name="delivery-option" id="delivery-option_pick-up" value="pick-up" />
-						<label for="delivery-option_pick-up"><?php echo __( 'Pick up at ', 'woocommerce' ) . $vendor_address ?></label>
-					</span>
-				</p>
-
 			<?php foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field ) : ?>
 				<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
 			<?php endforeach; ?>

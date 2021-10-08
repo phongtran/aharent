@@ -29,9 +29,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 			<?php if ( $notices ) : ?>
 
-			<div class="woocommerce-info"<?php echo wc_get_notice_data_attr( $notice ); ?>>
+			<!-- <div class="woocommerce-info"<?php echo wc_get_notice_data_attr( $notice ); ?>>
 				<?php echo wc_kses_notice( $notice['notice'] ); ?>
-			</div>
+			</div> -->
 			<?php endif ?>
 
 			<div class="cart-step-content">
@@ -187,12 +187,39 @@ do_action( 'woocommerce_before_cart' ); ?>
 															
 															
 														</div>
+														
+													</td>
+												</tr>
 
-														
+												<tr class="delivery-option">
+													<td class="label">Giao/nhận:</td>
+													<td>
+														<?php
+															$vendor_login = $product->get_meta( 'vendor' );
+															$vendor_profiles = get_vendor_profiles( $vendor_login );
+															$address = $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
 
-													
-														
-														
+															
+															$vendor = get_product_vendor ( wc_get_product( $product_id)->post );
+															$delivery_terms = get_user_meta( $vendor, 'delivery_terms', true );
+														?>
+
+														<div class="radio-options">
+															<?php if ( $delivery_terms ): ?>
+																<div class='radio-option-row'>
+																	<input id="delivery_option_delivery" type="radio" name="cart[<?php echo $cart_item_key ?>][delivery_option]" value="delivery" <?php echo ('delivery' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
+																	<label for="delivery_option_delivery">Giao hàng tận nơi.</label>
+																</div>
+															<?php endif ?>
+															
+															<?php if ( !empty( $address )): ?>
+																<div class='radio-option-row'>
+																	<input id="delivery_option_pick-up" type="radio" name="cart[<?php echo $cart_item_key ?>][delivery_option]" value="pick-up" <?php echo ('pick-up' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
+																	<label for="delivery_option_pick-up">Nhận hàng tại <?php echo $address ?>.</label>
+																</div>
+															<?php endif ?>
+														</div>
+
 													</td>
 												</tr>
 												

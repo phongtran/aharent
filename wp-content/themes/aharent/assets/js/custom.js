@@ -2,14 +2,14 @@
 
 	$('input.number-spinner').inputSpinner();
 
+	tinymce.init({
+		selector: '.tinymce-form'
+	});
+
 
     $(".add-to-cart input.number-spinner").change(function(e) {
 		getProductPrice();
 	});
-
-	tinymce.init({
-        selector: '#rental-terms'
-    });
 
 	$('.add-to-cart select.time-unit').change(function(e) {
 		$('.time-delimiter .time-unit').text($(this).find('option:selected').first().text().toLowerCase());
@@ -80,6 +80,10 @@
 	});
 
 	$('.woocommerce-cart-form .duration input').change(function(e) {
+		cartItemChanged(e);
+	});
+
+	$('.woocommerce-cart-form .delivery-option input').change(function(e) {
 		cartItemChanged(e);
 	});
 

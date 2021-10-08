@@ -10,6 +10,7 @@
                         <div class="company-name">
                             <p>Công ty TNHH Tale</p>
                             <p>Technologies Việt Nam</p>
+                            <p class="hotline">Hotline: (+84) 867 051 437</p>
                         </div>
 
                         <div class="copyright">

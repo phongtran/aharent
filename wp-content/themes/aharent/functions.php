@@ -135,8 +135,8 @@ function load_scripts()
 {
 	wp_enqueue_script( 'wp-util' );
 
-	wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js', array(), '1', true );
-	wp_enqueue_script( 'tinymce-editor' );
+	wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/naf4lwctip9s1fh3vtm6ry1rlefmimd7wo585ayh82ybykap/tinymce/5/tinymce.min.js', array(), '1', true );
+    wp_enqueue_script( 'tinymce-editor' );
 
 	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', false );
 	wp_enqueue_script( 'bootstrap-bundle-js-min' );	
@@ -285,6 +285,9 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 
 	if ( isset( $_POST['duration'] ))
 		$cart_item_data['duration'] = $_POST['duration'];
+
+	if ( isset( $_POST['delivery_option']) )
+		$cart_item_data['delivery-option'] = $_POST['delivery_option'];
 	
 	$product = wc_get_product( $product_id );
 	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
@@ -313,6 +316,7 @@ function update_cart_meta( $cart_updated )
 	{
 		WC()->cart->cart_contents[$key]['duration'] = $cart_item_data['duration'];
 		WC()->cart->cart_contents[$key]['date-from'] = $cart_item_data['_date_from'];
+		WC()->cart->cart_contents[$key]['delivery-option'] = $cart_item_data['delivery_option'];
 		
 		if (isset($cart_item_data['time_unit']))
 			WC()->cart->cart_contents[$key]['time-unit'] = $cart_item_data['time_unit'];
@@ -333,7 +337,19 @@ function update_cart_meta( $cart_updated )
 add_action( 'woocommerce_update_cart_action_cart_updated', 'update_cart_meta', 10, 3 );
 
 
-
+function save_order_custom_values_of_items( $item, $cart_item_key, $values, $order )
+{
+	$item->add_meta_data( '_rental_price', $values['rental_price'] );
+	$item->add_meta_data( 'duration', $values['duration'] );
+	if ( !$values['time-unit'] )
+		$item->add_meta_data( 'time-unit', 'day' );
+	else
+		$item->add_meta_data( 'time-unit', $values['time-unit'] );
+	$item->add_meta_data( 'date-from', $values['date-from'] );
+	$item->add_meta_data( 'delivery-option', $values['delivery-option'] );
+	
+}
+add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_values_of_items', 10, 4 );
 
 
 function set_cart_calculation( $cart )
@@ -346,27 +362,14 @@ function set_cart_calculation( $cart )
 add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
 
 
-function save_order_custom_values_of_items( $item, $cart_item_key, $values, $order )
-{
-	$item->add_meta_data( '_rental_price', $values['rental_price'] );
-	$item->add_meta_data( 'duration', $values['duration'] );
-	if ( !$values['time-unit'] )
-		$item->add_meta_data( 'time-unit', 'day' );
-	else
-		$item->add_meta_data( 'time-unit', $values['time-unit'] );
-	$item->add_meta_data( 'date-from', $values['date-from'] );
-	
-}
-add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_values_of_items', 10, 4 );
-
 
 // Update the order meta with field value
 add_action( 'woocommerce_checkout_create_order', 'custom_checkout_field_create_order', 10, 2 );
 function custom_checkout_field_create_order( $order, $data )
 {
 	// Save national id number
-	if ( isset( $_POST['billing_nation_id'] ))
-		$order->update_meta_data( 'billing_nation_id', sanitize_text_field( $_POST['billing_national_id'] ));
+	if ( isset( $_POST['billing_national_id'] ))
+		$order->update_meta_data( 'billing_national_id', sanitize_text_field( $_POST['billing_national_id'] ));
 
 	// Save tax receipt options
     if ( isset($_POST['order_vat']) && $_POST['order_vat'] )
@@ -382,6 +385,9 @@ function custom_checkout_field_create_order( $order, $data )
 add_action( 'woocommerce_admin_order_data_after_billing_address', 'my_custom_checkout_field_display_admin_order_meta', 10, 1 );
 function my_custom_checkout_field_display_admin_order_meta( $order )
 {
+	// Display Nation ID Number
+	if ( $national_id = $order->get_meta( 'billing_national_id' ))
+		echo '<p><strong>'.__('National ID number', 'woocommerce').':</strong> ' . $national_id . '</p>';
 
     // display order VAT options
 	if( $order_vat = $order->get_meta('order_vat') )
@@ -405,7 +411,8 @@ function woocommerce_admin_order_item_headers()
     $column_name = array(
 		'Rental price',
 		'Rental duration',
-		'From date'
+		'From date',
+		'Delivery/Pick-up'
 	 );
 
     // display the column name
@@ -426,11 +433,13 @@ function woocommerce_admin_order_item_values($_product, $item, $item_id = null)
 	$rental_duration = wc_get_order_item_meta( $item_id, 'duration' );
 	$rental_date_from = wc_get_order_item_meta( $item_id, 'date-from' );
 	$time_unit = wc_get_order_item_meta( $item_id, 'time-unit' );
+	$delivery_option = wc_get_order_item_meta( $item_id, 'delivery-option' );
     
 	// display the value
     echo '<td>' . wc_price( $rental_price ) . '</td>';
 	echo '<td>' . $rental_duration . ' ' . $time_unit . '</td>';
 	echo '<td>' . $rental_date_from . '</td>';
+	echo '<td>' . $delivery_option . '</td>';
 }
 add_action('woocommerce_admin_order_item_values', 'woocommerce_admin_order_item_values', 10, 3);
 
@@ -787,7 +796,7 @@ function update_order_review( $checkout )
 	parse_str( $checkout, $get_values );
 
 	if ( $get_values['order_vat'] )
-		WC()->customer->set_is_vat_exempt( false );
+		WC()->customer->set_is_vat_exempt( true );
 	else
 		WC()->customer->set_is_vat_exempt( true );	
 }
@@ -806,19 +815,20 @@ function aha_validate_checkout_fields( $fields, $errors )
 }
 add_action( 'woocommerce_after_checkout_validation', 'aha_validate_checkout_fields', 10, 2);
 
-add_filter( 'user_has_cap', 'bbloomer_order_pay_without_login', 9999, 3 );
- 
-function bbloomer_order_pay_without_login( $allcaps, $caps, $args ) {
-   if ( isset( $caps[0], $_GET['key'] ) ) {
-      if ( $caps[0] == 'pay_for_order' ) {
-         $order_id = isset( $args[2] ) ? $args[2] : null;
-         $order = wc_get_order( $order_id );
-         if ( $order ) {
-            $allcaps['pay_for_order'] = true;
-         }
-      }
-   }
-   return $allcaps;
+
+function get_vendor_profiles( $vendor_login )
+{
+	$user = get_user_by ( 'login', $vendor_login );
+	$dokan_profiles = get_user_meta ( $user->ID, 'dokan_profile_settings', true );
+
+	return $dokan_profiles;
 }
+
+
+function strip_style($string)
+{
+    return preg_replace('/(<[^>]+) style=".*?"/i', '$1', $string);     
+}
+
 
 ?>

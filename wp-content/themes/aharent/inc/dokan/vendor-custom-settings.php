@@ -62,6 +62,10 @@ add_filter( 'dokan_dashboard_settings_helper_text', 'prefix_set_rental_terms_tab
  * @param array $query_vars WP query vars
  */
 function prefix_output_help_tab_content( $query_vars ) {
+
+    wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js', array(), '1', false );
+    wp_enqueue_script( 'tinymce-editor' );
+    
     if ( isset( $query_vars['settings'] ) && 'rental-terms' === $query_vars['settings'] ) {
         if ( ! current_user_can( 'dokan_view_store_settings_menu' ) ) {
             dokan_get_template_part ('global/dokan-error', '', [
@@ -71,16 +75,36 @@ function prefix_output_help_tab_content( $query_vars ) {
         } else {
             $user_id        = get_current_user_id();
             $rental_terms   = get_user_meta( $user_id, 'vendor_rental_terms', true );
+            $receive_return_terms = get_user_meta( $user_id, 'receive_return_terms', true );
+            $delivery_terms = get_user_meta( $user_id, 'delivery_terms', true );
 
             ?>
             <form method="post" id="settings-form"  action="" class="dokan-form-horizontal">
                 <?php wp_nonce_field( 'dokan_rental_terms_settings_nonce' ); ?>
                 <div class="dokan-form-group">
                     <label class="dokan-w3 dokan-control-label" for="bio">
-                        <?php esc_html_e( 'Rental terms and conditions' ); ?>
+                        <?php esc_html_e( 'Security deposit terms' ); ?>
                     </label>
                     <div class="dokan-w5 text-editor">
-                        <textarea id="rental-terms" name="rental_terms" class="dokan-form-control"><?php echo $rental_terms ?></textarea>
+                        <textarea id="rental-terms" name="rental_terms" class="tinymce-form dokan-form-control"><?php echo $rental_terms ?></textarea>
+                    </div>
+                </div>
+
+                <div class="dokan-form-group">
+                    <label class="dokan-w3 dokan-control-label" for="bio">
+                        <?php esc_html_e( 'Receive and return terms' ); ?>
+                    </label>
+                    <div class="dokan-w5 text-editor">
+                        <textarea id="receive-return" name="receive_return_terms" class="tinymce-form dokan-form-control"><?php echo $receive_return_terms ?></textarea>
+                    </div>
+                </div>
+
+                <div class="dokan-form-group">
+                    <label class="dokan-w3 dokan-control-label" for="bio">
+                        <?php esc_html_e( 'Delivery terms' ); ?>
+                    </label>
+                    <div class="dokan-w5 text-editor">
+                        <textarea id="delivery" name="delivery_terms" class="tinymce-form dokan-form-control"><?php echo $delivery_terms ?></textarea>
                     </div>
                 </div>
                 
@@ -96,6 +120,11 @@ function prefix_output_help_tab_content( $query_vars ) {
                     margin-bottom: 0;
                 }
             </style>
+            <script type="text/javascript">
+                (function($) {
+                    
+                })(jQuery)
+            </script>
             <?php
         }
     }
@@ -116,9 +145,14 @@ function prefix_save_rental_terms_settings() {
     if ( ! wp_verify_nonce( $nonce, 'dokan_rental_terms_settings_nonce' ) ) {
         return;
     }
-    $rental_terms            = $post_data['rental_terms'];
+    $rental_terms               = $post_data['rental_terms'];
+    $receive_return_terms       = $post_data['receive_return_terms'];
+    $delivery_terms             = $post_data['delivery_terms'];
     
     update_user_meta( $user_id, 'vendor_rental_terms', $rental_terms );
+    update_user_meta( $user_id, 'receive_return_terms', $receive_return_terms );
+    update_user_meta( $user_id, 'delivery_terms', $delivery_terms );
+    
     wp_send_json_success( array(
         'msg' => __( 'Your information has been saved successfully.' ),
     ) );

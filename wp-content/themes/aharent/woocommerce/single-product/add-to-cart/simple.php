@@ -93,6 +93,41 @@ if ( ! $product->is_purchasable() ) {
 			</div>
 		</div>
 
+
+		<div class="form-row">
+			<div class="form-label">
+				<label>Tùy chọn giao/nhận: </label>
+			</div>
+
+			<?php
+				$vendor_login = $product->get_meta( 'vendor' );
+				$vendor_profiles = get_vendor_profiles( $vendor_login );
+				$address = $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
+				
+				global $vendor;
+				if ( !$vendor )
+					$vendor = get_product_vendor ( $product->post );
+
+				$delivery_terms = get_user_meta( $vendor, 'delivery_terms', true );
+			?>
+
+			<div class="form-input radio-options">
+				<?php if ( $delivery_terms ): ?>
+					<div class='radio-option-row'>
+						<input id="delivery_option_delivery" type="radio" name="delivery_option" value="delivery" checked />
+						<label for="delivery_option_delivery">Giao hàng tận nơi.</label>
+					</div>
+				<?php endif ?>
+
+				<?php if ( !empty( $address )) : ?>
+					<div class='radio-option-row'>
+						<input id="delivery_option_pick-up" type="radio" name="delivery_option" value="pick-up" <?php if ( !$delivery_terms) echo 'checked'; ?> />
+						<label for="delivery_option_pick-up">Nhận hàng tại <?php echo $address ?>.</label>
+					</div>
+				<?php endif ?>
+			</div>
+		</div>
+
 		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>

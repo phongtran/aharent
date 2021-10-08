@@ -70,6 +70,10 @@ footer {
         p {
             font-size: 1rem;
             margin: 5px 0;
+
+            &.hotline {
+                color: $validation-text;
+            }
         }
     }
 

@@ -33,6 +33,10 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 	<address>
 		<?php echo wp_kses_post( $order->get_formatted_billing_address( esc_html__( 'N/A', 'woocommerce' ) ) ); ?>
 
+		<?php if ( $national_id = $order->get_meta('billing_national_id') ) : ?>
+			<p><?php echo __( 'National ID number', 'woocommerce' ) ?>:<?php echo esc_html( $national_id ); ?></p>
+		<?php endif; ?>
+		
 		<?php if ( $order->get_billing_phone() ) : ?>
 			<p class="woocommerce-customer-details--phone"><?php echo esc_html( $order->get_billing_phone() ); ?></p>
 		<?php endif; ?>

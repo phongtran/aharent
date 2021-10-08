@@ -76,8 +76,10 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 				<label>Số lượng: </label>
 			</div>
 
+			<?php $stock = $product->get_stock_quantity(); ?>
+
 			<div class="form-input quantity-input-increment">
-				<input class="number-spinner" id="quantity-input" name="quantity" type="number" value="1" min="1" max="10" step="1" />
+				<input class="number-spinner" id="quantity-input" name="quantity" type="number" value="1" min="1" max="<?php echo $stock; ?>" step="1" />
 			</div>
 		</div>
 
@@ -92,8 +94,18 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 			<div class="form-input time-period">
 
+				<?php
+					$time_min = $product->get_meta( 'time_min' );
+					if ( !$time_min) $time_min = 1;
+
+					$time_max = $product->get_meta( 'time_max' );
+					
+					$time_step = $product->get_meta( 'time_step' );
+					if ( !$time_step ) $time_step = 1;
+				?>
+
 				<div class="duration">
-					<input id="duration" class="number-spinner" name="duration" type="number" value="1" min="1" max="10" step="1" />
+					<input id="duration" class="number-spinner" name="duration" type="number" value="<?php echo $time_min ?>" min="<?php echo $time_min ?>" <?php if ($time_max) echo 'max="' . $time_max . '"'; ?> step="<?php echo $time_step; ?>" />
 				</div>
 	
 				<span class="time-delimiter">
@@ -114,6 +126,41 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 					
 				
+			</div>
+		</div>
+
+
+		<div class="form-row">
+			<div class="form-label">
+				<label>Tùy chọn giao/nhận: </label>
+			</div>
+
+			<?php
+				$vendor_login = $product->get_meta( 'vendor' );
+				$vendor_profiles = get_vendor_profiles( $vendor_login );
+				$address = $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
+
+				global $vendor;
+				if ( !$vendor )
+					$vendor = get_product_vendor ( $product->post );
+
+				$delivery_terms = get_user_meta( $vendor, 'delivery_terms', true );
+			?>
+
+			<div class="form-input radio-options">
+				<?php if ( $delivery_terms ): ?>
+					<div class='radio-option-row'>
+						<input id="delivery_option_delivery" type="radio" name="delivery_option" value="delivery" checked />
+						<label for="delivery_option_delivery">Giao hàng tận nơi.</label>
+					</div>
+				<?php endif ?>
+
+				<?php if ( !empty( $address )) : ?>
+					<div class='radio-option-row'>
+						<input id="delivery_option_pick-up" type="radio" name="delivery_option" value="pick-up" <?php if ( !$delivery_terms ) echo 'checked'; ?> />
+						<label for="delivery_option_pick-up">Nhận hàng tại <?php echo $address ?>.</label>
+					</div>
+				<?php endif ?>
 			</div>
 		</div>
 

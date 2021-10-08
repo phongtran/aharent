@@ -88,7 +88,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php endforeach; ?>
 
 		<?php
-		if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() ) {
+		if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() && !WC()->customer->is_vat_exempt() ) {
 			$taxable_address = WC()->customer->get_taxable_address();
 			$estimated_text  = '';
 
