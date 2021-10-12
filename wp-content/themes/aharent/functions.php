@@ -831,4 +831,53 @@ function strip_style($string)
 }
 
 
+function update_order_items_booking_time( $order_id )
+{
+    $order = wc_get_order( $order_id );
+	$items = $order->get_items();
+	
+	foreach ( $items as $item_key => $item )
+	{
+		$product = $item->get_product();
+
+		if ( $product->is_type( 'variation' ))
+			$product = new WC_Product_Variable( $product->get_parent_id() );
+
+		$time_unit = $item->get_meta( 'time-unit' );
+		$duration_count = $item->get_meta( 'duration' );
+		$start = $item->get_meta( 'date-from' );
+		$start_date = DateTime::createFromFormat( 'd/m/Y', $start );
+		
+		$duration = '';
+		if ( 'day' == $time_unit )
+			$duration = 'P'. $duration_count . 'D';
+		elseif ( 'week' == $time_unit )
+			$duration = 'P' . $duration_count * 7 . 'D';
+		elseif ( 'month' == $time_unit )
+			$duration = 'P' . $duration_count . 'M';
+
+		$end_date = $start_date;
+		$end_date->add( new DateInterval( $duration ));
+
+		$booking_time = $product->get_meta( 'booking_time' );
+
+		$booking = array(
+			'start'	=>	$start_date->format( 'd/m/Y'),
+			'end'	=>	$end_date->format( 'd/m/Y' )
+		);
+
+		if ( $booking_time )
+			$booking_time[ $order_id ] = $booking;
+		else
+			$booking_time = array( $order_id => $booking );
+		
+
+		update_post_meta( $product->get_id(), 'booking_time', $booking_time );	
+	}
+    
+}
+
+
+
+
 ?>
