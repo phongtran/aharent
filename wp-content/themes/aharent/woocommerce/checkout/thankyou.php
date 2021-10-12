@@ -23,6 +23,8 @@ defined( 'ABSPATH' ) || exit;
 	<?php
 	if ( $order ) :
 
+		update_order_items_booking_time( $order->get_id() );
+
 		do_action( 'woocommerce_before_thankyou', $order->get_id() );
 		?>
 
