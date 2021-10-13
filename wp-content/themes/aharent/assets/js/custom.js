@@ -1,3 +1,5 @@
+//const { isDate } = require("util/types");
+
 (function($) {
 
 	$('input.number-spinner').inputSpinner();
@@ -31,11 +33,39 @@
 		format: dateFormat,
 		timepicker: false,
 		minDate: dateFromMinDate,
+		onGenerate: function( ct ) {
+			var dates = $(this).find('.xdsoft_date');	
+			for ( let i = 0; i < dates.length; i++) {
+				var year = $(dates[i]).attr('data-year'),
+					month =  parseInt( $(dates[i]).attr('data-month')) + 1,
+					day = $(dates[i]).attr('data-date'),
+					d = year + '/' + month + '/' + day;
+				
+				if ( !isDateAvailable(d) )
+					$(dates[i]).addClass('xdsoft_disabled');
+			}
+		}
 	}).change(function(e) {
 		
 		e.preventDefault();
 		getProductPrice();
 	});
+
+	function isDateAvailable( date ) {
+
+		var checkDate = new Date(date),
+			bookings = $('.booking-time');
+
+		for ( let i = 0; i < bookings.length; i++) {
+			var startDate = new Date($(bookings[i]).attr('start-date')),
+				endDate = new Date($(bookings[i]).attr('end-date'));
+
+			if ( startDate <= checkDate && checkDate <= endDate )
+				return false;
+		}
+
+		return true;
+	}
 
 
 	

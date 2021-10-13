@@ -126,11 +126,25 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 					if ( $hold_date )
 					{
 						$hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
-						$hold_date_str = $hold_date->format( 'Y.m.d' );
+						$date_now = new DateTime();
+						if ( $hold_date > $date_now )
+							$hold_date_str = $hold_date->format( 'Y.m.d' );
 					}
 				?>
 
-				<input type="text" id="date-from" name="_date_from" value="" date-hold-to="<?php echo $hold_date_str ?>" placeholder="Ngày" autocomplete="off" />
+				<?php $booking_time = $product->get_meta( 'booking_time' ); ?>
+				<?php if ( $booking_time ) : ?>
+					<?php foreach ( $booking_time as $key => $booking ): ?>
+						<?php
+							$start_date = DateTime::createFromFormat( 'd/m/Y', $booking['start'] );
+							$end_date = DateTime::createFromFormat( 'd/m/Y', $booking['end'] );
+						?>
+						<input type="hidden" class="booking-time" booking-id="<?php echo $key ?>" start-date="<?php echo $start_date->format('Y/m/d') ?>" end-date="<?php echo $end_date->format('Y/m/d') ?>" />
+					<?php endforeach ?>
+				<?php endif ?>
+
+
+				<input type="text" id="date-from" name="_date_from" value="" <?php if ($hold_date_str) echo 'date-hold-to="' . $hold_date_str . '"' ?> placeholder="Ngày" autocomplete="off" />
 
 			</div>
 		</div>

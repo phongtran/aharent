@@ -856,7 +856,7 @@ function update_order_items_booking_time( $order_id )
 		elseif ( 'month' == $time_unit )
 			$duration = 'P' . $duration_count . 'M';
 
-		$end_date = $start_date;
+		$end_date = clone $start_date;
 		$end_date->add( new DateInterval( $duration ));
 
 		$booking_time = $product->get_meta( 'booking_time' );
