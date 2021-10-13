@@ -878,6 +878,4 @@ function update_order_items_booking_time( $order_id )
 }
 
 
-
-
 ?>
