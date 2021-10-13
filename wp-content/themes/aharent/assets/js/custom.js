@@ -20,11 +20,17 @@
 
 	jQuery.datetimepicker.setLocale('vi');
 	
+	var dateFromMinDate = 0,
+		dateHoldTo = $('.add-to-cart :input[name="_date_from"]').attr('date-hold-to');
+
+	if ( undefined != dateHoldTo ) {
+		dateFromMinDate = dateHoldTo;
+	}
 
 	$('.add-to-cart :input[name="_date_from"]').datetimepicker({
 		format: dateFormat,
 		timepicker: false,
-		minDate: 0,
+		minDate: dateFromMinDate,
 	}).change(function(e) {
 		
 		e.preventDefault();
@@ -32,24 +38,7 @@
 	});
 
 
-	$('.add-to-cart :input[name="_date_to"]').datetimepicker({
-		format: dateFormat,
-		timepicker: false,
-		onShow:	function( ct ){
-			
-			var _dateFrom = $('.add-to-cart :input[name="_date_from"]').datetimepicker("getValue");
-
-			this.setOptions({
-				minDate: _dateFrom,
-			});
-
-		}
-	}).change(function(e) {
-		e.preventDefault();
-
-		getProductPrice();
-	});
-
+	
 	$('.add-to-cart button.aha-button').click(function(e) {
 
 		var quantity 		= $("#quantity-input").val(),

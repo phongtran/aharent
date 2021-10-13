@@ -121,11 +121,17 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 					</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
 				</span>
 
-				<input type="text" id="date-from" name="_date_from" value="" placeholder="Ngày" autocomplete="off" />
-				<!-- <input type="text" id="date-to" name="_date_to" value="" placeholder="Đến ngày" autocomplete="off" /> -->
+				<?php
+					$hold_date = $product->get_meta( 'date_hold_to' );
+					if ( $hold_date )
+					{
+						$hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
+						$hold_date_str = $hold_date->format( 'Y.m.d' );
+					}
+				?>
 
-					
-				
+				<input type="text" id="date-from" name="_date_from" value="" date-hold-to="<?php echo $hold_date_str ?>" placeholder="Ngày" autocomplete="off" />
+
 			</div>
 		</div>
 

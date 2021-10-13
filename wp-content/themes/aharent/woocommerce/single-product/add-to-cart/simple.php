@@ -84,8 +84,17 @@ if ( ! $product->is_purchasable() ) {
 							<?php echo $time_unit; ?>
 						</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
 					</span>
+
+					<?php
+						$hold_date = $product->get_meta( 'date_hold_to' );
+						if ( $hold_date )
+						{
+							$hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
+							$hold_date_str = $hold_date->format( 'Y.m.d' );
+						}
+					?>
 				
-					<input type="text" class="date" id="date-from" name="_date_from"  placeholder="Ngày" autocomplete="off" />
+					<input type="text" class="date" id="date-from" name="_date_from" date-hold-to="<?php echo $hold_date_str ?>"  placeholder="Ngày" autocomplete="off" />
 					<!-- <input type="text" id="date-to" name="_date_to" placeholder="Đến ngày" autocomplete="off" />	 -->
 
 
