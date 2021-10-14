@@ -103,9 +103,6 @@ function load_stylesheets()
 
 	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', false );
 	wp_enqueue_style( 'datetimepicker' );
-
-	// wp_register_style( 'tempus', 'https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@v6-alpha1/dist/css/tempus-dominus.css', '', '1', false );
-    // wp_enqueue_style( 'tempus' );
 }
 add_action( 'wp_enqueue_scripts', 'load_stylesheets' );
 
@@ -131,15 +128,41 @@ add_action( 'widgets_init', 'aharent_widgets_init' );
 
 
 // Load theme javascripts
-function load_scripts()
+function load_home_scripts()
+{
+	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', false );
+	wp_enqueue_script( 'bootstrap-bundle-js-min' );	
+
+
+	// Remove scripts
+	wp_dequeue_script( 'woo-viet-provinces-script' );
+	wp_dequeue_style( 'woo-viet-provinces-style' );
+
+	
+	wp_dequeue_script( 'jquery-migrate' );
+	wp_dequeue_script( 'jquery-ui-mouse' );
+	wp_dequeue_script( 'jquery-ui-sortable' );
+	wp_dequeue_script( 'jquery-blockui' );
+
+	wp_dequeue_script( 'dokan-util-helper' );
+
+	wp_dequeue_script( 'dokan-login-form-popup' );
+}
+add_action ('wp_enqueue_scripts', 'load_home_scripts', 99 );
+
+
+function load_cart_scripts()
+{
+	add_action( 'wp_enqueue_scripts', 'cart_scripts');
+}
+
+
+function cart_scripts()
 {
 	wp_enqueue_script( 'wp-util' );
 
 	wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/naf4lwctip9s1fh3vtm6ry1rlefmimd7wo585ayh82ybykap/tinymce/5/tinymce.min.js', array(), '1', true );
     wp_enqueue_script( 'tinymce-editor' );
-
-	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', false );
-	wp_enqueue_script( 'bootstrap-bundle-js-min' );	
 
 	wp_register_script( 'jquery-zoom-image-carousel-zoom', get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/scripts/zoom-image.js', array('jquery-core'), '1', true );
 	wp_enqueue_script( 'jquery-zoom-image-carousel-zoom' );
@@ -156,7 +179,6 @@ function load_scripts()
 	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array( 'jquery', 'datetimepicker' ), '1', true );
 	wp_enqueue_script( 'custom-script' );
 }
-add_action ('wp_enqueue_scripts', 'load_scripts' );
 
 
 
