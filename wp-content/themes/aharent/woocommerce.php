@@ -1,7 +1,5 @@
 <?php /* Template Name: Woocommerce Template */ ?>
 
-<?php load_cart_scripts(); ?>
-
 <?php get_header(); ?>
 
 

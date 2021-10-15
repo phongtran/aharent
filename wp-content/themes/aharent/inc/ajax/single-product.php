@@ -16,13 +16,14 @@ function get_product_price() {
 
     $new_price = get_new_price( $product_id, $date_from, $duration, $time_unit );
 
+    $new_price['price'] = $new_price['price'] - $new_price['deposit'];
+
     foreach ( $new_price as $key => $price )
         $new_price[$key] = wc_price( $price * $quantity );
 
     wp_send_json_success( array( 'data' => $new_price ) );
 
     die();
-    
 }
 add_action( 'wp_ajax_nopriv_get_product_price', 'get_product_price' );
 add_action( 'wp_ajax_get_product_price', 'get_product_price' );

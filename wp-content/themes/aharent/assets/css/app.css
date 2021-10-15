@@ -1670,7 +1670,7 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: #04b950;
   color: #ddf6e8;
   padding: 0 10px;

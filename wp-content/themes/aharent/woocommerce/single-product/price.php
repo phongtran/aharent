@@ -118,10 +118,26 @@ if ( !isset($prices) )
 		<span>Chọn thông tin bên dưới để tính giá thuê.</span>
 	</div>
 
+	<div class="price-item deposit">
+		
+		<div class="price-item-title">
+			<span>Phí trả trước</span>
+			<div class="loading-price">
+				<div class="loading-icon">
+					<img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="price-item-value">
+			-
+		</div>
+	</div>
+
 	<div class="price-item">
 		
 		<div class="price-item-title">
-			<span>Giá thuê</span>
+			<span>Thanh toán khi nhận hàng</span>
 			<div class="loading-price">
 				<div class="loading-icon">
 					<img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
@@ -157,21 +173,7 @@ if ( !isset($prices) )
 	<?php endif ?>
 
 
-	<div class="price-item deposit">
-		
-		<div class="price-item-title">
-			<span>Phí trả trước</span>
-			<div class="loading-price">
-				<div class="loading-icon">
-					<img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
-				</div>
-			</div>
-		</div>
-		
-		<div class="price-item-value">
-			-
-		</div>
-	</div>
+	
 
 </div>
 <?php endif ?>
