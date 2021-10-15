@@ -203,8 +203,6 @@ ul.products {
 
     a.product-link {
         margin: 0 10px 20px 0 !important;
-
-        max-width: 18%;
         width: 18%;
         min-width: 160px;
 
@@ -253,6 +251,14 @@ ul.products {
     
     
 
+}
+
+.shop-product-listing {
+    ul.products {
+        a.product-link {
+            width: 23%;
+        }
+    }
 }
 
 .related {
