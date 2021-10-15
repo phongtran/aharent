@@ -96,6 +96,23 @@
 
                 position: relative;
 
+
+                .radio-options {
+                    
+                    .radio-option-row {
+                        display: flex;
+                        align-items: center;
+
+                        input[type=radio] {
+                            margin-right: 10px;
+                        }
+
+                        label {
+                            width: 85%;
+                        }
+                    }
+                }
+
                 .button-remove {
                     display: flex;
                     align-items: center;

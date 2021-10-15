@@ -230,14 +230,16 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 
 									<div class="price-section">
-										<div class="rental-price">
-											<span class="label">Giá thuê</span>
-											<h3 class="price"><?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] ); ?></h3>
-										</div>
+										
 
 										<div class="deposit-price">
 											<span class="label"><?php echo __( 'Deposit', 'woocommerce' ) ?></span>
 											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity']); ?></h2>
+										</div>
+
+										<div class="rental-price">
+											<span class="label">Trả sau</span>
+											<h3 class="price"><?php echo wc_price( ( $cart_item['rental_price'] - $cart_item['deposit']) * $cart_item['quantity'] ); ?></h3>
 										</div>
 										
 										

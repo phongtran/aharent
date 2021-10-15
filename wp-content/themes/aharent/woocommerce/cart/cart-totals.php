@@ -28,12 +28,12 @@ defined( 'ABSPATH' ) || exit;
 
 	<table cellspacing="0" class="shop_table shop_table_responsive">
 
-		<tr class="cart-subtotal">
+		<!-- <tr class="cart-subtotal">
 			<th>
 				<p><?php esc_html_e( 'Price', 'woocommerce' ); ?></p>
 			</th>
 			<td data-title="<?php esc_attr_e( 'Phí thuê', 'woocommerce' ) ?>"><?php $total_rental = calculate_cart_total_rental_fee(); echo wc_price( $total_rental) ?></td>
-		</tr>
+		</tr> -->
 
 		<tr class="cart-subtotal">
 			<th>
@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<tr class="cart-subtotal">
 			<th>
-				<p><?php esc_html_e( 'Còn lại', 'woocommerce' ); ?></p>
+				<p><?php esc_html_e( 'Phí trả sau', 'woocommerce' ); ?></p>
 				<p class="note"><?php esc_html_e( 'Thanh toán khi nhận hàng', 'woocommerce' ); ?></p>
 			</th>
 			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php echo wc_price( $total_rental - $total_deposit ); ?></td>

@@ -113,16 +113,30 @@ function basic_scripts()
 	wp_register_style ( 'bootstrap', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap.min.css', '', '5.0.2', false );
     wp_enqueue_style( 'bootstrap' );
 
-	wp_register_style( 'app', get_template_directory_uri() . '/assets/css/app.css', array('bootstrap'), '1', 'all' );
+	wp_register_style( 'app', get_template_directory_uri() . '/assets/css/app.min.css', array('bootstrap'), '1', 'all' );
     wp_enqueue_style( 'app' );
 	
 
 	// JS
-	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', true );
-	wp_enqueue_script( 'bootstrap-bundle-js-min' );	
 
 }
 add_action( 'wp_enqueue_scripts', 'basic_scripts' );
+
+
+
+function remove_jquery_migrate( $scripts )
+{
+	if ( !is_admin() && isset( $scripts->registered['jquery'] ) )
+	{
+		$script = $scripts->registered['jquery'];
+		if ( $script->deps )
+		{
+			// Check whether the script has any dependencies
+			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
+  		}
+  	}
+}
+add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 
 // Load theme javascripts
@@ -140,6 +154,7 @@ function home_scripts()
 	wp_dequeue_style( 'wc-block-vendors-style' );
 	wp_dequeue_style( 'wc-block-style' );
 	wp_dequeue_style( 'dokan-fontawesome' );
+	wp_dequeue_style( 'dokan-style');
 	wp_dequeue_style( 'wapf-frontend-css' );
 
 	// Remove scripts
@@ -153,12 +168,16 @@ function home_scripts()
 	wp_dequeue_script( 'jquery-blockui' );
 	wp_dequeue_script( 'woocommerce' );
 	wp_dequeue_script( 'wc-cart-fragments' );
-	wp_dequeue_script( 'wp-embed' );
+	wp_deregister_script( 'wp-embed' );
 
 	wp_dequeue_script( 'dokan-util-helper' );
 	wp_dequeue_script( 'cnss_js' );
 
 	wp_dequeue_script( 'dokan-login-form-popup' );
+
+	// Move jquery to footer
+	wp_dequeue_script( 'jquery' );
+	wp_deregister_script('jquery' );
 }
 
 function load_home_scripts()
@@ -184,6 +203,9 @@ function cart_scripts()
 
 	// JS
 	wp_enqueue_script( 'wp-util' );
+
+	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', true );
+	wp_enqueue_script( 'bootstrap-bundle-js-min' );	
 
 	wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/naf4lwctip9s1fh3vtm6ry1rlefmimd7wo585ayh82ybykap/tinymce/5/tinymce.min.js', array(), '1', true );
     wp_enqueue_script( 'tinymce-editor' );

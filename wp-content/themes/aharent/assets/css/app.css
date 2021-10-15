@@ -1092,6 +1092,23 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
   position: relative;
 }
 
+.aha-cart .cart-step .cart-step-content .cart-item .radio-options .radio-option-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .radio-options .radio-option-row input[type=radio] {
+  margin-right: 10px;
+}
+
+.aha-cart .cart-step .cart-step-content .cart-item .radio-options .radio-option-row label {
+  width: 85%;
+}
+
 .aha-cart .cart-step .cart-step-content .cart-item .button-remove {
   display: -webkit-box;
   display: -ms-flexbox;
