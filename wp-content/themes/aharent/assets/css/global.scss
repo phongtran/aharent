@@ -39,6 +39,8 @@ html {
             max-width: 1240px;
             margin-left: auto;
             margin-right: auto;
+
+            
         }
     }
 
@@ -199,11 +201,11 @@ ul.products {
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     a.product-link {
-        margin: 0 10px 20px 0 !important;
-        width: 18%;
+        margin-bottom: 20px !important;
+        width: 16%;
         min-width: 160px;
 
         li.product, li.product-item {
@@ -234,8 +236,8 @@ ul.products {
                 
                     
                 img {
-                    width: 220px;
-                    height: 220px;
+                    width: 180px;
+                    height: 180px;
                     object-fit: cover;
                 }
                 
@@ -256,7 +258,18 @@ ul.products {
 .shop-product-listing {
     ul.products {
         a.product-link {
-            width: 23%;
+            width: 19%;
+
+            li.product {
+
+                .thumbnail {
+
+                    img {
+                        width: 180px;
+                        height: 180px;
+                    }
+                }
+            }
         }
     }
 }

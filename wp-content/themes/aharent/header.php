@@ -168,7 +168,7 @@
             </div>
         
                 
-            <div class="desktop-header container h-100 d-flex align-items-center">
+            <div class="desktop-header container h-100">
                 <a class="logo-link" href="/">
                     <div class="logo col-sm-1"></div>
                 </a>
