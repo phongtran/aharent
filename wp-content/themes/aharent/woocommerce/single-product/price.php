@@ -44,7 +44,7 @@ if ( !isset($prices) )
 			<table>
 				<thead>
 					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
-					<th><?php echo __( 'Price', 'woocommerce' ) ?></th>
+					<th><?php echo __( 'Giá thuê', 'woocommerce' ) ?></th>
 					<!-- <th><?php echo __( 'Deposit', 'woocommerce' ) ?></th> -->
 				</thead>
 				<tbody>

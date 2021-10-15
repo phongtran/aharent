@@ -33,7 +33,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		</div>
 
 		<div class="product-name">
-			<h2><?php echo $product->name ?></h2>
+			<h2><?php echo wp_trim_words( $product->name, 6 ); ?></h2>
 		</div>
 
 		<div class="price">
