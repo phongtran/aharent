@@ -471,9 +471,9 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
         }
 
         padding: 15px 20px;
-
-        border-left: 5px solid $main-button-color !important;
+        
         border: 0;
+        border-left: 5px solid $main-button-color;
         margin: 0;
         background-color: $bright-bg-color;
         border-radius: 5px;
@@ -493,10 +493,12 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
         }
 
         .options {
-            margin: 10px 0;
+            display: flex;
+            justify-content: center;
 
             @media (max-width: 400px) {
                 width: 100%;
+                display: inline-block;
             }
             
         }
@@ -506,8 +508,9 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
             padding: 5px 10px;
             border-radius: 5px;
             align-self: flex-end;
-            margin-top: 10px;
             float: none;
+
+            margin-top: 10px;
 
             &.close-message {
                 margin-left: 10px;
