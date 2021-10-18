@@ -125,6 +125,11 @@
 	}
 
 
+	$('.close-message').click( function(e) {
+		e.preventDefault();
+		console.log( 'hi' );
+		$('.woocommerce-message').hide();
+	});
 
 
 	function getProductPrice() {

@@ -1,13 +1,72 @@
 .shop-container {
     
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
+    flex-wrap: wrap;    
+    position: relative;
 
     .shop-sidebar {
-        min-width: 200px;
-        width: 15%;
+
+        @media (max-width: 1000px) {
+
+            &:hover {
+                .sidebar-content {
+                    display: block;
+                }
+            }
+
+            &.fixed {
+                width: 100%;
+                position: fixed;
+                top: 100px;
+                left: 0;
+                z-index: 100;
+
+                margin: 0;
+                padding: 0 10px 10px 10px;
+
+                background-color: $bg-color;
+                border-radius: 5px;
+                box-shadow: 0px 1px 5px -2px $shadow-color;
+
+                .title {
+                    margin: 0;
+                    width: 180px;
+                }
+                
+            }
+
+            .title {
+                background-color: $main-button-color;
+                border: 1px solid $form-border-color;
+                border-radius: 5px;
+
+                padding: 10px;
+
+                h3 {
+                    color: $bright-text-color;
+                }
+            }
+
+            .sidebar-content {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100%;
+                z-index: 100;
+
+                display: none;
+
+                background-color: $bg-color;
+                padding: 20px;
+                border: 1px solid $form-border-color;
+                border-radius: 5px;
+                box-shadow: 1px 1px 5px 1px $shadow-color;
+                
+            }
+        }
+
+
+    
         margin-right: 20px;
         
         .title {
@@ -40,7 +99,7 @@
         
         width: 80%;
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
             width: 100%;
         }
     }

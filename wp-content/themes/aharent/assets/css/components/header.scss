@@ -28,6 +28,22 @@ $header-text-color: $text-color;
             margin: 10px 0;
 
             justify-content: space-between;
+
+            &.fixed {
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: $main-color;
+                border-radius: 5px;
+                box-shadow: 1px 1px 5px 1px $shadow-color;
+
+                padding: 10px;
+                margin: 0;
+
+                .woocommerce {
+                    margin: 0;
+                }
+            }
         }
 
         .logo-link, .cart, .product-categories {
@@ -58,7 +74,7 @@ header {
 
     position: relative;
 
-    z-index: 1000;
+    z-index: 50;
 
 
     .mobile-header {
@@ -71,6 +87,18 @@ header {
     .desktop-header {
         display: flex;
         align-items: center;
+        height: 100%;
+
+
+        &.fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: auto !important;
+
+            padding: 10px;
+            background-color: $main-color;
+        }
     }
     
 
@@ -78,12 +106,22 @@ header {
 
     .container {
 
+        a.logo-link {
+            padding: 0;
+        }
+
         .desktop-search {
             width: 45%;
         }
         
 
         .product-categories {
+
+            @media (max-width: 600px) {
+                margin: 0;
+                padding: 0;
+            }
+
             height: 100%;
             margin-left: 20px;
 
@@ -248,6 +286,11 @@ header {
 
         .cart {
             margin-left: 20px;
+
+            @media (max-width: 600px) {
+                margin: 0;
+                padding: 0;
+            }
             
 
             img {
