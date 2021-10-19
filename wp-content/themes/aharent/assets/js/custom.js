@@ -129,6 +129,7 @@
 		e.preventDefault();
 		console.log( 'hi' );
 		$('.woocommerce-message').hide();
+		$('.message-wrapper').hide();
 	});
 
 

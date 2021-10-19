@@ -263,6 +263,29 @@
                         <?php endif ?>
                     </span>
 
+                   
+                    <?php $notices = wc_get_notices( 'success' ); ?>
+
+                    <?php foreach ( $notices as $notice ) : ?>
+                        <?php $message = $notice['notice']; ?>
+                            <?php if ( strpos( $message, 'close-message button wc-forward' ) ) : ?>
+                                <div class="message-wrapper">
+                                    <div class="arrow-up"></div>
+                                    <div class="add-to-cart-message">    
+                                        <?php echo $message; ?>
+
+                                        <script type="text/javascript">
+                                            (function($) {
+                                                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                                            })(jQuery)
+                                        </script>
+                                    </div>
+                                </div>
+
+                            <?php endif ?>
+                    <?php endforeach ?>
+                        
+
                     
                 </div>
                 

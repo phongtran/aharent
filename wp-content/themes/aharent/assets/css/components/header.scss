@@ -287,10 +287,69 @@ header {
         .cart {
             margin-left: 20px;
 
+            position: relative;
+
             @media (max-width: 600px) {
                 margin: 0;
                 padding: 0;
             }
+
+            .message-wrapper {
+                position: absolute;
+                top: 45px;
+                left: -100px;
+                width: 250px;
+                z-index: 150;
+
+                @media (max-width: 1000px) {
+                    display: none;
+                }
+
+                .arrow-up {
+                    position: relative;
+                    z-index: 10;
+                    width: 0; 
+                    height: 0; 
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    
+                    border-bottom: 5px solid $bg-color;
+                    margin-left: 115px;
+                    box-shadow: 1px 1px -1px 1px $shadow-color;
+                }
+
+                .add-to-cart-message {
+                    top: -1px;
+                    position: relative;
+
+                    z-index: 5;
+                
+                    background-color: $bg-color;
+                    border: 1px solid $form-border-color;
+                    border-radius: 5px;
+                    box-shadow: 1px 1px 5px 1px $shadow-color;
+                    
+                    padding: 10px;
+    
+                    a.button.wc-forward {
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        align-self: flex-end;
+                        float: none;
+    
+                        width: 100%;
+                        display: block;
+                        margin-top: 10px;
+                        text-align: center;
+    
+                    }
+    
+                    
+                }
+
+            }
+
+            
             
 
             img {

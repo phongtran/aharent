@@ -467,8 +467,11 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
             width: calc( 100vw - 40px);
 
+            display: flex;
 
         }
+
+        display: none;
 
         padding: 15px 20px;
         
@@ -478,7 +481,6 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
         background-color: $bright-bg-color;
         border-radius: 5px;
 
-        display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
