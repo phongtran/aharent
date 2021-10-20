@@ -89,7 +89,6 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 		<div class="form-row">
 			<div class="form-label">
 				<label>Thời gian thuê:</label>
-				<div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
 			</div>
 
 			<div class="form-input time-period">
@@ -118,8 +117,18 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 							echo $time_unit;
 
 						?>
-					</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+					</span>, 
 				</span>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-label">
+				<label>Từ <?php echo __( 'day', 'woocommerce' ); ?>:</label>
+				<div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
+			</div>
+
+			<div class="form-input">
 
 				<?php
 					$hold_date = $product->get_meta( 'date_hold_to' );
@@ -143,8 +152,9 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 					<?php endforeach ?>
 				<?php endif ?>
 
-
+				
 				<input type="text" id="date-from" name="_date_from" value="" <?php if ($hold_date_str) echo 'date-hold-to="' . $hold_date_str . '"' ?> placeholder="Ngày" autocomplete="off" />
+				
 
 			</div>
 		</div>

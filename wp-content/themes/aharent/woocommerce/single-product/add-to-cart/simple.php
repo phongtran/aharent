@@ -60,7 +60,6 @@ if ( ! $product->is_purchasable() ) {
 		<div class="form-row">
 			<div class="form-label">
 				<label>Thời gian thuê:</label>
-				<div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
 			</div>
 
 			<div class="form-input time-period">
@@ -82,33 +81,46 @@ if ( ! $product->is_purchasable() ) {
 					<span class="time-delimiter">
 						<span class="time-unit">
 							<?php echo $time_unit; ?>
-						</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+						</span>, 
 					</span>
-
-					<?php
-						$hold_date = $product->get_meta( 'date_hold_to' );
-						if ( $hold_date )
-						{
-							$hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
-							$date_now = new DateTime();
-							if ( $hold_date > $date_now )
-								$hold_date_str = $hold_date->format( 'Y.m.d' );
-						}
-					?>
-
-					<?php $booking_time = $product->get_meta( 'booking_time' ); ?>
-					<?php if ( $booking_time ) : ?>
-						<?php foreach ( $booking_time as $key => $booking ): ?>
-							<?php
-								$start_date = DateTime::createFromFormat( 'd/m/Y', $booking['start'] );
-								$end_date = DateTime::createFromFormat( 'd/m/Y', $booking['end'] );
-							?>
-							<input type="hidden" class="booking-time" booking-id="<?php echo $key ?>" start-date="<?php echo $start_date->format('Y/m/d') ?>" end-date="<?php echo $end_date->format('Y/m/d') ?>" />
-						<?php endforeach ?>
-					<?php endif ?>
 				
-					<input type="text" class="date" id="date-from" name="_date_from" <?php if ($hold_date_str) echo 'date-hold-to="' . $hold_date_str . '"' ?>  placeholder="Ngày" autocomplete="off" />
-					<!-- <input type="text" id="date-to" name="_date_to" placeholder="Đến ngày" autocomplete="off" />	 -->
+			</div>
+		</div>
+
+
+
+		<div class="form-row">
+			<div class="form-label">
+				<label>Từ <?php echo __( 'day', 'woocommerce' ); ?>:</label>
+				<div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
+			</div>
+
+			<div class="form-input">
+
+				<?php
+					$hold_date = $product->get_meta( 'date_hold_to' );
+					if ( $hold_date )
+					{
+						$hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
+						$date_now = new DateTime();
+						if ( $hold_date > $date_now )
+							$hold_date_str = $hold_date->format( 'Y.m.d' );
+					}
+				?>
+
+				<?php $booking_time = $product->get_meta( 'booking_time' ); ?>
+				<?php if ( $booking_time ) : ?>
+					<?php foreach ( $booking_time as $key => $booking ): ?>
+						<?php
+							$start_date = DateTime::createFromFormat( 'd/m/Y', $booking['start'] );
+							$end_date = DateTime::createFromFormat( 'd/m/Y', $booking['end'] );
+						?>
+						<input type="hidden" class="booking-time" booking-id="<?php echo $key ?>" start-date="<?php echo $start_date->format('Y/m/d') ?>" end-date="<?php echo $end_date->format('Y/m/d') ?>" />
+					<?php endforeach ?>
+				<?php endif ?>
+			
+				<input type="text" class="date" id="date-from" name="_date_from" <?php if ($hold_date_str) echo 'date-hold-to="' . $hold_date_str . '"' ?>  placeholder="Ngày" autocomplete="off" />
+				<!-- <input type="text" id="date-to" name="_date_to" placeholder="Đến ngày" autocomplete="off" />	 -->
 
 
 				
