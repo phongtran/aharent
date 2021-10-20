@@ -28,6 +28,11 @@
 
         .swiper {
 
+            .swiper-wrapper {
+                display: flex;
+                align-items: center;
+            }
+
             img {
                 width: 100%;
                 object-fit: contain;
