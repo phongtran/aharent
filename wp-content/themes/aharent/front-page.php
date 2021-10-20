@@ -1,5 +1,3 @@
-<?php load_home_scripts(); ?>
-
 <?php get_header(); ?>
 
 

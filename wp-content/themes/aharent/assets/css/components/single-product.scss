@@ -11,8 +11,10 @@
     .product-image-gallery {
         
         width: 48%;
-
         padding: 20px;
+
+        display: flex;
+        align-items: center;
 
         @media (max-width: 600px) {
             width: 100%;
@@ -21,6 +23,15 @@
 
         @media (max-width: 900px) {
             width: 100%;
+        }
+
+
+        .swiper {
+
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
         }
 
         

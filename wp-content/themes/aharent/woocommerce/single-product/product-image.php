@@ -60,38 +60,70 @@ $attachment_ids = $product->get_gallery_image_ids();
 <!-- Primary carousel image -->
 
 <div class="product-image-gallery">
+	<!-- Slider main container -->
+	<div class="swiper">
+		<!-- Additional required wrapper -->
+		<div class="swiper-wrapper">
+			<!-- Slides -->
+			<div class="swiper-slide"><img src="<?php echo wp_get_attachment_url( $post_thumbnail_id ); ?>" class="" alt=""></div>
+			
+			<?php if ( $attachment_ids && $product->get_image_id() ) : ?>
+				<?php foreach ( $attachment_ids as $attachment_id ) : ?>
+			
+					<div class="swiper-slide">
+						<img src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" class="" alt="" />
+					</div>
 
-	<div class="show" href="<?php echo wp_get_attachment_url( $post_thumbnail_id ); ?>">
-		<img src="<?php echo wp_get_attachment_url( $post_thumbnail_id ); ?>" id="show-img">
+				<?php endforeach ?>
+			<?php endif ?>
+		</div>
+		
+
+		<!-- If we need navigation buttons -->
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+
+		<!-- If we need pagination -->
+		<div class="swiper-pagination"></div>	
+
+	
 	</div>
+</div>
+
+
+<!-- <div class="product-image-gallery">
+
+	<div class="show" href="<?php //echo wp_get_attachment_url( $post_thumbnail_id ); ?>">
+		<img src="<?php // echo wp_get_attachment_url( $post_thumbnail_id ); ?>" id="show-img">
+	</div> -->
 
 	<!-- Secondary carousel image thumbnail gallery -->
 
-	<div class="scroll-wrapper">
+	<!-- <div class="scroll-wrapper">
 		<div class="small-img">
 
-			<img src="<?php echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-left" alt="" id="prev-img" />
+			<img src="<?php // echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-left" alt="" id="prev-img" />
 			
 			<div class="small-container">
 				<div id="small-img-roll">
 					
-					<img src="<?php echo wp_get_attachment_url( $post_thumbnail_id ); ?>" class="show-small-img" alt="">
+					<img src="<?php // echo wp_get_attachment_url( $post_thumbnail_id ); ?>" class="show-small-img" alt="">
 
 					<?php 
-						if ( $attachment_ids && $product->get_image_id() ) :
-							foreach ( $attachment_ids as $attachment_id ) : 
+						// if ( $attachment_ids && $product->get_image_id() ) :
+						// 	foreach ( $attachment_ids as $attachment_id ) : 
 					?>
 					
-					<img src="<?php echo wp_get_attachment_url( $attachment_id ); ?>" class="show-small-img" alt="" />
+					<img src="<?php // echo wp_get_attachment_url( $attachment_id ); ?>" class="show-small-img" alt="" />
 
-					<?php endforeach ?>
-					<?php endif ?>
+					<?php // endforeach ?>
+					<?php // endif ?>
 				
 				</div>
 			</div>
 			
-			<img src="<?php echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-right" alt="" id="next-img">
+			<img src="<?php // echo get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/images/next-icon.png' ?>" class="icon-right" alt="" id="next-img">
 
 		</div>
 	</div>
-</div>
+</div> -->
