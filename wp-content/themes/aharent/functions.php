@@ -266,12 +266,6 @@ function cart_scripts()
 	// JS
 	wp_enqueue_script( 'wp-util' );
 
-	// wp_register_script( 'tinymce-cdn', 'https://cdn.tiny.cloud/1/naf4lwctip9s1fh3vtm6ry1rlefmimd7wo585ayh82ybykap/tinymce/5/tinymce.min.js', array(), '1', true );
-    // wp_enqueue_script( 'tinymce-cdn' );
-
-	// wp_register_script( 'rich-editor', get_template_directory_uri() . '/assets/js/rich-editor.js', array(), '1', true );
-    // wp_enqueue_script( 'rich-editor' );
-
 	wp_register_style ( 'bootstrap-utilities', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap-utilities.min.css', '', '5.0.2', true );
     wp_enqueue_style( 'bootstrap-utilities' );
 
@@ -291,6 +285,30 @@ function cart_scripts()
 	wp_enqueue_script( 'custom-script' );
 }
 
+
+add_action( 'dokan_dashboard_wrap_start', 'load_dokan_style_and_script' );
+function load_dokan_style_and_script()
+{
+	wp_enqueue_style( 'dokan-fontawesome' );
+	wp_enqueue_style( 'dokan-style');
+	wp_enqueue_style( 'dokan-select2-css');
+	
+	
+	// JS
+	wp_enqueue_script( 'dokan-util-helper' );
+	wp_enqueue_script( 'dokan-tooltip' );
+	wp_enqueue_script( 'dokan-form-validate' );
+	wp_enqueue_script( 'speaking-url' );
+	wp_enqueue_script( 'dokan-select2-js' );
+
+	wp_enqueue_script( 'dokan-login-form-popup' );
+
+	wp_register_script( 'tinymce-cdn', 'https://cdn.tiny.cloud/1/naf4lwctip9s1fh3vtm6ry1rlefmimd7wo585ayh82ybykap/tinymce/5/tinymce.min.js', array(), '1', true );
+    wp_enqueue_script( 'tinymce-cdn' );
+
+	wp_register_script( 'rich-editor', get_template_directory_uri() . '/assets/js/rich-editor.js', array(), '1', true );
+    wp_enqueue_script( 'rich-editor' );
+}
 
 
 function wc_set_up_breadcrumb( $defaults )
