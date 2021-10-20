@@ -29,6 +29,24 @@ footer {
     .social-links {
         display: flex;
         justify-content: center;
+
+        ul {
+            width: 92px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+
+            list-style-type: none;
+
+            li {
+                img {
+                    width: 24px;
+                    height: 24px;
+                    object-fit: contain;
+                }
+            }
+        }
     }
 
     .footer-col {

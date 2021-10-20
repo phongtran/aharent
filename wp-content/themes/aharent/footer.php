@@ -56,8 +56,25 @@
                 <div class="footer-col">
                     <h4 class="text-center">KẾT NỐI VỚI CHÚNG TÔI</h4>
                     <div class="social-links">
+
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com/aharentvn"><img src="<?php echo get_template_directory_uri() . '/assets/img/facebook.png' ?>" /></a>
+                                </li>
+
+                                <li>
+                                    <a href="https://www.instagram.com/aharentvn/"><img src="<?php echo get_template_directory_uri() . '/assets/img/instagram.png' ?>" /></a>
+                                </li>
+
+                                <li>
+                                    <a href="https://zalo.me/2636303008534069878"><img src="<?php echo get_template_directory_uri() . '/assets/img/zalo.png' ?>" /></a>
+                                </li>
+                                
+
+                            </ul>
+
                         
-                        <?php dynamic_sidebar( 'footer-social-links' ); ?>
+                        <?php // dynamic_sidebar( 'footer-social-links' ); ?>
 
                     </div>
                 </div>

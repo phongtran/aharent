@@ -4,10 +4,6 @@
 
 	$('input.number-spinner').inputSpinner();
 
-	tinymce.init({
-		selector: '.tinymce-form'
-	});
-
 
     $(".add-to-cart input.number-spinner").change(function(e) {
 		getProductPrice();
