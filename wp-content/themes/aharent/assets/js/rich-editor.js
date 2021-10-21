@@ -1,7 +1,5 @@
-(function($) {
+
 
     tinymce.init({
-		selector: '.tinymce-form'
+		selector: 'textarea.tinymce-form'
 	});
-
-})(jQuery)

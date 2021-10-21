@@ -61,11 +61,7 @@ add_filter( 'dokan_dashboard_settings_helper_text', 'prefix_set_rental_terms_tab
  *
  * @param array $query_vars WP query vars
  */
-function prefix_output_help_tab_content( $query_vars ) {
-
-    wp_register_script( 'tinymce-editor', 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js', array(), '1', false );
-    wp_enqueue_script( 'tinymce-editor' );
-    
+function prefix_output_help_tab_content( $query_vars ) {    
     if ( isset( $query_vars['settings'] ) && 'rental-terms' === $query_vars['settings'] ) {
         if ( ! current_user_can( 'dokan_view_store_settings_menu' ) ) {
             dokan_get_template_part ('global/dokan-error', '', [
@@ -120,11 +116,7 @@ function prefix_output_help_tab_content( $query_vars ) {
                     margin-bottom: 0;
                 }
             </style>
-            <script type="text/javascript">
-                (function($) {
-                    
-                })(jQuery)
-            </script>
+    
             <?php
         }
     }

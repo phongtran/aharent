@@ -112,12 +112,12 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 // add async and defer attributes to enqueued scripts
 function attribute_script_loader_tag( $tag, $handle, $src )
 {
-	if ( 'tinymce-editor' == $handle )
-		$tag = str_replace(' src', ' async src', $tag);	
-	elseif ( 'jquery-core' == $handle )
-		$tag = str_replace(' src', ' src', $tag);
-	else
-		$tag = str_replace(' src', ' defer src', $tag);	
+	// if ( 'tinymce-editor' == $handle )
+	// 	$tag = str_replace(' src', ' async src', $tag);	
+	// elseif ( 'jquery-core' == $handle )
+	// 	$tag = str_replace(' src', ' src', $tag);
+	// else
+	// 	$tag = str_replace(' src', ' defer src', $tag);	
 	
 	return $tag;
 }
@@ -134,47 +134,17 @@ function basic_scripts()
 	wp_register_style( 'app', get_template_directory_uri() . '/assets/css/app.min.css', array('bootstrap'), '1', 'all' );
     wp_enqueue_style( 'app' );
 
-	wp_dequeue_style( 'dashicons' );
-	wp_dequeue_style( 'cnss_font_awesome_css' );
-	wp_dequeue_style( 'cnss_font_awesome_v4_shims' );
-	wp_dequeue_style( 'cnss_css' );
-	wp_dequeue_style( 'font-awesome' );
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'wc-block-vendors-style' );
-	wp_dequeue_style( 'wc-block-style' );
-	wp_dequeue_style( 'woocommerce-smallscreen' );
 	
-
-	wp_dequeue_style( 'dokan-fontawesome' );
-	wp_dequeue_style( 'dokan-style');
-	wp_dequeue_style( 'dokan-select2-css');
-	
-
 	// JS
-
 	wp_register_script( 'header', get_template_directory_uri() . '/assets/js/header.js', array(), 1, true ); 
 	wp_enqueue_script( 'header' );
 
-	wp_dequeue_script( 'woocommerce' );
 
-	wp_deregister_script( 'imgareaselect' );
-
-	wp_dequeue_script( 'woo-viet-provinces-script' );
-
-	wp_dequeue_script( 'dokan-util-helper' );
-	wp_dequeue_script( 'dokan-tooltip' );
-	wp_deregister_script( 'dokan-form-validate' );
-	wp_deregister_script( 'speaking-url' );
-	wp_deregister_script( 'dokan-select2-js' );
-
-	wp_dequeue_script( 'dokan-login-form-popup' );
 
 	if ( !is_front_page() )
 	{
 		wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', true );
 		wp_enqueue_script( 'bootstrap-bundle-js-min' );
-
-		
 
 		if ( is_single() )
 		{
@@ -194,10 +164,41 @@ function basic_scripts()
 
 		load_cart_scripts();
 
+		
 	}
 	else // Landing page script
 	{
-		load_home_scripts();
+
+		wp_dequeue_style( 'dashicons' );
+		wp_dequeue_style( 'wp-block-library' );
+		wp_dequeue_style( 'wc-block-vendors-style' );
+		wp_dequeue_style( 'wc-block-style' );
+		wp_dequeue_style( 'berocket_aapf_widget-style' );
+		wp_dequeue_style( 'wapf-frontend-css' );
+
+		wp_dequeue_style( 'woocommerce-layout' );
+		wp_dequeue_style( 'woocommerce-general' );
+
+		wp_dequeue_style( 'woo-viet-provinces-style' );
+
+		wp_dequeue_style( 'font-awesome' );
+
+		wp_dequeue_style( 'dokan-style' );
+		wp_dequeue_style( 'dokan-fontawesome' );
+		
+		
+		// JS
+		wp_dequeue_script( 'woocommerce' );
+
+		wp_dequeue_script( 'wc-cart-fragments' );
+		wp_dequeue_script( 'wc-single-product' );
+
+		wp_dequeue_script( 'dokan-util-helper' );
+		wp_deregister_script( 'dokan-popup' );
+
+		wp_dequeue_script( 'woo-viet-provinces-script' );
+
+
 	}
 
 }
@@ -220,33 +221,6 @@ function remove_jquery_migrate( $scripts )
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 
-// Load theme javascripts
-function home_scripts()
-{
-	// CSS
-	wp_dequeue_style( 'berocket_aapf_widget-style' );
-	wp_dequeue_style( 'wapf-frontend-css' );
-
-	wp_dequeue_style( 'woocommerce-layout' );
-	wp_dequeue_style( 'woocommerce-general' );
-
-	wp_dequeue_style( 'woo-viet-provinces-style' );
-	
-	
-	
-	// JS
-	wp_dequeue_script( 'woocommerce' );
-
-	wp_dequeue_script( 'wc-cart-fragments' );
-	wp_dequeue_script( 'wc-single-product' );
-	
-}
-
-function load_home_scripts()
-{
-	add_action ( 'wp_enqueue_scripts', 'home_scripts', 210 );
-}
-
 function load_cart_scripts()
 {
 	add_action( 'wp_enqueue_scripts', 'cart_scripts', 210 );
@@ -256,9 +230,6 @@ function load_cart_scripts()
 function cart_scripts()
 {
 	// Css
-	// wp_register_style( 'jquery-zoom-image-carousel-style', get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/style.css', '', '1', false );
-    // wp_enqueue_style( 'jquery-zoom-image-carousel-style' );
-
 	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', false );
 	wp_enqueue_style( 'datetimepicker' );
 	
@@ -269,11 +240,6 @@ function cart_scripts()
 	wp_register_style ( 'bootstrap-utilities', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap-utilities.min.css', '', '5.0.2', true );
     wp_enqueue_style( 'bootstrap-utilities' );
 
-	// wp_register_script( 'jquery-zoom-image-carousel-zoom', get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/scripts/zoom-image.js', array(), '1', true );
-	// wp_enqueue_script( 'jquery-zoom-image-carousel-zoom' );
-
-	// wp_register_script( 'jquery-zoom-image-carousel-main', get_template_directory_uri() . '/assets/vendors/jquery-zoom-image-carousel/scripts/main.js', array('jquery-zoom-image-carousel-zoom'), '1', true );
-	// wp_enqueue_script( 'jquery-zoom-image-carousel-main' );
 
 	wp_register_script( 'bootstrap-input-spinner', get_template_directory_uri() . '/assets/vendors/bootstrap-input-spinner/src/bootstrap-input-spinner.js', array(), '1', true );
 	wp_enqueue_script( 'bootstrap-input-spinner' );
@@ -289,25 +255,15 @@ function cart_scripts()
 add_action( 'dokan_dashboard_wrap_start', 'load_dokan_style_and_script' );
 function load_dokan_style_and_script()
 {
-	wp_enqueue_style( 'dokan-fontawesome' );
-	wp_enqueue_style( 'dokan-style');
-	wp_enqueue_style( 'dokan-select2-css');
+	// CSS
 	
 	
 	// JS
-	wp_enqueue_script( 'dokan-util-helper' );
-	wp_enqueue_script( 'dokan-tooltip' );
-	wp_enqueue_script( 'dokan-form-validate' );
-	wp_enqueue_script( 'speaking-url' );
-	wp_enqueue_script( 'dokan-select2-js' );
 
-	wp_enqueue_script( 'dokan-login-form-popup' );
+	wp_enqueue_script( 'dokan-tinymce' );
 
-	wp_register_script( 'tinymce-cdn', 'https://cdn.tiny.cloud/1/naf4lwctip9s1fh3vtm6ry1rlefmimd7wo585ayh82ybykap/tinymce/5/tinymce.min.js', array(), '1', true );
-    wp_enqueue_script( 'tinymce-cdn' );
-
-	wp_register_script( 'rich-editor', get_template_directory_uri() . '/assets/js/rich-editor.js', array(), '1', true );
-    wp_enqueue_script( 'rich-editor' );
+	wp_register_script( 'rich-editor', get_template_directory_uri() . '/assets/js/rich-editor.js', array( 'dokan-tinymce' ), null, true );
+	wp_enqueue_script( 'rich-editor' );
 }
 
 
@@ -319,92 +275,6 @@ function wc_set_up_breadcrumb( $defaults )
 }
 add_filter( 'woocommerce_breadcrumb_defaults', 'wc_set_up_breadcrumb' );
 
-
-
-// function aha_breadcrumb( $crumbs, $object_class )
-// {
-//     // Loop through all $crumb
-//     foreach( $crumbs as $key => $crumb )
-// 		{
-//         $taxonomy = 'product_cat'; // The product category taxonomy
-
-//         // Check if it is a product category term
-//         $term_array = term_exists( $crumb[0], $taxonomy );
-
-//         // if it is a product category term
-//         if ( $term_array !== 0 && $term_array !== null ) {
-
-//             // Get the WP_Term instance object
-//             $term = get_term( $term_array['term_id'], $taxonomy );
-
-//             // HERE set your new link with a custom one
-//             $crumbs[$key][1] = home_url( '/san-pham/?filters=product_cat%5B'.$term->slug.'%5D' ); // or use all other dedicated functions
-//         }
-//     }
-
-//     return $crumbs;
-// }
-// add_filter( 'woocommerce_get_breadcrumb', 'aha_breadcrumb', 10, 2 );
-
-
-
-/**
- * Display the custom text field for product data in woocommerce
- * @since 1.0.0
- */
-function create_product_custom_field()
-{
-
-	// Rental time unit	
-	// woocommerce_wp_select( 
-	// 	array( 
-	// 		'id'      => '_rental_time_unit', 
-	// 		'label'   => __( 'Rental time unit', 'woocommerce' ), 
-	// 		'options' => array(
-	// 			'hour'   => __( 'Hour', 'woocommerce' ),
-	// 			'day'   => __( 'Day', 'woocommerce' ),
-	// 			'month' => __( 'Month', 'woocommerce' )
-	// 			)
-	// 		)
-	// 	);
-
-
-	// Security deposit checkbox
-	// woocommerce_wp_checkbox( 
-	// 	array( 
-	// 		'id'            => '_security_deposit', 
-	// 		'wrapper_class' => 'show_if_simple', 
-	// 		'label'         => __('Security deposit', 'woocommerce' ),
-	// 		)
-	// 	);
-
-	// Security deposit amount
-	// woocommerce_wp_text_input( 
-	// 	array( 
-	// 		'id'          => '_security_deposit_amount', 
-	// 		'label'       => __( 'Security deposit amount', 'woocommerce' ),
-	// 	)
-	// );
-
-	// Security deposit notes
-	// woocommerce_wp_textarea_input( 
-	// 	array( 
-	// 		'id'          => '_security_deposit_notes', 
-	// 		'label'       => __( 'Security deposit notes', 'woocommerce' ),
-	// 	)
-	// );
-
-	// Platform fee, collect from current vendor
-	// woocommerce_wp_text_input( 
-	// 	array( 
-	// 		'id'          => '_platform_fee', 
-	// 		'label'       => __( 'Platform fee', 'woocommerce' ),
-	// 	)
-	// );
-	
-	
-}
-add_action( 'woocommerce_product_options_general_product_data', 'create_product_custom_field' );
 
 
 function cfwc_save_custom_field( $post_id ) {
