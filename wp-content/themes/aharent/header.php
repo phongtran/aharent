@@ -48,6 +48,8 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <div class="page-loading"></div>
+
         <header>
 
             <div class="mobile-header container h-100 d-flex align-items-center">

@@ -1,6 +1,10 @@
 //const { isDate } = require("util/types");
 
 (function($) {
+	
+	// $(document).ready(function() {
+	// 	topbar.hide();
+	// });
 
 	$('input.number-spinner').inputSpinner();
 
@@ -47,6 +51,12 @@
 		getProductPrice();
 	});
 
+	$('.date-picker-input input').datetimepicker({
+		format: dateFormat,
+		timepicker: false,
+		minDate: 0,
+	})
+
 	function isDateAvailable( date ) {
 
 		var checkDate = new Date(date),
@@ -88,6 +98,8 @@
 			e.preventDefault();
 		}
 	});
+
+	
 
 
 	$('.woocommerce-cart-form .quantity input').inputSpinner().change(function(e) {

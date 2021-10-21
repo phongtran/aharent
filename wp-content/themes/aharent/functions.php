@@ -136,7 +136,13 @@ function basic_scripts()
 
 	
 	// JS
-	wp_register_script( 'header', get_template_directory_uri() . '/assets/js/header.js', array(), 1, true ); 
+	wp_register_script( 'loading-bar', get_template_directory_uri() . '/assets/vendors/topbar-master/topbar.min.js', array(), null, true );
+	wp_enqueue_script( 'loading-bar' );
+
+	wp_register_script( 'page-loading', get_template_directory_uri() . '/assets/js/loading.js', array( 'loading-bar' ), null, true ); 
+	wp_enqueue_script( 'page-loading' );
+
+	wp_register_script( 'header', get_template_directory_uri() . '/assets/js/header.js', array(), null, true ); 
 	wp_enqueue_script( 'header' );
 
 
@@ -551,12 +557,12 @@ function customize_checkout_billing_kyc( $fields )
 	);
 
 
-	$fields['billing']['billing_national_id'] = array(
-        'label'     => __('National ID Number', 'woocommerce'),
-        'required'  => true,
-		'priority'	=> 5,
+	// $fields['billing']['billing_national_id'] = array(
+    //     'label'     => __('National ID Number', 'woocommerce'),
+    //     'required'  => true,
+	// 	'priority'	=> 5,
 		
-    );
+    // );
 
 	// $fields['order']['order_vat'] = array(
 	// 	'label'	=>	__( 'Tax receipt', 'woocommerce' ),
@@ -915,6 +921,15 @@ function wc_add_to_cart_message_filter($message, $product_id = null) {
 
     return $message;
 }
+
+add_action( 'wp_loaded', 'rent_now_and_checkout' );
+function rent_now_and_checkout()
+{
+	
+}
+
+
+
 
 
 ?>

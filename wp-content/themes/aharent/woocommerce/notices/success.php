@@ -19,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+return;
+
 if ( ! $notices ) {
 	return;
 }
