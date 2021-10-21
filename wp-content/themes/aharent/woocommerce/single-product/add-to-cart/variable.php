@@ -194,7 +194,11 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			</div>
 		</div>
 
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
+		<div class="form-row">
+			<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
+			<input type="hidden" name="rent-now" value="0" />
+			<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt rent-now-button">THUÊ NGAY</button>
+		</div>
 
 		<input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
 		<input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />

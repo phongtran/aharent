@@ -266,7 +266,7 @@
                     </span>
 
                    
-                    <?php $notices = wc_get_notices( 'success' ); ?>
+                    <?php if ( !is_checkout()) $notices = wc_get_notices( 'success' ); ?>
 
                     <?php foreach ( $notices as $notice ) : ?>
                         <?php $message = $notice['notice']; ?>

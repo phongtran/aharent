@@ -99,6 +99,12 @@
 		}
 	});
 
+	$('.rent-now-button').click(function(e) {
+		
+		$('input[name=rent-now').first().val('rent-now');
+		
+	});
+
 	
 
 

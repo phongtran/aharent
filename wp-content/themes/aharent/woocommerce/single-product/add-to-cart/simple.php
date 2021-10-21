@@ -164,8 +164,10 @@ if ( ! $product->is_purchasable() ) {
 
 		<div class="form-row">
 
+			<input type="hidden" name="rent-now" value="0" />
+
 			<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt">CHỌN THUÊ</button>
-			<button type="submit" name="rent-now" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt rent-now-button">THUÊ NGAY</button>
+			<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="aha-button single_add_to_cart_button button alt rent-now-button">THUÊ NGAY</button>
 		
 		</div>
 
