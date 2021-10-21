@@ -112,12 +112,12 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 // add async and defer attributes to enqueued scripts
 function attribute_script_loader_tag( $tag, $handle, $src )
 {
-	// if ( 'tinymce-editor' == $handle )
-	// 	$tag = str_replace(' src', ' async src', $tag);	
-	// elseif ( 'jquery-core' == $handle )
-	// 	$tag = str_replace(' src', ' src', $tag);
-	// else
-	// 	$tag = str_replace(' src', ' defer src', $tag);	
+	if ( 'tinymce-editor' == $handle )
+		$tag = str_replace(' src', ' async src', $tag);	
+	elseif ( 'jquery-core' == $handle )
+		$tag = str_replace(' src', ' src', $tag);
+	else
+		$tag = str_replace(' src', ' defer src', $tag);	
 	
 	return $tag;
 }
