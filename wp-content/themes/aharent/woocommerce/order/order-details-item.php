@@ -68,7 +68,7 @@ $payment_method = $order->get_payment_method();
 		</td>
 	<?php else: ?>
 		<td class="woocommerce-table__product-total product-total">
-			<?php echo wc_price( $item->get_meta( '_rental_price' ) * $qty ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php echo wc_price( ($item->get_meta( '_rental_price' ) - $item->get_meta( 'deposit')) * $qty ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		</td>
 
 		<td class="woocommerce-table__product-total product-total">

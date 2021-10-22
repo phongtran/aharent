@@ -55,12 +55,12 @@ defined( 'ABSPATH' ) || exit;
 					</td>
 					<?php if ( 'cod' == $payment_method ) : ?>
 						<td>
-							<?php $cart_item['data']->set_price( $cart_item['rental_price'] + $cart_item['deposit']); ?>
+							<?php $cart_item['data']->set_price( $cart_item['rental_price'] ); ?>
 							<?php echo wc_price( $cart_item['data']->get_price() * $cart_item['quantity']) ?>
 						</td>
 					<?php else: ?>
 						<td>
-							<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity']) ?>
+							<?php echo wc_price( ($cart_item['rental_price'] - $cart_item['deposit'])  * $cart_item['quantity']) ?>
 						</td>
 						<td class="product-total">
 							<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] ); ?> 

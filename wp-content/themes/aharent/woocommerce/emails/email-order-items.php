@@ -95,7 +95,7 @@ foreach ( $items as $item_id => $item ) :
 			</td>
 		<?php else: ?>
 			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
-				<?php echo wc_price( $item->get_meta( '_rental_price' )); ?>
+				<?php echo wc_price( ($item->get_meta( '_rental_price' ) - $item->get_meta( 'deposit')) * $qty); ?>
 			</td>
 			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
 				<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>

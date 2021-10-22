@@ -372,7 +372,14 @@ add_action( 'woocommerce_update_cart_action_cart_updated', 'update_cart_meta', 1
 
 function save_order_custom_values_of_items( $item, $cart_item_key, $values, $order )
 {
+	$payment_method = $order->get_payment_method();
+	if ( 'cod' == $payment_method )
+		$item->add_meta_data( 'deposit', 0 );
+	else
+		$item->add_meta_data( 'deposit', $values['deposit'] );
+
 	$item->add_meta_data( '_rental_price', $values['rental_price'] );
+	
 	$item->add_meta_data( 'duration', $values['duration'] );
 	if ( !$values['time-unit'] )
 		$item->add_meta_data( 'time-unit', 'day' );
@@ -385,18 +392,6 @@ function save_order_custom_values_of_items( $item, $cart_item_key, $values, $ord
 add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_values_of_items', 10, 4 );
 
 
-function set_cart_calculation( $cart )
-{
-	$payment_method = WC()->session->get( 'chosen_payment_method' );
-	foreach ( $cart->get_cart() as $cart_item )
-	{	
-		if ( 'cod' == $payment_method )
-			$cart_item['data']->set_price( $cart_item['deposit'] + $cart_item['rental_price'] );
-		else
-			$cart_item['data']->set_price( $cart_item['deposit'] );
-	}
-}
-add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
 
 
 
@@ -446,7 +441,7 @@ function woocommerce_admin_order_item_headers()
 {
     // set the column name
     $column_name = array(
-		'Rental price',
+		'Trả sau',
 		'Rental duration',
 		'From date',
 		'Delivery/Pick-up'
@@ -467,13 +462,18 @@ function woocommerce_admin_order_item_values($_product, $item, $item_id = null)
 {
     // get the post meta value from the associated product
 	$rental_price = wc_get_order_item_meta( $item_id, '_rental_price');
+	$deposit = wc_get_order_item_meta ( $item_id, 'deposit' );
 	$rental_duration = wc_get_order_item_meta( $item_id, 'duration' );
 	$rental_date_from = wc_get_order_item_meta( $item_id, 'date-from' );
 	$time_unit = wc_get_order_item_meta( $item_id, 'time-unit' );
 	$delivery_option = wc_get_order_item_meta( $item_id, 'delivery-option' );
     
 	// display the value
-    echo '<td>' . wc_price( $rental_price ) . '</td>';
+	if ( $deposit > 0)
+    	echo '<td>' . wc_price( $rental_price - $deposit ) . '</td>';
+	else
+		echo '<td>none</td>';
+
 	echo '<td>' . $rental_duration . ' ' . $time_unit . '</td>';
 	echo '<td>' . $rental_date_from . '</td>';
 	echo '<td>' . $delivery_option . '</td>';
@@ -483,12 +483,35 @@ add_action('woocommerce_admin_order_item_values', 'woocommerce_admin_order_item_
 
 function custom_woocommerce_hidden_order_itemmeta( $arr ) {
     $arr[] = '_rental_price';
-	// $arr[] = 'duration';
-	// $arr[] = 'time-unit';
-	// $arr[] = 'date-from';
+	$arr[] = 'deposit';
+	$arr[] = 'delivery-option';
+	$arr[] = 'duration';
+	$arr[] = 'time-unit';
+	$arr[] = 'date-from';
     return $arr;
 }
 add_filter('woocommerce_hidden_order_itemmeta', 'custom_woocommerce_hidden_order_itemmeta', 10, 1);
+
+
+
+
+function set_cart_calculation( $cart )
+{
+	$payment_method = WC()->session->get( 'chosen_payment_method' );
+	foreach ( $cart->get_cart() as $cart_item )
+	{	
+		if ( 'cod' == $payment_method )
+		{
+			$cart_item['data']->set_price( $cart_item['rental_price'] );
+		}
+		else
+		{
+			$cart_item['data']->set_price( $cart_item['deposit'] );
+		}
+			
+	}
+}
+add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
 
 
 function calculate_cart_total_rental_fee()
