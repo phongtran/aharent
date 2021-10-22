@@ -22,6 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 	return;
 }
+
+$payment_method = $order->get_payment_method();
+
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
@@ -52,12 +55,26 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 	</td>
 
 	<td class="woocommerce-table__product-total product-total">
-		<?php echo wc_price( $item->get_meta( '_rental_price' ) * $qty ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo $item->get_meta( 'duration' ) . ' ' . __( $item->get_meta( 'time-unit', 'woocommerce' )); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</td>
 
 	<td class="woocommerce-table__product-total product-total">
-		<?php echo $order->get_formatted_line_subtotal( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo $item->get_meta( 'date-from' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</td>
+
+	<?php if ( 'cod' == $payment_method ): ?>
+		<td class="woocommerce-table__product-total product-total">
+			<?php echo $order->get_formatted_line_subtotal( $item ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</td>
+	<?php else: ?>
+		<td class="woocommerce-table__product-total product-total">
+			<?php echo wc_price( $item->get_meta( '_rental_price' ) * $qty ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</td>
+
+		<td class="woocommerce-table__product-total product-total">
+			<?php echo $order->get_formatted_line_subtotal( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</td>
+	<?php endif ?>
 
 </tr>
 

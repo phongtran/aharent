@@ -23,8 +23,13 @@ defined( 'ABSPATH' ) || exit;
 			<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 			<th class="product-name"><?php esc_html_e( 'Duration', 'woocommerce' ); ?></th>
 			<th class="product-name"><?php esc_html_e( 'From date', 'woocommerce' ); ?></th>
-			<th class="product-name"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
-			<th class="product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
+			<?php $payment_method = WC()->session->get( 'chosen_payment_method' ); ?>
+			<?php if ( 'cod' == $payment_method ) : ?>
+				<th class="product-name"><?php esc_html_e( 'Giá thuê', 'woocommerce' ); ?></th>
+			<?php else: ?>
+				<th class="product-name"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<th class="product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
+			<?php endif ?>
 		</tr>
 	</thead>
 	<tbody>
@@ -48,12 +53,19 @@ defined( 'ABSPATH' ) || exit;
 					<td>
 						<?php echo $cart_item['date-from'] ?>
 					</td>
-					<td>
-						<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity']) ?>
-					</td>
-					<td class="product-total">
-						<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] ); ?> 
-					</td>
+					<?php if ( 'cod' == $payment_method ) : ?>
+						<td>
+							<?php $cart_item['data']->set_price( $cart_item['rental_price'] + $cart_item['deposit']); ?>
+							<?php echo wc_price( $cart_item['data']->get_price() * $cart_item['quantity']) ?>
+						</td>
+					<?php else: ?>
+						<td>
+							<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity']) ?>
+						</td>
+						<td class="product-total">
+							<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] ); ?> 
+						</td>
+					<?php endif ?>
 				</tr>
 				<?php
 			}
@@ -112,7 +124,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<tr class="order-total">
-			<th colspan="4"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+			<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 

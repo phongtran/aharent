@@ -112,9 +112,13 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 // add async and defer attributes to enqueued scripts
 function attribute_script_loader_tag( $tag, $handle, $src )
 {
-	if ( 'tinymce-editor' == $handle )
+	$normal_loading = array( 'jquery-core', 'wp-i18n', 'wp-hooks' );
+	$async_loading = array();
+
+	
+	if ( in_array( $handle, $async_loading ) )
 		$tag = str_replace(' src', ' async src', $tag);	
-	elseif ( 'jquery-core' == $handle )
+	elseif ( in_array( $handle, $normal_loading ) )
 		$tag = str_replace(' src', ' src', $tag);
 	else
 		$tag = str_replace(' src', ' defer src', $tag);	
@@ -144,6 +148,8 @@ function basic_scripts()
 
 	wp_register_script( 'header', get_template_directory_uri() . '/assets/js/header.js', array(), null, true ); 
 	wp_enqueue_script( 'header' );
+
+	wp_deregister_script( 'wp-embed' );
 
 
 
@@ -381,9 +387,13 @@ add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_va
 
 function set_cart_calculation( $cart )
 {
+	$payment_method = WC()->session->get( 'chosen_payment_method' );
 	foreach ( $cart->get_cart() as $cart_item )
 	{	
-		$cart_item['data']->set_price( $cart_item['deposit'] );
+		if ( 'cod' == $payment_method )
+			$cart_item['data']->set_price( $cart_item['deposit'] + $cart_item['rental_price'] );
+		else
+			$cart_item['data']->set_price( $cart_item['deposit'] );
 	}
 }
 add_action( 'woocommerce_before_calculate_totals', 'set_cart_calculation', 10, 1);
@@ -930,6 +940,19 @@ function aha_skip_cart_redirect_checkout( $url )
 		return wc_get_checkout_url();
 	}
 		
+}
+
+// Set default payment
+add_action( 'template_redirect', 'define_default_payment_gateway' );
+function define_default_payment_gateway()
+{
+    if( is_checkout() && ! is_wc_endpoint_url() )
+	{
+        // HERE define the default payment gateway ID
+        $default_payment_id = 'stripe';
+
+        WC()->session->set( 'chosen_payment_method', $default_payment_id );
+    }
 }
 
 

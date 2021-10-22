@@ -214,8 +214,12 @@
 		$('body').trigger('update_checkout');
 	});
 
+	$('body').on( 'payment_method_selected', function() {
+		$('body').trigger( 'update_checkout' );
+	});
 
 	$('.wc_payment_methods input[type=radio]').click(function(e) {
+
 		if ( $( '.payment_methods input.input-radio' ).length > 1 ) {
 			var target_payment_box = $( 'div.payment_box.' + $( this ).attr( 'ID' ) ),
 				is_checked         = $( this ).is( ':checked' );

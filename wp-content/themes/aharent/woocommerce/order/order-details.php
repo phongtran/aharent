@@ -28,6 +28,7 @@ $show_purchase_note    = $order->has_status( apply_filters( 'woocommerce_purchas
 $show_customer_details = true; // is_user_logged_in() && $order->get_user_id() === get_current_user_id();
 $downloads             = $order->get_downloadable_items();
 $show_downloads        = $order->has_downloadable_item() && $order->is_download_permitted();
+$payment_method		   = $order->get_payment_method();
 
 if ( $show_downloads ) {
 	wc_get_template(
@@ -50,8 +51,14 @@ if ( $show_downloads ) {
 		<thead>
 			<tr>
 				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Duration', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'From date', 'woocommerce' ); ?></th>
+				<?php if ( 'cod' == $payment_method ): ?>
+					<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Giá thuê', 'woocommerce' ); ?></th>
+				<?php else: ?>
+					<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+					<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
+				<?php endif ?>
 			</tr>
 		</thead>
 
@@ -84,7 +91,7 @@ if ( $show_downloads ) {
 			foreach ( $order->get_order_item_totals() as $key => $total ) {
 				?>
 					<tr>
-						<th scope="row" colspan="2"><?php echo esc_html( $total['label'] ); ?></th>
+						<th scope="row" colspan="<?php echo ('cod' == $payment_method)? '3' : '4'; ?>"><?php echo esc_html( $total['label'] ); ?></th>
 						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 					</tr>
 					<?php
@@ -92,7 +99,7 @@ if ( $show_downloads ) {
 			?>
 			<?php if ( $order->get_customer_note() ) : ?>
 				<tr>
-					<th colspan="2"><?php esc_html_e( 'Ghi chú:', 'woocommerce' ); ?></th>
+					<th colspan="<?php echo ('cod' == $payment_method)? '3' : '4'; ?>"><?php esc_html_e( 'Ghi chú:', 'woocommerce' ); ?></th>
 					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
 				</tr>
 			<?php endif; ?>

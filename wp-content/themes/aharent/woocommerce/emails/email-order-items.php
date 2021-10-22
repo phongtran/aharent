@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
+$payment_method = $order->get_payment_method();
 
 foreach ( $items as $item_id => $item ) :
 	$product       = $item->get_product();
@@ -88,12 +89,18 @@ foreach ( $items as $item_id => $item ) :
 		<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
 			<?php echo $item->get_meta( 'date-from' ); ?>
 		</td>
-		<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
-			<?php echo wc_price( $item->get_meta( '_rental_price' )); ?>
-		</td>
-		<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
-			<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>
-		</td>
+		<?php if ('cod' == $payment_method): ?>
+			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+				<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>
+			</td>
+		<?php else: ?>
+			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+				<?php echo wc_price( $item->get_meta( '_rental_price' )); ?>
+			</td>
+			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+				<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>
+			</td>
+		<?php endif ?>
 	</tr>
 	<?php
 
