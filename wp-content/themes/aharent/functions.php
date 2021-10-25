@@ -112,6 +112,13 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 // add async and defer attributes to enqueued scripts
 function attribute_script_loader_tag( $tag, $handle, $src )
 {
+
+	if ( is_admin() )
+	{
+		return $tag;
+	}
+		
+
 	$normal_loading = array( 'jquery-core', 'wp-i18n', 'wp-hooks' );
 	$async_loading = array();
 
@@ -206,7 +213,8 @@ function basic_scripts()
 		wp_dequeue_script( 'wc-single-product' );
 
 		wp_dequeue_script( 'dokan-util-helper' );
-		wp_deregister_script( 'dokan-popup' );
+		wp_dequeue_script( 'dokan-login-form-popup' );
+		wp_dequeue_script( 'dokan-popup' );
 
 		wp_dequeue_script( 'woo-viet-provinces-script' );
 
@@ -725,7 +733,7 @@ function get_product_prices( $product )
 					'block_price'	=>	!empty($block_price) && $block_price[0]
 				);
 
-				if ( !isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) ||
+				if ( !$prices[$variation['arrtributes']['attribute_time_unit']] ||
 					( isset( $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]) && 
 						$variation['display_price'] < $prices[ $variation[ 'arrtributes' ][ 'attribute_time_unit' ]]))
 				{
@@ -869,7 +877,7 @@ function update_order_review( $checkout )
 	parse_str( $checkout, $get_values );
 
 	if ( $get_values['order_vat'] )
-		WC()->customer->set_is_vat_exempt( true );
+		WC()->customer->set_is_vat_exempt( false );
 	else
 		WC()->customer->set_is_vat_exempt( true );	
 }
