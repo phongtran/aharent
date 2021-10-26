@@ -6,7 +6,14 @@
 	// 	topbar.hide();
 	// });
 
-	$('input.number-spinner').inputSpinner({buttonsOnly: true});
+	for (const spinner of $('input.number-spinner')) {
+		var step = $(spinner).attr('step');
+		console.log(step);
+		if (step > 1)
+			$(spinner).inputSpinner({buttonsOnly: true});
+		else
+			$(spinner).inputSpinner();
+	}	
 
 
     $(".add-to-cart input.number-spinner").change(function(e) {
