@@ -174,15 +174,16 @@
 
             if ( $product_price == 0)
             {
-                if ( isset( $price_more ) )
+                if ( $price_more )
                     $product_price = $price_more;
                 else
                 {
                     $product_price = end( $temp_prices );
 
-                    if ( isset( $price_extra ))
+                    if ( $price_extra )
                     {
                         $product_extra_price = ($duration - array_key_last($temp_prices)) * $price_extra;
+                        $duration = array_key_last( $temp_prices );
                     }
                 }
                     
@@ -190,14 +191,11 @@
 
             if ( !$block_price )
             {
-                if ( $duration <= array_key_last( $temp_prices ))
-                    $product_price *= $duration;
-                else
-                    $product_price *= array_key_last( $temp_prices );
+                $product_price *= $duration;
             }
                 
         
-            if ( isset($product_extra_price) )
+            if ( $product_extra_price )
                 $product_price += $product_extra_price;
 
             
