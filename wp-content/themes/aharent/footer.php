@@ -59,15 +59,15 @@
 
                             <ul>
                                 <li>
-                                    <a href="https://www.facebook.com/aharentvn"><img src="<?php echo get_template_directory_uri() . '/assets/img/facebook.png' ?>" /></a>
+                                    <a target="_blank" href="https://www.facebook.com/aharentvn"><img src="<?php echo get_template_directory_uri() . '/assets/img/facebook.png' ?>" /></a>
                                 </li>
 
                                 <li>
-                                    <a href="https://www.instagram.com/aharentvn/"><img src="<?php echo get_template_directory_uri() . '/assets/img/instagram.png' ?>" /></a>
+                                    <a target="_blank" href="https://www.instagram.com/aharentvn/"><img src="<?php echo get_template_directory_uri() . '/assets/img/instagram.png' ?>" /></a>
                                 </li>
 
                                 <li>
-                                    <a href="https://zalo.me/1959065384440068544"><img src="<?php echo get_template_directory_uri() . '/assets/img/zalo.png' ?>" /></a>
+                                    <a target="_blank" href="https://zalo.me/1959065384440068544"><img src="<?php echo get_template_directory_uri() . '/assets/img/zalo.png' ?>" /></a>
                                 </li>
                                 
 

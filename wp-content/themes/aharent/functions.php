@@ -690,8 +690,6 @@ function get_product_prices( $product )
 		$variations = $product->get_available_variations();
 		$prices = array();
 
-		
-
 		if ( !$time_units )
 		{
 			foreach ( $variations as $key => $variation)
