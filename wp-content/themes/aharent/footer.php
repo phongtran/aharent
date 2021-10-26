@@ -67,7 +67,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="https://zalo.me/2636303008534069878"><img src="<?php echo get_template_directory_uri() . '/assets/img/zalo.png' ?>" /></a>
+                                    <a href="https://zalo.me/1959065384440068544"><img src="<?php echo get_template_directory_uri() . '/assets/img/zalo.png' ?>" /></a>
                                 </li>
                                 
 
