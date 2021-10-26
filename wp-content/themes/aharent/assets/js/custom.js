@@ -6,7 +6,7 @@
 	// 	topbar.hide();
 	// });
 
-	$('input.number-spinner').inputSpinner();
+	$('input.number-spinner').inputSpinner({buttonsOnly: true});
 
 
     $(".add-to-cart input.number-spinner").change(function(e) {
@@ -108,7 +108,7 @@
 	
 
 
-	$('.woocommerce-cart-form .quantity input').inputSpinner().change(function(e) {
+	$('.woocommerce-cart-form .quantity input').change(function(e) {
 		cartItemChanged(e);
 	});
 

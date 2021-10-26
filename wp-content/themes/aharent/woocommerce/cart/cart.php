@@ -143,6 +143,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 																	// 'max_value'    => $_product->get_max_purchase_quantity(),
 																	'min_value'    => '1',
 																	'product_name' => $_product->get_name(),
+																	'classes'		=> 'number-spinner'
 																),
 																$_product,
 																false
@@ -158,7 +159,18 @@ do_action( 'woocommerce_before_cart' ); ?>
 													<td>
 														<div class="time-period-wrapper">
 															<div class="duration">
-																<input id="duration" class="number-spinner" name="cart[<?php echo $cart_item_key ?>][duration]" type="number" value="<?php echo $cart_item['duration'] ?>" min="1" max="10" step="1" />
+
+																<?php
+																	$time_min = $product->get_meta( 'time_min' );
+																	if ( !$time_min) $time_min = 1;
+
+																	$time_max = $product->get_meta( 'time_max' );
+																	
+																	$time_step = $product->get_meta( 'time_step' );
+																	if ( !$time_step ) $time_step = 1;
+																?>
+
+																<input id="duration" class="number-spinner" name="cart[<?php echo $cart_item_key ?>][duration]" type="number" value="<?php echo $cart_item['duration'] ?>" min="<?php echo $time_min?>" <?php if ($time_max) echo 'max="' . $time_max . '"' ?> step="<?php echo $time_step ?>" />
 															</div>
 
 															<span class="time-unit-wrapper">

@@ -877,9 +877,16 @@ function update_order_review( $checkout )
 	parse_str( $checkout, $get_values );
 
 	if ( $get_values['order_vat'] )
-		WC()->customer->set_is_vat_exempt( false );
+	{
+		// WC()->session->set( 'vat', true );
+		WC()->customer->set_is_vat_exempt( true );
+	}
 	else
-		WC()->customer->set_is_vat_exempt( true );	
+	{
+		// WC()->session->set( 'vat', false );
+		WC()->customer->set_is_vat_exempt( true );
+	}
+		
 }
 add_action( 'woocommerce_checkout_update_order_review', 'update_order_review');
 
