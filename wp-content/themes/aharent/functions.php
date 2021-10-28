@@ -583,6 +583,9 @@ add_filter( 'woocommerce_add_to_cart_validation', 'add_the_date_validation', 10,
 
 function customize_checkout_billing_kyc( $fields )
 {
+	unset($fields['billing']['billing_first_name']['class']);
+	unset($fields['billing']['billing_last_name']['class']);
+
 	unset($fields['billing']['billing_company']);
     unset($fields['billing']['billing_city']);
 	unset($fields['billing']['billing_postcode']);
@@ -600,7 +603,7 @@ function customize_checkout_billing_kyc( $fields )
 		'class'		=> array( 'form-row-wide', 'address-field' )
 	);
 
-	$fields['billing']['billing_last_name']['class'] = array( 'form-row', 'form-row-wide' );
+	
 
 
 	// $fields['billing']['billing_national_id'] = array(
