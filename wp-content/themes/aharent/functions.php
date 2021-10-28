@@ -599,28 +599,9 @@ function customize_checkout_billing_kyc( $fields )
 		'default'	=> 'Hồ Chí Minh',
 		'value'		=> 'Hồ Chí Minh',
 		'custom_attributes'	=> array( 'readonly' => 'readonly' ),
-		'priority'	=> 91,
+		'priority'	=> 65,
 		'class'		=> array( 'form-row-wide', 'address-field' )
 	);
-
-	
-
-
-	// $fields['billing']['billing_national_id'] = array(
-    //     'label'     => __('National ID Number', 'woocommerce'),
-    //     'required'  => true,
-	// 	'priority'	=> 5,
-		
-    // );
-
-	// $fields['order']['order_vat'] = array(
-	// 	'label'	=>	__( 'Tax receipt', 'woocommerce' ),
-	// 	'type'	=>	'checkbox',
-	// 	'class'	=>	array('input-checkbox'),
-	// 	'priority'	=> 111,
-	// );
-
-	// var_dump( $fields['order'] );
 
     return $fields;
 }

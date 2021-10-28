@@ -359,7 +359,9 @@
         border: 1px solid $form-border-color;
     }
 
-    
+    &.place-order {
+        width: auto;
+    }
 
 }
 
