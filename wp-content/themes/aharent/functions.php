@@ -252,6 +252,8 @@ function cart_scripts()
 	// Css
 	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', false );
 	wp_enqueue_style( 'datetimepicker' );
+
+	wp_dequeue_style( 'woo-viet-provinces-style' );
 	
 
 	// JS
@@ -594,8 +596,11 @@ function customize_checkout_billing_kyc( $fields )
 		'default'	=> 'Hồ Chí Minh',
 		'value'		=> 'Hồ Chí Minh',
 		'custom_attributes'	=> array( 'readonly' => 'readonly' ),
-		'priority'	=> 65,
+		'priority'	=> 91,
+		'class'		=> array( 'form-row-wide', 'address-field' )
 	);
+
+	$fields['billing']['billing_last_name']['class'] = array( 'form-row', 'form-row-wide' );
 
 
 	// $fields['billing']['billing_national_id'] = array(
@@ -860,11 +865,12 @@ add_action( 'updated_post_meta', 'aha_after_post_meta', 10, 4 );
 function get_featured_products_query()
 {
 	return array(
-		'post_type'   => 'product',
+		'post_type' => 'product',
+		'meta_key' => 'total_sales',
+		'orderby' => 'meta_value_num',
+		'order'		=>	'rand',
 		'stock'       => 1,
 		'showposts'   => 30,
-		'orderby'     => 'rand',
-		'order'       => 'DESC' ,
 	);
 }
 
