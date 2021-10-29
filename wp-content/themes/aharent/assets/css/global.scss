@@ -72,7 +72,11 @@ html {
 
 .form-control:focus {
     box-shadow: none;
-} 
+}
+
+.form-control[readonly] {
+    background-color: inherit;
+}
 
 input, textarea {
     padding: 6px 10px 6px;
