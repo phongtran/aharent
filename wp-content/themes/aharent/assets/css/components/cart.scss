@@ -1,417 +1,363 @@
 .aha-cart {
-    
-    margin: 20px 0;
-    padding: 0 0 20px 0; 
+  margin: 20px 0;
+  padding: 0 0 20px 0;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-    // background-color: #fff;
-        
-    table.shop_table {
-        border: 0;
+  // background-color: #fff;
+
+  table.shop_table {
+    border: 0;
+  }
+
+  .cart_totals {
+    background-color: #fff;
+    padding: 0 10px;
+    padding-bottom: 10px;
+
+    tr.order-total {
+      background-color: $shadow-color;
+    }
+
+    p {
+      margin: 0;
+
+      &.note {
+        &::before {
+          content: "*";
+        }
+        color: $footer-text-color;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: italic;
+      }
+    }
+
+    .cart_totals-title {
+      background-color: #fff;
+      padding: 15px 0;
+      padding-left: 10px;
+    }
+  }
+
+  .cart-steps {
+    width: 68%;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  .cart-step {
+    .cart-step-title {
+      padding: 15px 20px;
+      border-radius: 8px;
+
+      background-color: #fff;
+    }
+
+    .cart-step-content {
+      background-color: #fff;
+      margin: 20px 0;
+
+      .item-break {
+        height: 1px;
+        border-bottom: 1px solid #ececec;
+        margin: 10px;
+      }
+
+      .control-section {
+        display: flex;
+
+        button {
+          margin: 15px;
+          background-color: $main-button-color;
+          color: $bright-text-color;
+
+          &:hover {
+            background-color: $main-button-color;
+            color: $bright-text-color;
+          }
+        }
+      }
+
+      .cart-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        position: relative;
+
+        .form-control {
+          padding: 0;
+        }
+
+        .radio-options {
+          .radio-option-row {
+            display: flex;
+            align-items: center;
+
+            input[type="radio"] {
+              margin-right: 10px;
+            }
+
+            label {
+              width: 85%;
+            }
+          }
+        }
+
+        .button-remove {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          right: 0;
+          margin: 10px 10px 0 0;
+
+          .delete-icon {
+            background: url(../img/dustbin.png) left top no-repeat;
+            display: block;
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        .cart-item-thumbnail {
+          margin: 10px;
+
+          width: 30%;
+
+          @media (max-width: 600px) {
+            width: 100%;
+          }
+
+          .security-deposit-policy {
+            margin-top: 20px;
+
+            span {
+              font-size: 14px;
+              font-style: italic;
+
+              &::before {
+                width: 16px;
+                height: 16px;
+                background: url(../img/information.png) center center no-repeat;
+                content: "";
+                display: block;
+                float: left;
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+
+        .cart-item-title {
+          margin-bottom: 15px;
+          display: flex;
+
+          h4 {
+            font-size: 18px;
+          }
+        }
+
+        .cart-item-description {
+          width: 60%;
+
+          margin: 10px;
+
+          .price-section {
+            display: flex;
+            justify-content: right;
+            margin-top: 20px;
+
+            table {
+              td {
+                padding: 5px 10px;
+              }
+            }
+
+            .rental-price {
+              margin-right: 20px;
+
+              h3 {
+                line-height: 2;
+              }
+            }
+
+            h3.price {
+              margin-top: 5px;
+            }
+
+            .deposit-price {
+              h2 {
+                font-size: 24px;
+                font-weight: bold;
+                color: #258c69;
+              }
+            }
+          }
+
+          .info-section {
+            td {
+              padding: 5px 0;
+
+              &.label {
+                padding-right: 15px;
+              }
+            }
+
+            select.time-unit {
+              margin: 10px 0;
+              width: 120px;
+            }
+
+            .time-unit-wrapper {
+              display: flex;
+              align-items: center;
+              margin: 0 10px;
+            }
+
+            .time-period-wrapper {
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+            }
+
+            .quantity,
+            .duration {
+              input {
+                max-width: 40px;
+              }
+            }
+
+            .time-period {
+              .date-picker-input {
+                display: flex;
+                flex-wrap: wrap;
+
+                align-items: center;
+
+                .delimeter {
+                  margin-right: 10px;
+                }
+
+                input {
+                  margin: 10px 10px 10px 0;
+                  max-width: 150px;
+                  width: 100px;
+                  font-size: 14px;
+                  padding: 8px 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cart-summary {
+    width: 30%;
+
+    @media (max-width: 600px) {
+      width: 100%;
     }
 
     .cart_totals {
-        background-color: #fff;
-        padding: 0 10px;
-        padding-bottom: 10px;
-
-        tr.order-total {
-            background-color: $shadow-color;
-        }
-
-        p {
-            margin: 0;
-
-
-            &.note {
-
-                &::before {
-                    content: "*";
-                }
-                color: $footer-text-color;
-                font-size: 14px;
-                font-weight: normal;
-                font-style: italic;
-            }
-        }
-
-        .cart_totals-title {
-            background-color: #fff;
-            padding: 15px 0;
-            padding-left: 10px;
-        }
+      float: left;
+      width: 100%;
     }
 
-    .cart-steps {
-        width: 68%;
+    .wc-proceed-to-checkout {
+      display: flex;
+      justify-content: right;
 
-        @media (max-width: 600px) {
-            width: 100%;
-        }
+      a.button {
+        background-color: $main-button-color;
+        color: $bright-text-color;
+      }
     }
-
-    .cart-step{
-        
-        .cart-step-title {
-            padding: 15px 20px;
-            border-radius: 8px;
-    
-            background-color: #fff;
-        }
-
-        .cart-step-content {
-            background-color: #fff;
-            margin: 20px 0;
-
-            .item-break {
-                height: 1px;
-                border-bottom: 1px solid #ececec;
-                margin: 10px;
-            }
-
-            .control-section {
-                display: flex;
-                
-
-                button {
-                    margin: 15px;
-                    background-color: $main-button-color;
-                    color: $bright-text-color;
-
-                    &:hover {
-                        background-color: $main-button-color;
-                        color: $bright-text-color;
-                    }
-                }
-            }
-
-            .cart-item {
-
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-
-                position: relative;
-
-                .form-control {
-                    padding: 0;
-                }
-
-
-                .radio-options {
-                    
-                    .radio-option-row {
-                        display: flex;
-                        align-items: center;
-
-                        input[type=radio] {
-                            margin-right: 10px;
-                        }
-
-                        label {
-                            width: 85%;
-                        }
-                    }
-                }
-
-                .button-remove {
-                    display: flex;
-                    align-items: center;
-                    position: absolute;
-                    right: 0;
-                    margin: 10px 10px 0 0;
-
-                    .delete-icon {
-                        background: url(../img/dustbin.png) left top no-repeat;
-                        display: block;
-                        width: 16px;
-                        height: 16px;
-                    }
-                }
-
-                
-                .cart-item-thumbnail {
-                    margin: 10px;
-
-                    width: 30%;
-
-                    @media (max-width: 600px) {
-                        width: 100%;
-                    }
-
-                    .security-deposit-policy {
-                        margin-top: 20px;
-
-                        span {
-
-                            font-size: 14px;
-                            font-style: italic;
-                            
-
-                            &::before {
-                                width: 16px;
-                                height: 16px;
-                                background: url(../img/information.png) center center no-repeat;
-                                content: "";
-                                display: block;
-                                float:left;
-                                margin-right: 5px;
-                            }
-                        }
-                    }
-                }
-
-                .cart-item-title {
-
-                    margin-bottom: 15px;
-                    display: flex;
-                    
-                    h4 {
-                        font-size: 18px;
-                    }
-
-                    
-                }
-
-                .cart-item-description {
-
-                    width: 60%;
-
-                    margin: 10px; 
-
-                    .price-section {
-                        display: flex;
-                        justify-content: right;
-                        margin-top: 20px;
-    
-                        table {
-                            td {
-                                padding: 5px 10px;
-                            }
-                        }
-
-                        .rental-price {
-                            margin-right: 20px;
-
-                            h3 {
-                                line-height: 2;
-                            }
-                        }
-
-                        h3.price {
-                            margin-top: 5px;                           
-                        }
-
-                        .deposit-price {
-                            h2 {
-                                font-size: 24px;
-                                font-weight: bold;
-                                color: #258c69;
-                            }
-                        }
-                    }
-
-                   
-    
-
-                    .info-section {
-
-                        td {
-                            padding: 5px 0;
-
-                            &.label {
-                                padding-right: 15px;
-                            }
-
-                        }
-
-                        select.time-unit {
-                            margin: 10px 0;
-                            width: 120px;
-                        }
-
-                        .time-unit-wrapper {
-                            display: flex;
-                            align-items: center;
-                            margin: 0 10px;
-                        }
-
-                        .time-period-wrapper {
-                            display: flex;
-                            flex-wrap: wrap;
-                            align-items: center;
-                        }
-
-                        .quantity, .duration {
-
-                            input {
-
-                                max-width: 40px;
-                            
-                            }
-
-                        }
-
-                        .time-period {
-
-                            .date-picker-input {
-                                display: flex;
-                                flex-wrap: wrap;
-                                
-            
-                                align-items: center;
-
-                                .delimeter {
-                                    margin-right: 10px;
-                                }
-
-                                input {
-                                    margin: 10px 10px 10px 0;
-                                    max-width: 150px;
-                                    width: 100px;
-                                    font-size: 14px;
-                                    padding: 8px 10px; 
-                                }
-                            }
-
-                            
-                        }
-
-                        
-
-                        
-                        
-                    }
-                }
-
-                
-            }
-        }
-
-    }
-
-    
-
-    .cart-summary {
-        width: 30%;
-
-        @media (max-width: 600px) {
-            width: 100%;
-        }
-
-        .cart_totals {
-            float: left;
-            width: 100%;
-        }
-
-
-        .wc-proceed-to-checkout {
-            display: flex;
-            justify-content: right;
-
-            a.button {
-                background-color: $main-button-color;
-                color: $bright-text-color;
-            }
-        }
-
-    }
-    
+  }
 }
 
 #customer_details {
-
-    margin-top: 20px;
-
+  margin-top: 20px;
 }
 
 #payment {
-    margin-top: 20px;
+  margin-top: 20px;
 
-    button {
-        background-color: $main-button-color;
-        color: $bright-text-color;
-    }
+  button {
+    background-color: $main-button-color;
+    color: $bright-text-color;
+  }
 }
 
 .payment-retry-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    .payment-retry {
-        margin-top: 20px;
-        width: 50%;
-        align-self: center;
-    }
+  .payment-retry {
+    margin-top: 20px;
+    width: 50%;
+    align-self: center;
+  }
 }
 
-
 .woocommerce form .form-row {
+  margin-left: 20px;
 
-    margin-left: 20px;
-    
-    width: 80%;
+  width: 80%;
 
-    input, textarea {
-        border: 1px solid $form-border-color;
-    }
+  input,
+  textarea {
+    border: 1px solid $form-border-color;
+  }
 
-    &.place-order {
-        width: auto;
-    }
-
+  &.place-order {
+    width: auto;
+  }
 }
 
 .woocommerce-additional-fields {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-
-
 .checkout-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
-
-    section {
-
-        @media (max-width: 600px) {
-            width: 100%;
-        }
-
-        width: 48%;
+  section {
+    @media (max-width: 600px) {
+      width: 100%;
     }
+
+    width: 48%;
+  }
 }
 
 .woocommerce-thankyou-order-details {
-    @media (max-width: 600px) {
-        li {
-            margin: 5px 0;
-            width: 100%;
-        }
-    }
-
+  @media (max-width: 600px) {
     li {
-        margin: 5px 0;
+      margin: 5px 0;
+      width: 100%;
     }
+  }
+
+  li {
+    margin: 5px 0;
+  }
 }
 
-
 .woocommerce {
-
-    ul.products {
-
-        li.product {
-
-            .price {
-                
-                color: $main-button-color;
-            }
-        }
+  ul.products {
+    li.product {
+      .price {
+        color: $main-button-color;
+      }
     }
+  }
 }
