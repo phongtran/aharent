@@ -873,6 +873,13 @@ function get_featured_products_query()
 {
 	return array(
 		'post_type' => 'product',
+		'tax_query'	=> array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'slug',
+				'terms' => array( 'da-ngoai', 'dien-tu', 'may-anh-quay-phim', 'xe-may', 'o-to' ),
+			)
+		),
 		'meta_key' => 'total_sales',
 		'orderby' => 'meta_value_num',
 		'stock'       => 1,
