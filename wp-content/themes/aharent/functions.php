@@ -13,19 +13,22 @@ require_once THEME_DIR . 'inc/dokan/vendor-custom-settings.php';
 require_once THEME_DIR . 'inc/ajax/single-product.php';
 
 
-function wpai_is_xml_preprocess_enabled( $is_enabled ) {
+function wpai_is_xml_preprocess_enabled( $is_enabled )
+{
     return false;
 }
 add_filter( 'is_xml_preprocess_enabled', 'wpai_is_xml_preprocess_enabled', 10, 1 );
 
-function mytheme_add_woocommerce_support() {
+function mytheme_add_woocommerce_support()
+{
     add_theme_support( 'woocommerce' );
 }
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 
 // Product loop column in shop page
-if ( !function_exists('loop_columns') ) {
+if ( !function_exists('loop_columns') )
+{
 	function loop_columns() {
 		return 5; // 5 products per row
 	}
@@ -50,7 +53,8 @@ function jk_related_products_args( $args )
 add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_args', 20 );
 
 
-function register_menus() { 
+function register_menus()
+{ 
     register_nav_menus(
         array(
             'main-menu' => 'Main Menu',
@@ -84,7 +88,8 @@ add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
 add_filter( 'yikes_woocommerce_custom_repeatable_product_tabs_heading', '__return_false', 99 );
 
 
-function aharent_widgets_init() {
+function aharent_widgets_init()
+{
     register_sidebar( array(
         'name'          => __( 'Shop Sidebar', 'aharent' ),
         'id'            => 'shop',
@@ -138,87 +143,138 @@ add_filter('script_loader_tag', 'attribute_script_loader_tag', 10, 3);
 
 function basic_scripts()
 {
-	// CSS
+	// CSS Registration
 	wp_register_style ( 'bootstrap', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap.min.css', '', '5.0.2', false );
-    wp_enqueue_style( 'bootstrap' );
-
+	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', false );
 	wp_register_style( 'app', get_template_directory_uri() . '/assets/css/app.min.css', array('bootstrap'), '1', 'all' );
+	wp_register_style( 'swipe-style', 'https://unpkg.com/swiper@7/swiper-bundle.min.css' );
+	wp_register_style ( 'bootstrap-utilities', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap-utilities.min.css', '', '5.0.2', true );
+
+	// JS Registration
+	wp_register_script( 'loading-bar', get_template_directory_uri() . '/assets/vendors/topbar-master/topbar.min.js', array(), null, true );
+	wp_register_script( 'page-loading', get_template_directory_uri() . '/assets/js/loading.js', array( 'loading-bar' ), null, true ); 
+	wp_register_script( 'header', get_template_directory_uri() . '/assets/js/header.js', array(), null, true ); 
+	wp_register_script( 'swipe-script', 'https://unpkg.com/swiper@7/swiper-bundle.min.js', array(), 1, true );
+	wp_register_script( 'single-product-script', get_template_directory_uri() . '/assets/js/single-product.js', array(), 1, true );
+	wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', true );
+	wp_register_script( 'bootstrap-input-spinner', get_template_directory_uri() . '/assets/vendors/bootstrap-input-spinner/src/bootstrap-input-spinner.js', array(), '1', true );
+	wp_register_script( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.full.min.js', array(), '1', true );
+	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array(), '1', true );
+
+
+	// CSS queue
+    wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'app' );
 
+	wp_dequeue_style( 'dashicons' );
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wc-block-vendors-style' );
+	wp_dequeue_style( 'wc-block-style' );
+
+	wp_dequeue_style( 'font-awesome' );
+
+	wp_dequeue_style( 'dokan-style' );
+	wp_dequeue_style( 'dokan-fontawesome' );
+
 	
-	// JS
-	wp_register_script( 'loading-bar', get_template_directory_uri() . '/assets/vendors/topbar-master/topbar.min.js', array(), null, true );
+	// JS queue
 	wp_enqueue_script( 'loading-bar' );
-
-	wp_register_script( 'page-loading', get_template_directory_uri() . '/assets/js/loading.js', array( 'loading-bar' ), null, true ); 
 	wp_enqueue_script( 'page-loading' );
-
-	wp_register_script( 'header', get_template_directory_uri() . '/assets/js/header.js', array(), null, true ); 
 	wp_enqueue_script( 'header' );
 
 	wp_deregister_script( 'wp-embed' );
 
+	
 
+	wp_dequeue_script( 'woo-viet-provinces-script' );
+	
+	wp_dequeue_script( 'dokan-util-helper' );
+	wp_dequeue_script( 'dokan-login-form-popup' );
+	wp_dequeue_script( 'dokan-popup' );
 
-	if ( !is_front_page() )
+	if ( is_single() )
 	{
-		wp_register_script( 'bootstrap-bundle-js-min', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js', array(), '1', true );
-		wp_enqueue_script( 'bootstrap-bundle-js-min' );
+		// Load swipe for image slider
+		// Swipe CSS
+		
+		wp_enqueue_style( 'swipe-style' );
+		wp_enqueue_style( 'datetimepicker' );
 
-		if ( is_single() )
-		{
-			// Load swipe for image slider
-			// Swipe CSS
-			wp_register_style( 'swipe-style', 'https://unpkg.com/swiper@7/swiper-bundle.min.css' );
-			wp_enqueue_style( 'swipe-style' );
 
-			// Swipe JS
-			wp_register_script( 'swipe-script', 'https://unpkg.com/swiper@7/swiper-bundle.min.js', array(), 1, true );
-			wp_enqueue_script( 'swipe-script' );
+		wp_dequeue_style( 'dokan-select2-css' );
 
-			wp_register_script( 'single-product-script', get_template_directory_uri() . '/assets/js/single-product.js', array(), 1, true );
-			wp_enqueue_script( 'single-product-script' );
+		// Swipe JS
+		
+		wp_enqueue_script( 'wp-util' );
+		wp_enqueue_script( 'bootstrap-input-spinner' );
+		wp_enqueue_script( 'datetimepicker' );
+		wp_enqueue_script( 'swipe-script' );
+		wp_enqueue_script( 'single-product-script' );
+		wp_enqueue_script( 'custom-script' );
+
+		wp_deregister_script( 'jquery-ui-core' );
+
+
+		wp_dequeue_script( 'dokan-script' );
+		wp_deregister_script( 'dokan-i18n-jed' );
+		wp_deregister_script( 'dokan-tooltip' );
+		wp_deregister_script( 'dokan-form-validate' );
+		wp_deregister_script( 'speaking-url' );
+		wp_deregister_script( 'dokan-select2-js' );
+		
 			
-		}
-
-		load_cart_scripts();
-
-		
 	}
-	else // Landing page script
+	else
 	{
+		wp_deregister_script( 'jquery-blockui' );
 
-		wp_dequeue_style( 'dashicons' );
-		wp_dequeue_style( 'wp-block-library' );
-		wp_dequeue_style( 'wc-block-vendors-style' );
-		wp_dequeue_style( 'wc-block-style' );
-		wp_dequeue_style( 'berocket_aapf_widget-style' );
-		wp_dequeue_style( 'wapf-frontend-css' );
+		if ( is_cart() || is_checkout() )
+		{
+			// Css
+			
+			wp_enqueue_style( 'datetimepicker' );
+			wp_dequeue_style( 'woo-viet-provinces-style' );
+			
 
-		wp_dequeue_style( 'woocommerce-layout' );
-		wp_dequeue_style( 'woocommerce-general' );
+			// JS
+			wp_enqueue_script( 'bootstrap-bundle-js-min' );
+			wp_enqueue_script( 'wp-util' );
+			wp_enqueue_style( 'bootstrap-utilities' );
+			wp_enqueue_script( 'bootstrap-input-spinner' );
+			wp_enqueue_script( 'datetimepicker' );
+			wp_enqueue_script( 'custom-script' );
 
-		wp_dequeue_style( 'woo-viet-provinces-style' );
 
-		wp_dequeue_style( 'font-awesome' );
+		}
+		elseif ( is_archive() )
+		{
 
-		wp_dequeue_style( 'dokan-style' );
-		wp_dequeue_style( 'dokan-fontawesome' );
+		}
+		else
+		{
+			wp_deregister_script( 'underscore' );
+			wp_deregister_script( 'wp-embed' );
+
+			wp_dequeue_style( 'berocket_aapf_widget-style' );
+			wp_dequeue_style( 'wapf-frontend-css' );
+
+			wp_dequeue_style( 'woocommerce-layout' );
+			wp_dequeue_style( 'woocommerce-general' );
+
+			wp_dequeue_style( 'woo-viet-provinces-style' );
+
+			
+			// JS
+			wp_dequeue_script( 'woocommerce' );
+
+			wp_dequeue_script( 'wc-cart-fragments' );
+			wp_dequeue_script( 'wc-single-product' );
+
+			wp_deregister_script( 'jquery-ui-slider' );
+			wp_deregister_script( 'jquery-ui-mouse' );
+			wp_deregister_script( 'jquery-ui-core' );
+		}
 		
-		
-		// JS
-		wp_dequeue_script( 'woocommerce' );
-
-		wp_dequeue_script( 'wc-cart-fragments' );
-		wp_dequeue_script( 'wc-single-product' );
-
-		wp_dequeue_script( 'dokan-util-helper' );
-		wp_dequeue_script( 'dokan-login-form-popup' );
-		wp_dequeue_script( 'dokan-popup' );
-
-		wp_dequeue_script( 'woo-viet-provinces-script' );
-
-
 	}
 
 }
@@ -239,39 +295,6 @@ function remove_jquery_migrate( $scripts )
   	}
 }
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
-
-
-function load_cart_scripts()
-{
-	add_action( 'wp_enqueue_scripts', 'cart_scripts', 210 );
-}
-
-
-function cart_scripts()
-{
-	// Css
-	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', false );
-	wp_enqueue_style( 'datetimepicker' );
-
-	wp_dequeue_style( 'woo-viet-provinces-style' );
-	
-
-	// JS
-	wp_enqueue_script( 'wp-util' );
-
-	wp_register_style ( 'bootstrap-utilities', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap-utilities.min.css', '', '5.0.2', true );
-    wp_enqueue_style( 'bootstrap-utilities' );
-
-
-	wp_register_script( 'bootstrap-input-spinner', get_template_directory_uri() . '/assets/vendors/bootstrap-input-spinner/src/bootstrap-input-spinner.js', array(), '1', true );
-	wp_enqueue_script( 'bootstrap-input-spinner' );
-	
-	wp_register_script( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.full.min.js', array(), '1', true );
-	wp_enqueue_script( 'datetimepicker' );
-
-	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array(), '1', true );
-	wp_enqueue_script( 'custom-script' );
-}
 
 
 add_action( 'dokan_dashboard_wrap_start', 'load_dokan_style_and_script' );
