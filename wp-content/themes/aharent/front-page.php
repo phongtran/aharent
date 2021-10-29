@@ -160,6 +160,8 @@
                     $args = get_featured_products_query();
 
                     $loop = new WP_Query( $args );
+                    shuffle( $loop->posts );
+                    
 
                     while ( $loop->have_posts() ) :
                         $loop->the_post();

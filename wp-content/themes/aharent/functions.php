@@ -875,7 +875,6 @@ function get_featured_products_query()
 		'post_type' => 'product',
 		'meta_key' => 'total_sales',
 		'orderby' => 'meta_value_num',
-		'order'		=>	'rand',
 		'stock'       => 1,
 		'showposts'   => 30,
 	);
