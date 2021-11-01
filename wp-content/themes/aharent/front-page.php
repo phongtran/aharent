@@ -109,6 +109,8 @@
                     );
                     
                     $product_categories = get_terms( 'product_cat', $cat_args );
+
+                    random_total_sales();
                 ?>
 
                 <?php if ( !empty( $product_categories )) : ?>

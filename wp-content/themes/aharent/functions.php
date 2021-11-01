@@ -871,13 +871,15 @@ add_action( 'updated_post_meta', 'aha_after_post_meta', 10, 4 );
 
 function get_featured_products_query()
 {
+	$featured_categories = array( 'da-ngoai', 'dien-tu', 'may-anh-quay-phim', 'xe-may', 'o-to' );
+
 	return array(
 		'post_type' => 'product',
 		'tax_query'	=> array(
 			array(
-				'taxonomy' => 'product_cat',
-				'field' => 'slug',
-				'terms' => array( 'da-ngoai', 'dien-tu', 'may-anh-quay-phim', 'xe-may', 'o-to' ),
+				'taxonomy' 	=> 'product_cat',
+				'field' 	=> 'slug',
+				'terms' 	=> $featured_categories,
 			)
 		),
 		'meta_key' => 'total_sales',
@@ -1022,6 +1024,30 @@ function define_default_payment_gateway()
 
         WC()->session->set( 'chosen_payment_method', $default_payment_id );
     }
+}
+
+function random_total_sales()
+{
+	$featured_categories = array( 'da-ngoai', 'dien-tu', 'may-anh-quay-phim', 'xe-may', 'o-to' );
+	$query = array(
+		'post_type' => 'product',
+		'show_count'	=> 0,
+		'hide_empty'	=> 0,
+		'showposts'		=> 500,		
+		'tax_query'	=> array(
+			array(
+				'taxonomy' 	=> 'product_cat',
+				'field' 	=> 'slug',
+				'terms' 	=> $featured_categories,
+			)
+		)
+	);
+
+	$products = get_posts( $query );
+	foreach ( $products as $product )
+	{
+		update_post_meta( $product->ID, 'total_sales', rand( 5, 30 ) );
+	}
 }
 
 
