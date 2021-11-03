@@ -6,13 +6,20 @@
 <div class="container">
 
     <?php woocommerce_breadcrumb(); ?>
+
+    <?php
+        global $post, $wp_query;
+
+        
+
+        
+    ?>
     
-    <?php if ( is_archive() ): ?>
+    <?php if ( is_archive() ):  ?>
         <div class="shop-container">
             
             <?php
-                global $wp_query;
-
+                
                 if ( !is_search() || ( is_search() &&  $wp_query->found_posts > 0 ))
                     get_sidebar( 'shop' );
             ?>
@@ -27,7 +34,13 @@
             <?php if ( is_search() && 0 == $wp_query->found_posts ) : woocommerce_content();  ?>
             <?php else : ?>
                 <div class="shop-product-listing">
-                    <?php woocommerce_content(); ?>
+
+                    <?php
+                        if ( 'san-pham-thue-nhieu' == $post->post_name)
+                            the_content();
+                        else
+                            woocommerce_content();
+                    ?>
                 </div>
             <?php endif ?>
         </div>

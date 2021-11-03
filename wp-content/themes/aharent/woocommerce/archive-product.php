@@ -15,7 +15,7 @@
  * @version 3.4.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit; 
 
 get_header( 'shop' );
 
@@ -47,7 +47,7 @@ do_action( 'woocommerce_before_main_content' );
 </header>
 
 <?php
-if ( woocommerce_product_loop() ) {
+if ( woocommerce_product_loop() ) { 
 
 	/**
 	 * Hook: woocommerce_before_shop_loop.

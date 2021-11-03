@@ -106,6 +106,7 @@
                         'orderby'    => $orderby,
                         'order'      => $order,
                         'hide_empty' => $hide_empty,
+                        'parent'     => 0,
                     );
                     
                     $product_categories = get_terms( 'product_cat', $cat_args );
@@ -150,6 +151,39 @@
 
 
 
+        <div class="popular-products">
+            <div class="title-bar">
+                <h3>SẢN PHẨM ĐƯỢC THUÊ NHIỀU NHẤT</h3>
+            </div>
+
+                <?php
+                    woocommerce_product_loop_start();
+
+                    $args = get_most_rented_products_query();
+
+                    $loop = new WP_Query( $args );
+                    shuffle( $loop->posts );
+                    
+
+                    while ( $loop->have_posts() ) :
+                        $loop->the_post();
+                        
+                        wc_get_template_part( 'content', 'product' );
+                    endwhile;
+
+                    wp_reset_query();
+
+                    woocommerce_product_loop_end();
+                ?>
+
+            <div class="button-more">
+                <a href="/san-pham/san-pham-thue-nhieu/">
+                    <button class="aha-button" type="button">Xem thêm</button>
+                </a>
+            </div>
+            
+        </div>
+
 
         <div class="popular-products">
             <div class="title-bar">
@@ -183,6 +217,8 @@
             </div>
             
         </div>
+
+        
     </div>
 
 </div>

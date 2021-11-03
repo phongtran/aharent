@@ -101,6 +101,7 @@
                                         'orderby'    => $orderby,
                                         'order'      => $order,
                                         'hide_empty' => $hide_empty,
+                                        'parent'      => 0,
                                     );
                                     
                                     $product_categories = get_terms( 'product_cat', $cat_args );
@@ -189,18 +190,6 @@
                     <div class="pop-up-menu">
 
                         <div class="categories-pop-up-list">
-                            <?php
-                                $orderby = 'name';
-                                $order = 'asc';
-                                $hide_empty = false ;
-                                $cat_args = array(
-                                    'orderby'    => $orderby,
-                                    'order'      => $order,
-                                    'hide_empty' => $hide_empty,
-                                );
-                                
-                                $product_categories = get_terms( 'product_cat', $cat_args );
-                            ?>
                             <?php if ( !empty( $product_categories )) : ?>
                     
                     

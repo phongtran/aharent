@@ -250,7 +250,7 @@ function basic_scripts()
 		{
 
 		}
-		else
+		elseif (is_front_page())
 		{
 			wp_deregister_script( 'underscore' );
 			wp_deregister_script( 'wp-embed' );
@@ -273,6 +273,13 @@ function basic_scripts()
 			wp_deregister_script( 'jquery-ui-slider' );
 			wp_deregister_script( 'jquery-ui-mouse' );
 			wp_deregister_script( 'jquery-ui-core' );
+
+			
+		}
+		else
+		{
+			wp_dequeue_style( 'woocommerce-layout' );
+			wp_dequeue_style( 'woocommerce-general' );
 		}
 		
 	}
@@ -871,7 +878,28 @@ add_action( 'updated_post_meta', 'aha_after_post_meta', 10, 4 );
 
 function get_featured_products_query()
 {
-	$featured_categories = array( 'da-ngoai', 'dien-tu', 'may-anh-quay-phim', 'xe-may', 'o-to' );
+	$featured_categories = array( 'da-ngoai', 'laptop', 'dsrl-camera-camcorders', 'xe-may', 'o-to' );
+
+	return array(
+		'post_type' => 'product',
+		'tax_query'	=> array(
+			array(
+				'taxonomy' 	=> 'product_cat',
+				'field' 	=> 'slug',
+				'terms' 	=> $featured_categories,
+			)
+		),
+		// 'meta_key' => 'total_sales',
+		// 'orderby' => 'meta_value_num',
+		'orderby'	=> 'rand',
+		'stock'       => 1,
+		'showposts'   => 18,
+	);
+}
+
+function get_most_rented_products_query()
+{
+	$featured_categories = array( 'da-ngoai', 'laptop', 'dsrl-camera-camcorders', 'xe-may', 'o-to' );
 
 	return array(
 		'post_type' => 'product',
@@ -885,7 +913,7 @@ function get_featured_products_query()
 		'meta_key' => 'total_sales',
 		'orderby' => 'meta_value_num',
 		'stock'       => 1,
-		'showposts'   => 30,
+		'showposts'   => 18,
 	);
 }
 
@@ -1049,6 +1077,21 @@ function random_total_sales()
 		update_post_meta( $product->ID, 'total_sales', rand( 5, 30 ) );
 	}
 }
+
+function product_query( $q )
+{ 
+	// var_dump( $q );
+}
+add_action( 'woocommerce_product_query', 'product_query' ); 
+
+
+// add_action( 'pre_get_posts', 'custom_query_vars' );
+// function custom_query_vars( $query )
+// {
+// 	// if ( !is_admin())
+// 	// 	var_dump( $query );
+// 	return $query;
+// }
 
 
 ?>

@@ -4,6 +4,8 @@
     flex-wrap: wrap;    
     position: relative;
 
+    justify-content: space-between;
+
     .shop-sidebar {
 
         @media (max-width: 1000px) {
@@ -68,6 +70,7 @@
 
     
         margin-right: 20px;
+        max-width: 20%;
         
         .title {
             
@@ -97,7 +100,7 @@
 
     .shop-product-listing {
         
-        width: 80%;
+        width: 78%;
 
         @media (max-width: 1000px) {
             width: 100%;
