@@ -608,3 +608,33 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
         }
     }
 }
+
+
+.zalo-chat-widget {
+    @media (max-width: 600px) {
+        width: 100% !important;
+
+        bottom: 0 !important;
+        right: 0 !important;
+        background-color: $bg-color;
+        padding: 10px 0;
+
+        display: flex;
+        justify-content: center;
+
+        box-shadow: 1px 1px 5px 1px $shadow-color;
+
+        iframe {
+            right: auto !important;
+
+            .za-chat {
+                .logo {
+                    img {
+                        width: 30px  !important;
+                        height: 30px !important;
+                    }
+                }
+            }
+        }
+    }
+}

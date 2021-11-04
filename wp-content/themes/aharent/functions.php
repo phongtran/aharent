@@ -173,9 +173,6 @@ function basic_scripts()
 
 	wp_dequeue_style( 'font-awesome' );
 
-	wp_dequeue_style( 'dokan-style' );
-	wp_dequeue_style( 'dokan-fontawesome' );
-
 	
 	// JS queue
 	wp_enqueue_script( 'loading-bar' );
@@ -188,9 +185,7 @@ function basic_scripts()
 
 	wp_dequeue_script( 'woo-viet-provinces-script' );
 	
-	wp_dequeue_script( 'dokan-util-helper' );
-	wp_dequeue_script( 'dokan-login-form-popup' );
-	wp_dequeue_script( 'dokan-popup' );
+	
 
 	if ( is_single() )
 	{
@@ -262,6 +257,8 @@ function basic_scripts()
 			wp_dequeue_style( 'woocommerce-general' );
 
 			wp_dequeue_style( 'woo-viet-provinces-style' );
+			wp_dequeue_style( 'dokan-style' );
+			wp_dequeue_style( 'dokan-fontawesome' );
 
 			
 			// JS
@@ -274,9 +271,13 @@ function basic_scripts()
 			wp_deregister_script( 'jquery-ui-mouse' );
 			wp_deregister_script( 'jquery-ui-core' );
 
+			wp_dequeue_script( 'dokan-util-helper' );
+			wp_dequeue_script( 'dokan-login-form-popup' );
+			wp_dequeue_script( 'dokan-popup' );
+
 			
 		}
-		else
+		elseif ( !dokan_is_seller_dashboard() )
 		{
 			wp_dequeue_style( 'woocommerce-layout' );
 			wp_dequeue_style( 'woocommerce-general' );
