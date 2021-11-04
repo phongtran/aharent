@@ -24,7 +24,6 @@ global $prices;
 global $time_unit;
 if ( !isset($prices) )
 	$prices = get_product_prices( $product );
-			
 
 ?>
 
