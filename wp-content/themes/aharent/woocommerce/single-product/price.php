@@ -72,10 +72,18 @@ if ( !isset($prices) )
 									<?php 
 										if ( is_numeric( $duration ) )
 										{
-											if ( $level < $duration )
-												echo $level . ' - ' . $duration . ' ' . __( $time_unit, 'woocommerce' );
-											else
+											if ( $value['block_price'] )
+											{
 												echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+											}
+											else
+											{
+												if ( $level < $duration )
+													echo $level . ' - ' . $duration . ' ' . __( $time_unit, 'woocommerce' );
+												else
+													echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+											}
+											
 										}
 										else
 										{

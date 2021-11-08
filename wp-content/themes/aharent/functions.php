@@ -1084,6 +1084,7 @@ function product_query( $q )
 { 
 	// var_dump( $q );
 }
-add_action( 'woocommerce_product_query', 'product_query' ); 
+add_action( 'woocommerce_product_query', 'product_query' );
+
 
 ?>
