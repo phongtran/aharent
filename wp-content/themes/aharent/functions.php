@@ -1086,14 +1086,4 @@ function product_query( $q )
 }
 add_action( 'woocommerce_product_query', 'product_query' ); 
 
-
-// add_action( 'pre_get_posts', 'custom_query_vars' );
-// function custom_query_vars( $query )
-// {
-// 	// if ( !is_admin())
-// 	// 	var_dump( $query );
-// 	return $query;
-// }
-
-
 ?>
