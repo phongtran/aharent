@@ -87,5 +87,44 @@
     </footer>
 
     <?php wp_footer(); ?>
+
+
+    <div class="chat-area">
+        <div class="zalo">
+            <div class="zalo-chat-widget" data-oaid="1959065384440068544" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+
+            <script src="https://sp.zalo.me/plugins/sdk.js"></script>
+        </div>
+
+        <div class="fb">
+            
+                            <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    xfbml            : true,
+    version          : 'v12.0'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+  attribution="install_email"
+  attribution_version="biz_inbox"
+  page_id="103026198160404">
+</div>
+
+
+        </div>
+    </div>
 </body>
 </html>

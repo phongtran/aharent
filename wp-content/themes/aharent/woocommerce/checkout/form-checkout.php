@@ -77,3 +77,36 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
+
+<div class="popular-products">
+            <div class="title-bar">
+                <h3>SẢN PHẨM NỔI BẬT</h3>
+            </div>
+
+                <?php
+                    woocommerce_product_loop_start();
+
+                    $args = get_featured_products_query();
+
+                    $loop = new WP_Query( $args );
+                    shuffle( $loop->posts );
+                    
+
+                    while ( $loop->have_posts() ) :
+                        $loop->the_post();
+                        
+                        wc_get_template_part( 'content', 'product' );
+                    endwhile;
+
+                    wp_reset_query();
+
+                    woocommerce_product_loop_end();
+                ?>
+
+            <div class="button-more">
+                <a href="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' )); ?>">
+                    <button class="aha-button" type="button">Xem thêm</button>
+                </a>
+            </div>
+            
+        </div>

@@ -51,10 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </head>
 
 
-    <div class="zalo-chat-widget" data-oaid="1959065384440068544" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
-
-    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
-
+   
     <body>
 
    <!-- Google Tag Manager (noscript) -->

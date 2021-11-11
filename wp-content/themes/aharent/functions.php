@@ -918,6 +918,27 @@ function get_most_rented_products_query()
 	);
 }
 
+function get_recommended_products_query()
+{
+	$featured_categories = array( 'da-ngoai', 'laptop', 'dsrl-camera-camcorders', 'xe-may', 'o-to' );
+
+	return array(
+		'post_type' => 'product',
+		'tax_query'	=> array(
+			array(
+				'taxonomy' 	=> 'product_cat',
+				'field' 	=> 'slug',
+				'terms' 	=> $featured_categories,
+			)
+		),
+		// 'meta_key' => 'total_sales',
+		// 'orderby' => 'meta_value_num',
+		'orderby'	=> 'rand',
+		'stock'       => 1,
+		'showposts'   => 18,
+	);
+}
+
 
 function update_order_review( $checkout )
 {
