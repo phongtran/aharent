@@ -610,31 +610,90 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 }
 
 
-.zalo-chat-widget {
+
+.chat-area {
+    
+
     @media (max-width: 600px) {
-        width: 100% !important;
+        height: 70px;
+        width: 100%;
 
-        bottom: 0 !important;
-        right: 0 !important;
+        position: fixed;
+        bottom: 0;
+        
+        box-shadow: 1px 1px 5px 1px $shadow-color !important;
         background-color: $bg-color;
-        padding: 10px 0;
-
+        
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
 
-        box-shadow: 1px 1px 5px 1px $shadow-color;
+        padding: 5px;
 
-        iframe {
-            right: auto !important;
 
-            .za-chat {
-                .logo {
-                    img {
-                        width: 30px  !important;
-                        height: 30px !important;
+    }
+    
+    .zalo-chat-widget {
+
+        bottom: 20px !important;
+        right: 10px !important;
+
+        @media (max-width: 600px) {
+            position: relative !important;
+            top: 0 !important;
+            left: 0 !important;
+
+            iframe {
+                right: auto !important;
+
+                .za-chat {
+                    .logo {
+                        img {
+                            width: 30px  !important;
+                            height: 30px !important;
+                        }
                     }
                 }
             }
         }
+    }
+
+    .fb {
+
+        .fb_dialog {
+
+            @media (max-width: 600px) {
+                top: 0 !important;
+                position: relative !important;
+                background: none !important;
+            }
+
+            .fb_dialog_content {
+
+                @media (max-width: 600px) {
+                    position: relative;
+                    background: none !important;
+                }
+    
+                
+                iframe {
+                    animation: none !important;
+                    right: 10px !important;
+                    bottom: 80px !important;
+    
+                    margin: 0 !important;
+    
+                    box-shadow: none !important;
+    
+                    @media (max-width: 600px) {
+                        position: relative !important;
+                        top: 0 !important;
+                        left: 0 !important;
+
+                    }
+                }
+            }
+        }
+
+        
     }
 }
