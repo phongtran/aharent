@@ -920,7 +920,16 @@ function get_most_rented_products_query()
 
 function get_recommended_products_query()
 {
-	$featured_categories = array( 'da-ngoai', 'laptop', 'dsrl-camera-camcorders', 'xe-may', 'o-to' );
+	$items = WC()->cart->get_cart();
+	$categories = array();
+
+	foreach ( $items as $item )
+	{
+		$product_id = $item['product_id'];
+		$terms = get_the_terms( $product_id, 'product_cat' );
+		foreach ( $terms as $term )
+			array_push( $categories, $term->slug );
+	}	
 
 	return array(
 		'post_type' => 'product',
@@ -928,7 +937,7 @@ function get_recommended_products_query()
 			array(
 				'taxonomy' 	=> 'product_cat',
 				'field' 	=> 'slug',
-				'terms' 	=> $featured_categories,
+				'terms' 	=> $categories,
 			)
 		),
 		// 'meta_key' => 'total_sales',
