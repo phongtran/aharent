@@ -73,6 +73,9 @@ function prefix_output_help_tab_content( $query_vars ) {
             $rental_terms   = get_user_meta( $user_id, 'vendor_rental_terms', true );
             $receive_return_terms = get_user_meta( $user_id, 'receive_return_terms', true );
             $delivery_terms = get_user_meta( $user_id, 'delivery_terms', true );
+            $discount_percentage = get_user_meta( $user_id, 'discount_percentage', true );
+            $discount_date_from = get_user_meta( $user_id, 'discount_date_from', true );
+            $discount_date_to = get_user_meta( $user_id, 'discount_date_to', true );
 
             ?>
             <form method="post" id="settings-form"  action="" class="dokan-form-horizontal">
@@ -101,6 +104,33 @@ function prefix_output_help_tab_content( $query_vars ) {
                     </label>
                     <div class="dokan-w5 text-editor">
                         <textarea id="delivery" name="delivery_terms" class="tinymce-form dokan-form-control"><?php echo $delivery_terms ?></textarea>
+                    </div>
+                </div>
+
+                <div class="dokan-form-group">
+                    <label class="dokan-w3 dokan-control-label" for="bio">
+                        <?php esc_html_e( 'Discount percentage' ); ?>
+                    </label>
+                    <div class="dokan-w5 text-editor">
+                        <input id="discount-percentage" name="discount_percentage" class="dokan-form-control" value="<?php echo $discount_percentage ?>" />
+                    </div>
+                </div>
+
+                <div class="dokan-form-group">
+                    <label class="dokan-w3 dokan-control-label" for="bio">
+                        <?php esc_html_e( 'Discount date starts' ); ?>
+                    </label>
+                    <div class="dokan-w5 text-editor">
+                        <input id="discount-date-from" name="discount_date_from" class="date-time-picker dokan-form-control" value="<?php echo $discount_date_from ?>" />
+                    </div>
+                </div>
+
+                <div class="dokan-form-group">
+                    <label class="dokan-w3 dokan-control-label" for="bio">
+                        <?php esc_html_e( 'Discount date ends' ); ?>
+                    </label>
+                    <div class="dokan-w5 text-editor">
+                        <input id="discount-date-to" name="discount_date_to" class="date-time-picker dokan-form-control" value="<?php echo $discount_date_to ?>" />
                     </div>
                 </div>
                 
@@ -140,10 +170,16 @@ function prefix_save_rental_terms_settings() {
     $rental_terms               = $post_data['rental_terms'];
     $receive_return_terms       = $post_data['receive_return_terms'];
     $delivery_terms             = $post_data['delivery_terms'];
+    $discount_percentage        = $post_data['discount_percentage'];
+    $discount_date_from         = $post_data['discount_date_from'];
+    $discount_date_to           = $post_data['discount_date_to'];
     
     update_user_meta( $user_id, 'vendor_rental_terms', $rental_terms );
     update_user_meta( $user_id, 'receive_return_terms', $receive_return_terms );
     update_user_meta( $user_id, 'delivery_terms', $delivery_terms );
+    update_user_meta( $user_id, 'discount_percentage', $discount_percentage );
+    update_user_meta( $user_id, 'discount_date_from', $discount_date_from );
+    update_user_meta( $user_id, 'discount_date_to', $discount_date_to );
     
     wp_send_json_success( array(
         'msg' => __( 'Your information has been saved successfully.' ),

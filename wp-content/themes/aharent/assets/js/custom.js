@@ -2,10 +2,6 @@
 
 (function($) {
 	
-	// $(document).ready(function() {
-	// 	topbar.hide();
-	// });
-
 	for (const spinner of $('input.number-spinner')) {
 		var step = $(spinner).attr('step');
 		console.log(step);
@@ -79,6 +75,8 @@
 
 		return true;
 	}
+
+
 
 
 	

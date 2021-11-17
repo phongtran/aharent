@@ -282,6 +282,11 @@ function basic_scripts()
 			wp_dequeue_style( 'woocommerce-layout' );
 			wp_dequeue_style( 'woocommerce-general' );
 		}
+		elseif ( dokan_is_seller_dashboard() )
+		{
+			wp_enqueue_style( 'datetimepicker' );
+			wp_enqueue_script( 'datetimepicker' );
+		}
 		
 	}
 
@@ -894,7 +899,7 @@ function get_featured_products_query()
 		// 'orderby' => 'meta_value_num',
 		'orderby'	=> 'rand',
 		'stock'       => 1,
-		'showposts'   => 18,
+		'showposts'   => 12,
 	);
 }
 
@@ -914,7 +919,7 @@ function get_most_rented_products_query()
 		'meta_key' => 'total_sales',
 		'orderby' => 'meta_value_num',
 		'stock'       => 1,
-		'showposts'   => 18,
+		'showposts'   => 12,
 	);
 }
 

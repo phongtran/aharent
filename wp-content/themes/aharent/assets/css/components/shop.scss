@@ -92,6 +92,10 @@
                         input {
                             border: 1px solid $footer-text-color;
                         }
+
+                        label {
+                            max-width: 90%;
+                        }
                     }
                 }
             }
