@@ -21,4 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="product-title-wrapper">
 	<?php the_title( '<h1 class="product_title entry-title">', '</h1>' ); ?>
+	<?php
+	global $post;
+		$discount = is_discount( $post );
+		if ( $discount ) :
+	?>
+	<span>kjkjdskafjskda</span>
+
+	<?php endif ?>
 </div>

@@ -1122,4 +1122,27 @@ function product_query( $q )
 add_action( 'woocommerce_product_query', 'product_query' );
 
 
+function is_discount( $product )
+{
+	$vendor = get_product_vendor( $product );
+	$discount_percentage = get_user_meta( $vendor, 'discount_percentage', true );
+
+	if ( !$discount_percentage )
+		return false;
+
+	$date_from = get_user_meta( $vendor, 'discount_date_from', true );
+	$discount_date_from = new DateTime( str_replace( '/', '-', $date_from ) );
+
+	$date_to = get_user_meta( $vendor, 'discount_date_to', true );
+	$discount_date_to = new DateTime( str_replace( '/', '-', $date_to ) );
+
+	$now = new DateTime();
+	
+	if ( $now < $discount_date_from || $discount_date_to < $now )
+		return false;
+
+	return $discount_percentage;
+}
+
+
 ?>
