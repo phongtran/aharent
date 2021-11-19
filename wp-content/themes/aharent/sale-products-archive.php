@@ -1,17 +1,17 @@
-<?php /* Template Name: Sale Products Template */ ?>
+<?php /* Template Name: Sale Products Archives */ ?>
 
 <?php get_header(); ?>
 
 <?php
 
-    global $woocommerce_loop, $woocommerce, $paged;
-
+    global $paged, $wp_query;
+    
     if ( !$paged )
         $paged = 1;
 
     $per_page = 60;
 
-	$args = array(
+    $args = array(
 		'post_type' => 'product',
         'posts_per_page' => $per_page,
         'paged'         => $paged,
@@ -24,10 +24,10 @@
             )
         ),
 	);
-
-    ob_start();
-
-    $products = new WP_Query( $args );
+    
+    WC()->query->product_query( new WP_Query( $args ) );
+    $wp_query = WC_Query::get_main_query();
+    
     
 ?>
 
@@ -55,12 +55,16 @@
 
                     <?php
               
-                        wc_get_template( 'loop/result-count.php', array( 
-                            'total' => $products->found_posts,
-                            'per_page'  => $per_page,
-                            'current'   => $paged
+                        // wc_get_template( 'loop/result-count.php', array( 
+                        //     'total' => $products->found_posts,
+                        //     'per_page'  => $per_page,
+                        //     'current'   => $paged
                         
-                        ));
+                        // ));
+
+                        $products = WC_Query::get_main_query();
+
+                        do_action( 'woocommerce_archive_description' );
 
                         if ( woocommerce_product_loop() ) : ?>
 
@@ -68,13 +72,20 @@
 
                             <?php woocommerce_product_loop_start(); ?>
 
-                                <?php while ( $products->have_posts() ) : $products->the_post(); ?>
+                            <?php if (wc_get_loop_prop('total')) : ?>
+
+                                <?php while ( $products->have_posts() ) :  ?>
+
+                                    <?php $products->the_post(); ?>
 
                                     <?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
                                 <?php endwhile; // end of the loop. ?>
+                            <?php endif ?>
 
                             <?php woocommerce_product_loop_end(); ?>
+
+                            <?php do_action( 'woocommerce_after_shop_loop' ); ?>
 
                         <?php endif;
 
@@ -86,7 +97,7 @@
 
                             ));
 
-                        wp_reset_postdata();   
+                        wp_reset_postdata();
                     ?>
                 </div>
         </div>

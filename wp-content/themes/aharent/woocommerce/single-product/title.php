@@ -18,11 +18,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+global $product;
 ?>
 <div class="product-title-wrapper">
 	<?php the_title( '<h1 class="product_title entry-title">', '</h1>' ); ?>
+	<div class="sku">(<?php echo $product->sku  ?>)</div>
 	<?php
-		global $product;
+		
 		$discount = get_discount( $product );
 		if ( $discount ) :
 	?>

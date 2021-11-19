@@ -9,10 +9,6 @@
 
     <?php
         global $post, $wp_query;
-
-        
-
-        
     ?>
     
     <?php if ( is_archive() ):  ?>
@@ -34,6 +30,8 @@
             <?php if ( is_search() && 0 == $wp_query->found_posts ) : woocommerce_content();  ?>
             <?php else : ?>
                 <div class="shop-product-listing">
+
+                
 
                     <?php
                         if ( 'san-pham-thue-nhieu' == $post->post_name)
