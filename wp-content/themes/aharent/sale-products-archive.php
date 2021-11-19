@@ -4,18 +4,17 @@
 
 <?php
 
-    global $woocommerce_loop, $woocommerce;
-    $featured_categories = array( 'da-ngoai', 'laptop', 'dsrl-camera-camcorders', 'xe-may', 'o-to' );
+    global $woocommerce_loop, $woocommerce, $paged;
+
+    if ( !$paged )
+        $paged = 1;
+
+    $per_page = 60;
 
 	$args = array(
 		'post_type' => 'product',
-		'tax_query'	=> array(
-			array(
-				'taxonomy' 	=> 'product_cat',
-				'field' 	=> 'slug',
-				'terms' 	=> $featured_categories,
-			)
-		),
+        'posts_per_page' => $per_page,
+        'paged'         => $paged,
         'meta_query'    => array(
             array(
                 'key'   =>  'date_sale_ends',
@@ -24,15 +23,12 @@
                 'type'  => 'DATE',
             )
         ),
-		'meta_key' => 'total_sales',
-		'orderby' => 'meta_value_num',
-		'stock'       => 1,
-		'showposts'   => 12,
 	);
 
     ob_start();
 
     $products = new WP_Query( $args );
+    
 ?>
 
 
@@ -58,8 +54,17 @@
                 <div class="shop-product-listing">
 
                     <?php
+              
+                        wc_get_template( 'loop/result-count.php', array( 
+                            'total' => $products->found_posts,
+                            'per_page'  => $per_page,
+                            'current'   => $paged
+                        
+                        ));
 
-                        if ( $products->have_posts() ) : ?>
+                        if ( woocommerce_product_loop() ) : ?>
+
+                            <?php do_action( 'woocommerce_before_shop_loop' ); ?>
 
                             <?php woocommerce_product_loop_start(); ?>
 
@@ -72,6 +77,14 @@
                             <?php woocommerce_product_loop_end(); ?>
 
                         <?php endif;
+
+                        $total_pages = ceil( $products->found_posts / $per_page );
+
+                            wc_get_template( 'loop/pagination.php', array( 
+                                'total' => $total_pages,
+                                'current'   => $paged
+
+                            ));
 
                         wp_reset_postdata();   
                     ?>
