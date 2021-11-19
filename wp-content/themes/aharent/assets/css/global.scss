@@ -172,6 +172,22 @@ a {
     .rent-price {
         font-weight: bold;
         font-size: 16px;
+
+        width: 100%;
+    }
+
+    .discount-tag {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        
+        span {
+            border: 1px solid $validation-text;
+            color: $validation-text;
+            font-weight: bold;
+
+            padding: 0 5px;
+        }
     }
 
     .rent-count {
@@ -181,6 +197,8 @@ a {
 
         display: flex;
         align-items: center;
+
+        width: 100%;
     }
 }
 

@@ -28,6 +28,7 @@
         &::before {
           content: "*";
         }
+
         color: $footer-text-color;
         font-size: 14px;
         font-weight: normal;
@@ -188,6 +189,15 @@
 
             h3.price {
               margin-top: 5px;
+              
+              .original-price {
+                font-size: 15px;
+                color: $text-color;
+                margin-right: 5px;
+
+                display: flex;
+                align-items: center;
+              }
             }
 
             .deposit-price {
@@ -195,6 +205,15 @@
                 font-size: 24px;
                 font-weight: bold;
                 color: #258c69;
+
+                .original-price {
+                  font-size: 15px;
+                  color: $text-color;
+                  margin-right: 5px;
+
+                  display: flex;
+                  align-items: center;
+                }
               }
             }
           }

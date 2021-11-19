@@ -183,6 +183,26 @@
         .product-title-wrapper {
             display: flex;
             flex-wrap: wrap;
+            margin-bottom: 5px;
+
+            h1 {
+                margin-bottom: 0;
+            }
+
+            .discount-tag {
+                display: flex;
+                align-items: center;
+
+                margin-left: 5px;
+
+                span {
+                    border: 1px solid $validation-text;
+                    color: $validation-text;
+                    padding: 0 5px;
+
+                    font-weight: bold;
+                }
+            }
         }
 
         .add-to-cart {
@@ -325,6 +345,15 @@
                             font-size: 1.5rem;
                         }
                     }
+
+                    .original-price {
+                        font-size: 15px;
+                        display: flex;
+                        align-items: center;
+                        margin-right: 5px;
+                        color: $text-color;
+                        // text-decoration: line-through;
+                    }
                     
 
                     span.percentage {
@@ -358,6 +387,7 @@
 
                 .price-item-title {
                     display: flex;
+                    justify-content: center;
                     
                     font-size: 1rem;
 

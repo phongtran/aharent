@@ -55,15 +55,41 @@ defined( 'ABSPATH' ) || exit;
 					</td>
 					<?php if ( 'cod' == $payment_method ) : ?>
 						<td>
-							<?php $cart_item['data']->set_price( $cart_item['rental_price'] ); ?>
+							<?php
+								$amount = $cart_item['rental_price'];
+
+								if ( $cart_item['discount'] )
+									if ( 'percentage' == $cart_item['discount']['type'] )
+										$amount = $amount * ( 100 - $cart_item['discount']['value'] ) / 100;
+
+								$cart_item['data']->set_price( $amount );
+							?>
 							<?php echo wc_price( $cart_item['data']->get_price() * $cart_item['quantity']) ?>
 						</td>
 					<?php else: ?>
 						<td>
-							<?php echo wc_price( ($cart_item['rental_price'] - $cart_item['deposit'])  * $cart_item['quantity']) ?>
+							<?php
+								$amount = ($cart_item['rental_price'] - $cart_item['deposit'])  * $cart_item['quantity'];
+
+								if ( $cart_item['discount'] )
+									if ( 'percentage' == $cart_item['discount']['type'] )
+										$amount = $amount * ( 100 - $cart_item['discount']['value'] ) / 100;
+							
+								echo wc_price( $amount );
+								
+							?>
 						</td>
 						<td class="product-total">
-							<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] ); ?> 
+							<?php
+								$amount = $cart_item['deposit'] * $cart_item['quantity'];
+
+								if ( $cart_item['discount'] )
+									if ( 'percentage' == $cart_item['discount']['type'] )
+										$amount = $amount * ( 100 - $cart_item['discount']['value'] ) / 100;
+
+								echo wc_price( $amount );
+								
+							?> 
 						</td>
 					<?php endif ?>
 				</tr>

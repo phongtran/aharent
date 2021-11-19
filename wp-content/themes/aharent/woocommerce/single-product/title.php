@@ -22,11 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="product-title-wrapper">
 	<?php the_title( '<h1 class="product_title entry-title">', '</h1>' ); ?>
 	<?php
-	global $post;
-		$discount = is_discount( $post );
+		global $product;
+		$discount = get_discount( $product );
 		if ( $discount ) :
 	?>
-	<span>kjkjdskafjskda</span>
+	<div class="discount-tag">
+		<span>-<?php echo $discount['value']; echo ('percentage' == $discount['type'])? '%':'đ' ?></span>
+	</div>
 
 	<?php endif ?>
 </div>

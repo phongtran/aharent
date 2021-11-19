@@ -20,28 +20,28 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'woocommerce_before_cart' ); ?>
 
 <div class="aha-cart container">
-	<div class="cart-steps">
+    <div class="cart-steps">
 
-		<div class="cart-step cart-items active">
-			<div class="cart-step-title">
-				<h3>SẢN PHẨM ĐẶT THUÊ</h3>
-			</div>
+        <div class="cart-step cart-items active">
+            <div class="cart-step-title">
+                <h3>SẢN PHẨM ĐẶT THUÊ</h3>
+            </div>
 
-			<?php if ( $notices ) : ?>
+            <?php if ( $notices ) : ?>
 
-			<!-- <div class="woocommerce-info"<?php echo wc_get_notice_data_attr( $notice ); ?>>
+            <!-- <div class="woocommerce-info"<?php echo wc_get_notice_data_attr( $notice ); ?>>
 				<?php echo wc_kses_notice( $notice['notice'] ); ?>
 			</div> -->
-			<?php endif ?>
+            <?php endif ?>
 
-			<div class="cart-step-content">
+            <div class="cart-step-content">
 
-			<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
-			<?php do_action( 'woocommerce_before_cart_table' ); ?>
+                <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+                    <?php do_action( 'woocommerce_before_cart_table' ); ?>
 
-			<?php do_action( 'woocommerce_before_cart_contents' ); ?>
+                    <?php do_action( 'woocommerce_before_cart_contents' ); ?>
 
-					<?php
+                    <?php
 					$index = 0;
 					foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 						$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
@@ -51,13 +51,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 							$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 							?>
 
-							<?php if ( $index > 0): ?>
+                    <?php if ( $index > 0): ?>
 
-								<div class="item-break"></div>
-							<?php endif ?>
-							<div class="cart-item">
-								<div class="cart-item-thumbnail">
-									<?php
+                    <div class="item-break"></div>
+                    <?php endif ?>
+                    <div class="cart-item">
+                        <div class="cart-item-thumbnail">
+                            <?php
 									$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
 									if ( ! $product_permalink ) {
@@ -67,7 +67,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 									}
 									?>
 
-									<!-- <div class="security-deposit-policy">
+                            <!-- <div class="security-deposit-policy">
 										<span><a tabindex="0" role="button" class="popover-dismiss" data-bs-toggle="popover" data-bs-trigger="focus" title="Chính sách thế chân"
   												data-bs-content="<?php
 												  $vendor_rental_terms = get_user_meta( $_product->post->post_author, 'vendor_rental_terms', true );
@@ -75,12 +75,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 													if ( !empty( $vendor_rental_terms) )
 														echo $vendor_rental_terms; ?>">Chính sách thế chân</a></span>
 									</div> -->
-								</div>
+                        </div>
 
-								<div class="cart-item-description">
-									<div class="cart-item-title">
-										<div class="title">
-										<?php
+                        <div class="cart-item-description">
+                            <div class="cart-item-title">
+                                <div class="title">
+                                    <?php
 											if ( ! $product_permalink ) {
 												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key ) . '&nbsp;' );
 											} else {
@@ -97,41 +97,47 @@ do_action( 'woocommerce_before_cart' ); ?>
 												echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__( 'Available on backorder', 'woocommerce' ) . '</p>', $product_id ) );
 											}
 										?>
-										</div>
+                                </div>
 
-										
-									</div>
 
-									<div class="info-section d-flex">
-										<table class="item-data">
-											<tbody>
+                            </div>
 
-												<?php
+                            <div class="info-section d-flex">
+                                <table class="item-data">
+                                    <tbody>
+
+                                        <?php
 													$product = wc_get_product( $_product->id );
 													$time_units = $product->get_attribute( 'time_unit' );
 												?>
-												<?php if ( $time_units ) : $time_units = explode( ' | ', $time_units ); ?>
+                                        <?php if ( $time_units ) : $time_units = explode( ' | ', $time_units ); ?>
 
-													<tr class="time-unit">
-														<td class="label">Thuê theo:</td>
-														<td>
-															<div class="time-unit-row">
-																<select data-key="<?php echo $cart_item_key ?>" class="form-select time-unit" id="time_unit" name="cart[<?php echo $cart_item_key ?>][time_unit]">
-																	<?php foreach ( $time_units as $time_unit ) : ?>
-																		<option <?php echo ($time_unit == $cart_item['time-unit']) ? 'selected' : '' ?> value="<?php echo $time_unit ?>"><?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?></option>
-																	<?php endforeach ?> 
-																</select>
-															</div>
-														</td>
-													</tr>
+                                        <tr class="time-unit">
+                                            <td class="label">Thuê theo:</td>
+                                            <td>
+                                                <div class="time-unit-row">
+                                                    <select data-key="<?php echo $cart_item_key ?>"
+                                                        class="form-select time-unit" id="time_unit"
+                                                        name="cart[<?php echo $cart_item_key ?>][time_unit]">
+                                                        <?php foreach ( $time_units as $time_unit ) : ?>
+                                                        <option
+                                                            <?php echo ($time_unit == $cart_item['time-unit']) ? 'selected' : '' ?>
+                                                            value="<?php echo $time_unit ?>">
+                                                            <?php echo ucfirst(__( $time_unit, 'woocommerce' )) ?>
+                                                        </option>
+                                                        <?php endforeach ?>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-												<?php endif ?>
-												
-												<tr class="quantity">
-													<td class="label">Số lượng:</td>
-													<td>
+                                        <?php endif ?>
 
-													<?php
+                                        <tr class="quantity">
+                                            <td class="label">Số lượng:</td>
+                                            <td>
+
+                                                <?php
 														if ( $_product->is_sold_individually() ) {
 															$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
 														} else {
@@ -152,61 +158,69 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 														echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 														?>
-													</td>
-												</tr>
-												<tr class="time-period">
-													<td class="label">Thời gian thuê:</td>
-													<td>
-														<div class="time-period-wrapper">
-															<div class="duration">
+                                            </td>
+                                        </tr>
+                                        <tr class="time-period">
+                                            <td class="label">Thời gian thuê:</td>
+                                            <td>
+                                                <div class="time-period-wrapper">
+                                                    <div class="duration">
 
-																<?php
-																	$time_min = $product->get_meta( 'time_min' );
-																	if ( !$time_min) $time_min = 1;
+                                                        <?php
+															$time_min = $product->get_meta( 'time_min' );
+															if ( !$time_min) $time_min = 1;
 
-																	$time_max = $product->get_meta( 'time_max' );
-																	
-																	$time_step = $product->get_meta( 'time_step' );
-																	if ( !$time_step ) $time_step = 1;
-																?>
+															$time_max = $product->get_meta( 'time_max' );
+															
+															$time_step = $product->get_meta( 'time_step' );
+															if ( !$time_step ) $time_step = 1;
+														?>
 
-																<input id="duration" class="number-spinner" name="cart[<?php echo $cart_item_key ?>][duration]" type="number" value="<?php echo $cart_item['duration'] ?>" min="<?php echo $time_min?>" <?php if ($time_max) echo 'max="' . $time_max . '"' ?> step="<?php echo $time_step ?>" />
-															</div>
+                                                        <input id="duration" class="number-spinner"
+                                                            name="cart[<?php echo $cart_item_key ?>][duration]"
+                                                            type="number" value="<?php echo $cart_item['duration'] ?>"
+                                                            min="<?php echo $time_min?>"
+                                                            <?php if ($time_max) echo 'max="' . $time_max . '"' ?>
+                                                            step="<?php echo $time_step ?>" />
+                                                    </div>
 
-															<span class="time-unit-wrapper">
-																<span class="time-unit" data-key="<?php echo $cart_item_key ?>">
-																	<?php
-																		if (isset($cart_item['time-unit']))
-																			$time_unit = __( $cart_item['time-unit'], 'woocommerce' );
-																		else
-																		{
-																			$time_unit = __( 'day', 'woocommerce' );
-																			$time_block = $_product->get_meta( '_time_block' );
-																			if ( !empty( $time_block) )
-																				$time_unit = __( $time_block, 'woocommerce' );
-																		}
+                                                    <span class="time-unit-wrapper">
+                                                        <span class="time-unit" data-key="<?php echo $cart_item_key ?>">
+                                                            <?php
+																if (isset($cart_item['time-unit']))
+																	$time_unit = __( $cart_item['time-unit'], 'woocommerce' );
+																else
+																{
+																	$time_unit = __( 'day', 'woocommerce' );
+																	$time_block = $_product->get_meta( '_time_block' );
+																	if ( !empty( $time_block) )
+																		$time_unit = __( $time_block, 'woocommerce' );
+																}
 
-																		echo $time_unit;
-																	?>
-																</span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
-															</span>
+																echo $time_unit;
+															?>
+                                                        </span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+                                                    </span>
 
-															<div class="date-picker-input">
-																<div><input type="text" id="date-from" name="cart[<?php echo $cart_item_key ?>][_date_from]" value="<?php echo $cart_item['date-from'] ?>" placeholder="Từ ngày"></div>
-																<!-- <div class="delimeter"><span>đến</span></div>
+                                                    <div class="date-picker-input">
+                                                        <div><input type="text" id="date-from"
+                                                                name="cart[<?php echo $cart_item_key ?>][_date_from]"
+                                                                value="<?php echo $cart_item['date-from'] ?>"
+                                                                placeholder="Từ ngày"></div>
+                                                        <!-- <div class="delimeter"><span>đến</span></div>
 																<div><input type="text" id="date-to" name="_date_to" value="<?php echo $cart_item['date-to'] ?>" placeholder="Đến ngày"></div> -->
-															</div>
-															
-															
-														</div>
-														
-													</td>
-												</tr>
+                                                    </div>
 
-												<tr class="delivery-option">
-													<td class="label">Giao/nhận:</td>
-													<td>
-														<?php
+
+                                                </div>
+
+                                            </td>
+                                        </tr>
+
+                                        <tr class="delivery-option">
+                                            <td class="label">Giao/nhận:</td>
+                                            <td>
+                                                <?php
 															$vendor_login = $product->get_meta( 'vendor' );
 															$vendor_profiles = get_vendor_profiles( $vendor_login );
 															$address = $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
@@ -216,46 +230,79 @@ do_action( 'woocommerce_before_cart' ); ?>
 															$delivery_terms = get_user_meta( $vendor, 'delivery_terms', true );
 														?>
 
-														<div class="radio-options">
-															<?php if ( $delivery_terms ): ?>
-																<div class='radio-option-row'>
-																	<input id="delivery_option_delivery" type="radio" name="cart[<?php echo $cart_item_key ?>][delivery_option]" value="delivery" <?php echo ('delivery' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
-																	<label for="delivery_option_delivery">Giao hàng tận nơi.</label>
-																</div>
-															<?php endif ?>
-															
-															<?php if ( !empty( $address )): ?>
-																<div class='radio-option-row'>
-																	<input id="delivery_option_pick-up" type="radio" name="cart[<?php echo $cart_item_key ?>][delivery_option]" value="pick-up" <?php echo ('pick-up' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
-																	<label for="delivery_option_pick-up">Nhận hàng tại <?php echo $address ?>.</label>
-																</div>
-															<?php endif ?>
-														</div>
+                                                <div class="radio-options">
+                                                    <?php if ( $delivery_terms ): ?>
+                                                    <div class='radio-option-row'>
+                                                        <input id="delivery_option_delivery" type="radio"
+                                                            name="cart[<?php echo $cart_item_key ?>][delivery_option]"
+                                                            value="delivery"
+                                                            <?php echo ('delivery' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
+                                                        <label for="delivery_option_delivery">Giao hàng tận nơi.</label>
+                                                    </div>
+                                                    <?php endif ?>
 
-													</td>
-												</tr>
-												
+                                                    <?php if ( !empty( $address )): ?>
+                                                    <div class='radio-option-row'>
+                                                        <input id="delivery_option_pick-up" type="radio"
+                                                            name="cart[<?php echo $cart_item_key ?>][delivery_option]"
+                                                            value="pick-up"
+                                                            <?php echo ('pick-up' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
+                                                        <label for="delivery_option_pick-up">Nhận hàng tại
+                                                            <?php echo $address ?>.</label>
+                                                    </div>
+                                                    <?php endif ?>
+                                                </div>
 
-											</tbody>
-										</table>
-									</div>
+                                            </td>
+                                        </tr>
 
 
-									<div class="price-section">
-										
+                                    </tbody>
+                                </table>
+                            </div>
 
-										<div class="deposit-price">
-											<span class="label"><?php echo __( 'Deposit', 'woocommerce' ) ?></span>
-											<h2 class="price"><?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity']); ?></h2>
-										</div>
 
-										<div class="rental-price">
-											<span class="label">Trả sau</span>
-											<h3 class="price"><?php echo wc_price( ( $cart_item['rental_price'] - $cart_item['deposit']) * $cart_item['quantity'] ); ?></h3>
-										</div>
-										
-										
-										<!-- <table>
+                            <div class="price-section">
+
+
+                                <div class="deposit-price">
+                                    <span class="label"><?php echo __( 'Deposit', 'woocommerce' ) ?></span>
+                                    <h2 class="price">
+                                        <?php
+											$amount = $cart_item['deposit'] * $cart_item['quantity'];
+
+											$discount = $cart_item['discount'];
+											if ( $discount )
+											{
+												if ( 'percentage' == $discount['type'] )
+													echo '<div class="original-price"><s>' .  wc_price( $amount ) . '</s></div>' . wc_price( $amount * (100 - $discount['value']) / 100 );
+											}
+											else
+												echo wc_price( $amount );
+											
+										?>
+                                    </h2>
+                                </div>
+
+                                <div class="rental-price">
+                                    <span class="label">Trả sau</span>
+                                    <h3 class="price">
+                                        <?php
+											$amount = ( $cart_item['rental_price'] - $cart_item['deposit']) * $cart_item['quantity'];
+
+											if ( $discount )
+											{
+												if ( 'percentage' == $discount['type'] )
+													echo '<div class="original-price"><s>' .  wc_price( $amount ) . '</s></div>' . wc_price( $amount * (100 - $discount['value']) / 100 );
+											}
+											else
+												echo wc_price( $amount );
+										?>
+                                    </h3>
+                                </div>
+
+
+                                <!-- <table>
 											<tr>
 												<td>Giá thuê:</td>
 												<td>
@@ -269,18 +316,18 @@ do_action( 'woocommerce_before_cart' ); ?>
 												</td>
 											</tr>
 										</table> -->
-									</div>
-
-
-									
+                            </div>
 
 
 
-								</div>
 
-								<div class="button-remove">
 
-									<?php
+
+                        </div>
+
+                        <div class="button-remove">
+
+                            <?php
 										echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											'woocommerce_cart_item_remove_link',
 											sprintf(
@@ -294,48 +341,49 @@ do_action( 'woocommerce_before_cart' ); ?>
 											$cart_item_key
 										);
 									?>
-								</div>
+                        </div>
 
-							</div>
+                    </div>
 
-						<?php $index++; } ?>
-					<?php } ?>
+                    <?php $index++; } ?>
+                    <?php } ?>
 
-					<div class="control-section">
-										
-										
-					<button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Cập nhật', 'woocommerce' ); ?>"><?php esc_html_e( 'Cập nhật', 'woocommerce' ); ?></button>					
-										
-					<?php do_action( 'woocommerce_cart_actions' ); ?>
-					<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
-						
-				</div>
-					
-					
+                    <div class="control-section">
 
-			
-			
 
-			<?php do_action( 'woocommerce_after_cart_contents' ); ?>
-			<?php do_action( 'woocommerce_after_cart_table' ); ?>
-		</form>
-				
+                        <button type="submit" class="button" name="update_cart"
+                            value="<?php esc_attr_e( 'Cập nhật', 'woocommerce' ); ?>"><?php esc_html_e( 'Cập nhật', 'woocommerce' ); ?></button>
 
-			</div>
+                        <?php do_action( 'woocommerce_cart_actions' ); ?>
+                        <?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
 
-			
-			
-		</div>
-		
+                    </div>
 
-	</div>
 
-	<div class="cart-summary">
 
-		<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
 
-		<div class="cart-collaterals">
-			<?php
+
+
+                    <?php do_action( 'woocommerce_after_cart_contents' ); ?>
+                    <?php do_action( 'woocommerce_after_cart_table' ); ?>
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <div class="cart-summary">
+
+        <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
+
+        <div class="cart-collaterals">
+            <?php
 				/**
 				 * Cart collaterals hook.
 				 *
@@ -344,9 +392,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 				 */
 				do_action( 'woocommerce_cart_collaterals' );
 			?>
-		</div>
+        </div>
 
-	</div>
+    </div>
 
 
 
@@ -355,13 +403,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 <?php do_action( 'woocommerce_after_cart' ); ?>
 
 
-	<div class="popular-products">
-        <div class="title-bar">
-            <h3>SẢN PHẨM NỔI BẬT</h3>
-        </div>
+<div class="popular-products">
+    <div class="title-bar">
+        <h3>SẢN PHẨM NỔI BẬT</h3>
+    </div>
 
-    
-            <?php
+
+    <?php
 
             woocommerce_product_loop_start();
 
@@ -380,11 +428,10 @@ do_action( 'woocommerce_before_cart' ); ?>
                 woocommerce_product_loop_end();
             ?>
 
-        <div class="button-more">
-            <a href="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' )); ?>">
-                <button class="aha-button" type="button">Xem thêm</button>
-            </a>
-        </div>
-        
+    <div class="button-more">
+        <a href="<?php echo get_permalink( get_option( 'woocommerce_shop_page_id' )); ?>">
+            <button class="aha-button" type="button">Xem thêm</button>
+        </a>
     </div>
-		
+
+</div>

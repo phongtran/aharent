@@ -18,9 +18,26 @@ function get_product_price() {
 
     $new_price['price'] = $new_price['price'] - $new_price['deposit'];
 
+    $product = wc_get_product( $product_id );
+    $discount = get_discount( $product );
+   
     foreach ( $new_price as $key => $price )
-        $new_price[$key] = wc_price( $price * $quantity );
+    {
+        $amount = $price * $quantity;
 
+        if ( $discount )
+        {
+            if ( 'percentage' == $discount['type'])
+            {
+                $new_price[$key] = '<div class="original-price"><s>' . wc_price( $amount ) . '</s></div>' . wc_price( $amount * ( 100 - $discount['value']) / 100 );
+            }
+        }
+        else
+        {
+            $new_price[$key] = wc_price( $amount );
+        }
+    }
+        
     wp_send_json_success( array( 'data' => $new_price ) );
 
     die();

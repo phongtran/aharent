@@ -370,6 +370,10 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	
 	$product = wc_get_product( $product_id );
 	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
+
+	$discount = get_discount( $product );
+	if ( $discount )
+		$cart_item_data['discount'] = $discount;
 	
 	if (isset($cart_item_data['time-unit']))
 		$new_price = get_new_price( $product_id, $cart_item_data['date-from'], $cart_item_data['duration'], $cart_item_data['time-unit'] );
@@ -425,8 +429,11 @@ function save_order_custom_values_of_items( $item, $cart_item_key, $values, $ord
 		$item->add_meta_data( 'deposit', $values['deposit'] );
 
 	$item->add_meta_data( '_rental_price', $values['rental_price'] );
-	
 	$item->add_meta_data( 'duration', $values['duration'] );
+
+	if ($values['discount'])
+		$item->add_meta_data( 'discount', $values['discount'] );
+
 	if ( !$values['time-unit'] )
 		$item->add_meta_data( 'time-unit', 'day' );
 	else
@@ -548,11 +555,23 @@ function set_cart_calculation( $cart )
 	{	
 		if ( 'cod' == $payment_method )
 		{
-			$cart_item['data']->set_price( $cart_item['rental_price'] );
+			$amount = $cart_item['rental_price'];
+			
+			if ($cart_item['discount'])
+				if ('percentage' == $cart_item['discount']['type'])
+					$amount = $amount * (100 - $cart_item['discount']['value']) / 100;
+
+			$cart_item['data']->set_price( $amount );
 		}
 		else
 		{
-			$cart_item['data']->set_price( $cart_item['deposit'] );
+			$amount = $cart_item['deposit'];
+			
+			if ($cart_item['discount'])
+				if ('percentage' == $cart_item['discount']['type'])
+					$amount = $amount * (100 - $cart_item['discount']['value']) / 100;
+			
+			$cart_item['data']->set_price( $amount );
 		}
 			
 	}
@@ -567,7 +586,18 @@ function calculate_cart_total_rental_fee()
 
 	$_total_rental_fee = 0;
 	foreach ( $cart as $item => $values )
-		$_total_rental_fee += $values['rental_price'] * $values['quantity'];
+	{
+		$amount = $values['rental_price'] * $values['quantity'];
+
+		if ($values['discount'])
+			if ('percentage' == $values['discount']['type'])
+				$amount = $amount * (100 - $values['discount']['value']) / 100;
+
+		$_total_rental_fee += $amount;
+	}
+		
+
+	
 
 	return $_total_rental_fee;
 }
@@ -592,7 +622,16 @@ function calculate_cart_total_deposit()
 
 	$_total_deposit = 0;
 	foreach ( $cart as $item => $values )
-		$_total_deposit += $values['deposit'] * $values['quantity'];
+	{
+		$amount = $values['deposit'] * $values['quantity'];
+
+		if ($values['discount'])
+			if ('percentage' == $values['discount']['type'])
+				$amount = $amount * (100 - $values['discount']['value']) / 100;
+
+		$_total_deposit += $amount;
+	}
+		
 
 	return $_total_deposit;
 }
@@ -1122,7 +1161,7 @@ function product_query( $q )
 add_action( 'woocommerce_product_query', 'product_query' );
 
 
-function is_discount( $product )
+function is_store_discount( $product )
 {
 	$vendor = get_product_vendor( $product );
 	$discount_percentage = get_user_meta( $vendor, 'discount_percentage', true );
@@ -1137,12 +1176,90 @@ function is_discount( $product )
 	$discount_date_to = new DateTime( str_replace( '/', '-', $date_to ) );
 
 	$now = new DateTime();
-	
+
 	if ( $now < $discount_date_from || $discount_date_to < $now )
 		return false;
 
 	return $discount_percentage;
 }
+
+
+function get_discount( $product )
+{
+	$date_sale_starts = get_post_meta( $product->id, 'date_sale_starts', true );
+	if ( $date_sale_starts )
+		$date_sale_starts = new DateTime( $date_sale_starts );
+	
+	$date_sale_ends = get_post_meta( $product->id, 'date_sale_ends', true );
+	if ( $date_sale_ends )
+		$date_sale_ends = new DateTime( $date_sale_ends );
+
+	$now = new DateTime();
+
+	if ( $now < $date_sale_starts || $date_sale_ends < $now )
+		return false;
+
+	$discount_type = get_post_meta( $product->id, 'sale_type', true );
+	$discount_value = get_post_meta( $product->id, 'sale_price', true );
+
+	return array( 'type' => $discount_type, 'value' => $discount_value );
+}
+
+
+add_shortcode( 'sale_products', 'sale_products' );
+	function sale_products( $atts ){
+		var_dump( $atts ); die;
+	    global $woocommerce_loop, $woocommerce;
+
+	    // extract( shortcode_atts( array(
+	    //     'per_page'      => '12',
+	    //     'columns'       => '4',
+	    //     'orderby'       => 'title',
+	    //     'order'         => 'asc'
+	    //     ), $atts ) );
+
+		// Get products on sale
+		//$product_ids_on_sale = woocommerce_get_product_ids_on_sale();
+
+		// $meta_query = array();
+		// $meta_query[] = $woocommerce->query->visibility_meta_query();
+	    // $meta_query[] = $woocommerce->query->stock_status_meta_query();
+
+		$args = array(
+			'posts_per_page'=> 60,
+			
+			'post_status' 	=> 'publish',
+			'post_type' 	=> 'product',
+			'orderby' 		=> 'date',
+			'order' 		=> 'ASC',
+			// 'meta_query' 	=> $meta_query,
+			// 'post__in'		=> $product_ids_on_sale
+		);
+
+	  	ob_start();
+
+		$products = new WP_Query( $args );
+
+		$woocommerce_loop['columns'] = $columns;
+
+		if ( $products->have_posts() ) : ?>
+
+			<?php woocommerce_product_loop_start(); ?>
+
+				<?php while ( $products->have_posts() ) : $products->the_post(); ?>
+
+					<?php woocommerce_get_template_part( 'content', 'product' ); ?>
+
+				<?php endwhile; // end of the loop. ?>
+
+			<?php woocommerce_product_loop_end(); ?>
+
+		<?php endif;
+
+		wp_reset_postdata();
+
+		return ob_get_clean();
+	}
 
 
 ?>

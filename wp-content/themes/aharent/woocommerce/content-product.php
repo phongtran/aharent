@@ -37,6 +37,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		</div>
 
 		<div class="price">
+			
 			<div class="rent-price">
 				<?php $prices = get_product_prices( $product ); ?>
 				<?php foreach ( $prices as $time_unit => $price ) : ?>
@@ -45,6 +46,8 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 					</div>
 				<?php endforeach ?>
 			</div>
+			
+
 			<div class="rent-count">
 				<?php 
 					$total_sales = $product->get_meta( 'total_sales' );
@@ -52,7 +55,20 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 						echo $total_sales . ' lượt thuê';
 				?>
 			</div>
+
+			<?php
+				$discount = get_discount( $product );
+				if ( $discount ):
+			?>
+				<div class="discount-tag">
+					<span>-<?php echo $discount['value']; echo ('percentage' == $discount['type'])? '%':'đ' ?></span>
+				</div>
+
+			<?php  endif ?>
+
 		</div>
+
+		
 	
 	
 		<?php
