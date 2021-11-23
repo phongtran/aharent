@@ -39,8 +39,7 @@
         <div class="shop-container">
             
             <?php
-            
-                    get_sidebar( 'shop' );
+                get_sidebar( 'shop' );
             ?>
 
             <?php 
@@ -61,6 +60,8 @@
                         //     'current'   => $paged
                         
                         // ));
+
+                        
 
                         $products = WC_Query::get_main_query();
 

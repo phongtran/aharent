@@ -11,7 +11,7 @@
         global $post, $wp_query;
     ?>
     
-    <?php if ( is_archive() ):  ?>
+    <?php if ( is_archive() ): ?>
         <div class="shop-container">
             
             <?php
