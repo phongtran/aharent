@@ -149,6 +149,7 @@ function basic_scripts()
 	wp_register_style( 'app', get_template_directory_uri() . '/assets/css/app.min.css', array('bootstrap'), '1', 'all' );
 	wp_register_style( 'swipe-style', 'https://unpkg.com/swiper@7/swiper-bundle.min.css' );
 	wp_register_style ( 'bootstrap-utilities', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap-utilities.min.css', '', '5.0.2', true );
+	wp_register_style( 'fontawesome-cdn', 'https://use.fontawesome.com/eeaff9ebde.css' );
 
 	// JS Registration
 	wp_register_script( 'loading-bar', get_template_directory_uri() . '/assets/vendors/topbar-master/topbar.min.js', array(), null, true );
@@ -260,6 +261,8 @@ function basic_scripts()
 			wp_dequeue_style( 'woo-viet-provinces-style' );
 			wp_dequeue_style( 'dokan-style' );
 			wp_dequeue_style( 'dokan-fontawesome' );
+
+			wp_enqueue_style( 'fontawesome-cdn' );
 
 			
 			// JS

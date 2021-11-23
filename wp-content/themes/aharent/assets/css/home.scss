@@ -6,6 +6,83 @@
     }
 }
 
+.pop-up-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.7);
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .pop-up {
+        background: url(../img/pop-up-bg.png) center center;
+        width: 565px;
+        height: 530px;
+        position: relative;
+
+        .sale-registration-form {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+
+            input {
+                width: 300px;
+                border: none;
+
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            button.submit-button {
+                width: 100px;
+                border: none;
+
+                background-color: $main-button-color;
+                color: $bright-text-color;
+
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+
+        .pop-up-close-link {
+
+            &:hover {
+                opacity: 1;
+            }
+
+            .pop-up-close {
+                position: absolute;
+                height: 60px;
+                width: 60px;
+                top: -30px;
+                right: 30px;
+                border-radius: 50%;
+                background-color: $main-button-color;
+    
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        
+    }
+
+    
+}
+
 .container {
 
     .home-container {
@@ -67,6 +144,7 @@
         justify-content: space-evenly;
 
         margin-top: 50px;
+        margin-bottom: 20px;
 
         .testimonial-modal {
 
@@ -87,7 +165,7 @@
 
             .testi-item {
                 width: 800px;
-                
+
                 border-radius: 50%;
 
                 box-shadow: 1px 1px 5px 1px $shadow-color;

@@ -102,87 +102,7 @@
             </div>
         </div>
 
-        <?php $testimonials = array(
-            array(
-                'title'    =>  'Anh',
-                'name'      =>  'Vũ Lê Dung',
-                'image'     =>  get_template_directory_uri() . '/assets/img/testi-man-1.png',
-                'content'   => 'Mình cần một số dụng cụ cho chuyến dã ngoại vào ngày hôm sau, mà bây giờ đi long dong khắp thành phố Tp.HCM tìm đủ đồ thì chắc muộn mất. Tối hôm trước mình lên Aharent chọn thuê 1 đồ, vậy mà 9h sáng hôm sau đã có bạn giao hàng đem đồ tới rồi. Chưa kể bạn còn hướng dẫn tận tình cách sử dụ... như thế nào, setup sẵn đồ mình chỉ việc sử dụng. Quá ưng luôn!'
-            ),
-            array(
-                'title'    =>  'Chị',
-                'name'      =>  'Nguyễn Minh',
-                'image'     =>  get_template_directory_uri() . '/assets/img/testi-girl-big.png',
-                'content'   => 'Ở nước ngoài dịch vụ cho thuê đồ trực tuyến rất phát triển, nhưng khi về Việt Nam mình tìm “mỏi mắt” không ra dịch vụ này. Ở Việt Nam chủ yếu cho thuê các mặt hàng như quần áo, xe cộ trực tiếp tại cửa hàng,... Điều này gây ra không ít bất tiện như mình cần tốn rất nhiều thời gian di chuyển từ cửa hàng...  tới cửa hàng kia để lựa chọn món đồ ưng ý. May mắn được một người bạn tới Aharent  mình cảm thấy cuộc sống của mình nhẹ nhàng và thoải mái hơn rất nhiều.'
-            ),
-            array(
-                'title'    =>  'Anh',
-                'name'      =>  'Trần Hoàng',
-                'image'     =>  get_template_directory_uri() . '/assets/img/testi-man-big.png',
-                'content'   => 'Mình là một blogger chuyên review các sản phẩm về công nghệ như: laptop, máy chơi game, xe cộ,... Thông thường mỗi năm các hãng sẽ cho ra mắt ít nhất 1 dòng sản phẩm hoặc thậm chí là 3-4 dòng sản phẩm. Các dòng sản phẩm mới sẽ có giá rất đắt mình không thể nào mua hết tất cả các sản... phẩm......
-                review cho độc giả được. Mà mượn bạn bè, các hãng tài trợ xung quanh thì số lượng cũng có hạn vì không phải ai cũng đủ tiềm lực “kinh tế”. Nhưng kể từ ngày nhờ biết đến Aharent mà cuộc việc của mình thuận lợi hơn rất nhiều, cần sản phẩm gì cứ lên Aharent tìm là có ngay. Hơn nữa phí thuê đồ phải chăng, rất nhiều sản phẩm công nghệ mới nhất đều có!'
-            ),
-        );?>
-
-        <div class="testimonies-wrapper">
-
-            <?php foreach ( $testimonials as $testimonial ) : ?>
-            
-            <a href="#" class="modal-open-link">
-                <div class="testi-item" data-content="<?php echo $testimonial['content'] ?>">
-                    <div class="testi-head">
-                        <div class="person-image">
-                            <img src="<?php echo $testimonial['image'] ?>" />
-                        </div>
-                        <div class="person-name">
-                            <?php echo $testimonial['title'] ?> <span class="name"><?php echo $testimonial['name'] ?></span>
-                        </div>
-                        <div class="person-rating">
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                        </div>
-                    </div>
-                    <div class="testi-body">
-                        <p><?php echo wp_trim_words( $testimonial['content'], 45 ) ?></p>
-                    </div>
-                    <div class="arrow"></div>
-                </div>
-            </a>
-
-            <?php endforeach ?>
-
-            <div class="testimonial-modal" style="display: none;">
-                <div class="testi-item" data-content="<?php echo $testimonial['content'] ?>">
-                    <div class="testi-head">
-                        <div class="person-image">
-                            <img src="<?php echo $testimonial['image'] ?>" />
-                        </div>
-                        <div class="person-name">
-                            <?php echo $testimonial['title'] ?> <span class="name"><?php echo $testimonial['name'] ?></span>
-                        </div>
-                        <div class="person-rating">
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                        </div>
-                        <a href="#" class="modal-close-link">
-                            <div class="modal-close">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/img/modal-close.png" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="testi-body">
-                        <p><?php echo $testimonial['content'] ?></p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        
 
         <div class="categories">
             <div class="title-bar d-flex align-items-center">
@@ -313,6 +233,111 @@
 
     </div>
 
+    <?php
+    $testimonials = array(
+            array(
+                'title'    =>  'Anh',
+                'name'      =>  'Vũ Lê Dung',
+                'image'     =>  get_template_directory_uri() . '/assets/img/testi-man-1.png',
+                'content'   => 'Mình cần một số dụng cụ cho chuyến dã ngoại vào ngày hôm sau, mà bây giờ đi long dong khắp thành phố Tp.HCM tìm đủ đồ thì chắc muộn mất. Tối hôm trước mình lên Aharent chọn thuê 1 đồ, vậy mà 9h sáng hôm sau đã có bạn giao hàng đem đồ tới rồi. Chưa kể bạn còn hướng dẫn tận tình cách sử dụ... như thế nào, setup sẵn đồ mình chỉ việc sử dụng. Quá ưng luôn!'
+            ),
+            array(
+                'title'    =>  'Chị',
+                'name'      =>  'Nguyễn Minh',
+                'image'     =>  get_template_directory_uri() . '/assets/img/testi-girl-big.png',
+                'content'   => 'Ở nước ngoài dịch vụ cho thuê đồ trực tuyến rất phát triển, nhưng khi về Việt Nam mình tìm “mỏi mắt” không ra dịch vụ này. Ở Việt Nam chủ yếu cho thuê các mặt hàng như quần áo, xe cộ trực tiếp tại cửa hàng,... Điều này gây ra không ít bất tiện như mình cần tốn rất nhiều thời gian di chuyển từ cửa hàng...  tới cửa hàng kia để lựa chọn món đồ ưng ý. May mắn được một người bạn tới Aharent  mình cảm thấy cuộc sống của mình nhẹ nhàng và thoải mái hơn rất nhiều.'
+            ),
+            array(
+                'title'    =>  'Anh',
+                'name'      =>  'Trần Hoàng',
+                'image'     =>  get_template_directory_uri() . '/assets/img/testi-man-big.png',
+                'content'   => 'Mình là một blogger chuyên review các sản phẩm về công nghệ như: laptop, máy chơi game, xe cộ,... Thông thường mỗi năm các hãng sẽ cho ra mắt ít nhất 1 dòng sản phẩm hoặc thậm chí là 3-4 dòng sản phẩm. Các dòng sản phẩm mới sẽ có giá rất đắt mình không thể nào mua hết tất cả các sản... phẩm......
+                review cho độc giả được. Mà mượn bạn bè, các hãng tài trợ xung quanh thì số lượng cũng có hạn vì không phải ai cũng đủ tiềm lực “kinh tế”. Nhưng kể từ ngày nhờ biết đến Aharent mà cuộc việc của mình thuận lợi hơn rất nhiều, cần sản phẩm gì cứ lên Aharent tìm là có ngay. Hơn nữa phí thuê đồ phải chăng, rất nhiều sản phẩm công nghệ mới nhất đều có!'
+            ),
+        );
+?>
+
+    <div class="testimonies-wrapper">
+
+        <?php foreach ( $testimonials as $testimonial ) : ?>
+        
+        <a href="#" class="modal-open-link">
+            <div class="testi-item" data-content="<?php echo $testimonial['content'] ?>">
+                <div class="testi-head">
+                    <div class="person-image">
+                        <img src="<?php echo $testimonial['image'] ?>" />
+                    </div>
+                    <div class="person-name">
+                        <?php echo $testimonial['title'] ?> <span class="name"><?php echo $testimonial['name'] ?></span>
+                    </div>
+                    <div class="person-rating">
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                    </div>
+                </div>
+                <div class="testi-body">
+                    <p><?php echo wp_trim_words( $testimonial['content'], 45 ) ?></p>
+                </div>
+                <div class="arrow"></div>
+            </div>
+        </a>
+
+        <?php endforeach ?>
+
+        <div class="testimonial-modal" style="display: none;">
+            <div class="testi-item" data-content="<?php echo $testimonial['content'] ?>">
+                <div class="testi-head">
+                    <div class="person-image">
+                        <img src="<?php echo $testimonial['image'] ?>" />
+                    </div>
+                    <div class="person-name">
+                        <?php echo $testimonial['title'] ?> <span class="name"><?php echo $testimonial['name'] ?></span>
+                    </div>
+                    <div class="person-rating">
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                    </div>
+                    <a href="#" class="modal-close-link">
+                        <div class="modal-close">
+                            <img src="<?php echo get_template_directory_uri() ?>/assets/img/modal-close.png" />
+                        </div>
+                    </a>
+                </div>
+                <div class="testi-body">
+                    <p><?php echo $testimonial['content'] ?></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="pop-up-wrapper">
+    <div class="pop-up">
+
+        <form class="sale-registration-form">
+            <input placeholder="Nhập email của bạn" class="form-control">
+            <button class="form-control submit-button" type="submit">Đăng ký</button>
+        </form>
+    
+    
+        <a href="#" class="pop-up-close-link">
+            <div class="pop-up-close">
+                <img src="<?php echo get_template_directory_uri() ?>/assets/img/modal-close.png" />
+            </div>
+        </a>
+
+    </div>
+    
 </div>
 
 <?php get_footer(); ?>

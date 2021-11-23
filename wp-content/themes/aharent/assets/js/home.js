@@ -17,4 +17,9 @@
         e.preventDefault();
     });
 
+    $('.pop-up-close-link').click(function(e) {
+        $('.pop-up-wrapper').hide();
+        e.preventDefault();
+    });
+
 })(jQuery)
