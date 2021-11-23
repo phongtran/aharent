@@ -160,6 +160,7 @@ function basic_scripts()
 	wp_register_script( 'bootstrap-input-spinner', get_template_directory_uri() . '/assets/vendors/bootstrap-input-spinner/src/bootstrap-input-spinner.js', array(), '1', true );
 	wp_register_script( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.full.min.js', array(), '1', true );
 	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array(), '1', true );
+	wp_register_script( 'home-script', get_template_directory_uri() . '/assets/js/home.js', array(), '1', true );
 
 
 	// CSS queue
@@ -171,7 +172,7 @@ function basic_scripts()
 	wp_dequeue_style( 'wc-block-vendors-style' );
 	wp_dequeue_style( 'wc-block-style' );
 
-	wp_dequeue_style( 'font-awesome' );
+	// wp_dequeue_style( 'font-awesome' );
 
 	
 	// JS queue
@@ -274,6 +275,8 @@ function basic_scripts()
 			wp_dequeue_script( 'dokan-util-helper' );
 			wp_dequeue_script( 'dokan-login-form-popup' );
 			wp_dequeue_script( 'dokan-popup' );
+
+			wp_enqueue_script( 'home-script' );
 
 			
 		}
