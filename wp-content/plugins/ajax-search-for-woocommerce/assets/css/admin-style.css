@@ -1679,3 +1679,39 @@ h3.dgwt-wcas-troubleshooting-issue-title {
 .dgwt-wcas-settings-filters-rules-container .selectize-control.single::before {
 	right: 34px;
 }
+
+.dgwt-wcas-debug table {
+	margin-top: 30px;
+}
+
+.dgwt-wcas-debug table th h3 {
+	margin: 0;
+}
+
+.dgwt-wcas-debug .widefat td {
+	font-size: 13px;
+	line-height: 9px;
+	border-bottom: 1px solid #eee;
+	padding: 10px 2px;
+}
+
+.dgwt-wcas-debug .widefat td:first-child {
+	text-align: right;
+	color: #7c3b7d;
+	font-size: 14px;
+	width: 130px;
+	padding-right: 10px;
+	border-right: 1px solid #eee;
+}
+.dgwt-wcas-debug .widefat td:last-child {
+	padding-left: 10px;
+}
+
+.dgwt-wcas-table-wordlist p{
+	line-height: 167%;
+	column-count: 5;
+	font-size: 15px;
+	column-gap: 40px;
+	column-rule: 1px solid #eee;
+	font-family: monospace;
+}

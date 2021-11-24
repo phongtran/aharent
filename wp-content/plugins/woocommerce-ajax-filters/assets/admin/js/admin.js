@@ -30,14 +30,16 @@ var berocket_admin_filter_types_by_attr = {
                 multiple: false 
             }).on('select', function() {
                 var attachment = custom_uploader.state().get('selection').first().toJSON();
-                $p.prevAll(".berocket_selected_image").html('<image src="'+attachment.url+'" alt="">');
+                $p.prevAll(".berocket_selected_image").html('<image src="'+attachment.url+'" alt="">').show();
                 $p.prevAll(".berocket_image_value").val(attachment.url);
+				$p.parent().find('.berocket_remove_image').show();
             }).open();
         });
         $(document).on('click', '.br_aapf_settings_fa .berocket_remove_image',function(event) {
             event.preventDefault();
             $(this).prevAll(".berocket_image_value").val("");
-            $(this).prevAll(".berocket_selected_image").html("");
+            $(this).prevAll(".berocket_selected_image").html("").hide();
+			$(this).hide();
         });
         var berocket_fa_select_for = $('.berocket_fa_dark');
         $(document).on('click', '.br_aapf_settings_fa .berocket_select_fontawesome .berocket_select_fa',function(event) {

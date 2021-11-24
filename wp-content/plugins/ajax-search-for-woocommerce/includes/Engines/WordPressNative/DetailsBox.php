@@ -84,7 +84,6 @@ class DetailsBox
                     $items[] = array(
                         'objectID' => $item['objectID'],
                         'html'     => $productDetails['html'],
-                        'imageSrc' => $productDetails['imageSrc'],
                         'price'    => $productDetails['price'],
                     );
                 }
@@ -122,14 +121,14 @@ class DetailsBox
         }
         
         $details = array(
-            'html'     => '',
-            'imageSrc' => '',
-            'price'    => '',
+            'html'  => '',
+            'price' => '',
         );
         if ( !$product->isCorrect() ) {
             return $details;
         }
         $thumbSize = apply_filters( 'dgwt/wcas/suggestion_details/product/thumb_size', 'woocommerce_thumbnail' );
+        $responsiveImages = apply_filters( 'dgwt/wcas/suggestion_details/responsive_images', true );
         $wooProduct = $product->getWooObject();
         $vars = array(
             'ID'                => $product->getID(),
@@ -137,6 +136,8 @@ class DetailsBox
             'desc'              => $product->getDescription( 'details-panel' ),
             'link'              => $product->getPermalink(),
             'imageSrc'          => $product->getThumbnailSrc( $thumbSize ),
+            'imageSrcset'       => ( $responsiveImages ? $product->getThumbnailSrcset( $thumbSize ) : '' ),
+            'imageSizes'        => ( $responsiveImages ? $product->getThumbnailSizes( $thumbSize ) : '' ),
             'sku'               => $product->getSKU(),
             'reviewCount'       => $product->getReviewCount(),
             'ratingHtml'        => $product->getRatingHtml(),
@@ -179,7 +180,6 @@ class DetailsBox
             );
         }
         
-        $details['imageSrc'] = $vars->imageSrc;
         $details['price'] = $vars->priceHtml;
         return $details;
     }
@@ -208,13 +208,7 @@ class DetailsBox
             // Details panel title
             $title .= '<span class="dgwt-wcas-datails-title">';
             $title .= '<span class="dgwt-wcas-details-title-tax">';
-            
-            if ( 'product_cat' === $taxonomy ) {
-                $title .= Helpers::getLabel( 'category' ) . ': ';
-            } else {
-                $title .= Helpers::getLabel( 'tag' ) . ': ';
-            }
-            
+            $title .= Helpers::getLabel( 'tax_' . $taxonomy ) . ': ';
             $title .= '</span>';
             $title .= esc_html( wp_unslash( $termName ) );
             $title .= '</span>';

@@ -24,10 +24,10 @@
             )
         ),
 	);
+
+    query_posts( $args );
     
-    WC()->query->product_query( new WP_Query( $args ) );
-    $wp_query = WC_Query::get_main_query();
-    
+    WC()->query->product_query( $wp_query );
     
 ?>
 
@@ -40,6 +40,8 @@
             
             <?php
                 get_sidebar( 'shop' );
+
+                var_dump( $wp_query );
             ?>
 
             <?php 
@@ -60,10 +62,7 @@
                         //     'current'   => $paged
                         
                         // ));
-
-                        
-
-                        $products = WC_Query::get_main_query();
+                    
 
                         do_action( 'woocommerce_archive_description' );
 
@@ -75,9 +74,9 @@
 
                             <?php if (wc_get_loop_prop('total')) : ?>
 
-                                <?php while ( $products->have_posts() ) :  ?>
+                                <?php while ( have_posts() ) :  ?>
 
-                                    <?php $products->the_post(); ?>
+                                    <?php the_post(); ?>
 
                                     <?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
@@ -90,7 +89,7 @@
 
                         <?php endif;
 
-                        $total_pages = ceil( $products->found_posts / $per_page );
+                        $total_pages = ceil( $wp_query->found_posts / $per_page );
 
                             wc_get_template( 'loop/pagination.php', array( 
                                 'total' => $total_pages,

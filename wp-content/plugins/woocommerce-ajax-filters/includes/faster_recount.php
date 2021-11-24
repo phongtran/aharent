@@ -184,9 +184,15 @@ class BeRocket_AAPF_faster_attribute_recount {
                 JOIN (
                     SELECT tt1.term_taxonomy_id as tt1id, tt2.term_taxonomy_id as tt2id FROM {$wpdb->term_taxonomy} as tt1
                     JOIN {$wpdb->term_taxonomy} as tt2 ON (";
-                $join_list = array();
+                $join_list = array("(tt1.term_id = tt2.term_id)");
                 foreach($hierarchy as $term_id => $term_child) {
-                    $join_list[] = "(tt1.term_id = '{$term_id}' AND tt2.term_id IN('".implode("','", $term_child)."'))";
+                    if( count($term_child) > 1 || $term_id != $term_child[0] ) {
+                        $current = array_search($term_id, $term_child);
+                        if( $current !== false ) {
+                            unset($term_child[$current]);
+                        }
+                        $join_list[] = "(tt1.term_id = '{$term_id}' AND tt2.term_id IN('".implode("','", $term_child)."'))";
+                    }
                 }
                 $join_query .= implode('
                  OR 

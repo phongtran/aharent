@@ -125,7 +125,6 @@ class WC_AJAX {
 			'get_order_details',
 			'add_attribute',
 			'add_new_attribute',
-			'remove_variation',
 			'remove_variations',
 			'save_attributes',
 			'add_variation',
@@ -795,22 +794,43 @@ class WC_AJAX {
 		$loop         = intval( $_POST['loop'] );
 		$file_counter = 0;
 		$order        = wc_get_order( $order_id );
-		$items        = $order->get_items();
 
+		if ( ! $order->get_billing_email() ) {
+			wp_die();
+		}
+
+		$data  = array();
+		$items = $order->get_items();
+
+		// Check against order items first.
 		foreach ( $items as $item ) {
 			$product = $item->get_product();
-			if ( ! in_array( $product->get_id(), $product_ids, true ) ) {
-				continue;
-			}
-			$files = $product->get_downloads();
 
-			if ( ! $order->get_billing_email() ) {
-				wp_die();
+			if ( $product && $product->exists() && in_array( $product->get_id(), $product_ids, true ) && $product->is_downloadable() ) {
+				$data[ $product->get_id() ] = array(
+					'files'      => $product->get_downloads(),
+					'quantity'   => $item->get_quantity(),
+					'order_item' => $item,
+				);
+			}
+		}
+
+		foreach ( $product_ids as $product_id ) {
+			$product = wc_get_product( $product_id );
+
+			if ( isset( $data[ $product->get_id() ] ) ) {
+				$download_data = $data[ $product->get_id() ];
+			} else {
+				$download_data = array(
+					'files'      => $product->get_downloads(),
+					'quantity'   => 1,
+					'order_item' => null,
+				);
 			}
 
-			if ( ! empty( $files ) ) {
-				foreach ( $files as $download_id => $file ) {
-					$inserted_id = wc_downloadable_file_permission( $download_id, $product->get_id(), $order, $item->get_quantity(), $item );
+			if ( ! empty( $download_data['files'] ) ) {
+				foreach ( $download_data['files'] as $download_id => $file ) {
+					$inserted_id = wc_downloadable_file_permission( $download_id, $product->get_id(), $order, $download_data['quantity'], $download_data['order_item'] );
 					if ( $inserted_id ) {
 						$download = new WC_Customer_Download( $inserted_id );
 						$loop ++;
@@ -911,6 +931,7 @@ class WC_AJAX {
 
 			// Add items to order.
 			$order_notes = array();
+			$added_items = array();
 
 			foreach ( $items_to_add as $item ) {
 				if ( ! isset( $item['id'], $item['qty'] ) || empty( $item['id'] ) ) {
@@ -934,7 +955,7 @@ class WC_AJAX {
 					/* translators: %s: error message */
 					throw new Exception( sprintf( __( 'Error: %s', 'woocommerce' ), $validation_error->get_error_message() ) );
 				}
-				$item_id                 = $order->add_product( $product, $qty );
+				$item_id                 = $order->add_product( $product, $qty, array( 'order' => $order ) );
 				$item                    = apply_filters( 'woocommerce_ajax_order_item', $order->get_item( $item_id ), $item_id, $order, $product );
 				$added_items[ $item_id ] = $item;
 				$order_notes[ $item_id ] = $product->get_formatted_name();
@@ -1002,6 +1023,8 @@ class WC_AJAX {
 			);
 
 			if ( strstr( $amount, '%' ) ) {
+				// We need to calculate totals first, so that $order->get_total() is correct.
+				$order->calculate_totals( false );
 				$formatted_amount = $amount;
 				$percent          = floatval( trim( $amount, '%' ) );
 				$amount           = $order->get_total() * ( $percent / 100 );
@@ -1650,7 +1673,7 @@ class WC_AJAX {
 		$products        = array();
 
 		foreach ( $product_objects as $product_object ) {
-			$products[ $product_object->get_id() ] = rawurldecode( $product_object->get_formatted_name() );
+			$products[ $product_object->get_id() ] = rawurldecode( wp_strip_all_tags( $product_object->get_formatted_name() ) );
 		}
 
 		wp_send_json( $products );

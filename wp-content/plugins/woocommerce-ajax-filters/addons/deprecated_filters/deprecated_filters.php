@@ -36,6 +36,31 @@ class BeRocket_aapf_deprecated_compat_addon extends BeRocket_framework_addon_lib
         add_filter( 'BeRocket_AAPF_getall_Template_Styles', array($this, 'remove_new_templates'), 9000000 );
         add_filter( 'braapf_custom_user_css_replacement', array($this, 'custom_user_css_replacement') );
         update_option('braapf_new_filters_converted', false);
+        if( (! empty($_GET['page']) && $_GET['page'] == 'br-product-filters' ) 
+        || (! empty($_GET['post_type']) && in_array($_GET['post_type'], array('br_product_filter', 'br_filters_group'))) ) {
+            add_filter('berocket_display_additional_notices', array($this, 'deprecated_notice'));
+        }
+    }
+    function deprecated_notice($notices) {
+        $notices[] = array(
+            'start'         => 0,
+            'end'           => 0,
+            'name'          => 'aapf_remove_deprecated_filters',
+            'html'          => 'AJAX Product Filters. Deprecated Filters add-on enabled on your site, but it will be removed in near future. You can disable Deprecated Filters in <a href="'.admin_url('admin.php?page=br-product-filters&tab=addons').'">Plugin settings -> Add-ons tab</a>',
+            'righthtml'     => '',
+            'rightwidth'    => 0,
+            'nothankswidth' => 0,
+            'contentwidth'  => 1600,
+            'subscribe'     => false,
+            'priority'      => 10,
+            'height'        => 70,
+            'repeat'        => false,
+            'repeatcount'   => 1,
+            'image'  => array(
+                'local' => plugin_dir_url( BeRocket_AJAX_filters_file ) . 'images/attention.png',
+            ),
+        );
+        return $notices;
     }
     function wp() {
         $BeRocket_AAPF = BeRocket_AAPF::getInstance();

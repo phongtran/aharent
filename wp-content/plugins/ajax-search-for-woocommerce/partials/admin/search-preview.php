@@ -64,7 +64,7 @@ $labelSeeAll    = Helpers::getLabel( 'show_more' );
 
 				<div class="dgwt-wcas-suggestion dgwt-wcas-suggestion-headline-brand dgwt-wcas-suggestion-headline">
                     <span class="dgwt-wcas-st">
-                      <?php echo Helpers::getLabel( 'brand_plu' ); ?>
+                      <?php echo Helpers::getLabel( 'tax_' . DGWT_WCAS()->brands->getBrandTaxonomy() . '_plu' ); ?>
                     </span>
 				</div>
 
@@ -73,14 +73,14 @@ $labelSeeAll    = Helpers::getLabel( 'show_more' );
                         <img src="<?php echo DGWT_WCAS_URL; ?>assets/img/product-preview.png">
                     </span>
                     <span class="dgwt-wcas-st">
-                        <span class="dgwt-wcas-st--direct-headline"><?php echo Helpers::getLabel( 'brand' ); ?></span>
+                        <span class="dgwt-wcas-st--direct-headline"><?php echo Helpers::getLabel( 'tax_' . DGWT_WCAS()->brands->getBrandTaxonomy() ); ?></span>
                         <?php _e( 'Sample brand <strong>name</strong>', 'ajax-search-for-woocommerce' ); ?>
                     </span>
 				</div>
 
 				<div class="dgwt-wcas-suggestion dgwt-wcas-suggestion-headline-cat dgwt-wcas-suggestion-headline">
                     <span class="dgwt-wcas-st">
-                      <?php echo Helpers::getLabel( 'product_cat_plu' ); ?>
+                      <?php echo Helpers::getLabel( 'tax_product_cat_plu' ); ?>
                     </span>
 				</div>
 
@@ -89,20 +89,20 @@ $labelSeeAll    = Helpers::getLabel( 'show_more' );
                         <img src="<?php echo DGWT_WCAS_URL; ?>assets/img/product-preview.png">
                     </span>
                     <span class="dgwt-wcas-st">
-                        <span class="dgwt-wcas-st--direct-headline"><?php echo Helpers::getLabel( 'category' ); ?></span>
+                        <span class="dgwt-wcas-st--direct-headline"><?php echo Helpers::getLabel( 'tax_product_cat' ); ?></span>
                         <?php _e( 'Sample category <strong>name</strong>', 'ajax-search-for-woocommerce' ); ?>
                     </span>
 				</div>
 
 				<div class="dgwt-wcas-suggestion dgwt-wcas-suggestion-headline-tag dgwt-wcas-suggestion-headline">
                     <span class="dgwt-wcas-st">
-                      <?php echo Helpers::getLabel( 'product_tag_plu' ); ?>
+                      <?php echo Helpers::getLabel( 'tax_product_tag_plu' ); ?>
                     </span>
 				</div>
 
 				<div class="dgwt-wcas-suggestion dgwt-wcas-suggestion-tag">
                     <span class="dgwt-wcas-st">
-                        <span class="dgwt-wcas-st--direct-headline"><?php echo Helpers::getLabel( 'tag' ); ?></span>
+                        <span class="dgwt-wcas-st--direct-headline"><?php echo Helpers::getLabel( 'tax_product_tag' ); ?></span>
                         <?php _e( 'Sample tag <strong>name</strong>', 'ajax-search-for-woocommerce' ); ?>
                     </span>
 				</div>

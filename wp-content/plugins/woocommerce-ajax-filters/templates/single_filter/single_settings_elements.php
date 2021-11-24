@@ -141,7 +141,7 @@ if( ! class_exists('braapf_single_filter_edit_elements') ) {
                 );
                 $order_values_type = br_get_value_from_array($braapf_filter_settings, 'order_values_type', '');
                 echo '<div class="braapf_order_values_type braapf_half_select_full">';
-                    echo '<label for="braapf_order_values_type">' . __('Values Order', 'BeRocket_AJAX_domain') . '</label>';
+                    echo '<label for="braapf_order_values_type">' . __('Order Direction', 'BeRocket_AJAX_domain') . '</label>';
                     echo '<select id="braapf_order_values_type" name="'.$settings_name.'[order_values_type]">';
                     foreach($sorting_types as $sorting_type) {
                         echo '<option value="'.$sorting_type['value'].'"'.($order_values_type == $sorting_type['value'] ? ' selected' : '').'>'.$sorting_type['name'].'</option>';
@@ -152,9 +152,10 @@ if( ! class_exists('braapf_single_filter_edit_elements') ) {
         }
         static function cat_value_limit($settings_name, $braapf_filter_settings) {
             $cat_value_limit = br_get_value_from_array($braapf_filter_settings, 'cat_value_limit', '0');
-            echo '<div class="braapf_attribute_setup_flex"'
-            . ( apply_filters('braapf_single_filter_hide_cat_value_limit', empty($cat_value_limit), $cat_value_limit) ? ' style="display:none;"' : '' )
-            . '>';
+            if( apply_filters('braapf_single_filter_hide_cat_value_limit', empty($cat_value_limit), $cat_value_limit) ) {
+                return;
+            }
+            echo '<div class="braapf_attribute_setup_flex">';
                 echo '<div class="braapf_cat_value_limit braapf_full_select_full">';
                     $hrterms = berocket_aapf_get_terms(array(
                         'taxonomy'          => 'product_cat',

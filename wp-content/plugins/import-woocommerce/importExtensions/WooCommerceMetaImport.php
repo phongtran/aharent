@@ -83,7 +83,12 @@ class WooCommerceMetaImport extends ImportHelpers{
 				$metaData['_virtual'] = $data_array[$ekey];
 				break;
 			case 'product_image_gallery' :
-				$get_all_gallery_images = explode('|', $data_array[$ekey]);
+				//$get_all_gallery_images = explode('|', $data_array[$ekey]);
+				if (strpos($data_array[$ekey], ',') !== false) {
+					$get_all_gallery_images = explode(',', $data_array[$ekey]);
+				} elseif (strpos($data_array[$ekey], '|') !== false) {
+					$get_all_gallery_images = explode('|', $data_array[$ekey]);
+				}
 				$gallery_image_ids = '';
 				foreach($get_all_gallery_images as $gallery_image) {
 					if(is_numeric($gallery_image)) {
@@ -163,13 +168,22 @@ class WooCommerceMetaImport extends ImportHelpers{
 							$product_id = $product_id;
 						}
 						else{
-							$product_id = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts WHERE post_type = 'product' AND post_title = '$product_id' ");
+							$product_id = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts WHERE post_type = 'product' AND post_title = '$product_id' order by  ID Desc ");
 						}
 						$wpdb->insert($bundle_product_table, array('product_id' => $product_id, 'bundle_id' => $pID));
 					}
 					break;
 				}	
 			break;
+			case '_wc_pb_virtual_bundle':
+				$metaData['_wc_pb_virtual_bundle']=$data_array[$ekey];
+				break;
+			case '_wc_pb_virtual_bundle':
+				$metaData['_wc_pb_virtual_bundle']=$data_array[$ekey];
+				break;
+			case '_wc_pb_virtual_bundle':
+				$metaData['_wc_pb_virtual_bundle']=$data_array[$ekey];
+				break;
 			case 'layout' :
 				$layout_status = '';
 				if ($data_array[$ekey] == 'Standard') {
@@ -249,9 +263,9 @@ class WooCommerceMetaImport extends ImportHelpers{
 				}	
 			break;
 
-			case 'product_details' :
-			case 'cart_checkout' :
-			case 'order_details' :
+			case 'single_product_visibility' :
+			case 'cart_visibility' :
+			case 'order_visibility' :
 
 				if ($data_array[$ekey]) {
 					$bundle_product_ids = explode('|', $data_array[$ekey]);
@@ -278,8 +292,7 @@ class WooCommerceMetaImport extends ImportHelpers{
 			case 'quantity_min' :
 			case 'quantity_max' :
 			case 'discount' :
-			case 'override_title_value' :
-			case 'override_description_value' :
+				
 	
 				if ($data_array[$ekey]) {
 					$bundle_product_ids = explode('|', $data_array[$ekey]);
@@ -300,6 +313,42 @@ class WooCommerceMetaImport extends ImportHelpers{
 						}
 						
 						$wpdb->insert($bundle_product_table, array('bundled_item_id' => $bundle_meta_id ,'meta_key' => $ekey,'meta_value' => $bundle_meta_value));
+					}
+					break;
+				}	
+			break;
+			case 'override_title_value' :
+	
+				if ($data_array[$ekey]) {
+					$bundle_product_ids = explode('|', $data_array[$ekey]);
+					$bundle_product_table = $wpdb->prefix . 'woocommerce_bundled_itemmeta'; 
+					
+					$bundle_meta = $wpdb->prepare("SELECT bundled_item_id FROM {$wpdb->prefix}woocommerce_bundled_items where bundle_id = %d", $pID);
+					$bundle_meta_result = $wpdb->get_results($bundle_meta);
+					
+					for($i = 0; $i < count($bundle_meta_result); $i++){
+						$bundle_meta_id = $bundle_meta_result[$i]->bundled_item_id;
+						$bundle_meta_value = $bundle_product_ids[$i];
+						
+						$wpdb->insert($bundle_product_table, array('bundled_item_id' => $bundle_meta_id ,'meta_key' => 'title','meta_value' => $bundle_meta_value));
+					}
+					break;
+				}	
+			break;
+			case 'override_description_value' :
+	
+				if ($data_array[$ekey]) {
+					$bundle_product_ids = explode('|', $data_array[$ekey]);
+					$bundle_product_table = $wpdb->prefix . 'woocommerce_bundled_itemmeta'; 
+					
+					$bundle_meta = $wpdb->prepare("SELECT bundled_item_id FROM {$wpdb->prefix}woocommerce_bundled_items where bundle_id = %d", $pID);
+					$bundle_meta_result = $wpdb->get_results($bundle_meta);
+					
+					for($i = 0; $i < count($bundle_meta_result); $i++){
+						$bundle_meta_id = $bundle_meta_result[$i]->bundled_item_id;
+						$bundle_meta_value = $bundle_product_ids[$i];
+						
+						$wpdb->insert($bundle_product_table, array('bundled_item_id' => $bundle_meta_id ,'meta_key' => 'description','meta_value' => $bundle_meta_value));
 					}
 					break;
 				}	
@@ -507,7 +556,18 @@ class WooCommerceMetaImport extends ImportHelpers{
 					$exploded_crosssell_ids = explode(',', $data_array[$ekey]);
 					$crosssellids = $exploded_crosssell_ids;
 				}
-				$metaData['_crosssell_ids'] = $crosssellids;
+				foreach($crosssellids as $crosssell_ids){
+					if(is_numeric($crosssell_ids)){
+						$product_id = $crosssell_ids;
+						
+					}
+					else{
+						$product_id = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts WHERE post_type = 'product' AND post_title = '$crosssell_ids' order by ID Desc ");
+					}
+					$crosssell_id[]=$product_id;
+					
+				}
+				$metaData['_crosssell_ids'] = $crosssell_id;
 				break;
 			case 'upsell_ids' :
 				$upcellids = '';
@@ -515,7 +575,18 @@ class WooCommerceMetaImport extends ImportHelpers{
 					$exploded_upsell_ids = explode(',', $data_array[$ekey]);
 					$upcellids = $exploded_upsell_ids;
 				}
-				$metaData['_upsell_ids'] = $upcellids;
+				foreach($upcellids as $upsell_ids){
+					if(is_numeric($upsell_ids)){
+						$product_id = $upsell_ids;
+						
+					}
+					else{
+						$product_id = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts WHERE post_type = 'product' AND post_title = '$upsell_ids' order by ID Desc ");
+					}
+					$upsell_id[]=$product_id;
+					
+				}
+				$metaData['_upsell_ids'] = $upsell_id;
 				break;
 			case 'sku' :
 				$metaData['_sku'] = $data_array[$ekey];

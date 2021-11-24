@@ -3,7 +3,6 @@
 namespace DgoraWcas\Admin;
 
 use  DgoraWcas\Engines\TNTSearchMySQL\Indexer\Builder ;
-use  DgoraWcas\Helpers ;
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) {
     exit;
@@ -34,6 +33,7 @@ class Install
         }
         self::saveActivationDate();
         self::createOptions();
+        self::maybeUpgradeOptions();
         // Update plugin version
         update_option( 'dgwt_wcas_version', DGWT_WCAS_VERSION );
     }
@@ -61,6 +61,84 @@ class Install
         }
         $updateOptions = array_merge( $settings, $dgwtWcasSettings );
         update_option( DGWT_WCAS_SETTINGS_KEY, $updateOptions );
+    }
+    
+    private static function maybeUpgradeOptions()
+    {
+        $settingsVersion = (int) get_option( 'dgwt_wcas_settings_version', 0 );
+        
+        if ( $settingsVersion < 1 ) {
+            if ( (int) get_option( 'dgwt_wcas_settings_version_pro', 0 ) === 0 ) {
+                self::upgradeOptionsTo1();
+            }
+            update_option( 'dgwt_wcas_settings_version', 1 );
+            DGWT_WCAS()->settings->clearCache();
+        }
+    
+    }
+    
+    private static function upgradeOptionsTo1()
+    {
+        $settings = get_option( DGWT_WCAS_SETTINGS_KEY );
+        if ( empty($settings) ) {
+            return;
+        }
+        // Product categories
+        
+        if ( isset( $settings['show_matching_categories'] ) ) {
+            $settings['show_product_tax_product_cat'] = $settings['show_matching_categories'];
+            unset( $settings['show_matching_categories'] );
+        }
+        
+        
+        if ( isset( $settings['show_categories_images'] ) ) {
+            $settings['show_product_tax_product_cat_images'] = $settings['show_categories_images'];
+            unset( $settings['show_categories_images'] );
+        }
+        
+        
+        if ( isset( $settings['search_in_product_categories'] ) ) {
+            $settings['search_in_product_tax_product_cat'] = $settings['search_in_product_categories'];
+            unset( $settings['search_in_product_categories'] );
+        }
+        
+        // Product tags
+        
+        if ( isset( $settings['show_matching_tags'] ) ) {
+            $settings['show_product_tax_product_tag'] = $settings['show_matching_tags'];
+            unset( $settings['show_matching_tags'] );
+        }
+        
+        
+        if ( isset( $settings['search_in_product_tags'] ) ) {
+            $settings['search_in_product_tax_product_tag'] = $settings['search_in_product_tags'];
+            unset( $settings['search_in_product_tags'] );
+        }
+        
+        // Product brands
+        
+        if ( DGWT_WCAS()->brands->hasBrands() ) {
+            
+            if ( isset( $settings['show_matching_brands'] ) ) {
+                $settings['show_product_tax_' . DGWT_WCAS()->brands->getBrandTaxonomy()] = $settings['show_matching_brands'];
+                unset( $settings['show_matching_brands'] );
+            }
+            
+            
+            if ( isset( $settings['search_in_brands'] ) ) {
+                $settings['search_in_product_tax_' . DGWT_WCAS()->brands->getBrandTaxonomy()] = $settings['search_in_brands'];
+                unset( $settings['search_in_brands'] );
+            }
+            
+            
+            if ( isset( $settings['show_brands_images'] ) ) {
+                $settings['show_product_tax_' . DGWT_WCAS()->brands->getBrandTaxonomy() . '_images'] = $settings['show_brands_images'];
+                unset( $settings['show_brands_images'] );
+            }
+        
+        }
+        
+        update_option( DGWT_WCAS_SETTINGS_KEY, $settings );
     }
     
     /**

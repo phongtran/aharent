@@ -11,7 +11,12 @@ if ( ! defined( 'DGWT_WCAS_FILE' ) ) {
 
 		<a href="<?php echo esc_url( $vars->link ); ?>" title="<?php echo wp_strip_all_tags($vars->name); ?>">
 			<div class="dgwt-wcas-details-main-image">
-				<img src="<?php echo esc_url( $vars->imageSrc ); ?>" alt="<?php echo wp_strip_all_tags( $vars->name ); ?>">
+				<img
+					src="<?php echo esc_url( $vars->imageSrc ); ?>"
+					<?php echo ( ! empty( $vars->imageSrcset ) && ! empty( $vars->imageSizes ) ) ? 'srcset="' . esc_attr( $vars->imageSrcset ) . '"' : '' ?>
+					<?php echo ( ! empty( $vars->imageSrcset ) && ! empty( $vars->imageSizes ) ) ? 'sizes="' . esc_attr( $vars->imageSizes ) . '"' : '' ?>
+					alt="<?php echo wp_strip_all_tags( $vars->name ); ?>"
+				>
 			</div>
 		</a>
 

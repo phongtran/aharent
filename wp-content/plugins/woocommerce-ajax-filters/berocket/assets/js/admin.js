@@ -123,6 +123,14 @@ var br_something_changed = false;
 				if ( attachment.url ) {
 					$p.nextAll(".berocket_remove_image").show();
 					$p.prevAll(".berocket_selected_image").html('<image src="'+attachment.url+'" alt="">').show();
+					var value_size = $p.prevAll(".berocket_image_value_size");
+					if(value_size.length == 0) {
+						value_size = $p.nextAll(".berocket_image_value_size");
+					}
+					if(value_size.length > 0 && attachment.width && attachment.height) {
+						var value_size_line = attachment.width.toString()+'*'+attachment.height;
+						value_size.val(value_size_line).trigger('change');
+					}
 				} else {
 					$p.nextAll(".berocket_remove_image").hide();
 					$p.prevAll(".berocket_selected_image").html('').hide();

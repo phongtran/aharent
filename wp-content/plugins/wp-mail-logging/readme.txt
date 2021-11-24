@@ -4,8 +4,8 @@ Tags: mail, email, log, logging, email log, debug, smtp, spam, deliverability
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 1.9.9
+Tested up to: 5.9
+Stable tag: 1.10.0
 
 Log every single email sent by WordPress. Zero configuration. Entirely free.
 
@@ -115,6 +115,9 @@ Yes, directly on <a href="https://github.com/kgjerstad/wp-mail-logging/" rel="no
 3. The Settings
 
 == Changelog ==
+
+= 1.10.0 - 2021-1-23 =
+- Updated: Redux framework to 4.3.3.
 
 = 1.9.9 - 2021-09-12 =
 - Updated: support for WordPress 5.8.

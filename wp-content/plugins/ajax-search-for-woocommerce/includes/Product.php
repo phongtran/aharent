@@ -182,7 +182,47 @@ class Product
      */
     public function getThumbnail( $size = '' )
     {
-        return '<img src="' . $this->getThumbnailSrc( $size ) . '" alt="' . $this->getName() . '" />';
+        return '<img src="' . $this->getThumbnailSrc( $size ) . '" alt="' . wp_strip_all_tags( $this->getName(), true ) . '" />';
+    }
+    
+    /**
+     * Get product thumbnail srcset
+     *
+     * @param string $size
+     *
+     * @return string
+     */
+    public function getThumbnailSrcset( $size = '' )
+    {
+        $size = ( empty($size) ? 'dgwt-wcas-product-suggestion' : $size );
+        $imageID = $this->wcProduct->get_image_id();
+        $srcset = ( function_exists( 'wp_get_attachment_image_srcset' ) ? (string) wp_get_attachment_image_srcset( $imageID, $size ) : '' );
+        return apply_filters(
+            'dgwt/wcas/product/thumbnail_srcset',
+            $srcset,
+            $this->productID,
+            $this
+        );
+    }
+    
+    /**
+     * Get product thumbnail sizes (for srcset)
+     *
+     * @param string $size
+     *
+     * @return string
+     */
+    public function getThumbnailSizes( $size = '' )
+    {
+        $size = ( empty($size) ? 'dgwt-wcas-product-suggestion' : $size );
+        $imageID = $this->wcProduct->get_image_id();
+        $sizes = ( function_exists( 'wp_get_attachment_image_sizes' ) ? (string) wp_get_attachment_image_sizes( $imageID, $size ) : false );
+        return apply_filters(
+            'dgwt/wcas/product/thumbnail_sizes',
+            $sizes,
+            $this->productID,
+            $this
+        );
     }
     
     /**
@@ -427,10 +467,10 @@ class Product
     /**
      * Get terms form specific taxonomy
      *
-     * @param $taxonomy
-     * @param $format output format
+     * @param string $taxonomy
+     * @param string $format Output format
      *
-     * @return string
+     * @return string|array
      *
      */
     public function getTerms( $taxonomy = 'product_cat', $format = 'array' )

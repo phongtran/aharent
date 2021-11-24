@@ -9,6 +9,7 @@ import { TotalsItem } from '@woocommerce/blocks-checkout';
 import type { Currency } from '@woocommerce/price-format';
 import type { ReactElement } from 'react';
 import { getSetting, EnteredAddress } from '@woocommerce/settings';
+import { ShippingVia } from '@woocommerce/base-components/cart-checkout/totals/shipping/shipping-via';
 
 /**
  * Internal dependencies
@@ -106,9 +107,7 @@ const NoShippingPlaceholder = ( {
 interface TotalShippingProps {
 	currency: Currency;
 	values: {
-		// eslint-disable-next-line camelcase
 		total_shipping: string;
-		// eslint-disable-next-line camelcase
 		total_shipping_tax: string;
 	}; // Values in use
 	showCalculator?: boolean; //Whether to display the rate selector below the shipping total.
@@ -146,6 +145,14 @@ const TotalsShipping = ( {
 		setIsShippingCalculatorOpen,
 	};
 
+	const selectedShippingRates = shippingRates.flatMap(
+		( shippingPackage ) => {
+			return shippingPackage.shipping_rates
+				.filter( ( rate ) => rate.selected )
+				.flatMap( ( rate ) => rate.name );
+		}
+	);
+
 	return (
 		<div
 			className={ classnames(
@@ -168,11 +175,18 @@ const TotalsShipping = ( {
 				description={
 					<>
 						{ cartHasCalculatedShipping && (
-							<ShippingAddress
-								shippingAddress={ shippingAddress }
-								showCalculator={ showCalculator }
-								{ ...calculatorButtonProps }
-							/>
+							<>
+								<ShippingVia
+									selectedShippingRates={
+										selectedShippingRates
+									}
+								/>
+								<ShippingAddress
+									shippingAddress={ shippingAddress }
+									showCalculator={ showCalculator }
+									{ ...calculatorButtonProps }
+								/>
+							</>
 						) }
 					</>
 				}

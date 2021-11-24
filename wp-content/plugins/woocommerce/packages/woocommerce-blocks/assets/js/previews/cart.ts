@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { WC_BLOCKS_ASSET_URL } from '@woocommerce/block-settings';
+import { WC_BLOCKS_IMAGE_URL } from '@woocommerce/block-settings';
 import { CartResponse } from '@woocommerce/types';
 import { getSetting } from '@woocommerce/settings';
 
@@ -11,9 +11,10 @@ import { getSetting } from '@woocommerce/settings';
  */
 import { previewShippingRates } from './shipping-rates';
 
+const displayWithTax = getSetting( 'displayCartPricesIncludingTax', false );
 // Sample data for cart block.
 // This closely resembles the data returned from the Store API /cart endpoint.
-// https://github.com/woocommerce/woocommerce-gutenberg-products-block/tree/trunk/src/RestApi/StoreApi#cart-api
+// https://github.com/woocommerce/woocommerce-gutenberg-products-block/blob/trunk/src/StoreApi/docs/cart.md#cart-response
 export const previewCart: CartResponse = {
 	coupons: [],
 	shipping_rates: getSetting( 'shippingMethodsExist', false )
@@ -40,8 +41,8 @@ export const previewCart: CartResponse = {
 			images: [
 				{
 					id: 10,
-					src: WC_BLOCKS_ASSET_URL + 'img/beanie.jpg',
-					thumbnail: WC_BLOCKS_ASSET_URL + 'img/beanie.jpg',
+					src: WC_BLOCKS_IMAGE_URL + 'previews/beanie.jpg',
+					thumbnail: WC_BLOCKS_IMAGE_URL + 'previews/beanie.jpg',
 					srcset: '',
 					sizes: '',
 					name: '',
@@ -66,14 +67,14 @@ export const previewCart: CartResponse = {
 				currency_thousand_separator: ',',
 				currency_prefix: '$',
 				currency_suffix: '',
-				price: '800',
-				regular_price: '800',
-				sale_price: '800',
+				price: displayWithTax ? '800' : '640',
+				regular_price: displayWithTax ? '800' : '640',
+				sale_price: displayWithTax ? '800' : '640',
 				raw_prices: {
 					precision: 6,
-					price: '8000000',
-					regular_price: '8000000',
-					sale_price: '8000000',
+					price: displayWithTax ? '8000000' : '6400000',
+					regular_price: displayWithTax ? '8000000' : '6400000',
+					sale_price: displayWithTax ? '8000000' : '6400000',
 				},
 			},
 			totals: {
@@ -84,10 +85,10 @@ export const previewCart: CartResponse = {
 				currency_thousand_separator: ',',
 				currency_prefix: '$',
 				currency_suffix: '',
-				line_subtotal: '1600',
+				line_subtotal: displayWithTax ? '1600' : '1280',
 				line_subtotal_tax: '0',
 				line_total: '1600',
-				line_total_tax: '0',
+				line_total_tax: displayWithTax ? '0' : '320',
 			},
 			extensions: {},
 		},
@@ -110,8 +111,8 @@ export const previewCart: CartResponse = {
 			images: [
 				{
 					id: 11,
-					src: WC_BLOCKS_ASSET_URL + 'img/cap.jpg',
-					thumbnail: WC_BLOCKS_ASSET_URL + 'img/cap.jpg',
+					src: WC_BLOCKS_IMAGE_URL + 'previews/cap.jpg',
+					thumbnail: WC_BLOCKS_IMAGE_URL + 'previews/cap.jpg',
 					srcset: '',
 					sizes: '',
 					name: '',
@@ -132,14 +133,14 @@ export const previewCart: CartResponse = {
 				currency_thousand_separator: ',',
 				currency_prefix: '$',
 				currency_suffix: '',
-				price: '1400',
-				regular_price: '1600',
-				sale_price: '1400',
+				price: displayWithTax ? '1400' : '1120',
+				regular_price: displayWithTax ? '1600' : '1280',
+				sale_price: displayWithTax ? '1400' : '1120',
 				raw_prices: {
 					precision: 6,
-					price: '14000000',
-					regular_price: '16000000',
-					sale_price: '14000000',
+					price: displayWithTax ? '14000000' : '11200000',
+					regular_price: displayWithTax ? '16000000' : '12800000',
+					sale_price: displayWithTax ? '14000000' : '11200000',
 				},
 			},
 			totals: {
@@ -150,10 +151,10 @@ export const previewCart: CartResponse = {
 				currency_thousand_separator: ',',
 				currency_prefix: '$',
 				currency_suffix: '',
-				line_subtotal: '1400',
-				line_subtotal_tax: '0',
+				line_subtotal: displayWithTax ? '1400' : '1120',
+				line_subtotal_tax: displayWithTax ? '0' : '280',
 				line_total: '1400',
-				line_total_tax: '0',
+				line_total_tax: displayWithTax ? '0' : '280',
 			},
 			extensions: {},
 		},
@@ -164,7 +165,6 @@ export const previewCart: CartResponse = {
 	needs_payment: true,
 	needs_shipping: getSetting( 'shippingEnabled', true ),
 	has_calculated_shipping: true,
-	extensions: {},
 	shipping_address: {
 		first_name: '',
 		last_name: '',
@@ -175,6 +175,7 @@ export const previewCart: CartResponse = {
 		state: '',
 		postcode: '',
 		country: '',
+		phone: '',
 	},
 	billing_address: {
 		first_name: '',
@@ -197,7 +198,7 @@ export const previewCart: CartResponse = {
 		currency_thousand_separator: ',',
 		currency_prefix: '$',
 		currency_suffix: '',
-		total_items: '3000',
+		total_items: displayWithTax ? '3000' : '2400',
 		total_items_tax: '0',
 		total_fees: '0',
 		total_fees_tax: '0',
@@ -205,8 +206,18 @@ export const previewCart: CartResponse = {
 		total_discount_tax: '0',
 		total_shipping: '0',
 		total_shipping_tax: '0',
-		total_tax: '0',
+		total_tax: '600',
 		total_price: '3000',
-		tax_lines: [],
+		tax_lines: [
+			{
+				name: __( 'Sales tax', 'woo-gutenberg-products-block' ),
+				rate: '20%',
+				price: 600,
+			},
+		],
 	},
+	errors: [],
+	payment_requirements: [ 'products' ],
+	generated_timestamp: Date.now(),
+	extensions: {},
 };

@@ -77,6 +77,12 @@ add_action( 'wp_footer', function () {
 			max-width: 800px;
 		}
 
+		.navbar-search {
+			flex-basis: 0;
+			flex-grow: 1;
+			margin-bottom: 0;
+		}
+
 		/** Mobile: Default Handled Header */
 		.handheld-header-links .site-search .dgwt-wcas-search-wrapp {
 			max-width: 100%;

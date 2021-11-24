@@ -827,7 +827,8 @@ class BeRocket_AAPF_dynamic_data_template {
             if( berocket_isset($berocket_query_var_title['color_image_checked']) == 'brchecked_custom' ) {
                 $template_content['template']['attributes']['class']['checked_type'] = 'brchecked_custom_'.$berocket_query_var_title['unique_filter_id'];
                 if( ! empty($berocket_query_var_title['color_image_checked_custom_css']) ) {
-                    $styles = '.bapf_sfilter.bapf_stylecolor.brchecked_custom_' . $berocket_query_var_title['unique_filter_id'] . ' input[type="checkbox"]:checked + label .bapf_clr_span {'
+                    $styles = '.bapf_sfilter.bapf_stylecolor.brchecked_custom_' . $berocket_query_var_title['unique_filter_id'] . ' input[type="checkbox"]:checked + label .bapf_clr_span,
+.bapf_sfilter.bapf_styleimage.brchecked_custom_' . $berocket_query_var_title['unique_filter_id'] . ' input[type="checkbox"]:checked + label .bapf_img_span {'
                     . $berocket_query_var_title['color_image_checked_custom_css'] . '}';
                     $template_content['template']['content']['checkboxstyle'] = array(
                         'type'          => 'tag',

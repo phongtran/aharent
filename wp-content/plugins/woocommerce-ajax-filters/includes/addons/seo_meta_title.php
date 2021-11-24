@@ -157,6 +157,9 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
                         }
                         $taxonomy_label = apply_filters('wpml_translate_single_string', $taxonomy_label, 'WordPress', sprintf( 'taxonomy singular name: %s', $taxonomy_label ) );
                         $term = get_term($term_parsed[1], $term_parsed[0]);
+                        if( ! empty($term) && is_a($term, 'WP_Error') ) {
+                            continue;
+                        }
                         if( ! isset($terms_name[$taxonomy->name]) ) {
                             $terms_name[$taxonomy->name] = array(
                                 'name' => apply_filters('berocket_aapf_seo_meta_filtered_taxonomy_label', $taxonomy_label, $taxonomy, $term, $term_parsed), 

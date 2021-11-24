@@ -196,7 +196,6 @@ class BeRocket_AAPF extends BeRocket_Framework {
             BeRocket_AAPF_group_filters::getInstance();
             new BeRocket_AAPF_compat_product_table();
             new BeRocket_AAPF_compat_JetSmartFilter();
-            add_action('et_builder_modules_load', 'berocket_filter_et_builder_ready');
             add_action('vc_before_init', 'berocket_filter_vc_before_init', 100000);
             //----------------------
         }
@@ -234,6 +233,7 @@ class BeRocket_AAPF extends BeRocket_Framework {
                         add_action( 'admin_init', array($this, 'register_admin_assets'));
                     }
 
+                    add_action( 'divi_extensions_init', array($this, 'divi_extensions_init') );
                     add_action( 'admin_init', array( $this, 'admin_init' ) );
                     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
                     add_shortcode( 'br_filters', array( $this, 'shortcode' ) );
@@ -568,7 +568,8 @@ class BeRocket_AAPF extends BeRocket_Framework {
         }
         if( function_exists('wmc_get_price') ) {
             include_once(plugin_dir_path( __FILE__ ) . "includes/compatibility/woo-multi-currency.php");
-        }if( defined('WOOCS_VERSION') ) {
+        }
+        if( defined('WOOCS_VERSION') ) {
             include_once(plugin_dir_path( __FILE__ ) . "includes/compatibility/woocs.php");
         }
         if ( ((defined( 'WCML_VERSION' ) || defined('POLYLANG_VERSION')) && defined( 'ICL_LANGUAGE_CODE' )) || function_exists('wpm_get_language') ) {
@@ -588,6 +589,9 @@ class BeRocket_AAPF extends BeRocket_Framework {
         }
         if( function_exists('premmerce_multicurrency') ) {
             include_once(plugin_dir_path( __FILE__ ) . "includes/compatibility/premmerce-multicurrency.php");
+        }
+        if( ! empty($GLOBALS['woocommerce-aelia-currencyswitcher']) ) {
+            include_once(plugin_dir_path( __FILE__ ) . "includes/compatibility/aelia-currencyswitcher.php");
         }
         if( apply_filters('BeRocket_AAPF_widget_load_file', true) ) {
             foreach (glob(__DIR__ . "/includes/display_filter/*.php") as $filename)
@@ -983,6 +987,13 @@ class BeRocket_AAPF extends BeRocket_Framework {
                         ),
                         "value"    => '',
                         "label_for" => __('On Category, Tag, Attribute page filter for it will remove value or leave only one value', 'BeRocket_AJAX_domain'),
+                    ),
+                    'reload_changed_filters' => array(
+                        "label"     => __( 'Load products when URL changed', "BeRocket_AJAX_domain" ),
+                        "type"      => "checkbox",
+                        "name"      => "reload_changed_filters",
+                        "value"     => '1',
+                        'label_for' => __('Load products again when some filters not exist after filtering', 'BeRocket_AJAX_domain'),
                     ),
                     'header_part_tools' => array(
                         'section' => 'header_part',
@@ -1820,6 +1831,7 @@ jQuery(document).on('change', '.berocket_disable_ajax_loading', berocket_disable
                 ),
                 'trailing_slash'                       => $permalink_structure,
                 'pagination_base'                      => $wp_rewrite->pagination_base,
+                'reload_changed_filters'               => ( empty($br_options['reload_changed_filters']) ? false : true),
             ) );
             self::$the_ajax_script_initialized = TRUE;
         }
@@ -2217,6 +2229,7 @@ jQuery(document).on('change', '.berocket_disable_ajax_loading', berocket_disable
         } else {
             $is_wc_main_query = $query->is_main_query();
         }
+                
         $is_wc_main_query = apply_filters('berocket_aapf_check_is_wc_main_query', $is_wc_main_query, $query, $is_shortcode);
         if( apply_filters( 'berocket_aapf_is_filtered_page_check', ! empty($_GET['filters']), 'apply_user_filters', $query ) ) {
             br_aapf_args_converter( $query );
@@ -2291,6 +2304,9 @@ jQuery(document).on('change', '.berocket_disable_ajax_loading', berocket_disable
         $options = $this->get_option();
         $args = array();
         if ( apply_filters( 'berocket_aapf_is_filtered_page_check', ! empty($_GET['filters']), 'get_filter_args', $query ) ) {
+            if( $is_shortcode ) {
+                $query->set('brapf_is_shortcode', true);
+            }
             br_aapf_args_converter( $query );
 
             if( self::$debug_mode ) {
@@ -3100,6 +3116,37 @@ jQuery(document).on('change', '.berocket_disable_ajax_loading', berocket_disable
                 update_option( 'br_filters_options', $options );
             }
         }
+        if( $previous !== '0' && ( version_compare($previous, '1.5.6', '<') || (version_compare($previous, '2.0', '>') && version_compare($previous, '3.0.5', '<') ) ) ) {
+            $deprecated_filters = false;
+            if( ! empty($options['addons']) && is_array($options['addons']) ) {
+                foreach($options['addons'] as $addon) {
+                    if( strpos($addon, 'deprecated_filters.php') !== FALSE ) {
+                        $deprecated_filters = true;
+                        break;
+                    }
+                }
+            }
+            if($deprecated_filters) {
+                new berocket_admin_notices(array(
+                    'start' => 0,
+                    'end'   => 0,
+                    'name'  => 'aapf_remove_deprecated_filters',
+                    'html'  => 'AJAX Product Filters. Deprecated Filters add-on enabled on your site, but it will be removed in near future. You can disable Deprecated Filters in <a href="'.admin_url('admin.php?page=br-product-filters&tab=addons').'">Plugin settings -> Add-ons tab</a>',
+                    'righthtml'  => '<a class="berocket_no_thanks">Close notice</a>',
+                    'rightwidth'  => 200,
+                    'nothankswidth'  => 200,
+                    'contentwidth'  => 400,
+                    'subscribe'  => false,
+                    'priority'  => 20,
+                    'height'  => 50,
+                    'repeat'  => false,
+                    'repeatcount'  => 1,
+                    'image'  => array(
+                        'local' => plugin_dir_url( __FILE__ ) . 'images/attention.png',
+                    ),
+                ));
+            }
+        }
     }
     public function save_settings_callback( $settings ) {
         $options = $this->get_option();
@@ -3156,6 +3203,9 @@ jQuery(document).on('change', '.berocket_disable_ajax_loading', berocket_disable
     }
     public function bapf_wp_footer() {
         do_action('bapf_wp_footer');
+    }
+    public function divi_extensions_init() {
+        include_once dirname( __FILE__ ) . '/includes/divi/DiviExtension.php';
     }
 }
 

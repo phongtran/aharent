@@ -175,6 +175,7 @@ class SettingsAPI
                     'sanitize_callback' => ( isset( $option['sanitize_callback'] ) ? $option['sanitize_callback'] : '' ),
                     'type'              => $type,
                     'move_dest'         => ( isset( $option['move_dest'] ) ? $option['move_dest'] : '' ),
+                    'input_data'        => ( isset( $option['input_data'] ) ? $option['input_data'] : '' ),
                 );
                 add_settings_field(
                     "{$this->name}[" . $option['name'] . ']',
@@ -295,10 +296,11 @@ class SettingsAPI
         );
         $html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', $this->name, $args['id'] );
         $html .= sprintf(
-            '<input type="checkbox" class="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />',
+            '<input type="checkbox" class="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s %4$s />',
             $this->name,
             $args['id'],
-            checked( $value, 'on', false )
+            checked( $value, 'on', false ),
+            $args['input_data']
         );
         $html .= sprintf( '<p class="%1$s-description-field">%2$s</p></label>', $this->name, $args['desc'] );
         $html .= '</fieldset>';

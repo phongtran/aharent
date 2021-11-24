@@ -21,98 +21,59 @@ class WooViet_OnePay_International extends WooViet_OnePay_Abstract {
 	}
 
 	public function get_onepay_payment_link( $testmode ) {
-		//return $testmode ? 'https://mtf.onepay.vn/vpcpay/vpcpay.op' : 'https://onepay.vn/vpcpay/vpcpay.op';
-		return $testmode ? 'https://mtf.onepay.vn/paygate/vpcpay.op' : 'https://onepay.vn/paygate/vpcpay.op';
+		return $testmode ? 'https://mtf.onepay.vn/vpcpay/vpcpay.op' : 'https://onepay.vn/vpcpay/vpcpay.op';
 	}
 
 	public function get_onepay_querydr_link( $testmode ) {
-		//return $testmode ? 'https://mtf.onepay.vn/vpcpay/Vpcdps.op' : 'https://onepay.vn/vpcpay/Vpcdps.op';
+		return $testmode ? 'https://mtf.onepay.vn/vpcpay/Vpcdps.op' : 'https://onepay.vn/vpcpay/Vpcdps.op';
 	}
 
 	public function OnePay_getResponseDescription( $responseCode ) {
 
-		switch ( $responseCode ) 
-		{
+		switch ( $responseCode ) {
 			case "0" :
-				$result = "Giao dịch thành công";
-				break;
-			case "?" :
-				$result = "Transaction status is unknown";
+				$result = "Giao dịch thành công - Approved";
 				break;
 			case "1" :
-				$result = "Giao dịch không thành công,Ngân hàng phát hành thẻ không cấp phép cho giao dịch hoặc thẻ chưa được kích hoạt dịch vụ thanh toán trên Internet. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ được hỗ trợ chi tiết.";
-				break;
 			case "2" :
-				$result = "Giao dịch không thành công,Ngân hàng phát hành thẻ từ chối cấp phép cho giao dịch. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ để biết chính xác nguyên nhân Ngân hàng từ chối.";
+				$result = "Ngân hàng từ chối giao dịch - Bank Declined";
 				break;
 			case "3" :
-				$result = "Giao dịch không thành công, Cổng thanh toán không nhận được kết quả trả về từ ngân hàng phát hành thẻ. Vui lòng liên hệ với ngân hàng theo số điện thoại sau mặt thẻ để biết chính xác trạng thái giao dịch và thực hiện thanh toán lại ";
+				$result = "OnePay không nhận được kết quả giao dịch từ ngân hàng - OnePAY did not received payment result
+from Issuer bank";
 				break;
 			case "4" :
-				$result = "Giao dịch không thành công do thẻ hết hạn sử dụng hoặc nhập sai thông tin tháng/ năm hết hạn của thẻ. Vui lòng kiểm tra lại thông tin và thanh toán lại";
+				$result = "Thẻ hết hạn hoặc sai thông tin hết hạn thẻ -  Card expired or incorrect expired date";
 				break;
 			case "5" :
-				$result = "Giao dịch không thành công,Thẻ không đủ hạn mức hoặc tài khoản không đủ số dư để thanh toán. Vui lòng kiểm tra lại thông tin và thanh toán lại";
+				$result = "Số tiền không đủ để thanh toán - Insufficient fund";
 				break;
 			case "6" :
-				$result = "Giao dịch không thành công, Quá trình xử lý giao dịch phát sinh lỗi từ ngân hàng phát hành thẻ. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ được hỗ trợ chi tiết.";
-				break;
 			case "7" :
-				$result = "Giao dịch không thành công,Đã có lỗi phát sinh trong quá trình xử lý giao dịch. Vui lòng thực hiện thanh toán lại.";
+				$result = "Quá trình xử lý giao dịch phát sinh lỗi - An error was encountered while processing your transaction";
 				break;
 			case "8" :
-				$result = "Giao dịch không thành công. Số thẻ không đúng. Vui lòng kiểm tra và thực hiện thanh toán lại ";
+				$result = "Thẻ không hỗ trợ giao
+dịch thanh toán trên Internet - Ecommerce transaction is not supported for this card";
 				break;
 			case "9" :
-				$result = "Giao dịch không thành công. Tên chủ thẻ không đúng. Vui lòng kiểm tra và thực hiện thanh toán lại";
-				break;
-			case "10" :
-				$result = "Giao dịch không thành công. Thẻ hết hạn/Thẻ bị khóa. Vui lòng kiểm tra và thực hiện thanh toán lại ";
-				break;
-			case "11" :
-				$result = "Giao dịch không thành công. Thẻ chưa đăng ký sử dụng dịch vụ thanh toán trên Internet. Vui lòng liên hê ngân hàng theo số điện thoại sau mặt thẻ để được hỗ trợ";
-				break;
-			case "12" :
-				$result = "Giao dịch không thành công. Ngày phát hành/Hết hạn không đúng. Vui lòng kiểm tra và thực hiện thanh toán lại";
-				break;
-			case "13" :
-				$result = "Giao dịch không thành công. thẻ/ tài khoản đã vượt quá hạn mức thanh toán. Vui lòng kiểm tra và thực hiện thanh toán lại ";
-				break;				
-			case "21" :
-				$result = "Giao dịch không thành công. Số tiền không đủ để thanh toán. Vui lòng kiểm tra và thực hiện thanh toán lại";
-				break;
-			case "22" :
-				$result = "Giao dịch không thành công. Thông tin tài khoản không đúng. Vui lòng kiểm tra và thực hiện thanh toán lại ";
-				break;
-			case "23" :
-				$result = "Giao dịch không thành công. Tài khoản bị khóa.Vui lòng liên hê ngân hàng theo số điện thoại sau mặt thẻ để được hỗ trợ";
-				break;				
-			case "24" :
-				$result = "Giao dịch không thành công. Thông tin thẻ không đúng. Vui lòng kiểm tra và thực hiện thanh toán lại";
-				break;
-			case "25" :
-				$result = "Giao dịch không thành công. OTP không đúng.Vui lòng kiểm tra và thực hiện thanh toán lại ";
-				break;
-			case "253" :
-				$result = "Giao dịch không thành công. Quá thời gian thanh toán. Vui lòng thực hiện thanh toán lại";
+				$result = "Ngân hàng từ chối giao dịch - Bank Declined";
 				break;
 			case "99" :
-				$result = "Giao dịch không thành công. Người sử dụng hủy giao dịch";
+				$result = "Người sủ dụng hủy giao dịch - User cancel";
 				break;
 			case "B" :
-				$result = "Giao dịch không thành công do không xác thực được 3D-Secure. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ được hỗ trợ chi tiết.";
+			case "F" :
+				$result = "Không xác thực được 3D-Secure - 3D Secure Authentication Failed";
 				break;
 			case "E" :
-				$result = "Giao dịch không thành công do nhập sai CSC (Card Security Card) hoặc ngân hàng từ chối cấp phép cho giao dịch. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ được hỗ trợ chi tiết.";
-				break;
-			case "F" :
-				$result = "Giao dịch không thành công do không xác thực được 3D-Secure. Vui lòng liên hệ ngân hàng theo số điện thoại sau mặt thẻ được hỗ trợ chi tiết";
+				$result = "Nhập sai CSC (Card Security Card) hoặc ngân hàng từ chối cấp phép cho giao dịch - You have entered wrong CSC or Issuer Bank declided transaction";
 				break;
 			case "Z" :
-				$result = "Giao dịch của bạn bị từ chối. Vui lòng liên hệ Đơn vị chấp nhận thẻ để được hỗ trợ.";
+				$result = "Transaction restricted due to OFD’s policies - vi phạm quy định của hệ thống";
 				break;
-			default  :
-				$result = "Payment fail";
+			default :
+				$result = "Giao dịch thất bại - Failure";
 		}
 
 		return $result;

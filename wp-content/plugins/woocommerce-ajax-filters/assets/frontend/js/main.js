@@ -147,7 +147,8 @@ braapf_get_current_url_data,
 braapf_reset_buttons_hide,
 bapf_universal_theme_compatibility,
 braapf_disable_ajax_loading,
-braapf_close_tippy;
+braapf_close_tippy,
+braapf_context_is_update;
 function braapf_grab_all_init() {braapf_grab_all();}
 function braapf_selected_filters_area_set_init() {braapf_selected_filters_area_set();}
 function braapf_filtered_filters_set() {
@@ -320,6 +321,7 @@ function braapf_filtered_filters_set() {
             braapf_ajax_load_from_url(berocket_apply_filters('before_update_products_context_url_filtered_partial', url_filtered, context, element), {}, berocket_apply_filters('ajax_load_from_filters_partial', {done:[braapf_replace_each_filter, braapf_init_load]}, url_filtered, 'partial'), 'partial');
         }
     }
+    
     braapf_context_is_update = function(context) {
         return berocket_apply_filters('context_is_update', (context == 'update' || context == 'reset_all' || context == 'reset_single'), context);
     }
@@ -335,10 +337,16 @@ function braapf_filtered_filters_set() {
         braapf_grab_all();
         var compat_filters = braapf_compact_filters();
     }
-    braapf_update_url_history_api_from_current = function() {
+    var braapf_update_url_history_api_from_current_action = false;
+    braapf_update_url_history_api_from_current = function(data, textStatus, jqXHR, url, type) {
         if( the_ajax_script.seo_friendly_urls ) {
             url_filtered = braapf_get_url_with_filters_selected();
             history.replaceState(history.state, "BeRocket Rules", url_filtered);
+            if( url != url_filtered && the_ajax_script.reload_changed_filters ) {
+                setTimeout(function() {
+                    braapf_filter_products_by_url(url_filtered);
+                }, 5);
+            }
         }
     }
     //Grab filters from page
@@ -693,7 +701,7 @@ function braapf_filtered_filters_set() {
                 $(document).trigger('berocket_ajax_filtering_on_update');
                 data = berocket_apply_filters('ajax_load_from_url_done', data, url, send_data, callback_func, type);
                 $.each(callback_func.done, function(i, val) {
-                    val(data, textStatus, jqXHR);
+                    val(data, textStatus, jqXHR, url, type);
                 });
                 data = berocket_apply_filters('ajax_load_from_url_done_after', data, url, send_data, callback_func, type);
                 $(document).trigger('berocket_ajax_products_loaded');
@@ -705,7 +713,7 @@ function braapf_filtered_filters_set() {
                 $(document).trigger('berocket_ajax_products_not_loaded');
                 jqXHR = berocket_apply_filters('ajax_load_from_url_fail', jqXHR, url, send_data, callback_func, type);
                 $.each(callback_func.fail, function(i, val) {
-                    val(jqXHR, textStatus, errorThrown);
+                    val(jqXHR, textStatus, errorThrown, url, type);
                 });
                 jqXHR = berocket_apply_filters('ajax_load_from_url_fail_after', jqXHR, url, send_data, callback_func, type);
                 if( type == 'default' ) {
@@ -723,7 +731,7 @@ function braapf_filtered_filters_set() {
             .always(function(data, textStatus, jqXHR) {
                 data = berocket_apply_filters('ajax_load_from_url_always', data, url, send_data, callback_func, type);
                 $.each(callback_func.always, function(i, val) {
-                    val(data, textStatus, jqXHR);
+                    val(data, textStatus, jqXHR, url, type);
                 });
                 data = berocket_apply_filters('ajax_load_from_url_always_after', data, url, send_data, callback_func, type);
                 $(document).trigger('berocket_ajax_filtering_end');
@@ -1357,7 +1365,6 @@ brapf_jet_smart_filters;
     });
 })(jQuery);
 jQuery(document).trigger('bapf_js_loaded');
-
 var braapf_init_ion_slidr,
 braapf_ion_slidr_same,
 braapf_jqrui_slidr_ion_value_wc_price,

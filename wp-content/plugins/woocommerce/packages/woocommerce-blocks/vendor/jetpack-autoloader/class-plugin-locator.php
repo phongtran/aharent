@@ -5,7 +5,7 @@
  * @package automattic/jetpack-autoloader
  */
 
-namespace Automattic\Jetpack\Autoloader\jpbc1b1af2c309d7ebec60f743d6cb8207;
+namespace Automattic\Jetpack\Autoloader\jpb78ca910fe07339d6189615f1734a3e3;
 
  // phpcs:ignore
 

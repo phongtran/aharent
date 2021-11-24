@@ -67,6 +67,7 @@ class Scripts
             'is_premium'                   => ( dgoraAsfwFs()->is_premium() ? true : false ),
             'mobile_breakpoint'            => $layout->breakpoint,
             'mobile_overlay_wrapper'       => $layout->mobile_overlay_wrapper,
+            'mobile_overlay_delay'         => apply_filters( 'dgwt/wcas/scripts/overlay_delay_ms', 0 ),
             'debounce_wait_ms'             => apply_filters( 'dgwt/wcas/scripts/debounce_wait_ms', 400 ),
             'send_ga_events'               => apply_filters( 'dgwt/wcas/scripts/send_ga_events', true ),
             'enable_ga_site_search_module' => apply_filters( 'dgwt/wcas/scripts/enable_ga_site_search_module', false ),

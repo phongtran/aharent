@@ -69,7 +69,7 @@ class WcomInstall {
 	 * Install actions when a update button is clicked.
 	 */
 	public static function install_actions() {
-		if ( ! empty( $_GET['do_update_sm_uci_pro'] ) ) {
+		if ( ! empty( sanitize_text_field($_GET['do_update_sm_uci_pro'] ) )) {
 			self::update();
 		}
 	}
@@ -92,7 +92,7 @@ class WcomInstall {
 	 */
 	public function smack_uci_action_links( $links ) {
 		$links[] = '<a href="'. esc_url( get_admin_url(null, 'admin.php?page=sm-uci-settings') ) .'">Settings</a>';
-		$links[] = '<a href="http://wp-buddy.com" target="_blank">More plugins by WP-Buddy</a>';
+		$links[] = '<a href="https://wp-buddy.com" target="_blank">More plugins by WP-Buddy</a>';
 		return $links;
 	}
 

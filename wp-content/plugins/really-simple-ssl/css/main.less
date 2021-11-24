@@ -1,5 +1,5 @@
 // RTL generator: https://cssjanus.github.io/
-
+@import 'wcag.less';
 /*
     Hide nags from other plugins
 */
@@ -546,8 +546,8 @@ hr {
 .rsssl-switch {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 21px;
+  width: 35px;
+  height: 18px;
   input {
     display: none;
   }
@@ -567,10 +567,10 @@ hr {
 .rsssl-slider:before {
   position: absolute;
   content: "";
-  height: 15px;
-  width: 15px;
-  left: 4px;
-  bottom: 3px;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 2.2px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
@@ -585,9 +585,9 @@ input:checked + .rsssl-slider {
   background-color: #2DAAE1;
 }
 input:checked + .rsssl-slider:before {
-  -webkit-transform: translateX(17px);
-  -ms-transform: translateX(17px);
-  transform: translateX(17px);
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
 }
 input:disabled + .rsssl-slider {
   background-color: #b3e0f4;
@@ -694,5 +694,188 @@ input:focus + .rsssl-slider {
   ul {
     list-style-type: disc;
     margin-left: 22px;
+  }
+}
+
+/**
+settings saved
+ */
+
+
+.rsssl-container, #rsssl-wizard {
+  .rsssl-settings-saved {
+    display: none;
+    opacity: 0;
+    top: 20px;
+    height: 45px;
+    position: fixed;
+    background-color: #fff;
+    z-index: 999999;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: left;
+    box-shadow: 0 0 5px 5px rgba(222, 222, 222, 0.2);
+
+    .rsssl-success {
+      color: #61ce70;
+    }
+
+    svg {
+      stroke: #61ce70;
+      fill: #61ce70;
+    }
+
+    .rsssl-settings-saved__text_and_icon {
+      .rsssl-icon {
+        margin: 12px 0 0 0;
+        height: 30px;
+        width: 30px;
+      }
+
+      display: flex;
+      align-content: center;
+      padding: 0 20px;
+
+      span {
+        display: flex;
+        align-self: center;
+        font-size: 12px;
+        font-weight: 400;
+        color: #696969;
+      }
+
+      div {
+        display: flex;
+        align-self: center;
+      }
+    }
+
+    &.rsssl-settings-saved--fade-in {
+      display: block;
+      -webkit-animation: fadeInFromNone 5s ease-in-out;
+      -moz-animation: fadeInFromNone 5s ease-in-out;
+      -o-animation: fadeInFromNone 5s ease-in-out;
+      animation: fadeInFromNone 5s ease-in-out;
+    }
+
+    @-webkit-keyframes fadeInFromNone {
+      0% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+
+      5% {
+        display: block;
+        opacity: 0;
+        top: -10px;
+      }
+
+      15% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      90% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      100% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+    }
+
+    @-moz-keyframes fadeInFromNone {
+      0% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+
+      5% {
+        display: block;
+        opacity: 0;
+        top: -10px;
+      }
+
+      15% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      90% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      100% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+    }
+
+    @-o-keyframes fadeInFromNone {
+      0% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+
+      5% {
+        display: block;
+        opacity: 0;
+        top: -10px;
+      }
+
+      15% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      90% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      100% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+    }
+
+    @keyframes fadeInFromNone {
+      0% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+
+      5% {
+        display: block;
+        opacity: 0;
+        top: -10px;
+      }
+
+      15% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      90% {
+        display: block;
+        opacity: 1;
+        top: 20px;
+      }
+      100% {
+        display: none;
+        opacity: 0;
+        top: 20px;
+      }
+    }
   }
 }

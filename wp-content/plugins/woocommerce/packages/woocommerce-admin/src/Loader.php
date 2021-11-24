@@ -44,6 +44,16 @@ class Loader {
 	protected static $required_capability = null;
 
 	/**
+	 * An array of dependencies that have been preloaded (to avoid duplicates).
+	 *
+	 * @var array
+	 */
+	protected $preloaded_dependencies = array(
+		'script' => array(),
+		'style'  => array(),
+	);
+
+	/**
 	 * Get class instance.
 	 */
 	public static function get_instance() {
@@ -59,14 +69,15 @@ class Loader {
 	 */
 	public function __construct() {
 		Features::get_instance();
+		WCAdminSharedSettings::get_instance();
 		add_action( 'init', array( __CLASS__, 'define_tables' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'register_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'inject_wc_settings_dependencies' ), 14 );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_scripts' ), 15 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ), 15 );
 		// Old settings injection.
 		add_filter( 'woocommerce_components_settings', array( __CLASS__, 'add_component_settings' ) );
 		// New settings injection.
-		add_filter( 'woocommerce_shared_settings', array( __CLASS__, 'add_component_settings' ) );
+		add_filter( 'woocommerce_admin_shared_settings', array( __CLASS__, 'add_component_settings' ) );
 		add_filter( 'admin_body_class', array( __CLASS__, 'add_admin_body_classes' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'register_page_handler' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'register_store_details_page' ) );
@@ -250,7 +261,7 @@ class Loader {
 	 * @param  string $file File name (without extension).
 	 * @return string complete asset filename.
 	 *
-	 * @throws Exception Throws an exception when a readable asset registry file cannot be found.
+	 * @throws \Exception Throws an exception when a readable asset registry file cannot be found.
 	 */
 	public static function get_script_asset_filename( $script_path_name, $file ) {
 		$minification_supported = Features::exists( 'minified-js' );
@@ -380,6 +391,7 @@ class Loader {
 			'wc-currency',
 			'wc-date',
 			'wc-components',
+			'wc-customer-effort-score',
 			WC_ADMIN_APP,
 		);
 
@@ -416,20 +428,20 @@ class Loader {
 		wp_style_add_data( 'wc-components', 'rtl', 'replace' );
 
 		wp_register_style(
-			'wc-components-ie',
-			self::get_url( 'components/ie', 'css' ),
-			array(),
-			$css_file_version
-		);
-		wp_style_add_data( 'wc-components-ie', 'rtl', 'replace' );
-
-		wp_register_style(
 			'wc-customer-effort-score',
 			self::get_url( 'customer-effort-score/style', 'css' ),
 			array(),
 			$css_file_version
 		);
 		wp_style_add_data( 'wc-customer-effort-score', 'rtl', 'replace' );
+
+		wp_register_style(
+			'wc-experimental',
+			self::get_url( 'experimental/style', 'css' ),
+			array(),
+			$css_file_version
+		);
+		wp_style_add_data( 'wc-experimental', 'rtl', 'replace' );
 
 		wp_localize_script(
 			WC_ADMIN_APP,
@@ -440,22 +452,21 @@ class Loader {
 			)
 		);
 
-		// The "app" RTL files are in a different format than the components.
-		$rtl = is_rtl() ? '.rtl' : '';
-
 		wp_register_style(
 			WC_ADMIN_APP,
-			self::get_url( "app/style{$rtl}", 'css' ),
-			array( 'wc-components', 'wc-customer-effort-score', 'wp-components' ),
+			self::get_url( 'app/style', 'css' ),
+			array( 'wc-components', 'wc-customer-effort-score', 'wp-components', 'wc-experimental' ),
 			$css_file_version
 		);
+		wp_style_add_data( WC_ADMIN_APP, 'rtl', 'replace' );
 
 		wp_register_style(
-			'wc-admin-ie',
-			self::get_url( "ie/style{$rtl}", 'css' ),
-			array( WC_ADMIN_APP ),
+			'wc-onboarding',
+			self::get_url( 'onboarding/style', 'css' ),
+			array(),
 			$css_file_version
 		);
+		wp_style_add_data( 'wc-onboarding', 'rtl', 'replace' );
 	}
 
 	/**
@@ -668,7 +679,7 @@ class Loader {
 	/**
 	 * Loads the required scripts on the correct pages.
 	 */
-	public static function load_scripts() {
+	public function load_scripts() {
 		if ( ! self::is_admin_or_embed_page() ) {
 			return;
 		}
@@ -679,20 +690,10 @@ class Loader {
 		wp_enqueue_script( WC_ADMIN_APP );
 		wp_enqueue_style( WC_ADMIN_APP );
 		wp_enqueue_style( 'wc-material-icons' );
-
-		// Use server-side detection to prevent unneccessary stylesheet loading in other browsers.
-		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : ''; // phpcs:ignore sanitization ok.
-		preg_match( '/MSIE (.*?);/', $user_agent, $matches );
-		if ( count( $matches ) < 2 ) {
-			preg_match( '/Trident\/\d{1,2}.\d{1,2}; rv:([0-9]*)/', $user_agent, $matches );
-		}
-		if ( count( $matches ) > 1 ) {
-			wp_enqueue_style( 'wc-components-ie' );
-			wp_enqueue_style( 'wc-admin-ie' );
-		}
+		wp_enqueue_style( 'wc-onboarding' );
 
 		// Preload our assets.
-		self::output_header_preload_tags();
+		$this->output_header_preload_tags();
 	}
 
 	/**
@@ -705,10 +706,18 @@ class Loader {
 	 * @param string        $type Dependency type - 'script' or 'style'.
 	 * @param array         $allowlist Optional. List of allowed dependency handles.
 	 */
-	public static function maybe_output_preload_link_tag( $dependency, $type, $allowlist = array() ) {
-		if ( ! empty( $allowlist ) && ! in_array( $dependency->handle, $allowlist, true ) ) {
+	public function maybe_output_preload_link_tag( $dependency, $type, $allowlist = array() ) {
+		if (
+			(
+				! empty( $allowlist ) &&
+				! in_array( $dependency->handle, $allowlist, true )
+			) ||
+			in_array( $dependency->handle, $this->preloaded_dependencies[ $type ], true )
+		) {
 			return;
 		}
+
+		$this->preloaded_dependencies[ $type ][] = $dependency->handle;
 
 		$source = $dependency->ver ? add_query_arg( 'ver', $dependency->ver, $dependency->src ) : $dependency->src;
 
@@ -724,7 +733,7 @@ class Loader {
 	 * @param string $type Dependency type - 'script' or 'style'.
 	 * @param array  $allowlist Optional. List of allowed dependency handles.
 	 */
-	public static function output_header_preload_tags_for_type( $type, $allowlist = array() ) {
+	public function output_header_preload_tags_for_type( $type, $allowlist = array() ) {
 		if ( 'script' === $type ) {
 			$dependencies_of_type = wp_scripts();
 		} elseif ( 'style' === $type ) {
@@ -745,11 +754,11 @@ class Loader {
 				$sub_dependency = $dependencies_of_type->query( $sub_dependency_handle, 'registered' );
 
 				if ( $sub_dependency ) {
-					self::maybe_output_preload_link_tag( $sub_dependency, $type, $allowlist );
+					$this->maybe_output_preload_link_tag( $sub_dependency, $type, $allowlist );
 				}
 			}
 
-			self::maybe_output_preload_link_tag( $dependency, $type, $allowlist );
+			$this->maybe_output_preload_link_tag( $dependency, $type, $allowlist );
 		}
 	}
 
@@ -758,7 +767,7 @@ class Loader {
 	 *
 	 * See: https://macarthur.me/posts/preloading-javascript-in-wordpress
 	 */
-	public static function output_header_preload_tags() {
+	public function output_header_preload_tags() {
 		$wc_admin_scripts = array(
 			WC_ADMIN_APP,
 			'wc-components',
@@ -767,16 +776,14 @@ class Loader {
 		$wc_admin_styles = array(
 			WC_ADMIN_APP,
 			'wc-components',
-			'wc-components-ie',
-			'wc-admin-ie',
 			'wc-material-icons',
 		);
 
 		// Preload styles.
-		self::output_header_preload_tags_for_type( 'style', $wc_admin_styles );
+		$this->output_header_preload_tags_for_type( 'style', $wc_admin_styles );
 
 		// Preload scripts.
-		self::output_header_preload_tags_for_type( 'script', $wc_admin_scripts );
+		$this->output_header_preload_tags_for_type( 'script', $wc_admin_scripts );
 	}
 
 	/**
@@ -1236,6 +1243,16 @@ class Loader {
 	 * Registers WooCommerce specific user data to the WordPress user API.
 	 */
 	public static function register_user_data() {
+		register_rest_field(
+			'user',
+			'is_super_admin',
+			array(
+				'get_callback' => function() {
+					return is_super_admin();
+				},
+				'schema'       => null,
+			)
+		);
 		register_rest_field(
 			'user',
 			'woocommerce_meta',

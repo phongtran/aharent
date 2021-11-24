@@ -3,12 +3,12 @@ Contributors: smackcoders
 Donate link: https://www.paypal.me/smackcoders
 Tags: update woocommerce, import variation products, import woocommerce, woocommerce csv, products import, import coupons
 Requires at least: 5.0
-Tested up to: 5.7.2
-Stable tag: 1.6.2
-Version: 1.6.2
+Tested up to: 5.8.1
+Stable tag: 1.6.6
+Version: 1.6.6
 Requires PHP: 5.2.4
 Author: smackcoders
-Author URI: http://profiles.wordpress.org/smackcoders/
+Author URI: https://profiles.wordpress.org/smackcoders/
 License: GPLv2 or later
 
 Complete WooCommerce Product Import Suite add-on with 5 major add-on support
@@ -83,7 +83,7 @@ To know more about the premium bundled version, visit [WordPress Lead Form Data 
 
 = Helpful links =
 
-Try the demo [WP Ultimate CSV Importer PRO](http://demo.smackcoders.com/wp-ultimate-csv-importer/wp-admin) plugin to import all WooCommerce products along with WooCommerce add-ons. 
+Try the demo [WP Ultimate CSV Importer PRO](https://demo.smackcoders.com/wp-ultimate-csv-importer/wp-admin) plugin to import all WooCommerce products along with WooCommerce add-ons. 
 
 For technical support and feature request, visit <a href="https://www.smackcoders.com/support.html"> Smackcoders support </a> or <a href="mailto:support@smackcoders.com">mail us</a>.
 
@@ -116,6 +116,21 @@ The import button will be enabled only after uploading the CSV file to be import
 4. Log section with Admin and Web view.
 
 == Changelog ==
+= 1.6.6 =
+* Added: Import  support for latest woocommerce product bundle plugin-v6.12.4
+* Fixed: Dropbox link image issue
+
+= 1.6.5 =
+* Added: support for dropbox image import (products).
+* Checked: WordPress 5.8.1 compatibility.
+
+= 1.6.4 =
+* Added: Separate widget for woocommerce product attributes
+
+= 1.6.3 =
+* Added: Import support for Polylang for WooCommerce plugin.
+* Added: WordPress 5.8 compatibility
+
 = 1.6.2 =
 * Added: WordPress 5.7.2 compatibility
 * Fixed: Woocommerce regular price issue.
@@ -200,6 +215,18 @@ Added: Latest woocommerce version 3.6.5 support
 * Initial release version. Tested and found to work well without any issues.
 
 == Upgrade Notice ==
+= 1.6.6 = 
+* Upgrade now for latest changes
+
+= 1.6.5 = 
+* Upgrade now for latest changes
+
+= 1.6.4 = 
+* Upgrade now for latest changes
+
+= 1.6.3 = 
+* Upgrade now for latest changes
+
 = 1.6.2 = 
 * Upgrade now for latest changes
 

@@ -5,8 +5,15 @@ if ( ! defined( 'DGWT_WCAS_FILE' ) ) {
 	exit;
 }
 
+add_filter( 'dgwt/wcas/scripts/mobile_breakpoint', function () {
+	return 980;
+} );
+
 add_action( 'wp_footer', function () {
 	echo '<div id="wcas-divi-search" style="display: block;">' . do_shortcode( '[wcas-search-form layout="classic" mobile_overlay="1" mobile_breakpoint="980" ]' ) . '</div>';
+} );
+
+add_action( 'wp_footer', function () {
 	?>
 	<script>
 		(function ($) {
@@ -78,16 +85,16 @@ add_action( 'wp_footer', function () {
 				});
 
 				// Open overlay automatically
-				$('#et_top_search #et_search_icon').on('click', function(){
-					if($(window).width() <= 980){
+				$('#et_top_search #et_search_icon').on('click', function () {
+					if ($(window).width() <= 980) {
 						var $handler = $('.et_search_outer .js-dgwt-wcas-enable-mobile-form');
-						if($handler.length){
+						if ($handler.length) {
 							$handler[0].click();
 						}
 
 						setTimeout(function () {
 							var $closeBtn = $('.et_close_search_field');
-							if($closeBtn.length){
+							if ($closeBtn.length) {
 								$closeBtn[0].click();
 							}
 						}, 1100)
@@ -121,13 +128,13 @@ add_action( 'wp_footer', function () {
 		}(jQuery));
 	</script>
 	<?php
-} );
+}, 100 );
 
 add_action( 'wp_head', function () {
 	?>
 	<style>
 		#wcas-divi-search {
-			display: none!important;
+			display: none !important;
 		}
 
 		/* Custom header */

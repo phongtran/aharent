@@ -924,17 +924,11 @@ class Helpers
      */
     public static function getLabels()
     {
-        $labels = apply_filters( 'dgwt/wcas/labels', array(
-            'category'           => __( 'Category', 'woocommerce' ),
-            'tag'                => __( 'Tag' ),
-            'brand'              => __( 'Brand', 'ajax-search-for-woocommerce' ),
+        return apply_filters( 'dgwt/wcas/labels', array(
             'post'               => __( 'Post' ),
             'page'               => __( 'Page' ),
             'vendor'             => __( 'Vendor', 'ajax-search-for-woocommerce' ),
-            'product_cat_plu'    => __( 'Categories', 'woocommerce' ),
-            'product_tag_plu'    => __( 'Tags' ),
             'product_plu'        => __( 'Products', 'woocommerce' ),
-            'brand_plu'          => __( 'Brands', 'ajax-search-for-woocommerce' ),
             'post_plu'           => __( 'Posts' ),
             'page_plu'           => __( 'Pages' ),
             'vendor_plu'         => __( 'Vendors', 'ajax-search-for-woocommerce' ),
@@ -950,7 +944,6 @@ class Helpers
             'search_placeholder' => DGWT_WCAS()->settings->getOption( 'search_placeholder', __( 'Search for products...', 'ajax-search-for-woocommerce' ) ),
             'submit'             => DGWT_WCAS()->settings->getOption( 'search_submit_text', '' ),
         ) );
-        return $labels;
     }
     
     /**
@@ -1147,7 +1140,6 @@ class Helpers
     public static function searchProducts( $phrase )
     {
         $postIn = array();
-        $baseUrl = home_url() . \WC_AJAX::get_endpoint( DGWT_WCAS_SEARCH_ACTION );
         $urlPhrase = str_replace( "\\'", "'", $phrase );
         $urlPhrase = str_replace( '\\"', '"', $urlPhrase );
         $args = array(
@@ -1157,7 +1149,7 @@ class Helpers
         if ( Multilingual::isMultilingual() ) {
             $args['l'] = Multilingual::getCurrentLanguage();
         }
-        $url = add_query_arg( $args, $baseUrl );
+        $url = add_query_arg( $args, Helpers::getAjaxSearchEndpointUrl() );
         $r = wp_remote_retrieve_body( wp_remote_get( $url, array(
             'timeout' => 120,
         ) ) );
@@ -1218,6 +1210,38 @@ class Helpers
         }
         
         return $authorization;
+    }
+    
+    /**
+     * Get plugin version
+     *
+     * @return string
+     */
+    public static function getPluginVersion()
+    {
+        global  $wpdb ;
+        $version = $wpdb->get_var( "SELECT option_value FROM {$wpdb->options} WHERE option_name = 'dgwt_wcas_version_pro'" );
+        return ( empty($version) ? '' : $version );
+    }
+    
+    /**
+     * Get AJAX search endpoint URL
+     *
+     * @param null $scheme
+     *
+     * @return string
+     *
+     * @see \WC_AJAX::get_endpoint() - Almost the same, but you can choose a scheme
+     */
+    public static function getAjaxSearchEndpointUrl( $scheme = null )
+    {
+        return esc_url_raw( apply_filters( 'woocommerce_ajax_get_endpoint', add_query_arg( 'wc-ajax', DGWT_WCAS_SEARCH_ACTION, remove_query_arg( array(
+            'remove_item',
+            'add-to-cart',
+            'added-to-cart',
+            'order_again',
+            '_wpnonce'
+        ), home_url( '/', $scheme ) ) ), DGWT_WCAS_SEARCH_ACTION ) );
     }
 
 }

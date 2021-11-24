@@ -107,6 +107,13 @@ class Search
             add_action( 'wp_ajax_nopriv_' . DGWT_WCAS_SEARCH_ACTION, array( $this, 'getSearchResults' ) );
             add_action( 'wp_ajax_' . DGWT_WCAS_SEARCH_ACTION, array( $this, 'getSearchResults' ) );
         }
+        
+        // Labels
+        
+        if ( !dgoraAsfwFs()->is_premium() ) {
+            add_filter( 'dgwt/wcas/labels', array( $this, 'setTaxonomiesLabels' ), 5 );
+            add_filter( 'dgwt/wcas/labels', array( $this, 'fixTaxonomiesLabels' ), PHP_INT_MAX - 5 );
+        }
     
     }
     
@@ -149,18 +156,18 @@ class Search
         $keyword = apply_filters( 'dgwt/wcas/phrase', $keyword );
         /* SEARCH IN WOO CATEGORIES */
         
-        if ( !$remote && array_key_exists( 'product_cat', $this->groups ) ) {
-            $limit = ( $this->flexibleLimits ? $this->totalLimit : $this->groups['product_cat']['limit'] );
+        if ( !$remote && array_key_exists( 'tax_product_cat', $this->groups ) ) {
+            $limit = ( $this->flexibleLimits ? $this->totalLimit : $this->groups['tax_product_cat']['limit'] );
             $categories = $this->getCategories( $keyword, $limit );
-            $this->groups['product_cat']['results'] = $categories;
+            $this->groups['tax_product_cat']['results'] = $categories;
         }
         
         /* SEARCH IN WOO TAGS */
         
-        if ( !$remote && array_key_exists( 'product_tag', $this->groups ) ) {
-            $limit = ( $this->flexibleLimits ? $this->totalLimit : $this->groups['product_tag']['limit'] );
+        if ( !$remote && array_key_exists( 'tax_product_tag', $this->groups ) ) {
+            $limit = ( $this->flexibleLimits ? $this->totalLimit : $this->groups['tax_product_tag']['limit'] );
             $tags = $this->getTags( $keyword, $limit );
-            $this->groups['product_tag']['results'] = $tags;
+            $this->groups['tax_product_tag']['results'] = $tags;
         }
         
         /* SEARCH IN PRODUCTS */
@@ -198,7 +205,14 @@ class Search
                         $orderedProducts[$i] = $post;
                     }
                     
-                    $orderedProducts[$i]->score = Helpers::calcScore( $keyword, $post->post_title );
+                    $score = Helpers::calcScore( $keyword, $post->post_title );
+                    $orderedProducts[$i]->score = apply_filters(
+                        'dgwt/wcas/search_results/product/score',
+                        $score,
+                        $keyword,
+                        $post->ID,
+                        $post
+                    );
                     $i++;
                 }
                 // Sort by relevance
@@ -513,27 +527,27 @@ class Search
             $search = $searchand = '';
             if ( !empty($q['search_terms']) ) {
                 foreach ( (array) $q['search_terms'] as $term ) {
-                    $term = esc_sql( $wpdb->esc_like( $term ) );
+                    $like = $n . $wpdb->esc_like( $term ) . $n;
                     $search .= "{$searchand} (";
                     // Search in title
                     
                     if ( in_array( 'title', $this->searchIn ) ) {
-                        $search .= "({$wpdb->posts}.post_title LIKE '{$n}{$term}{$n}')";
+                        $search .= $wpdb->prepare( "({$wpdb->posts}.post_title LIKE %s)", $like );
                     } else {
                         $search .= "(0 = 1)";
                     }
                     
                     // Search in content
                     if ( DGWT_WCAS()->settings->getOption( 'search_in_product_content' ) === 'on' && in_array( 'content', $this->searchIn ) ) {
-                        $search .= " OR ({$wpdb->posts}.post_content LIKE '{$n}{$term}{$n}')";
+                        $search .= $wpdb->prepare( " OR ({$wpdb->posts}.post_content LIKE %s)", $like );
                     }
                     // Search in excerpt
                     if ( DGWT_WCAS()->settings->getOption( 'search_in_product_excerpt' ) === 'on' && in_array( 'excerpt', $this->searchIn ) ) {
-                        $search .= " OR ({$wpdb->posts}.post_excerpt LIKE '{$n}{$term}{$n}')";
+                        $search .= $wpdb->prepare( " OR ({$wpdb->posts}.post_excerpt LIKE %s)", $like );
                     }
                     // Search in SKU
                     if ( DGWT_WCAS()->settings->getOption( 'search_in_product_sku' ) === 'on' && in_array( 'sku', $this->searchIn ) ) {
-                        $search .= " OR (dgwt_wcasmsku.meta_key='_sku' AND dgwt_wcasmsku.meta_value LIKE '{$n}{$term}{$n}')";
+                        $search .= $wpdb->prepare( " OR (dgwt_wcasmsku.meta_key='_sku' AND dgwt_wcasmsku.meta_value LIKE %s)", $like );
                     }
                     $search .= ")";
                     $searchand = ' AND ';
@@ -635,11 +649,6 @@ class Search
         if ( !empty($query->query_vars['order']) ) {
             $order = strtolower( $query->query_vars['order'] );
         }
-        $slugs = strtok( $_SERVER["REQUEST_URI"], '?' );
-        if ( $slugs == '/' ) {
-            $slugs = '';
-        }
-        $baseUrl = home_url() . $slugs . \WC_AJAX::get_endpoint( DGWT_WCAS_SEARCH_ACTION );
         $urlPhrase = str_replace( "\\'", "'", $phrase );
         $urlPhrase = str_replace( '\\"', '"', $urlPhrase );
         $args = array(
@@ -649,7 +658,7 @@ class Search
         if ( Multilingual::isMultilingual() ) {
             $args['l'] = Multilingual::getCurrentLanguage();
         }
-        $url = add_query_arg( $args, $baseUrl );
+        $url = add_query_arg( $args, Helpers::getAjaxSearchEndpointUrl() );
         $postIn = array();
         $correctResponse = false;
         $r = wp_remote_retrieve_body( wp_remote_get( $url, array(
@@ -841,13 +850,13 @@ class Search
     public function searchResultsGroups()
     {
         $groups = array();
-        if ( DGWT_WCAS()->settings->getOption( 'show_matching_categories' ) === 'on' ) {
-            $groups['product_cat'] = array(
+        if ( DGWT_WCAS()->settings->getOption( 'show_product_tax_product_cat' ) === 'on' ) {
+            $groups['tax_product_cat'] = array(
                 'limit' => 3,
             );
         }
-        if ( DGWT_WCAS()->settings->getOption( 'show_matching_tags' ) === 'on' ) {
-            $groups['product_tag'] = array(
+        if ( DGWT_WCAS()->settings->getOption( 'show_product_tax_product_tag' ) === 'on' ) {
+            $groups['tax_product_tag'] = array(
                 'limit' => 3,
             );
         }
@@ -893,6 +902,62 @@ class Search
                 2
             );
         }
+    }
+    
+    /**
+     * Add taxonomies labels
+     *
+     * @param array $labels Labels used at frontend
+     *
+     * @return array
+     */
+    public function setTaxonomiesLabels( $labels )
+    {
+        $labels['tax_product_cat_plu'] = __( 'Categories', 'woocommerce' );
+        $labels['tax_product_cat'] = __( 'Category', 'woocommerce' );
+        $labels['tax_product_tag_plu'] = __( 'Tags' );
+        $labels['tax_product_tag'] = __( 'Tag' );
+        return $labels;
+    }
+    
+    /**
+     * Backward compatibility for labels
+     *
+     * Full taxonomy names for categories and tags. All with prefix 'tax_'.
+     *
+     * @param array $labels Labels used at frontend
+     *
+     * @return array
+     */
+    public function fixTaxonomiesLabels( $labels )
+    {
+        // Product category. Old: 'category', 'product_cat_plu'.
+        
+        if ( isset( $labels['category'] ) ) {
+            $labels['tax_product_cat'] = $labels['category'];
+            unset( $labels['category'] );
+        }
+        
+        
+        if ( isset( $labels['product_cat_plu'] ) ) {
+            $labels['tax_product_cat_plu'] = $labels['product_cat_plu'];
+            unset( $labels['product_cat_plu'] );
+        }
+        
+        // Product tag. Old: 'tag', 'product_tag_plu'.
+        
+        if ( isset( $labels['tag'] ) ) {
+            $labels['tax_product_tag'] = $labels['tag'];
+            unset( $labels['tag'] );
+        }
+        
+        
+        if ( isset( $labels['product_tag_plu'] ) ) {
+            $labels['tax_product_tag_plu'] = $labels['product_tag_plu'];
+            unset( $labels['product_tag_plu'] );
+        }
+        
+        return $labels;
     }
 
 }

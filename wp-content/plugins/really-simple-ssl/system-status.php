@@ -8,6 +8,9 @@ if (!defined('RSSSL_DOING_SYSTEM_STATUS')) define( 'RSSSL_DOING_SYSTEM_STATUS' ,
 define( 'BASE_PATH', find_wordpress_base_path()."/" );
 
 # Load WordPress Core
+if ( !file_exists(BASE_PATH . 'wp-load.php') ) {
+	die("WordPress not installed here");
+}
 require_once( BASE_PATH . 'wp-load.php' );
 require_once( BASE_PATH . 'wp-includes/class-phpass.php' );
 require_once( BASE_PATH . 'wp-admin/includes/image.php' );
@@ -24,9 +27,12 @@ if ( current_user_can( 'manage_options' ) ) {
 		echo "SAFE MODE\n";
 	}
 
+	global $wp_version;
+
 	echo "General\n";
 	echo "Domain: " . site_url() . "\n";
 	echo "Plugin version: " . rsssl_version . "\n";
+	echo "WordPress version: " . $wp_version . "\n";
 
 	if ( RSSSL()->rsssl_certificate->is_valid() ) {
 		echo "SSL certificate is valid\n";
@@ -57,7 +63,7 @@ if ( current_user_can( 'manage_options' ) ) {
 	if ( RSSSL()->really_simple_ssl->switch_mixed_content_fixer_hook ) {
 		echo "* Use alternative method to fix mixed content\n";
 	}
-	if ( RSSSL()->really_simple_ssl->dismiss_all_notices ) {
+	if ( RSSSL()->really_simple_ssl->dismiss_all_notices || is_multisite() && rsssl_multisite::this()->dismiss_all_notices ) {
 		echo "* Dismiss all Really Simple SSL notices\n";
 	}
 	echo "\n";
@@ -65,6 +71,10 @@ if ( current_user_can( 'manage_options' ) ) {
 	echo "Server information\n";
 	echo "Server: " . RSSSL()->rsssl_server->get_server() . "\n";
 	echo "SSL Type: " . RSSSL()->really_simple_ssl->ssl_type . "\n";
+
+	if ( function_exists('phpversion')) {
+		echo "PHP Version: " . phpversion() . "\n";
+	}
 
 	if ( is_multisite() ) {
 		echo "MULTISITE\n";
@@ -77,7 +87,7 @@ if ( current_user_can( 'manage_options' ) ) {
 
 	echo RSSSL()->really_simple_ssl->debug_log;
 
-	echo "\n\nConstants\n";
+	echo "\nConstants\n";
 
 	if ( defined( 'RSSSL_FORCE_ACTIVATE' ) ) {
 		echo "RSSSL_FORCE_ACTIVATE defined\n";
@@ -142,16 +152,34 @@ if ( current_user_can( 'manage_options' ) ) {
 	exit;
 }
 
-function find_wordpress_base_path() {
-	$dir = dirname(__FILE__);
+function find_wordpress_base_path()
+{
+	$path = dirname(__FILE__);
+
 	do {
-		if( file_exists($dir."/wp-config.php") ) {
-			if (file_exists($dir."/current")){
-				return $dir.'/current';
+		if (file_exists($path . "/wp-config.php")) {
+			//check if the wp-load.php file exists here. If not, we assume it's in a subdir.
+			if ( file_exists( $path . '/wp-load.php') ) {
+				return $path;
 			} else {
-				return $dir;
+				//wp not in this directory. Look in each folder to see if it's there.
+				if ( file_exists( $path ) && $handle = opendir( $path ) ) {
+					while ( false !== ( $file = readdir( $handle ) ) ) {
+						if ( $file != "." && $file != ".." ) {
+							$file = $path .'/' . $file;
+							if ( is_dir( $file ) && file_exists( $file . '/wp-load.php') ) {
+								$path = $file;
+								break;
+							}
+						}
+					}
+					closedir( $handle );
+				}
 			}
+
+			return $path;
 		}
-	} while( $dir = realpath("$dir/..") );
-	return null;
+	} while ($path = realpath("$path/.."));
+
+	return false;
 }

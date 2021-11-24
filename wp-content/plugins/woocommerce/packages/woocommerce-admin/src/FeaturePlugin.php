@@ -15,7 +15,6 @@ use \Automattic\WooCommerce\Admin\Notes\TrackingOptIn;
 use \Automattic\WooCommerce\Admin\Notes\WooCommercePayments;
 use \Automattic\WooCommerce\Admin\Notes\InstallJPAndWCSPlugins;
 use \Automattic\WooCommerce\Admin\Notes\DrawAttention;
-use \Automattic\WooCommerce\Admin\RemoteInboxNotifications\RemoteInboxNotificationsEngine;
 use \Automattic\WooCommerce\Admin\Notes\SetUpAdditionalPaymentTypes;
 use \Automattic\WooCommerce\Admin\Notes\TestCheckout;
 use \Automattic\WooCommerce\Admin\Notes\SellingOnlineCourses;
@@ -23,6 +22,7 @@ use \Automattic\WooCommerce\Admin\Notes\MerchantEmailNotifications\MerchantEmail
 use \Automattic\WooCommerce\Admin\Notes\WelcomeToWooCommerceForStoreUsers;
 use \Automattic\WooCommerce\Admin\Notes\ManageStoreActivityFromHomeScreen;
 use \Automattic\WooCommerce\Admin\Notes\NavigationNudge;
+use Automattic\WooCommerce\Admin\Features\Features;
 
 /**
  * Feature plugin main class.
@@ -64,20 +64,11 @@ class FeaturePlugin {
 		// Load the page controller functions file first to prevent fatal errors when disabling WooCommerce Admin.
 		$this->define_constants();
 		require_once WC_ADMIN_ABSPATH . '/includes/page-controller-functions.php';
-
-		/**
-		 * Filter allowing WooCommerce Admin to be disabled.
-		 *
-		 * @param bool $disabled False.
-		 */
-		if ( apply_filters( 'woocommerce_admin_disabled', false ) ) {
-			return;
-		}
-
 		require_once WC_ADMIN_ABSPATH . '/src/Notes/DeprecatedNotes.php';
 		require_once WC_ADMIN_ABSPATH . '/includes/core-functions.php';
 		require_once WC_ADMIN_ABSPATH . '/includes/feature-config.php';
 		require_once WC_ADMIN_ABSPATH . '/includes/wc-admin-update-functions.php';
+		require_once WC_ADMIN_ABSPATH . '/includes/class-experimental-abtest.php';
 
 		register_activation_hook( WC_ADMIN_PLUGIN_FILE, array( $this, 'on_activation' ) );
 		register_deactivation_hook( WC_ADMIN_PLUGIN_FILE, array( $this, 'on_deactivation' ) );
@@ -141,8 +132,8 @@ class FeaturePlugin {
 			return;
 		}
 
-		$this->includes();
 		$this->hooks();
+		$this->includes();
 	}
 
 	/**
@@ -156,7 +147,7 @@ class FeaturePlugin {
 		$this->define( 'WC_ADMIN_PLUGIN_FILE', WC_ADMIN_ABSPATH . 'woocommerce-admin.php' );
 		// WARNING: Do not directly edit this version number constant.
 		// It is updated as part of the prebuild process from the package.json value.
-		$this->define( 'WC_ADMIN_VERSION_NUMBER', '2.3.1' );
+		$this->define( 'WC_ADMIN_VERSION_NUMBER', '2.8.0' );
 	}
 
 	/**
@@ -170,19 +161,25 @@ class FeaturePlugin {
 	 * Include WC Admin classes.
 	 */
 	public function includes() {
-		// Initialize the WC API extensions.
-		ReportsSync::init();
+		// Initialize Database updates, option migrations, and Notes.
 		Install::init();
 		Events::instance()->init();
-		API\Init::instance();
-		ReportExporter::init();
-		PluginsInstaller::init();
-
-		// CRUD classes.
 		Notes::init();
 
-		// Initialize category lookup.
-		CategoryLookup::instance()->init();
+		// Initialize Plugins Installer.
+		PluginsInstaller::init();
+
+		// Initialize API.
+		API\Init::instance();
+
+		if ( Features::is_enabled( 'analytics' ) ) {
+			// Initialize Reports syncing.
+			ReportsSync::init();
+			CategoryLookup::instance()->init();
+
+			// Initialize Reports exporter.
+			ReportExporter::init();
+		}
 
 		// Admin note providers.
 		// @todo These should be bundled in the features/ folder, but loading them from there currently has a load order issue.
@@ -199,9 +196,6 @@ class FeaturePlugin {
 		new WelcomeToWooCommerceForStoreUsers();
 		new ManageStoreActivityFromHomeScreen();
 		new NavigationNudge();
-
-		// Initialize RemoteInboxNotificationsEngine.
-		RemoteInboxNotificationsEngine::init();
 
 		// Initialize MerchantEmailNotifications.
 		MerchantEmailNotifications::init();

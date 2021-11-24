@@ -757,20 +757,35 @@
                 ];
             for (var i = 0; i < options.length; i++) {
                 var selector = "input[id='dgwt_wcas_settings\\[" + options[i] + "\\]']";
+                var altSelector = "input[id^='dgwt_wcas_settings'][data-option-trigger='"+options[i]+"']";
                 var $el = $(selector),
+                    $altEl = $(altSelector)
                     methodToCall = 'onChange' + _this.camelCase(options[i]);
 
-                if (typeof _this[methodToCall] == 'function') {
+                if (typeof _this[methodToCall] == 'function' && $el.length > 0) {
                     _this[methodToCall]($el, $el.val());
-                }
 
-                $(document).on('change', selector, function () {
-                    methodToCall = $(this).attr('id').replace(']', '').replace('dgwt_wcas_settings[', '');
-                    methodToCall = 'onChange' + _this.camelCase(methodToCall);
-					if (typeof (_this[methodToCall]) === 'function') {
-						_this[methodToCall]($(this), this.value);
-					}
-                });
+                    $(document).on('change', selector, function () {
+                        methodToCall = $(this).attr('id').replace(']', '').replace('dgwt_wcas_settings[', '');
+                        methodToCall = 'onChange' + _this.camelCase(methodToCall);
+                        if (typeof (_this[methodToCall]) === 'function') {
+                            _this[methodToCall]($(this), this.value);
+                        }
+                    });
+                } else if (typeof _this[methodToCall] == 'function' && $altEl.length > 0) {
+                    _this[methodToCall]($altEl, $altEl.val());
+
+                    $(document).on('change', altSelector, function () {
+                        methodToCall = $(this).data('option-trigger');
+                        methodToCall = 'onChange' + _this.camelCase(methodToCall);
+                        if (typeof (_this[methodToCall]) === 'function') {
+                            _this[methodToCall]($(this), this.value);
+                        }
+                    });
+                } else {
+                    // Fallback for methods related to non-existing elements (eg. brands)
+                    _this[methodToCall]('', '');
+                }
             }
         },
         onColorHandler: function () {
@@ -1071,13 +1086,13 @@
 
                 $('.dgwt-wcas-suggestion-headline').show();
 
-                if (!_this.isChecked($("input[id*='show_matching_categories']"))) {
+                if (!_this.isChecked($("input[data-option-trigger='show_matching_categories']"))) {
                     $('.dgwt-wcas-suggestion-headline-cat').hide();
                 }
-                if (!_this.isChecked($("input[id*='show_matching_tags']"))) {
+                if (!_this.isChecked($("input[data-option-trigger='show_matching_tags']"))) {
                     $('.dgwt-wcas-suggestion-headline-tag').hide();
                 }
-                if (!_this.isChecked($("input[id*='show_matching_brands']"))) {
+                if (!_this.isChecked($("input[data-option-trigger='show_matching_brands']"))) {
                     $('.dgwt-wcas-suggestion-headline-brand').hide();
                 }
                 if (!_this.isChecked($("input[id*='show_matching_posts']"))) {

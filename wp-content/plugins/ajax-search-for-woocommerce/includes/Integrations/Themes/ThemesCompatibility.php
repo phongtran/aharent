@@ -195,6 +195,10 @@ class ThemesCompatibility {
 				'className' => 'EstorePro',
 				'name'      => 'eStore Pro',
 			),
+			'generatepress' => array(
+				'slug' => 'generatepress',
+				'name' => 'GeneratePress',
+			),
 		);
 	}
 

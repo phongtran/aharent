@@ -1192,11 +1192,11 @@ function is_store_discount( $product )
 
 function get_discount( $product )
 {
-	$date_sale_starts = get_post_meta( $product->id, 'date_sale_starts', true );
+	$date_sale_starts = get_post_meta( $product->get_id(), 'date_sale_starts', true );
 	if ( $date_sale_starts )
 		$date_sale_starts = new DateTime( $date_sale_starts );
 	
-	$date_sale_ends = get_post_meta( $product->id, 'date_sale_ends', true );
+	$date_sale_ends = get_post_meta( $product->get_id(), 'date_sale_ends', true );
 	if ( $date_sale_ends )
 		$date_sale_ends = new DateTime( $date_sale_ends );
 
@@ -1205,8 +1205,8 @@ function get_discount( $product )
 	if ( $now < $date_sale_starts || $date_sale_ends < $now )
 		return false;
 
-	$discount_type = get_post_meta( $product->id, 'sale_type', true );
-	$discount_value = get_post_meta( $product->id, 'sale_price', true );
+	$discount_type = get_post_meta( $product->get_id(), 'sale_type', true );
+	$discount_value = get_post_meta( $product->get_id(), 'sale_price', true );
 
 	return array( 'type' => $discount_type, 'value' => $discount_value );
 }

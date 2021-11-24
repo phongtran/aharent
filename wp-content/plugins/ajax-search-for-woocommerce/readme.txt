@@ -4,7 +4,7 @@ Tags: woocommerce search, ajax search, search by sku, product search, woocommerc
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 1.13.0
+Stable tag: 1.14.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,15 +142,39 @@ You can read more and compare Pro and Free features here: [Full comparison - Pro
 
 == Changelog ==
 
+= 1.14.0, October 19, 2021 =
+* ADD: Integration with “GeneratePress” theme
+* ADD: Possibility to set a delay for initialization of mobile overlay
+* ADD: New filter to manipulate the results score
+* ADD: Details Panel - support for responsive images including retina images (2x), sizes, and srcset
+* ADD: Possibility to insert custom HTML in 5 places in the search suggestion
+* ADD: New filter and action hooks
+
+* FIX: Prevent hiding search results on click an Enter key when submit is disabled via a filter
+* FIX: No results on the search page when WPML is active with “Language name added as a parameter” option
+* FIX: Support for version v1.3.1 of Open Shop theme
+* FIX: Integrating with Divi theme - delay in starting JS scripts
+* FIX: Integrating with Divi theme - force search overlay for mobile devices
+* FIX: Unnecessary HTML tags in the search input after selecting a suggestion
+* FIX: Hide mobile overlay after submitting a form or clicking a result. Fixes screen after clicking iPhone back arrow
+* FIX: Troubleshooting module. Fixed false negative in “OutOfStockRelationships test”. An order of arrays was taken into account for the diff function. It was replaced by full diff
+* FIX: Unclosed tag &lt;a/&gt;
+* FIX: Typo on Troubleshooting tab
+* FIX: Clear “alt” attribute in the product thumbnail
+
+* REFACTOR: Escape search terms the way WordPress core does
+* REFACTOR: Replacing image with thumbnails in DgoraWcas\Post class to keep a consistent style compared with DgoraWcas\Product
+
+
 = 1.13.0, July 27, 2021 =
-* ADD: Integration with "eStore" theme
+* ADD: Integration with “eStore” theme
 * ADD: Allow to open search result in new tab with Ctrl+left mouse key
 
 * FIX: Disappearing suggestions and details panel on click when there were more search bars.
-* FIX: Improved integration with "Avada" theme
-* FIX: Improved mobile search in new version of "Rehub" theme
+* FIX: Improved integration with “Avada” theme
+* FIX: Improved mobile search in new version of “Rehub” theme
 * FIX: Unable to use context menu and middle mouse button on search results
-* FIX: "Eletro" theme - Support cases when the search overlay is disabled
+* FIX: “Eletro” theme - Support cases when the search overlay is disabled
 
 * REFACTOR: Clean up composer files
 
