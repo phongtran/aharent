@@ -1211,6 +1211,14 @@ function get_discount( $product )
 	return array( 'type' => $discount_type, 'value' => $discount_value );
 }
 
+/**
+ * Turn off the email suggestion.
+ *
+ * @link  https://wpforms.com/developers/how-to-disable-the-email-suggestion-on-the-email-form-field/
+ */
+ 
+add_filter( 'wpforms_mailcheck_enabled', '__return_false' );
+
 
 add_shortcode( 'sale_products', 'sale_products' );
 	function sale_products( $atts ){

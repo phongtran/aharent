@@ -28,35 +28,93 @@
         height: 530px;
         position: relative;
 
+        display: flex;
+        justify-content: center;
+
+
+
         .sale-registration-form {
             position: absolute;
-            bottom: 20px;
-            width: 100%;
+            bottom: 5px;
+            width: 80%;
 
-            display: flex;
-            justify-content: center;
+            margin: 0;
 
-            input {
-                width: 300px;
-                border: none;
+            .wpforms-confirmation-container {
+                
+                text-align: center;
+                color: $green-text-color;
 
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
+                p {
+                    margin: 0;
+                }
             }
+        
 
-            button.submit-button {
-                width: 100px;
-                border: none;
+            form {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
 
-                background-color: $main-button-color;
-                color: $bright-text-color;
+                .wpforms-field {
+                    padding: 0;
+                }
+    
+                .wpforms-submit-container {
+                    padding: 0;
 
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
+                    img {
+                        position: absolute;
+                        top: 8px;
+                        left: -40px;
+                    }
+                }
 
-                font-weight: bold;
+                
+
+                input {
+                    width: 300px;
+                    height: 40px;
+                    border: 1px solid $bright-bg-color;
+    
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+
+                    max-width: 100%;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &.wpforms-error {
+                        border-color: $validation-text;
+                    }
+                }
+
+                label.wpforms-error {
+                    display: none !important;
+                }
+    
+                button.submit-button {
+                    width: 100px;
+                    height: 40px;
+                    border: none;
+    
+                    background-color: $main-button-color;
+                    color: $bright-text-color;
+    
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+    
+                    font-weight: bold;
+                }
+
             }
+            
         }
+        
 
         .pop-up-close-link {
 
@@ -82,7 +140,6 @@
         
     }
 
-    
 }
 
 .container {

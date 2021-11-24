@@ -324,10 +324,12 @@
 <div class="pop-up-wrapper">
     <div class="pop-up">
 
-        <form class="sale-registration-form">
+        <?php echo do_shortcode( '[wpforms id="6487" title="false"]' ); ?>
+
+        <!-- <form class="sale-registration-form">
             <input placeholder="Nhập email của bạn" class="form-control">
             <button class="form-control submit-button" type="submit">Đăng ký</button>
-        </form>
+        </form> -->
     
     
         <a href="#" class="pop-up-close-link">
