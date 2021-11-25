@@ -14,7 +14,6 @@ msgstr ""
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: woocommerce\n"
 
-
 #. Plugin Name of the plugin
 #: includes/admin/class-wc-admin-assets.php:105
 #: includes/admin/class-wc-admin-menus.php:66
