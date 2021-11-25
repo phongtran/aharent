@@ -4,31 +4,35 @@
 
 <?php
 
-    global $paged, $wp_query;
+    // global $paged, $wp_query, $wp_the_query;
     
-    if ( !$paged )
-        $paged = 1;
+    // if ( !$paged )
+    //     $paged = 1;
 
-    $per_page = 60;
+    // $per_page = 60;
 
-    $args = array(
-		'post_type' => 'product',
-        'posts_per_page' => $per_page,
-        'paged'         => $paged,
-        'meta_query'    => array(
-            array(
-                'key'   =>  'date_sale_ends',
-                'value' =>  date('Y-m-d'),
-                'compare' => '>=',
-                'type'  => 'DATE',
-            )
-        ),
-	);
+    // $args = array(
+	// 	'post_type' => 'product',
+    //     'posts_per_page' => $per_page,
+    //     'paged'         => $paged,
+    //     'meta_query'    => array(
+    //         array(
+    //             'key'   =>  'date_sale_ends',
+    //             'value' =>  date('Y-m-d'),
+    //             'compare' => '>=',
+    //             'type'  => 'DATE',
+    //         )
+    //     ),
+	// );
 
-    query_posts( $args );
+
+    // query_posts( $args );
     
-    WC()->query->product_query( $wp_query );
+    // WC()->query->product_query( $wp_query );
+    // $wp_the_query = $wp_query;
+
     
+        
 ?>
 
 
@@ -40,8 +44,6 @@
             
             <?php
                 get_sidebar( 'shop' );
-
-                var_dump( $wp_query );
             ?>
 
             <?php 

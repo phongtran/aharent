@@ -962,7 +962,7 @@ if ( ! function_exists( 'woocommerce_content' ) ) {
 	 * which people can add to their themes to add basic woocommerce support.
 	 * without hooks or modifying core templates.
 	 */
-	function woocommerce_content() {
+	function woocommerce_content() { 
 
 		if ( is_singular( 'product' ) ) {
 
@@ -971,7 +971,7 @@ if ( ! function_exists( 'woocommerce_content' ) ) {
 				wc_get_template_part( 'content', 'single-product' );
 			endwhile;
 
-		} else {
+		} else { 
 			?>
 
 			<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>

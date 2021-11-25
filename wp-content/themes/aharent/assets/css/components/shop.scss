@@ -109,6 +109,43 @@
         @media (max-width: 1000px) {
             width: 100%;
         }
+
+
+    }
+
+    .archive-info {
+        
+        height: 70px;
+        width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        background-color: $bright-bg-color;
+
+        margin-bottom: 20px;
+        padding: 0 20px;
+
+        .result-count {
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .ordering {
+
+            select {
+
+                &:focus {
+                    outline: none;
+                }
+
+                
+            }
+        }
     }
 
 }
