@@ -1275,5 +1275,20 @@ add_shortcode( 'sale_products', 'sale_products' );
 		return ob_get_clean();
 	}
 
+add_filter( 'woocommerce_catalog_orderby', 'aha_remove_default_sorting_options' );
+
+function aha_remove_default_sorting_options( $options ){
+
+	//unset( $options[ 'popularity' ] );
+	//unset( $options[ 'menu_order' ] );
+	//unset( $options[ 'rating' ] );
+	//unset( $options[ 'date' ] );
+	//unset( $options[ 'price' ] );
+	//unset( $options[ 'price-desc' ] );
+
+	return $options;
+
+}
+
 
 ?>
