@@ -26,6 +26,13 @@ class BeRocket_AAPF_display_filters_reset_button_type extends BeRocket_AAPF_disp
         $template_content['template']['content']['filter']['content']['button']['attributes']['class']['main'] = 'bapf_reset';
         if( ! empty($berocket_query_var_title['reset_hide']) ) {
             $template_content['template']['attributes']['class']['reset_hide'] = $berocket_query_var_title['reset_hide'];
+            if( ! isset($template_content['template']['attributes']['style']) ) {
+                $template_content['template']['attributes']['style'] = array();
+            }
+            if( ! is_array($template_content['template']['attributes']['style']) ) {
+                $template_content['template']['attributes']['style'] = array($template_content['template']['attributes']['style']);
+            }
+            $template_content['template']['attributes']['style']['display_none'] = 'display:none;';
         }
         return $template_content;
     }

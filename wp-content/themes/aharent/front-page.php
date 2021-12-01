@@ -324,7 +324,8 @@
 <div class="pop-up-wrapper">
     <div class="pop-up">
 
-        <?php echo do_shortcode( '[wpforms id="6487" title="false"]' ); ?>
+        <?php echo do_shortcode( '[wpforms id="7103" title="false"]' ); ?>
+        <?php //echo do_shortcode( '[wpforms id="6487" title="false"]' ); ?>
 
         <!-- <form class="sale-registration-form">
             <input placeholder="Nhập email của bạn" class="form-control">

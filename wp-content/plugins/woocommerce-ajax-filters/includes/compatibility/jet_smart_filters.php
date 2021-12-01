@@ -10,8 +10,7 @@ class BeRocket_AAPF_compat_JetSmartFilter {
         }
     }
     function apply_filters($query) {
-        $BeRocket_AAPF = BeRocket_AAPF::getInstance();
-        $query = $BeRocket_AAPF->woocommerce_filter_query_vars($query);
+        $query = apply_filters('bapf_uparse_apply_filters_to_query_vars_save', $query);
         return $query;
     }
 }

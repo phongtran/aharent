@@ -1003,6 +1003,13 @@ body.berocket_ajax_filters_sidebar_active {
     position: relative;
     z-index: 100;
 }
+.bapf_sfilter .bapf_img_span .bapf_clr_span_abslt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 
 .bapf_sfilter.brchecked_default input:checked + label .bapf_clr_span,
 .bapf_sfilter.brchecked_default input:checked + label .bapf_img_span,

@@ -11,7 +11,6 @@ class BeRocket_AAPF_get_terms {
             add_filter("berocket_aapf_get_terms_filter", array(__CLASS__, 'additional_sort'), 20, 3);
             add_filter("berocket_aapf_get_terms_filter", array(__CLASS__, 'hierarchical_sort'), 30, 3);
             add_filter("berocket_aapf_get_terms_filter", array(__CLASS__, 'depth_clear'), 40, 3);
-            add_action('br_aapf_args_converter_after', array($this, 'br_aapf_args_converter_after'));
             $BeRocket_AAPF = BeRocket_AAPF::getInstance();
             $option = $BeRocket_AAPF->get_option();
             add_filter('berocket_aapf_get_terms_filter_after', array(__CLASS__, 'prepared_data'), 1, 3);
@@ -24,20 +23,17 @@ class BeRocket_AAPF_get_terms {
                 || (in_array(br_get_value_from_array($option,'recount_hide'), array('removeFirst_recount')) && ( ! empty($option['out_of_stock_variable_reload']) && ! empty($option['out_of_stock_variable']) ) ) ) {
                     add_filter("berocket_aapf_get_terms_filter_after", array(__CLASS__, 'recount_products'), 30, 3);
                 }
+                if( in_array($option['recount_hide'], array('removeFirst_recount')) ) {
+                    add_filter("berocket_aapf_get_terms_filter_after", array(__CLASS__, 'recount_products_if_filtered'), 80, 3);
+                }
             }
         }
     }
-    public function br_aapf_args_converter_after() {
-        global $wp_query;
-        $BeRocket_AAPF = BeRocket_AAPF::getInstance();
-        $option = $BeRocket_AAPF->get_option();
-        if( ! empty($option['recount_hide']) ) {
-            if( (apply_filters( 'berocket_aapf_is_filtered_page_check', ! empty($_GET['filters']), 'get_filter_args', $wp_query ) 
-                    || is_filtered()
-                ) && in_array($option['recount_hide'], array('removeFirst_recount')) ) {
-                add_filter("berocket_aapf_get_terms_filter_after", array(__CLASS__, 'recount_products'), 30, 3);
-            }
+    public static function recount_products_if_filtered($terms, $args = array(), $additional = array()) {
+        if( apply_filters( 'berocket_aapf_is_filtered_page_check', ! empty($_GET['filters']), 'get_filter_args' ) || is_filtered() ) {
+            $terms = self::recount_products($terms, $args, $additional);
         }
+        return $terms;
     }
     public static function get_terms($args = array(), $additional = array()) {
         $args = apply_filters('berocket_aapf_get_terms_class_args', $args, $additional);

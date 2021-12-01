@@ -45,8 +45,7 @@ class BeRocket_AAPF_compat_product_table {
         if( empty($table_args['berocket_ajax']) ) {
             return $query_vars;
         }
-        $BeRocket_AAPF = BeRocket_AAPF::getInstance();
-        $query_vars = $BeRocket_AAPF->woocommerce_filter_query_vars($query_vars);
+        $query_vars = apply_filters('bapf_uparse_apply_filters_to_query_vars_save', $query_vars);
         return $query_vars;
     }
     public static function aapf_localize_widget_script($localize) {

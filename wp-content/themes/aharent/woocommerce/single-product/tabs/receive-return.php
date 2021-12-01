@@ -20,8 +20,8 @@ defined( 'ABSPATH' ) || exit;
 // global $post;
 
 global $post;
-
 global $vendor;
+
 if ( !$vendor) $vendor = get_product_vendor ( $post );
 
 $product_receive_return_terms = get_post_meta( $post->ID, 'receive_return_terms' );

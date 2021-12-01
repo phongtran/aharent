@@ -24,6 +24,7 @@
         wp_reset_postdata();
     }
     $filters_correct = 0;
+    $errors = array();
     if( isset($filters['filters']) && is_array($filters['filters']) ) {
         echo '<ul class="berocket_filter_added_list" data-name="' . $post_name . '[filters][]" data-url="' . admin_url('post.php') . '">';
         foreach($filters['filters'] as $filter) {
@@ -40,9 +41,16 @@
                     </div>
                 </li>';
                 $filters_correct++;
+            } else {
+                $errors[] = $filter_id;
             }
         }
         echo '</ul>';
+    }
+    if( count($errors) > 0 ) {
+        BeRocket_error_notices::add_plugin_error(1, 'Filter was removed, but it was added to group', array(
+            'filter_ids'   => $errors
+        ));
     }
     if($filters_correct == 0) {
         echo '<p>' . __('No one filters was created. Please create filters first', 'BeRocket_AJAX_domain')

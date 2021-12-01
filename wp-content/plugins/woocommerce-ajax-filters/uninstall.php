@@ -29,13 +29,12 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 global $wpdb;
 //Delete Additional table
-wp_unschedule_hook('berocket_create_table_braapf_product_stock_status_parent');
-wp_unschedule_hook('berocket_create_table_braapf_product_variation_attributes');
-wp_unschedule_hook('berocket_create_table_braapf_variation_attributes');
+wp_unschedule_hook('braapf_additional_table_cron');
 $tables_drop = array(
     'braapf_product_stock_status_parent',
     'braapf_product_variation_attributes',
     'braapf_variation_attributes',
+    'braapf_variable_attributes',
     'braapf_term_taxonomy_hierarchical'
 );
 foreach($tables_drop as $table_drop) {

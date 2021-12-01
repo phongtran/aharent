@@ -35,8 +35,8 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
     include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
     load_plugin_textdomain('BeRocket_domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
     class BeRocket_Framework {
-        public static $framework_version = '2.7.3';
-        public $plugin_framework_version = '2.7.3';
+        public static $framework_version = '2.7.4';
+        public $plugin_framework_version = '2.7.4';
         public static $settings_name = '';
         public $addons;
         public $libraries;
@@ -133,6 +133,11 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
                 $framework_version = $framework_version_current;
                 include($this->info['plugin_dir']."/berocket/framework_version.php");
                 $this->plugin_framework_version = $framework_version_current;
+                if( $this->plugin_version_capability < 10 ) {
+                    if( file_exists(plugin_dir_path( __FILE__ ) . 'sale/sale.php') ) {
+                        include_once( plugin_dir_path( __FILE__ ) . 'sale/sale.php');
+                    }
+                }
             }
             do_action($this->info[ 'plugin_name' ].'_framework_construct', $this->cc);
             add_filter('brfr_get_plugin_version_capability_'.$this->cc->info['plugin_name'], array($this, 'get_plugin_version_capability'));

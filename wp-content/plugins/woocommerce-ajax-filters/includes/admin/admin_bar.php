@@ -206,7 +206,7 @@ if( ! class_exists('BeRocket_aapf_admin_bar_debug') ) {
 			#wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_status .dashicons-yes {color:green;}
 			#wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_status .dashicons-no {color:red;}
 			#wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_status_element {display:inline-block;text-align:center; padding:3px;}
-			#wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_errors {text-align:center; max-height: 200px}
+			#wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_errors {text-align:center; max-height: 200px; overflow: auto; margin-left: -10px; margin-right: -10px;}
             #wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_errors > div {display: flex; border-top: 1px solid #555;text-align:left;align-items: center;}
             #wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_errors > div p {padding: 3px;}
 			#wp-admin-bar-bapf_debug_bar .ab-submenu .ab-item .bapf_adminbar_errors .dashicons {font-family: dashicons;font-size: 34px;line-height: 34px;display: block;cursor:pointer;}

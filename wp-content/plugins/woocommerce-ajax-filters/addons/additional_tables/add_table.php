@@ -1,8 +1,10 @@
 <?php
 class BeRocket_aapf_variations_tables {
+    public $variation_attributes = FALSE;
     function __construct() {
-        add_filter('berocket_aapf_wcvariation_filtering_total_query', array($this, 'wcvariation_filtering_total_query'), 10, 4);
-        add_filter('berocket_aapf_wcvariation_filtering_main_query', array($this, 'wcvariation_filtering_main_query'), 10, 4);
+        add_filter('berocket_aapf_wcvariation_filtering_total_query', array($this, 'wcvariation_filtering_total_query'), 10, 3);
+        add_filter('berocket_aapf_wcvariation_filtering_main_query', array($this, 'wcvariation_filtering_main_query'), 10, 2);
+        add_filter('berocket_aapf_wcvariation_filtering_single_attribute', array($this, 'wcvariation_filtering_single_attribute'), 10, 2);
         add_action( 'woocommerce_variation_set_stock_status', array($this, 'set_stock_status'), 10, 3 );
         add_action( 'woocommerce_product_set_stock_status', array($this, 'set_stock_status'), 10, 3 );
         add_action( 'delete_post', array($this, 'delete_post'), 10, 1 );
@@ -10,97 +12,103 @@ class BeRocket_aapf_variations_tables {
         //hierarhical recount custom table
         add_action('berocket_aapf_recount_terms_initialized', array($this, 'recount_terms_initialized'), 10, 1);
         add_filter('berocket_aapf_recount_stock_status_query', array($this, 'recount_stock_status'), 10, 1);
+        //Stock status modify
+        add_filter('bapf_uparse_generate_tax_query_each', array($this, 'stock_status_tax_query'), 110, 4);
+        add_filter('bapf_uparse_generate_custom_query_each', array($this, 'stock_status_custom_query'), 110, 6);
+        
+        add_filter('bapf_wcvariation_check_is_taxonomy_variable', array($this, 'check_is_taxonomy_variable'), 10, 2);
     }
-    function wcvariation_filtering_main_query($query, $input, $terms, $limits) {
-        $current_terms = array(0);
-        if( is_array($terms) && count($terms) ) {
-            foreach($terms as $term) {
-                if( substr( $term[0], 0, 3 ) == 'pa_' && ! empty($term[1]) ) {
-                    $current_terms[] = $term[1];
-                }
-            }
+    function get_current_variation_attributes() {
+        if( $this->variation_attributes !== FALSE ) return $this->variation_attributes;
+        global $wpdb;
+        $result = $wpdb->get_col("SELECT attribute FROM {$wpdb->prefix}braapf_variable_attributes GROUP BY attribute");
+        if( ! is_array($result) ) {
+            $result = array();
         }
-        if( is_array($limits) && count($limits) ) {
-            foreach($limits as $attr => $term_ids) {
-                if( substr( $attr, 0, 3 ) == 'pa_' ) {
-                    $current_attributes[] = sanitize_title('attribute_' . $attr);
-                    foreach($term_ids as $term_id) {
-                        $term = get_term($term_id);
-                        if( ! empty($term) && ! is_wp_error($term) && ! empty($term->term_id) ) {
-                            $current_terms[] = $term->term_id;
-                        }
-                    }
+        $this->variation_attributes = $result;
+        return $result;
+    }
+    function check_is_taxonomy_variable($is_var, $taxonomy) {
+        $attributes = $this->get_current_variation_attributes();
+        return in_array($taxonomy, $attributes);
+    }
+    function wcvariation_filtering_main_query($query, $data) {
+        $current_terms = array(0);
+        
+        foreach($data['filters'] as $filter) {
+            if( substr( $filter['taxonomy'], 0, 3 ) == 'pa_' && ! empty($filter['terms']) ) {
+                foreach($filter['terms'] as $term) {
+                    $current_terms[] = $term->term_id;
                 }
             }
         }
         global $wpdb;
         $table_name = $wpdb->prefix . 'braapf_product_variation_attributes';
         $query = array(
-            'select'    => 'SELECT '.$table_name.'.post_id as var_id, '.$table_name.'.parent_id as ID, COUNT('.$table_name.'.post_id) as meta_count',
+            'select'    => 'SELECT '.$table_name.'.post_id as var_id, '.$table_name.'.parent_id as ID, COUNT('.$table_name.'.post_id) as meta_count, max('.$table_name.'.stock_status) as stock_status',
             'from'      => 'FROM '.$table_name,
             'where'     => 'WHERE '.$table_name.'.meta_value_id IN ('.implode(',', $current_terms).')',
             'group'     => 'GROUP BY '.$table_name.'.post_id'
         );
         return $query;
     }
-    function wcvariation_filtering_total_query($query, $input, $terms, $limits) {
-        $current_attributes = array();
-        if( is_array($terms) && count($terms) ) {
-            foreach($terms as $term) {
-                if( substr( $term[0], 0, 3 ) == 'pa_' ) {
-                    $current_attributes[] = sanitize_title($term[0]);
+    function wcvariation_filtering_single_attribute($query, $data) {
+        $current_terms = array(0);
+        
+        foreach($data['filters'] as $filter) {
+            if( $this->check_is_taxonomy_variable(false, $filter['taxonomy']) && ! empty($filter['terms']) ) {
+                foreach($filter['terms'] as $term) {
+                    $current_terms[] = $term->term_id;
                 }
             }
         }
-        if( is_array($limits) && count($limits) ) {
-            foreach($limits as $attr => $term_ids) {
-                if( substr( $attr, 0, 3 ) == 'pa_' ) {
-                    $current_attributes[] = sanitize_title($attr);
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'braapf_product_variation_attributes';
+        $return_query = array(
+            'select'        => 'SELECT '.$table_name.'.parent_id as ID, '.$wpdb->term_taxonomy.'.term_taxonomy_id as term_id, MIN(out_of_stock_var.out_of_stock) AS out_of_stock',
+            'from'          => 'FROM '.$table_name,
+            'join_start'    => $query['join3_start'],
+            'join_select'   => $query['join3_select'],
+            'join_end'      => ') AS out_of_stock_var ON '.$table_name.'.post_id = out_of_stock_var.var_id',
+            'join2'         => "INNER JOIN {$wpdb->term_taxonomy} on {$table_name}.meta_value_id = {$wpdb->term_taxonomy}.term_id",
+            'where'         => 'WHERE '.$table_name.'.meta_value_id IN ('.implode(',', $current_terms).')',
+            'group'         => 'GROUP BY ID, term_id',
+            'having'        => 'HAVING out_of_stock = 1'
+        );
+        return $return_query;
+    }
+    function wcvariation_filtering_total_query($query, $data) {
+        $current_attributes = array();
+        $current_terms = array(0);
+        foreach($data['filters'] as $filter) {
+            if( $this->check_is_taxonomy_variable(false, $filter['taxonomy']) ) {
+                $current_attributes[] = sanitize_title($filter['taxonomy']);
+                if( ! empty($filter['terms']) ) {
+                    foreach($filter['terms'] as $term) {
+                        $current_terms[] = $term->term_id;
+                    }
                 }
             }
         }
         $current_attributes = array_unique($current_attributes);
         global $wpdb;
-        $query_custom = array(
-            'select'    => "SELECT {$wpdb->prefix}braapf_product_stock_status_parent.post_id as id, IF({$wpdb->prefix}braapf_product_stock_status_parent.stock_status = 1, 0, 1) as out_of_stock_init",
-            'from'      => "FROM {$wpdb->prefix}braapf_product_stock_status_parent",
-        );
         $query['subquery']['subquery_2'] = array(
             'select' => 'SELECT post_id as ID, COUNT(post_id) as max_meta_count',
-            'from'   => "FROM {$wpdb->prefix}braapf_variation_attributes",
-            'where'  => "WHERE taxonomy IN ('".implode("','", $current_attributes)."')",
+            'from'   => "FROM {$wpdb->prefix}braapf_variable_attributes",
+            'where'  => "WHERE attribute IN ('".implode("','", $current_attributes)."')",
             'group'  => 'GROUP BY post_id',
         );
-        $query['subquery']['join_close_1'] = ') as max_filtered_post ON max_filtered_post.ID = filtered_post.ID';
-        $query['subquery']['select'] = 'SELECT filtered_post.*, max_filtered_post.max_meta_count, IF(max_filtered_post.max_meta_count != filtered_post.meta_count OR stock_table.out_of_stock_init = 1, 1, 0) as out_of_stock';
-        /*if ( ! empty($_POST['price_ranges']) || ! empty($_POST['price']) ) {
-            $query_custom['join'] = "JOIN {$wpdb->prefix}wc_product_meta_lookup as wc_product_meta_lookup ON wc_product_meta_lookup.product_id = {$wpdb->prefix}braapf_product_stock_status_parent.post_id";
-            $query_custom['where_open'] = 'WHERE';
-            if ( ! empty($_POST['price']) ) {
-                $min = isset( $_POST['price'][0] ) ? floatval( $_POST['price'][0] ) : 0;
-                $max = isset( $_POST['price'][1] ) ? floatval( $_POST['price'][1] ) : 9999999999;
-                $query_custom['where_1'] = $wpdb->prepare(
-                    'wc_product_meta_lookup.min_price < %f AND wc_product_meta_lookup.max_price > %f ',
-                    $min,
-                    $max
-                );
-            } else {
-                $price_ranges = array();
-                foreach ( $_POST['price_ranges'] as $range ) {
-                    $range = explode( '*', $range );
-                    $min = isset( $range[0] ) ? floatval( ($range[0] - 1) ) : 0;
-                    $max = isset( $range[1] ) ? floatval( $range[1] ) : 0;
-                    $price_ranges[] = $wpdb->prepare(
-                        'wc_product_meta_lookup.min_price < %f AND wc_product_meta_lookup.max_price > %f ',
-                        $min,
-                        $max
-                    );
-                }
-                $query_custom['where_1'] = implode(' AND ', $price_ranges);
-            }
-        }*/
-        $query_custom['group'] = 'GROUP BY id';
-        $query['subquery']['subquery_3'] = $query_custom;
+        
+        $query['subquery']['select'] = 'SELECT filtered_post.post_id as var_id, filtered_post.parent_id as ID, COUNT(filtered_post.post_id) as meta_count, 
+ max(filtered_post.stock_status) as stock_status, max_filtered_post.max_meta_count,
+ IF(max_filtered_post.max_meta_count != COUNT(filtered_post.post_id) OR max(filtered_post.stock_status) = 0, 1, 0) as out_of_stock';
+
+        $query['subquery']['from_open'] = "FROM {$wpdb->prefix}braapf_product_variation_attributes as filtered_post";
+        $query['subquery']['join_close_1'] = ') as max_filtered_post ON max_filtered_post.ID = filtered_post.parent_id';
+        unset($query['subquery']['group']);
+        $query['subquery']['where'] = 'WHERE filtered_post.meta_value_id IN ('.implode(',', $current_terms).')';
+        $query['subquery']['group'] = 'GROUP BY filtered_post.post_id';
+        unset($query['subquery']['subquery_1'], $query['subquery']['from_close'], $query['subquery']['join_open_2'], $query['subquery']['subquery_3'], $query['subquery']['join_close_2']);
         return $query;
     }
     function delete_post($product_id) {
@@ -113,7 +121,7 @@ class BeRocket_aapf_variations_tables {
         $wpdb->query($sql);
         $sql = "DELETE FROM {$wpdb->prefix}braapf_product_variation_attributes WHERE parent_id={$product_id};";
         $wpdb->query($sql);
-        $sql = "DELETE FROM {$wpdb->prefix}braapf_variation_attributes WHERE post_id={$product_id};";
+        $sql = "DELETE FROM {$wpdb->prefix}braapf_variable_attributes WHERE post_id={$product_id};";
         $wpdb->query($sql);
     }
     function set_stock_status($product_id, $stock_status, $product) {
@@ -150,6 +158,7 @@ class BeRocket_aapf_variations_tables {
             $parent_id = $product->get_parent_id();
             $product_attributes = $product->get_variation_attributes();
             $parent_product = wc_get_product($parent_id);
+            $stock_status = ($product->is_in_stock() ? '1' : '0');
             $sql = "DELETE FROM {$wpdb->prefix}braapf_product_variation_attributes WHERE post_id={$product_id};";
             $wpdb->query($sql);
             foreach($product_attributes as $taxonomy => $attributes) {
@@ -167,16 +176,16 @@ class BeRocket_aapf_variations_tables {
                 foreach($attributes as $attribute) {
                     $term = get_term_by('slug', $attribute, $taxonomy);
                     if( $term !== false ) {
-                        $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_product_variation_attributes (post_id, parent_id, meta_key, meta_value_id) VALUES({$product_id}, {$parent_id}, '{$taxonomy}', {$term->term_id})";
+                        $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_product_variation_attributes (post_id, parent_id, meta_key, meta_value_id, stock_status) VALUES({$product_id}, {$parent_id}, '{$taxonomy}', {$term->term_id}, '{$stock_status}')";
                         $wpdb->query($sql);
                     }
                 }
             }
         } elseif( $product_type == 'variable' ) {
             $child_ids = $product->get_children();
+            $sql = "DELETE FROM {$wpdb->prefix}braapf_product_variation_attributes WHERE parent_id = {$product_id};";
+            $wpdb->query($sql);
             if( is_array($child_ids) && count($child_ids) > 0 ) {
-                $sql = "DELETE FROM {$wpdb->prefix}braapf_product_variation_attributes WHERE post_id IN (".implode(',', $child_ids).");";
-                $wpdb->query($sql);
                 $insert_values = array();
                 $terms_cache = array();
                 $parent_attributes = $product->get_variation_attributes(false);
@@ -202,8 +211,13 @@ class BeRocket_aapf_variations_tables {
                 }
                 foreach($child_ids as $child_id) {
                     $time_post = microtime(true);
+                    $variation = wc_get_product( $child_id );
+                    if( ! empty($variation) ) {
+                        $stock_status = ($variation->is_in_stock() ? '1' : '0');
+                    } else {
+                        $stock_status = ($product->is_in_stock() ? '1' : '0');
+                    }
                     if( empty($child_attributes[$child_id]) ) {
-                        $variation = wc_get_product( $child_id );
                         if( empty($variation) ) {
                             $product_attributes = array();
                         } else {
@@ -230,25 +244,50 @@ class BeRocket_aapf_variations_tables {
                             }
                             $term = $terms_cache[$taxonomy][$attribute];
                             if( $term !== false ) {
-                                $insert_values[] = "({$child_id}, {$product_id}, '{$taxonomy}', {$term->term_id})";
+                                $insert_values[] = "({$child_id}, {$product_id}, '{$taxonomy}', {$term->term_id}, '{$stock_status}')";
                             }
                         }
                     }
                 }
                 if( count($insert_values) > 0 ) {
-                    $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_product_variation_attributes (post_id, parent_id, meta_key, meta_value_id) 
+                    $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_product_variation_attributes (post_id, parent_id, meta_key, meta_value_id, stock_status) 
                     VALUES ".implode(',', $insert_values);
                     $wpdb->query($sql);
                 }
             }
-            $sql = "DELETE FROM {$wpdb->prefix}braapf_variation_attributes WHERE post_id={$product_id};";
             $wpdb->query($sql);
-            $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_variation_attributes
-            SELECT parent_id as post_id, meta_key as taxonomy
-            FROM {$wpdb->prefix}braapf_product_variation_attributes
-            WHERE parent_id={$product_id}
-            GROUP BY meta_key, parent_id";
-            $wpdb->query($sql);
+            $sql = "DELETE FROM {$wpdb->prefix}braapf_variable_attributes WHERE post_id={$product_id};";
+            $product_attribute = get_post_meta($product_id, '_product_attributes', true);
+            $insert_values = array();
+            if( is_array($product_attribute) ) {
+                foreach($product_attribute as $attribute) {
+                    if( ! empty($attribute['is_variation']) ) {
+                        $insert_values[] = "({$product_id}, '".$attribute['name']."')";
+                    }
+                }
+            }
+            if( ! empty($insert_values) ) {
+                $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_variable_attributes (post_id, attribute) 
+                    VALUES ".implode(',', $insert_values);
+                $wpdb->query($sql);
+            }
+            $table_name = $wpdb->prefix . 'braapf_variable_attributes';
+            $sql_select = "SELECT {$table_name}.post_id as post_id, 
+                   {$table_name}.post_id as parent_id,
+                   {$table_name}.attribute as meta_key,
+                   {$wpdb->term_taxonomy}.term_id as meta_value_id,
+                   0 as stock_status
+            FROM {$table_name}
+            JOIN {$wpdb->term_relationships} ON {$table_name}.post_id = {$wpdb->term_relationships}.object_id
+            JOIN {$wpdb->term_taxonomy} ON {$wpdb->term_relationships}.term_taxonomy_id = {$wpdb->term_taxonomy}.term_taxonomy_id AND {$wpdb->term_taxonomy}.taxonomy = {$table_name}.attribute
+            LEFT JOIN {$wpdb->prefix}braapf_product_variation_attributes ON {$wpdb->prefix}braapf_product_variation_attributes.parent_id = {$table_name}.post_id AND {$wpdb->prefix}braapf_product_variation_attributes.meta_value_id = {$wpdb->term_taxonomy}.term_id
+            WHERE {$wpdb->prefix}braapf_product_variation_attributes.meta_value_id IS NULL 
+                  AND {$table_name}.post_id = {$product_id}";
+            $test_row = $wpdb->get_row($sql_select);
+            if( ! empty($test_row) ) {
+                $sql = "INSERT IGNORE INTO {$wpdb->prefix}braapf_product_variation_attributes {$sql_select}";
+                $query_status = $wpdb->query($sql);
+            }
         }
         if ( defined( 'ICL_SITEPRESS_VERSION' ) && ! ICL_PLUGIN_INACTIVE && class_exists( 'SitePress' ) ) {
             do_action( 'wpml_switch_language', $current_language );
@@ -258,6 +297,7 @@ class BeRocket_aapf_variations_tables {
         remove_filter('berocket_aapf_recount_terms_query', array($recount_object, 'child_include'), 50, 3);
         add_filter('berocket_aapf_recount_terms_query', array($this, 'child_include'), 50, 3);
     }
+    public $hierarhical_data_to_table_ready = array();
     function child_include($query, $taxonomy_data, $terms) {
         global $wpdb;
         extract($taxonomy_data);
@@ -275,6 +315,7 @@ class BeRocket_aapf_variations_tables {
         return $query;
     }
     function set_hierarhical_data_to_table($taxonomy) {
+        if( in_array($taxonomy, $this->hierarhical_data_to_table_ready) ) return;
         global $wpdb;
 		$wpdb->query("SET SESSION group_concat_max_len = 1000000");
         $newmd5 = $wpdb->get_var(
@@ -331,6 +372,7 @@ class BeRocket_aapf_variations_tables {
             }
             update_option(apply_filters('br_aapf_md5_cache_text', 'br_custom_table_hierarhical_'.$taxonomy), $newmd5);
         }
+        $this->hierarhical_data_to_table_ready[] = $taxonomy;
     }
     function taxonomy_hierarchical_get($taxonomy) {
         $terms = $this->get_terms_all(array(
@@ -396,6 +438,44 @@ class BeRocket_aapf_variations_tables {
                 WHERE parent_id = 0) as term_relationships
                 ON {$wpdb->posts}.ID = term_relationships.object_id";
         return $join_query;
+    }
+    function stock_status_tax_query($result, $instance, $filter, $data) {
+        if( $result !== null && isset($filter['type']) && $filter['type'] == 'stock_status' ) {
+            $result = null;
+        }
+        return $result;
+    }
+    function stock_status_custom_query($result, $instance, $filter, $data) {
+        if( $result === null && isset($filter['type']) && $filter['type'] == 'stock_status' ) {
+            $status = 'none';
+            foreach($filter['terms'] as $filter_term) {
+                if($status == 'none' ) {
+                    $status = $filter_term->slug;
+                } else {
+                    $status = 'both';
+                }
+            }
+            if( $status != 'both' && $status != 'none' ) {
+                $result = $filter;
+                $result['custom_query'] = array($this, 'stock_status_post_clauses');
+                $result['custom_query_line'] = 'stock_status:' . $status;
+            }
+        }
+        return $result;
+    }
+    function stock_status_post_clauses($args, $filter) {
+        global $wpdb;
+        $status = 'none';
+        foreach($filter['terms'] as $filter_term) {
+            if($status == 'none' ) {
+                $status = $filter_term->slug;
+            } else {
+                $status = 'both';
+            }
+        }
+        $args['join'] .= " INNER JOIN {$wpdb->prefix}braapf_product_stock_status_parent ON {$wpdb->posts}.ID = {$wpdb->prefix}braapf_product_stock_status_parent.post_id";
+        $args['where'] .= " AND {$wpdb->prefix}braapf_product_stock_status_parent.stock_status = ".($status == 'instock' ? '1' : '0').' ';
+        return $args;
     }
 }
 new BeRocket_aapf_variations_tables();

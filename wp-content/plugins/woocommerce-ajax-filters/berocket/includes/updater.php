@@ -538,6 +538,42 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
             } else {
                 $plugins_key = array();
             }
+            $has_free = false;
+            foreach(self::$plugin_info as $plugin) {
+                if( $plugin['version_capability'] < 10 ) {
+                    $has_free = true;
+                }
+            }
+            if( $has_free ) {
+                if ( time() > 1637841600 and time() < 1637841600+302400 ) {
+                    echo "
+                    <div class='berocket-above-settings-banner' style='background: #1a1a1a; padding: 0;'>
+                        <a href='https://berocket.com/products?utm_source=free_plugin&utm_medium=settings&utm_campaign=account_keys&utm_content=top' target='_blank' 
+                        style='background: transparent; width: auto; border: 0 none; box-shadow: none; padding: 0; margin: 0;'>
+                            <img alt='BeRocket Products' src='https://berocket.ams3.cdn.digitaloceanspaces.com/g/bf21-1202x280.jpg' style='display: block;'>
+                        </a>
+                    </div>";
+                } else if ( time() > 1637841600+302400 and time() < 1637841600+302400+518400 ) {
+	                echo "
+                    <div class='berocket-above-settings-banner berocket-cm21-settings-wrapper' style='background: #07002e; padding: 0;'>
+                        <a href='https://berocket.com/products?utm_source=free_plugin&utm_medium=settings&utm_campaign=account_keys&utm_content=top' target='_blank' >
+                            <img alt='BeRocket Products' src='https://berocket.ams3.cdn.digitaloceanspaces.com/g/cm21.jpg'>
+                            <div class='berocket-cm21-settings'>
+                                <div class='berocket-cm21-settings-header'>
+                                    <p>Don't lose another 5% of the discount. Purchase now!</p>
+                                </div>
+                                <p style='top: 30%; left: 6%; '><span>Monday: <span style='padding-left: 20px; font-size: 1.25em; font-weight: bold;'>-30%</span></span></p>
+                                <p style='top: 32%; left: 55%;'><span>Tuesday: <span style='padding-left: 15px; font-size: 1.2em; font-weight: bold;'>-25%</span></span></p>
+                                <p style='top: 48%; left: 10%;'><span>Wednesday: <span style='padding-left: 5px; font-size: 1.15em'>-20%</span></span></p>
+                                <p style='top: 50%; left: 59%;'><span>Thursday: <span style='padding-left: 10px; font-size: 1.1em'>-15%</span></span></p>
+                                <p style='top: 66%; left: 16%;'><span>Friday: <span style='padding-left: 20px; font-size: 0.9em'>-10%</span></span></p>
+                                <p style='top: 68%; left: 63%;'><span>Saturday: <span style='padding-left: 15px; font-size: 0.9em'>-5%</span></span></p>
+                            </div>
+                            <div class='berocket-cm21-settings-mobiles-title' style='display: none;'>Up to 30% off sitewide!</div>
+                        </a>
+                    </div>";
+                }
+            }
             ?>
             <h2><?php _e('BeRocket Account Settings', 'BeRocket_domain'); ?></h2>
             <div>

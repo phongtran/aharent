@@ -1206,17 +1206,48 @@ if( ! class_exists( 'berocket_admin_notices_rate_stars' ) ) {
 
         function show_ad_above_admin_settings($plugin_version_capability, $cur_plugin) {
             if( $plugin_version_capability < 10 ) {
-                $plugin = $this->get_plugin_data($cur_plugin->info['id']);
-                if( $plugin === false ) {
-                    $plugin = $this->get_plugin_data(1);
+	            $plugin = $this->get_plugin_data($cur_plugin->info['id']);
+	            if( $plugin === false ) {
+		            $plugin = $this->get_plugin_data( 1 );
+	            }
+                if ( time() > 1637841600 and time() < 1637841600+302400 ) {
+                    echo "
+                    <div class='berocket-above-settings-banner' style='background: #1a1a1a; padding: 0;'>
+                        <a href='{$plugin['url']}?utm_source=free_plugin&utm_medium=settings&utm_campaign={$cur_plugin->info['plugin_name']}&utm_content=top' target='_blank' 
+                        style='background: transparent; width: auto; border: 0 none; box-shadow: none; padding: 0; margin: 0;'>
+                            <img alt='{$plugin['title']}' src='https://berocket.ams3.cdn.digitaloceanspaces.com/g/bf21-1202x280.jpg' style='display: block;'>
+                        </a>
+                    </div>";
+                } else if ( time() > 1637841600+302400 and time() < 1637841600+302400+518400 ) {
+	                echo "
+                    <div class='berocket-above-settings-banner berocket-cm21-settings-wrapper' style='background: #07002e; padding: 0;'>
+                        <a href='{$plugin['url']}?utm_source=free_plugin&utm_medium=settings&utm_campaign={$cur_plugin->info['plugin_name']}&utm_content=top' target='_blank' >
+                            <img alt='{$plugin['title']}' src='https://berocket.ams3.cdn.digitaloceanspaces.com/g/cm21.jpg'>
+                            <div class='berocket-cm21-settings'>
+                                <div class='berocket-cm21-settings-header'>
+                                    <p>Don't lose another 5% of the discount. Purchase now!</p>
+                                </div>
+                                <p style='top: 30%; left: 6%; '><span>Monday: <span style='padding-left: 20px; font-size: 1.25em; font-weight: bold;'>-30%</span></span></p>
+                                <p style='top: 32%; left: 55%;'><span>Tuesday: <span style='padding-left: 15px; font-size: 1.2em; font-weight: bold;'>-25%</span></span></p>
+                                <p style='top: 48%; left: 10%;'><span>Wednesday: <span style='padding-left: 5px; font-size: 1.15em'>-20%</span></span></p>
+                                <p style='top: 50%; left: 59%;'><span>Thursday: <span style='padding-left: 10px; font-size: 1.1em'>-15%</span></span></p>
+                                <p style='top: 66%; left: 16%;'><span>Friday: <span style='padding-left: 20px; font-size: 0.9em'>-10%</span></span></p>
+                                <p style='top: 68%; left: 63%;'><span>Saturday: <span style='padding-left: 15px; font-size: 0.9em'>-5%</span></span></p>
+                            </div>
+                            <div class='berocket-cm21-settings-mobiles-title' style='display: none;'>Up to 30% off sitewide!</div>
+                        </a>
+                    </div>";
+                } else {
+	                echo "
+                    <div class='berocket-above-settings-banner'>
+                        <h1>{$plugin['title']}</h1>
+                        " . ( empty( $plugin['image_top'] ) ? '' : "<img src='{$plugin['image_top']}' alt='{$plugin['title']}' />" ) . "
+                        <p>" . ( empty( $plugin['desc_top'] ) ? $plugin['desc'] : $plugin['desc_top'] ) . "</p>
+                        <a href='{$plugin['url']}?utm_source=free_plugin&utm_medium=settings&utm_campaign={$cur_plugin->info['plugin_name']}&utm_content=top' target='_blank'>" . __( 'Get it now', 'BeRocket_domain' ) . "</a>
+                    </div>
+                    ";
                 }
                 echo "
-                <div class='berocket-above-settings-banner'>
-                    <h1>{$plugin['title']}</h1>
-                    " . (empty($plugin['image_top']) ? '' : "<img src='{$plugin['image_top']}' alt='{$plugin['title']}' />" ) . "
-                    <p>".(empty($plugin['desc_top']) ? $plugin['desc'] : $plugin['desc_top'])."</p>
-                    <a href='{$plugin['url']}?utm_source=free_plugin&utm_medium=settings&utm_campaign={$cur_plugin->info['plugin_name']}&utm_content=top' target='_blank'>" . __('Get it now', 'BeRocket_domain') . "</a>
-                </div>
                 <style>
                     .berocket-above-settings-banner {
                         width: 100%;
@@ -1263,6 +1294,139 @@ if( ! class_exists( 'berocket_admin_notices_rate_stars' ) ) {
                         margin: 5px 0;
                         border: 2px solid #ff5252;
                         color: white;
+                    }
+                    .berocket-cm21-settings {
+                        text-align: left;
+                        position: relative;
+                    }
+                    .berocket-cm21-settings > p{
+                        font-size: 1.1em;
+                        position: absolute;
+                    }
+                    .berocket-cm21-settings > p > span {
+                        position: relative;
+                        z-index: 100;
+                    }
+                    .berocket-cm21-settings > p:after {
+                        content: '';
+                        position: absolute;
+                        left: -10px;
+                        bottom: -2px;
+                        background: linear-gradient(106deg, #ff30b8, #ffe390 50%, #41ebfd);
+                        height: 10px;
+                        width: 50%;
+                        transform: skewX(-20deg);
+                    }
+                    .berocket-cm21-settings > p:before {
+                        content: '';
+                        position: absolute;
+                        left: -8px;
+                        bottom: 0;
+                        background: #07002e;
+                        height: 10px;
+                        width: 50%;
+                        transform: skewX(-20deg);
+                        z-index: 10; 
+                    }
+                    .berocket-cm21-settings-header {
+                        margin-top: 20px;
+                        background: linear-gradient(106deg, #ff30b8, #ffe390 50%, #41ebfd);
+                        padding: 3px;
+                    }
+                    .berocket-cm21-settings-header p {
+                        font-size: 1.2em;
+                        background: #07002e;
+                        margin: 0;
+                        padding: 12px 18px;
+                    }
+                    .berocket-cm21-settings-wrapper > a {
+                        background: linear-gradient(46deg, #07002e 50%, #f743f4);
+                        width: auto;
+                        border: 0 none;
+                        box-shadow: none;
+                        padding: 0;
+                        margin: 0;
+                        display: flex;
+                    }
+                    @media (max-width: 1500px) {
+                        .berocket-above-settings-banner a img {
+                            max-height: 200px;
+                        }
+                        .berocket-cm21-settings-wrapper > a {
+                            background: linear-gradient(46deg, #07002e 75%, #f743f4);
+                        }
+                        .berocket-cm21-settings-header {
+                            padding: 2px;
+                        }
+                        .berocket-cm21-settings-header p {
+                            font-size: 1.1em;
+                            padding: 9px 14px;
+                        }
+                    }
+                    @media (max-width: 1200px) {
+                        .berocket-above-settings-banner a img {
+                            max-height: 150px;
+                            max-width: 100%;
+                        }
+                        .berocket-cm21-settings-header {
+                            margin-top: 10px;
+                            margin-left: -35px;
+                        }
+                        .berocket-cm21-settings-header p {
+                            font-size: 1em;
+                            padding: 6px 11px;
+                        }
+                        .berocket-cm21-settings > p {
+                            font-size: 0.8em;
+                        }
+                    }
+                    @media (max-width: 1200px) {
+                        .berocket-cm21-settings-wrapper a img {
+                            width: 240px;
+                            object-fit: cover;
+                            height: 150px;
+                        }
+                        .berocket-cm21-settings-header {
+                            margin-left: -15px;
+                        }
+                        .berocket-cm21-settings > p {
+                            margin-top: 10px;
+                        }
+                    }
+                    @media (max-width: 728px) {
+                        .berocket-cm21-settings-header {
+                            display: block;
+                            height: 1px;
+                            overflow: hidden;
+                            border: 0;
+                            padding: 0;
+                            background: transparent;
+                        }
+                        .berocket-cm21-settings-header p{
+                            background: transparent;
+                        }
+                        .berocket-cm21-settings > p {
+                            margin-top: -15px;
+                            margin-bottom: 30px;
+                            margin-left: -10px;
+                        }
+                        .berocket-cm21-settings > p:nth-child(2n+1) {
+                            margin-left: -40px;
+                        }
+                    }
+                    @media (max-width: 620px) {
+                        .berocket-cm21-settings > p {
+                            display: none;
+                        }
+                        .berocket-cm21-settings-wrapper > a {
+                            display: block;
+                            background: linear-gradient(180deg, #07002e 75%, #5b0b5a);
+                        }
+                        .berocket-cm21-settings-mobiles-title {
+                            display: block !important;
+                            padding: 10px 10px 30px;
+                            font-size: 20px;
+                        }
                     }
                 </style>
                 ";

@@ -1,1 +1,0 @@
-<?php include 'color.php'; ?>

@@ -1043,8 +1043,8 @@ function get_vendor_profiles( $vendor_login )
 
 function strip_style( $string )
 {
-	return $string;
-    // return preg_replace('/(<[^>]+) style=".*?"/i', '$1', $string);     
+	//return $string;
+    return preg_replace('/(<[^>]+) style=".*?"/i', '$1', $string);     
 }
 
 

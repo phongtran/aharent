@@ -12,13 +12,13 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
             'percentage' => 13
         ),
         3 => array(
-            'percentage' => 80
+            'percentage' => 70
         ),
         4 => array(
-            'percentage' => 2
+            'percentage' => 3
         ),
         5 => array(
-            'percentage' => 1
+            'percentage' => 10
         ),
         6 => array(
             'percentage' => 0
@@ -108,7 +108,7 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
         } elseif( $current_position == 3 && $brajax ) {
             $this->insert_table_braapf_product_variation_attributes();
         } elseif( $current_position == 4 && $brajax ) {
-            $this->insert_table_braapf_variation_attributes();
+            $this->insert_table_braapf_variable_attributes();
         } elseif( $current_position == 5 ) {
             if( class_exists('berocket_information_notices') ) {
                 new berocket_information_notices(array(
@@ -124,6 +124,10 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
             }
             $this->set_current_create_position(6);
             wp_clear_scheduled_hook('braapf_additional_table_cron');
+            $BeRocket_AAPF = BeRocket_AAPF::getInstance();
+            $options = $BeRocket_AAPF->get_option();
+            $options['purge_cache_time'] = time();
+            update_option( 'br_filters_options', $options );
         }
         if( empty($current_position) || $current_position < 5 ) {
             wp_schedule_single_event(time(), 'braapf_additional_table_cron');
@@ -258,8 +262,8 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
         ));
         $this->create_table_braapf_term_taxonomy_hierarchical();
         $this->create_table_braapf_product_stock_status_parent();
+        $this->create_table_braapf_variable_attributes();
         $this->create_table_braapf_product_variation_attributes();
-        $this->create_table_braapf_variation_attributes();
         
         $sql = "SELECT MIN({$wpdb->prefix}wc_product_meta_lookup.product_id) as min, MAX({$wpdb->prefix}wc_product_meta_lookup.product_id) as max FROM {$wpdb->prefix}wc_product_meta_lookup";
         $product_data = $wpdb->get_row($sql);
@@ -286,10 +290,15 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
                     'max_id' => $postmeta_data->max
                 ));
             } else {
+                $sql = "SELECT MIN({$wpdb->posts}.ID) as min, MAX({$wpdb->posts}.ID) as max FROM {$wpdb->posts}";
+                $postmeta_data = $wpdb->get_row($sql);
                 $this->set_current_create_position(4);
                 $this->set_current_create_position_data(array(
                     'status' => 0,
                     'run' => false,
+                    'start_id' => $postmeta_data->min,
+                    'min_id' => $postmeta_data->min,
+                    'max_id' => $postmeta_data->max
                 ));
             }
         }
@@ -332,6 +341,23 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
         $query_status = dbDelta( $sql );
         $this->save_query_error($sql, $query_status);
     }
+    function create_table_braapf_variable_attributes() {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        $table_name = $wpdb->prefix . 'braapf_variable_attributes';
+        $sql = "DROP TABLE IF EXISTS {$table_name};";
+        $wpdb->query($sql);
+        $sql = "CREATE TABLE $table_name (
+        post_id bigint(20) NOT NULL,
+        attribute varchar(32) NOT NULL,
+        INDEX post_id (post_id),
+        INDEX attribute (attribute),
+        UNIQUE uniqueid (post_id, attribute)
+        ) $charset_collate;";
+        $query_status = dbDelta( $sql );
+        $this->save_query_error($sql, $query_status);
+    }
     function create_table_braapf_product_variation_attributes() {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
@@ -344,27 +370,11 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
         parent_id bigint(20) NOT NULL,
         meta_key varchar(32) NOT NULL,
         meta_value_id bigint(20) NOT NULL,
+        stock_status tinyint(2),
         INDEX post_id (post_id),
         INDEX meta_key (meta_key),
         INDEX meta_value_id (meta_value_id),
         UNIQUE uniqueid (post_id, meta_key, meta_value_id)
-        ) $charset_collate;";
-        $query_status = dbDelta( $sql );
-        $this->save_query_error($sql, $query_status);
-    }
-    function create_table_braapf_variation_attributes() {
-        global $wpdb;
-        $charset_collate = $wpdb->get_charset_collate();
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        $table_name = $wpdb->prefix . 'braapf_variation_attributes';
-        $sql = "DROP TABLE IF EXISTS {$table_name};";
-        $wpdb->query($sql);
-        $sql = "CREATE TABLE $table_name (
-        post_id bigint(20) NOT NULL,
-        taxonomy varchar(32) NOT NULL,
-        INDEX post_id (post_id),
-        INDEX taxonomy (taxonomy),
-        UNIQUE uniqueid (post_id, taxonomy)
         ) $charset_collate;";
         $query_status = dbDelta( $sql );
         $this->save_query_error($sql, $query_status);
@@ -428,10 +438,15 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
                     'max_id' => $postmeta_data->max
                 ));
             } else {
+                $sql = "SELECT MIN({$wpdb->posts}.ID) as min, MAX({$wpdb->posts}.ID) as max FROM {$wpdb->posts}";
+                $postmeta_data = $wpdb->get_row($sql);
                 $this->set_current_create_position(4);
                 $this->set_current_create_position_data(array(
                     'status' => 0,
                     'run' => false,
+                    'start_id' => $postmeta_data->min,
+                    'min_id' => $postmeta_data->min,
+                    'max_id' => $postmeta_data->max
                 ));
             }
         }
@@ -451,10 +466,17 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
         $table_name = $wpdb->prefix . 'braapf_product_variation_attributes';
         $charset_collate = $wpdb->get_charset_collate();
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        $sql_select = "SELECT {$wpdb->postmeta}.post_id as post_id, {$wpdb->posts}.post_parent as parent_id, {$wpdb->term_taxonomy}.taxonomy as meta_key, {$wpdb->terms}.term_id as meta_value_id FROM {$wpdb->postmeta}
+        $sql_select = "SELECT 
+            {$wpdb->postmeta}.post_id as post_id, 
+            {$wpdb->posts}.post_parent as parent_id, 
+            {$wpdb->term_taxonomy}.taxonomy as meta_key, 
+            {$wpdb->terms}.term_id as meta_value_id,
+            IF({$wpdb->wc_product_meta_lookup}.stock_status = 'instock' OR {$wpdb->wc_product_meta_lookup}.stock_status = 'onbackorder', 1, 0) as stock_status
+        FROM {$wpdb->postmeta}
         JOIN {$wpdb->term_taxonomy} ON CONCAT('attribute_', {$wpdb->term_taxonomy}.taxonomy) = {$wpdb->postmeta}.meta_key
         JOIN {$wpdb->terms} ON {$wpdb->terms}.term_id = {$wpdb->term_taxonomy}.term_id AND {$wpdb->postmeta}.meta_value = {$wpdb->terms}.slug
         JOIN {$wpdb->posts} ON {$wpdb->postmeta}.post_id = {$wpdb->posts}.ID
+        JOIN {$wpdb->wc_product_meta_lookup} ON {$wpdb->posts}.ID = {$wpdb->wc_product_meta_lookup}.product_id
         WHERE {$wpdb->postmeta}.meta_id >= {$start_id} AND {$wpdb->postmeta}.meta_id < {$end_id}
         AND {$wpdb->postmeta}.meta_key LIKE 'attribute_pa_%'";
         $test_row = $wpdb->get_row($sql_select);
@@ -465,11 +487,17 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
                 $this->save_query_error($sql);
             }
         }
-        $sql_select = "SELECT {$wpdb->posts}.ID as post_id, {$wpdb->posts}.post_parent as parent_id, {$wpdb->term_taxonomy}.taxonomy as meta_key, {$wpdb->term_taxonomy}.term_id as meta_value_id
+        $sql_select = "SELECT 
+            {$wpdb->posts}.ID as post_id, 
+            {$wpdb->posts}.post_parent as parent_id, 
+            {$wpdb->term_taxonomy}.taxonomy as meta_key, 
+            {$wpdb->term_taxonomy}.term_id as meta_value_id,
+            IF({$wpdb->wc_product_meta_lookup}.stock_status = 'instock' OR {$wpdb->wc_product_meta_lookup}.stock_status = 'onbackorder', 1, 0) as stock_status
         FROM {$wpdb->postmeta}
         JOIN {$wpdb->posts} ON {$wpdb->postmeta}.post_id = {$wpdb->posts}.ID
         JOIN {$wpdb->term_relationships} ON {$wpdb->posts}.post_parent = {$wpdb->term_relationships}.object_id
         JOIN {$wpdb->term_taxonomy} ON {$wpdb->term_relationships}.term_taxonomy_id = {$wpdb->term_taxonomy}.term_taxonomy_id 
+        JOIN {$wpdb->wc_product_meta_lookup} ON {$wpdb->posts}.ID = {$wpdb->wc_product_meta_lookup}.product_id
             AND CONCAT('attribute_', {$wpdb->term_taxonomy}.taxonomy) = {$wpdb->postmeta}.meta_key
         WHERE {$wpdb->postmeta}.meta_id >= {$start_id} AND {$wpdb->postmeta}.meta_id < {$end_id}
         AND {$wpdb->postmeta}.meta_key LIKE 'attribute_pa_%' AND {$wpdb->postmeta}.meta_value = ''";
@@ -491,42 +519,76 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
                 'max_id' => $max_id
             ));
         } else {
+            $sql = "SELECT MIN({$wpdb->posts}.ID) as min, MAX({$wpdb->posts}.ID) as max FROM {$wpdb->posts}";
+            $postmeta_data = $wpdb->get_row($sql);
             $this->set_current_create_position(4);
             $this->set_current_create_position_data(array(
                 'status' => 0,
-                'run' => false
+                'run' => false,
+                'start_id' => $postmeta_data->min,
+                'min_id' => $postmeta_data->min,
+                'max_id' => $postmeta_data->max
             ));
         }
     }
-    function insert_table_braapf_variation_attributes() {
+    function insert_table_braapf_variable_attributes() {
         $run_data = $this->get_current_create_position_data();
-        if( ! empty($run_data) && ! empty($run_data['run']) ) {
+        if( empty($run_data) || ! empty($run_data['run']) ) {
             return false;
         }
-        $this->set_current_create_position_data(array(
-            'status' => 0,
-            'run' => true,
+        $run_data['run'] = true;
+        $variable_taxonomy = get_term_by('slug', 'variable', 'product_type');
+        $this->set_current_create_position_data($run_data);
+        $page = (isset($run_data['page']) ? $run_data['page'] : 0);
+        $page_step = apply_filters('berocket_insert_table_braapf_variable_attributes_end', 1000);
+        BeRocket_error_notices::add_plugin_error(1, 'insert_table_braapf_variable_attributes', array(
+            'page'   => $page
         ));
         global $wpdb;
-        $table_name = $wpdb->prefix . 'braapf_variation_attributes';
+        $table_name = $wpdb->prefix . 'braapf_variable_attributes';
         $charset_collate = $wpdb->get_charset_collate();
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        $sql_select = "SELECT parent_id as post_id, meta_key as taxonomy
-        FROM {$wpdb->prefix}braapf_product_variation_attributes
-        GROUP BY meta_key, parent_id";
-        $test_row = $wpdb->get_row($sql_select);
-        if( ! empty($test_row) ) {
-            $sql = "INSERT IGNORE INTO {$table_name} {$sql_select}";
-            $query_status = $wpdb->query($sql);
-            if( $query_status === FALSE ) {
-                $this->save_query_error($sql);
+        $sql_select = "SELECT {$wpdb->posts}.ID as id, {$wpdb->postmeta}.meta_value as value FROM {$wpdb->posts}
+        JOIN {$wpdb->postmeta} ON {$wpdb->posts}.ID = {$wpdb->postmeta}.post_id
+        JOIN {$wpdb->term_relationships} ON {$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id
+        WHERE {$wpdb->postmeta}.meta_key = '_product_attributes' AND {$wpdb->term_relationships}.term_taxonomy_id = {$variable_taxonomy->term_taxonomy_id}
+        LIMIT ".($page * $page_step).", {$page_step}";
+        $results = $wpdb->get_results($sql_select);
+        $has_result = false;
+        if( ! empty($results) && is_array($results) && count($results) > 0 ) {
+            $has_result = true;
+            $insert_values = array();
+            foreach($results as $product) {
+                $product_attribute = maybe_unserialize($product->value);
+                if( is_array($product_attribute) ) {
+                    foreach($product_attribute as $attribute) {
+                        if( ! empty($attribute['is_variation']) ) {
+                            $insert_values[] = "({$product->id}, '".$attribute['name']."')";
+                        }
+                    }
+                }
+            }
+            if( ! empty($insert_values) ) {
+                $sql = "INSERT IGNORE INTO {$table_name} (post_id, attribute) 
+                    VALUES ".implode(',', $insert_values);
+                $query_status = $wpdb->query($sql);
+                if( $query_status === FALSE ) {
+                    $this->save_query_error($sql);
+                }
             }
         }
-        $this->set_current_create_position(5);
-        $this->set_current_create_position_data(array(
-            'status' => 100,
-            'run' => false,
-        ));
+        if( $has_result ) {
+            $this->set_current_create_position_data(array(
+                'run' => false,
+                'page'   => ++$page
+            ));
+        } else {
+            $this->set_current_create_position(5);
+            $this->set_current_create_position_data(array(
+                'status' => 0,
+                'run' => false,
+            ));
+        }
     }
     function deactivate() {
         global $wpdb;
@@ -534,6 +596,7 @@ class BeRocket_aapf_variations_tables_addon extends BeRocket_framework_addon_lib
             'braapf_product_stock_status_parent',
             'braapf_product_variation_attributes',
             'braapf_variation_attributes',
+            'braapf_variable_attributes',
             'braapf_term_taxonomy_hierarchical'
         );
         foreach($tables_drop as $table_drop) {

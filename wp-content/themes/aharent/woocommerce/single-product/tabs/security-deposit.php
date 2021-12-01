@@ -17,20 +17,22 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// global $post;
-
 global $post;
-
 global $vendor;
+
 if ( !$vendor) $vendor = get_product_vendor ( $post );
 
 $product_rental_terms = get_post_meta( $post->ID, 'rental_terms' );
 if ( !empty( $product_rental_terms) )
-    echo strip_style( $product_rental_terms[0] );
-else
 {
-    $vendor_rental_terms = get_user_meta( $vendor, 'vendor_rental_terms', true );
-    if ( !empty( $vendor_rental_terms) )
-        echo strip_style( $vendor_rental_terms );
+    $product_rental_terms = strip_style( $product_rental_terms[0] );
+    if ( is_numeric( $product_rental_terms) )
+        echo '<p>Phí thế chân: ' . wc_price( $product_rental_terms ) . '</p>';
+    else
+        echo $product_rental_terms . '<br />';
 }
+
+$vendor_rental_terms = get_user_meta( $vendor, 'vendor_rental_terms', true );
+if ( !empty( $vendor_rental_terms) )
+    echo strip_style( $vendor_rental_terms );
 

@@ -143,73 +143,93 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
         }
         function get_header() {
             global $wp_query;
-            if ( apply_filters( 'berocket_aapf_is_filtered_page_check', ! empty($_GET['filters']), 'get_filter_args', $wp_query ) ) {
-                br_aapf_args_converter($wp_query);
-                $terms_name = array();
-                if( isset($_POST['terms']) && is_array($_POST['terms']) ) {
-                    foreach($_POST['terms'] as $term_parsed) {
-                        if( apply_filters('berocket_aapf_seo_meta_filtered_term_continue', false, $term_parsed) ) continue;
-                        $taxonomy = get_taxonomy($term_parsed[0]);
-                        if( ! empty($taxonomy->labels->singular_name) ) {
-                            $taxonomy_label = $taxonomy->labels->singular_name;
-                        } else {
-                            $taxonomy_label = $taxonomy->label;
-                        }
-                        $taxonomy_label = apply_filters('wpml_translate_single_string', $taxonomy_label, 'WordPress', sprintf( 'taxonomy singular name: %s', $taxonomy_label ) );
-                        $term = get_term($term_parsed[1], $term_parsed[0]);
-                        if( ! empty($term) && is_a($term, 'WP_Error') ) {
-                            continue;
-                        }
-                        if( ! isset($terms_name[$taxonomy->name]) ) {
-                            $terms_name[$taxonomy->name] = array(
-                                'name' => apply_filters('berocket_aapf_seo_meta_filtered_taxonomy_label', $taxonomy_label, $taxonomy, $term, $term_parsed), 
+            global $berocket_parse_page_obj;
+            $data = $berocket_parse_page_obj->get_current();
+            $terms_name = array();
+            if( isset($data['filters']) && is_array($data['filters']) ) {
+                foreach($data['filters'] as $filter) {
+                    if( in_array($filter['type'], array('taxonomy', 'attribute')) ) {
+                        if( ! isset($terms_name[$filter['taxonomy']]) ) {
+                            $taxonomy = get_taxonomy($filter['taxonomy']);
+                            if( ! empty($taxonomy->labels->singular_name) ) {
+                                $taxonomy_label = $taxonomy->labels->singular_name;
+                            } else {
+                                $taxonomy_label = $taxonomy->label;
+                            }
+                            $terms_name[$filter['taxonomy']] = array(
+                                'name' => apply_filters('berocket_aapf_seo_meta_filtered_taxonomy_label', $taxonomy_label, $taxonomy, $filter), 
                                 'values' => array(),
-                                'operator' => $term_parsed[2],
-                                'type'      => $term_parsed[4]
+                                'operator' => ( empty($filter['val_arr']['op']) ? 'OR' : $filter['val_arr']['op'] )
                             );
                         }
-                        $terms_name[$taxonomy->name]['values'][$term->slug] = apply_filters('berocket_aapf_seo_meta_filtered_term_label', $term->name, $term, $taxonomy, $term_parsed);
-                    }
-                }
-                if( isset($_POST['price']) && is_array($_POST['price']) && count($_POST['price']) > 1 ) {
-                    $min_price = $this->wc_price($_POST['price'][0]);
-                    $max_price = $this->wc_price($_POST['price'][1]);
-                    $terms_name['wc_price'] = array(
-                        'name' => apply_filters('berocket_aapf_seo_meta_filtered_taxonomy_price_label', __('Price', 'woocommerce')),
-                        'values' => array(
-                            'price' => apply_filters('berocket_aapf_seo_meta_filtered_price_label', wc_format_price_range($min_price, $max_price), $_POST['price'], array($min_price, $max_price))
-                        ),
-                        'is_price' => TRUE
-                    );
-                }
-                if( isset($_POST['limits']) && is_array($_POST['limits']) ) {
-                    foreach($_POST['limits'] as $term_parsed) {
-                        if( apply_filters('berocket_aapf_seo_meta_filtered_term_continue', false, $term_parsed) ) continue;
-                        $taxonomy = get_taxonomy($term_parsed[0]);
-                        if( ! empty($taxonomy->labels->singular_name) ) {
-                            $taxonomy_label = $taxonomy->labels->singular_name;
-                        } else {
-                            $taxonomy_label = $taxonomy->label;
+                        if( ! empty($filter['val_arr']['op']) && $filter['val_arr']['op'] == 'SLIDER' && isset($filter['val_arr']['from']) && isset($filter['val_arr']['to']) ) {
+                            $from = $filter['val_arr']['from'];
+                            $to   = $filter['val_arr']['to'];
+                            $from = ( isset($filter['val_ids'][$from]) && isset($filter['terms'][$filter['val_ids'][$from]]) 
+                                ? apply_filters('berocket_aapf_seo_meta_filtered_term_label', $filter['terms'][$filter['val_ids'][$from]]->name, $filter['terms'][$filter['val_ids'][$from]], $filter) 
+                                : $from 
+                            );
+                            $to   = ( isset($filter['val_ids'][$to]) && isset($filter['terms'][$filter['val_ids'][$to]]) 
+                                ? apply_filters('berocket_aapf_seo_meta_filtered_term_label', $filter['terms'][$filter['val_ids'][$to]]->name, $filter['terms'][$filter['val_ids'][$to]], $filter) 
+                                : $to 
+                            );
+                            $terms_name[$filter['taxonomy']]['values'][] = $from.' - '.$to;
+                        } else {                                
+                            if( ! empty($filter['terms']) && is_array($filter['terms']) ) {
+                                foreach($filter['terms'] as $term) {
+                                    $terms_name[$filter['taxonomy']]['values'][$term->slug] = apply_filters('berocket_aapf_seo_meta_filtered_term_label', $term->name, $term, $filter);
+                                }
+                            }
                         }
-                        $taxonomy_label = apply_filters('wpml_translate_single_string', $taxonomy_label, 'WordPress', sprintf( 'taxonomy singular name: %s', $taxonomy_label ) );
-                        $term1 = get_term_by('slug', $term_parsed[1], $term_parsed[0]);
-                        $term2 = get_term_by('slug', $term_parsed[2], $term_parsed[0]);
-                        if( ! isset($terms_name[$taxonomy->name]) ) {
-                            $terms_name[$taxonomy->name] = array(
-                                'name' => apply_filters('berocket_aapf_seo_meta_filtered_taxonomy_label', $taxonomy_label, $taxonomy, array($term1, $term2), $term_parsed), 
-                                'values' => array()
+                    } elseif($filter['type'] == 'price') {
+                        $new_terms_name = array(
+                            'name' => apply_filters('berocket_aapf_seo_meta_filtered_taxonomy_price_label', __('Price', 'woocommerce')),
+                            'is_price' => TRUE
+                        );
+                        if( isset($filter['val_arr']['from']) && isset($filter['val_arr']['to']) ) {
+                            $from = $this->wc_price($filter['val_arr']['from']);
+                            $to   = $this->wc_price($filter['val_arr']['to']);
+                            $new_terms_name['values'] = array(
+                                'price' => apply_filters('berocket_aapf_seo_meta_filtered_price_label', wc_format_price_range($from, $to), $filter, array($filter['val_arr']['from'], $filter['val_arr']['to']))
+                            );
+                        } elseif( ! empty($filter['val_arr']) && is_array($filter['val_arr']) ) {
+                            $new_terms_name['values'] = ( empty($filter['val_arr']['op']) ? 'OR' : $filter['val_arr']['op'] );
+                            if( isset($filter['val_arr']['op']) ) {
+                                unset($filter['val_arr']['op']);
+                            }
+                            $values = array();
+                            foreach($filter['val_arr'] as $val_arr) {
+                                if( isset($val_arr['from']) && isset($val_arr['to']) ) {
+                                    $from = $this->wc_price($val_arr['from']);
+                                    $to   = $this->wc_price($val_arr['to']);
+                                    $values[] = apply_filters('berocket_aapf_seo_meta_filtered_price_label', wc_format_price_range($from, $to), $filter, array($val_arr['from'], $val_arr['to']));
+                                }
+                            }
+                            if( ! empty($values ) ) {
+                                $new_terms_name['values'] = $values;
+                            }
+                        }
+                        if( ! empty($new_terms_name['values']) ) {
+                            $terms_name['wc_price'] = $new_terms_name;
+                        }
+                    } elseif(in_array($filter['type'], array('sale', 'stock_status'))) {
+                        if( ! isset($terms_name[$filter['taxonomy']]) ) {
+                            $terms_name[$filter['taxonomy']] = array(
+                                'name' => '', 
+                                'values' => array(),
+                                'operator' => ( empty($filter['val_arr']['op']) ? 'OR' : $filter['val_arr']['op'] ),
+                                'is_price' => true
                             );
                         }
-                        if( ! $term1 || ! $term2 ) {
-                            $terms_name[$taxonomy->name]['values'][$term_parsed[1].'_'.$term_parsed[2]] = apply_filters('berocket_aapf_seo_meta_filtered_term_label', sprintf( _x( '%1$s &ndash; %2$s', 'Price range: from-to', 'woocommerce' ), $term_parsed[1], $term_parsed[2] ), array($term1, $term2), $taxonomy, $term_parsed);
-                        } else {
-                            $terms_name[$taxonomy->name]['values'][$term1->slug.'_'.$term2->slug] = apply_filters('berocket_aapf_seo_meta_filtered_term_label', sprintf( _x( '%1$s &ndash; %2$s', 'Price range: from-to', 'woocommerce' ), $term1->name, $term2->name ), array($term1, $term2), $taxonomy, $term_parsed);
+                        if( ! empty($filter['terms']) && is_array($filter['terms']) ) {
+                            foreach($filter['terms'] as $term) {
+                                $terms_name[$filter['taxonomy']]['values'][$term->slug] = apply_filters('berocket_aapf_seo_meta_filtered_term_label', $term->name, $term, $filter);
+                            }
                         }
-                        $terms_name[$taxonomy->name]['has_slider'] = TRUE;
                     }
                 }
-                $this->terms_filtered = apply_filters('berocket_aapf_seo_meta_filtered_terms', $terms_name);
             }
+            $this->terms_filtered = apply_filters('berocket_aapf_seo_meta_filtered_terms', $terms_name);
         }
         public static function wc_price($price) {
             $decimal_separator  = wc_get_price_decimal_separator();
@@ -233,13 +253,26 @@ if( ! class_exists('BeRocket_AAPF_addon_woocommerce_seo_title') ) {
             return apply_filters('berocket_aapf_seo_meta_filters_text_return', $filters, $text, $section, $this->terms_filtered);
         }
         function the_title($title, $id = 0) {
-            if( get_queried_object_id() === $id ) {
+            if( get_queried_object_id() === $id && ! $this->the_title_backtrace_exclude() ) {
                 $title = $this->get_filters_string($title, 'header');
                 remove_filter('the_title', array($this, 'the_title'), 10, 2);
                 remove_filter('woocommerce_page_title', array($this, 'woocommerce_page_title'), 10, 2);
                 $this->ready_elements['header'] = true;
             }
             return $title;
+        }
+        function the_title_backtrace_exclude() {
+            $exclude_functions = array(
+                'wp_setup_nav_menu_item',
+                'wp_nav_menu'
+            );
+            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            foreach($backtrace as $call_func) {
+                if( isset($call_func['function']) && in_array($call_func['function'], $exclude_functions) ) {
+                    return true;
+                }
+            }
+            return false;
         }
         function woocommerce_page_title($title) {
             $title = $this->get_filters_string($title, 'header');
