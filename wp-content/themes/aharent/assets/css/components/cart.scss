@@ -287,6 +287,40 @@
     .cart_totals {
       float: left;
       width: 100%;
+
+      input[name="coupon_code"] {
+        width: 200px !important;
+        margin: 0 !important;
+        display: inline-block;
+        border-top-right-radius: unset;
+        border-bottom-right-radius: unset;
+      }
+
+      button[name="apply_coupon"] {
+        padding: 10px 15px;
+        margin: 0 !important;
+        border-top-left-radius: unset;
+        border-bottom-left-radius: unset;
+
+        background-color: $main-button-color;
+        color: $bright-text-color;
+      }
+
+      a.remove-coupon {
+
+        margin-left: 10px;
+
+        img {
+          width: 20px;
+
+        }
+      }
+
+      .coupon-form {
+        display: flex;
+        justify-content: center;
+      }
+      
     }
 
     .wc-proceed-to-checkout {

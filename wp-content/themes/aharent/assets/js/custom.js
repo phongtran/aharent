@@ -247,6 +247,7 @@
 		}
 	});
 	
+	console.log( $( 'a.woocommerce-remove-coupon' ).data( 'events' ) );
 
 })(jQuery);
 

@@ -241,6 +241,8 @@ function basic_scripts()
 			wp_enqueue_script( 'datetimepicker' );
 			wp_enqueue_script( 'custom-script' );
 
+			wp_dequeue_script( 'wc-cart' );
+
 
 		}
 		elseif ( is_archive() )
@@ -1289,6 +1291,14 @@ function aha_remove_default_sorting_options( $options ){
 	return $options;
 
 }
+
+function filter_woocommerce_cart_totals_coupon_html( $coupon_html, $coupon, $discount_amount_html )
+{   
+	$coupon_html = $discount_amount_html . '<a class="remove-coupon" href="' . get_site_url() . '/cart/?remove_coupon='.  $coupon->code .'"><img src="' . get_template_directory_uri()  . '/assets/img/remove.png" /></a>';
+
+    return $coupon_html;
+}
+add_filter( 'woocommerce_cart_totals_coupon_html', 'filter_woocommerce_cart_totals_coupon_html', 10, 3 );
 
 
 ?>

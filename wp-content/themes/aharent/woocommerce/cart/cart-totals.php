@@ -63,6 +63,29 @@ defined( 'ABSPATH' ) || exit;
 			</tr>
 		<?php endforeach; ?>
 
+
+		<tr>
+			<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+				<td colspan="2">
+					<div class="coupon-form">
+						<input type="text" name="coupon_code" class="form-control" id="coupon_code" value="" placeholder="Nhập mã khuyến mãi">
+					
+						<button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
+						
+						<?php do_action( 'woocommerce_cart_coupon' ); ?>
+
+						<?php do_action( 'woocommerce_cart_actions' ); ?>
+
+						<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
+					</div>
+				</td>
+			</form>
+			
+		</tr>
+
+		
+		
+
 		<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 
 			<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>

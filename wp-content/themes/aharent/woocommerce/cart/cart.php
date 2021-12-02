@@ -221,14 +221,14 @@ do_action( 'woocommerce_before_cart' ); ?>
                                             <td class="label">Giao/nhận:</td>
                                             <td>
                                                 <?php
-															$vendor_login = $product->get_meta( 'vendor' );
-															$vendor_profiles = get_vendor_profiles( $vendor_login );
-															$address = $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
+                                                        $vendor_login = $product->get_meta( 'vendor' );
+                                                        $vendor_profiles = get_vendor_profiles( $vendor_login );
+                                                        $address = $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
 
-															
-															$vendor = get_product_vendor ( wc_get_product( $product_id)->post );
-															$delivery_terms = get_user_meta( $vendor, 'delivery_terms', true );
-														?>
+                                                        
+                                                        $vendor = get_product_vendor ( wc_get_product( $product_id)->post );
+                                                        $delivery_terms = get_user_meta( $vendor, 'delivery_terms', true );
+                                                    ?>
 
                                                 <div class="radio-options">
                                                     <?php if ( $delivery_terms ): ?>
@@ -358,11 +358,6 @@ do_action( 'woocommerce_before_cart' ); ?>
                         <?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
 
                     </div>
-
-
-
-
-
 
                     <?php do_action( 'woocommerce_after_cart_contents' ); ?>
                     <?php do_action( 'woocommerce_after_cart_table' ); ?>
