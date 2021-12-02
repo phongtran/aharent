@@ -41,7 +41,7 @@ function lw_loop_shop_per_page( $products )
  	$products = 60; // number of products per page (shop page)
  	return $products;
 }
-add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 100 );
 
 
 function jk_related_products_args( $args )

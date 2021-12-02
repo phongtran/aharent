@@ -378,25 +378,35 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
-            
-            .category-item {
-                margin: 10px 5px;
 
-                display: flex;
-                flex-direction: column;
+            a {
 
-                justify-content: center;
+                margin: 10px 0;
+                width: 86px;
 
-                .category-image {
+                .category-item {
+                    
+    
                     display: flex;
+                    flex-direction: column;
+    
                     justify-content: center;
+    
+                    .category-image {
+                        display: flex;
+                        justify-content: center;
+                    }
+    
+                    .category-name {
+                        display: flex;
+                        justify-content: center;
+                        text-align: center;
+                    }
                 }
 
-                .category-name {
-                    display: flex;
-                    justify-content: center;
-                }
             }
+            
+            
         }
 
 
