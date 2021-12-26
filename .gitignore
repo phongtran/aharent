@@ -22,9 +22,12 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+*.DS_Store
 
 # ignore config file
 wp-config.php
 
 # ignore uploads folder
-wp-content/uploads/
+wp-content/*
+!wp-content/themes/
+!wp-content/plugins/

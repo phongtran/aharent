@@ -1,6 +1,3 @@
-#BEGIN Really Simple SSL LETS ENCRYPT
-RewriteRule ^.well-known/(.*)$ - [L]
-#END Really Simple SSL LETS ENCRYPT
 # BEGIN WordPress
 # Các nội dung nằm giữa "BEGIN WordPress" và "END WordPress" được tạo ra tự động, và chỉ nên được thay đổi thông qua các filter của WordPress. Mọi thay đổi tới thành phần này có thể sẽ bị mất và ghi đè.
 <IfModule mod_rewrite.c>
