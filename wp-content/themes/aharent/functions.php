@@ -1293,12 +1293,13 @@ function aha_remove_default_sorting_options( $options ){
 }
 
 function filter_woocommerce_cart_totals_coupon_html( $coupon_html, $coupon, $discount_amount_html )
-{   
-	$coupon_html = $discount_amount_html . '<a class="remove-coupon" href="' . get_site_url() . '/cart/?remove_coupon='.  $coupon->code .'"><img src="' . get_template_directory_uri()  . '/assets/img/remove.png" /></a>';
+{ 
+	global $wp;
+	$coupon_html = $discount_amount_html . '<a class="remove-coupon" href="' . home_url( $_SERVER['REQUEST_URI'] ) . '/?remove_coupon='.  $coupon->code .'"><img src="' . get_template_directory_uri()  . '/assets/img/remove.png" /></a>';
 
     return $coupon_html;
 }
-add_filter( 'woocommerce_cart_totals_coupon_html', 'filter_woocommerce_cart_totals_coupon_html', 10, 3 );
+//add_filter( 'woocommerce_cart_totals_coupon_html', 'filter_woocommerce_cart_totals_coupon_html', 10, 3 );
 
 
 ?>
