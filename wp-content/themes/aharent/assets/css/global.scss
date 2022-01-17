@@ -736,6 +736,16 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
         .aha-button{ 
             margin-top: 10px;
+            width: 100%;
+        }
+
+        input.input-text {
+            width: 100%;
+        }
+
+        .form-row {
+            width: 100% !important;
+            margin-left: 0 !important;
         }
     }
 
