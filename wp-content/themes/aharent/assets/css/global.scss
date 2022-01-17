@@ -719,8 +719,25 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
     }
 }
 
+.login-wrapper {
 
-.account-login {
     display: flex;
     justify-content: center;
+
+
+    .account-login {
+
+        width: 300px;
+
+        .login-title {
+            width: 100%;
+            text-align: center;
+        }
+
+        .aha-button{ 
+            margin-top: 10px;
+        }
+    }
+
+
 }
