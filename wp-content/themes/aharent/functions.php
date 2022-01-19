@@ -1225,7 +1225,6 @@ add_filter( 'wpforms_mailcheck_enabled', '__return_false' );
 
 add_shortcode( 'sale_products', 'sale_products' );
 	function sale_products( $atts ){
-		var_dump( $atts ); die;
 	    global $woocommerce_loop, $woocommerce;
 
 	    // extract( shortcode_atts( array(
@@ -1257,7 +1256,7 @@ add_shortcode( 'sale_products', 'sale_products' );
 
 		$products = new WP_Query( $args );
 
-		$woocommerce_loop['columns'] = $columns;
+		// $woocommerce_loop['columns'] = $columns;
 
 		if ( $products->have_posts() ) : ?>
 
@@ -1265,7 +1264,7 @@ add_shortcode( 'sale_products', 'sale_products' );
 
 				<?php while ( $products->have_posts() ) : $products->the_post(); ?>
 
-					<?php woocommerce_get_template_part( 'content', 'product' ); ?>
+					<?php // woocommerce_get_template_part( 'content', 'product' ); ?>
 
 				<?php endwhile; // end of the loop. ?>
 

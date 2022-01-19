@@ -50,9 +50,9 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 
 			<div class="rent-count">
 				<?php 
-					$total_sales = $product->get_meta( 'total_sales' );
-					if ( isset($total_sales) && $total_sales > 0 )
-						echo $total_sales . ' lượt thuê';
+					// $total_sales = $product->get_meta( 'total_sales' );
+					// if ( isset($total_sales) && $total_sales > 0 )
+					// 	echo $total_sales . ' lượt thuê';
 				?>
 			</div>
 
