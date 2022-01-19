@@ -6,8 +6,6 @@
 	});
 
 	(function($) {
-		console.log('hjsafljdskafjdksajfklsafsa');
-
 		$('.date-time-picker').datetimepicker({
 			format: dateFormat,
 			timepicker: false,

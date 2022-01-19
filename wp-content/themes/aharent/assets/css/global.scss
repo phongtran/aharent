@@ -751,3 +751,8 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 
 
 }
+
+
+body > span.select2-container {
+    z-index: unset !important;
+}

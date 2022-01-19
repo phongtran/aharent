@@ -173,7 +173,7 @@ function basic_scripts()
 	wp_dequeue_style( 'wc-block-vendors-style' );
 	wp_dequeue_style( 'wc-block-style' );
 
-	// wp_dequeue_style( 'font-awesome' );
+	wp_dequeue_style( 'font-awesome' );
 
 	
 	// JS queue
@@ -186,17 +186,16 @@ function basic_scripts()
 	
 
 	wp_dequeue_script( 'woo-viet-provinces-script' );
-	
-	
+
 
 	if ( is_single() )
 	{
 		// Load swipe for image slider
 		// Swipe CSS
+
 		
 		wp_enqueue_style( 'swipe-style' );
 		wp_enqueue_style( 'datetimepicker' );
-
 
 		wp_dequeue_style( 'dokan-select2-css' );
 
@@ -247,6 +246,7 @@ function basic_scripts()
 		}
 		elseif ( is_archive() )
 		{
+			
 
 		}
 		elseif (is_front_page())
@@ -289,6 +289,7 @@ function basic_scripts()
 		{
 			wp_dequeue_style( 'woocommerce-layout' );
 			wp_dequeue_style( 'woocommerce-general' );
+			
 		}
 		elseif ( dokan_is_seller_dashboard() )
 		{
