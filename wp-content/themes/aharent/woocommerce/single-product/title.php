@@ -22,7 +22,13 @@ global $product;
 ?>
 <div class="product-title-wrapper">
 	<?php the_title( '<h1 class="product_title entry-title">', '</h1>' ); ?>
-	<div class="sku">(<?php echo $product->sku  ?>)</div>
+	<div class="vendor-info">
+			<?php
+				$vendor = get_vendor_profiles ($product->get_meta( 'vendor' ));
+				echo $vendor['store_name'] . ' (' . $product->sku . ')';
+			?>
+		
+	</div>
 	<?php
 		
 		$discount = get_discount( $product );

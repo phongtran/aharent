@@ -287,8 +287,8 @@ function basic_scripts()
 		}
 		elseif ( !dokan_is_seller_dashboard() )
 		{
-			wp_dequeue_style( 'woocommerce-layout' );
-			wp_dequeue_style( 'woocommerce-general' );
+			// wp_dequeue_style( 'woocommerce-layout' );
+			// wp_dequeue_style( 'woocommerce-general' );
 			
 		}
 		elseif ( dokan_is_seller_dashboard() )
@@ -874,7 +874,7 @@ add_filter( 'woocommerce_show_page_title', 'aha_woocommerce_show_page_title' );
 function get_product_default_variation ( $product_id )
 {
 	$product				= wc_get_product( $product_id );
-	$default_attributes		= $product->get_default_attributes();
+	// $default_attributes		= $product->get_default_attributes();
 	$variations 			= $product->get_available_variations();
 	
 	foreach ( $variations as $variation )
