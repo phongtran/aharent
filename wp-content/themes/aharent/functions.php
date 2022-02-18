@@ -345,19 +345,19 @@ add_filter( 'woocommerce_breadcrumb_defaults', 'wc_set_up_breadcrumb' );
 
 
 function cfwc_save_custom_field( $post_id ) {
-	$product = wc_get_product( $post_id );
+	// $product = wc_get_product( $post_id );
 	
 	// $security_deposit_checkbox = isset( $_POST['_security_deposit'] ) ? $_POST['_security_deposit'] : '' ;
 
 	// $rental_period_unit = isset( $_POST['_rental_period_unit'])
 	
-	$security_deposit_amount = isset( $_POST['_security_deposit_amount'] ) ? $_POST['_security_deposit_amount'] : '';
-	$product->update_meta_data( '_security_deposit_amount', sanitize_text_field( $security_deposit_amount ) );
+	// $security_deposit_amount = isset( $_POST['_security_deposit_amount'] ) ? $_POST['_security_deposit_amount'] : '';
+	// $product->update_meta_data( '_security_deposit_amount', sanitize_text_field( $security_deposit_amount ) );
 	
-	$platform_fee = isset ( $_POST['_platform_fee'] ) ? $_POST['_platform_fee'] : '' ;
-	$product->update_meta_data( '_platform_fee', sanitize_text_field( $platform_fee));
+	// $platform_fee = isset ( $_POST['_platform_fee'] ) ? $_POST['_platform_fee'] : '' ;
+	// $product->update_meta_data( '_platform_fee', sanitize_text_field( $platform_fee));
 
-	$product->save();
+	// $product->save();
 }
 add_action( 'woocommerce_process_product_meta', 'cfwc_save_custom_field' );
 
@@ -438,7 +438,12 @@ function save_order_custom_values_of_items( $item, $cart_item_key, $values, $ord
 		$item->add_meta_data( 'deposit', $values['deposit'] );
 
 	$item->add_meta_data( '_rental_price', $values['rental_price'] );
-	$item->add_meta_data( 'duration', $values['duration'] );
+	
+	$duration = $item->get_meta_data( 'duration' );
+	if ( $duration )
+		$item->update_meta_data( 'duration', $values['duration']);
+	else
+		$item->add_meta_data( 'duration', $values['duration'] );
 
 	if ($values['discount'])
 		$item->add_meta_data( 'discount', $values['discount'] );
@@ -447,12 +452,12 @@ function save_order_custom_values_of_items( $item, $cart_item_key, $values, $ord
 		$item->add_meta_data( 'time-unit', 'day' );
 	else
 		$item->add_meta_data( 'time-unit', $values['time-unit'] );
+
 	$item->add_meta_data( 'date-from', $values['date-from'] );
 	$item->add_meta_data( 'delivery-option', $values['delivery-option'] );
 	
 }
 add_action( 'woocommerce_checkout_create_order_line_item', 'save_order_custom_values_of_items', 10, 4 );
-
 
 
 

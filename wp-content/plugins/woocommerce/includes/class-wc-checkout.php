@@ -454,7 +454,7 @@ class WC_Checkout {
 			 */
 			$item                       = apply_filters( 'woocommerce_checkout_create_order_line_item_object', new WC_Order_Item_Product(), $cart_item_key, $values, $order );
 			$product                    = $values['data'];
-			$item->legacy_values        = $values; // @deprecated 4.4.0 For legacy actions.
+			$item->legacy_values        = $values; // @deprecated 4.4.0 For legacy actions. 
 			$item->legacy_cart_item_key = $cart_item_key; // @deprecated 4.4.0 For legacy actions.
 			$item->set_props(
 				array(
@@ -479,14 +479,14 @@ class WC_Checkout {
 				);
 			}
 
-			$item->set_backorder_meta();
+			$item->set_backorder_meta(); 
 
 			/**
 			 * Action hook to adjust item before save.
 			 *
 			 * @since 3.0.0
 			 */
-			do_action( 'woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $values, $order );
+			do_action( 'woocommerce_checkout_create_order_line_item', $item, $cart_item_key, $values, $order ); 
 
 			// Add item to order and save.
 			$order->add_item( $item );

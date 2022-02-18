@@ -116,8 +116,19 @@ a {
 
 }
 
+
+.woocommerce {
+    .woocommerce-order {
+        padding-top: 20px;
+        
+        .woocommerce-order-details__title {
+            display: block;
+        }
+    }
+}
+
 .order-complete, .cart-empty, .notice {
-    margin-top: 20px;
+    // margin-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -393,6 +404,31 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
     align-items: center;
     justify-content: center;
 
+}
+
+.wc-cancel-buttons {
+    button {
+        background-color: $main-button-color;
+        color: $bright-text-color;
+
+        border: 0;
+
+        &:hover {
+            box-shadow: 1px 1px 5px 1px $shadow-color;
+            background-color: $main-button-color;
+        }
+    }
+}
+
+.wc-cancel-reason-text {
+    textarea {
+        width: 100%;
+        
+        &:focus {
+            outline: none;
+        }
+    }
+    
 }
 
 .woocommerce-pagination {
@@ -756,3 +792,5 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 body > span.select2-container {
     z-index: unset !important;
 }
+
+

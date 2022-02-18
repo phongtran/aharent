@@ -64,7 +64,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php endforeach; ?>
 
 
-		<tr>
+		<!-- <tr>
 			<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 				<td colspan="2">
 					<div class="coupon-form">
@@ -81,7 +81,7 @@ defined( 'ABSPATH' ) || exit;
 				</td>
 			</form>
 			
-		</tr>
+		</tr> -->
 
 		
 		
