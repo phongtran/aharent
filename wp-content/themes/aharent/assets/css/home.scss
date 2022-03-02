@@ -201,6 +201,7 @@
     .testimonies-wrapper {
         display: flex;
         justify-content: space-evenly;
+        flex-wrap: wrap;
 
         margin-top: 50px;
         margin-bottom: 20px;
@@ -298,6 +299,8 @@
 
         .testi-item {
             width: 370px;
+            margin: 10px 0;
+
 
             .testi-head {
                 background-color: $main-color;
