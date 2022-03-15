@@ -28,7 +28,7 @@ if ( !isset( $prices ))
 
 
 
-<?php if ( $product->is_in_stock()) :
+<?php //if ( $product->is_in_stock()) :
 
 $attribute_keys  = array_keys( $attributes );
 $variations_json = wp_json_encode( $available_variations );
@@ -51,6 +51,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 
         <?php if ( count( $time_units ) > 1) : ?>
+        
         <div class="form-row">
 
             <div class="form-label">
@@ -76,100 +77,155 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
         <?php do_action( 'woocommerce_before_add_to_cart_quantity' ); ?>
 
         <div class="form-row">
-            <div class="form-label">
-                <label>Số lượng: </label>
-            </div>
+            <div class="row-component">
 
-            <?php $stock = $product->get_stock_quantity(); ?>
-
-            <div class="form-input quantity-input-increment">
-                <input class="number-spinner" id="quantity-input" name="quantity" type="number" value="1" min="1"
-                    max="<?php echo $stock; ?>" step="1" />
-            </div>
-        </div>
-
-        <?php do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>
-
-
-        <div class="form-row">
-            <div class="form-label">
-                <label>Thời gian thuê:</label>
-            </div>
-
-            <div class="form-input time-period">
-
-                <?php
-					$time_min = $product->get_meta( 'time_min' );
-					if ( !$time_min) $time_min = 1;
-
-					$time_max = $product->get_meta( 'time_max' );
-					
-					$time_step = $product->get_meta( 'time_step' );
-					if ( !$time_step ) $time_step = 1;
-				?>
-
-                <div class="duration">
-                    <input id="duration" class="number-spinner" name="duration" type="number"
-                        value="<?php echo $time_min ?>" min="<?php echo $time_min ?>"
-                        <?php if ($time_max) echo 'max="' . $time_max . '"'; ?> step="<?php echo $time_step; ?>" />
+                <div class="form-label">
+                    <label>Số lượng: </label>
                 </div>
 
-                <span class="time-delimiter">
-                    <span class="time-unit">
-                        <?php							
-							$time_unit = __( 'day', 'woocommerce' );
-							if ( $time_units && count( $time_units ) > 0 )
-								$time_unit = __( $time_units[0], 'woocommerce' );
+                <?php $stock = $product->get_stock_quantity(); ?>
 
-							echo $time_unit;
+                <div class="form-input quantity-input-increment">
+                    <input class="number-spinner" id="quantity-input" name="quantity" type="number" value="1" min="1"
+                         step="1" />
+                </div>
 
-						?>
-                    </span>,
-                </span>
             </div>
+
+            <?php do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>
+
+            <div class="row-component">
+                <div class="form-label">
+                    <label>Thời gian thuê:</label>
+                </div>
+
+                <div class="form-input time-period">
+
+                    <?php
+                        $time_min = $product->get_meta( 'time_min' );
+                        if ( !$time_min) $time_min = 1;
+
+                        $time_max = $product->get_meta( 'time_max' );
+                        
+                        $time_step = $product->get_meta( 'time_step' );
+                        if ( !$time_step ) $time_step = 1;
+                    ?>
+
+                    <div class="duration">
+                        <input id="duration" class="number-spinner" name="duration" type="number"
+                            value="<?php echo $time_min ?>" min="<?php echo $time_min ?>"
+                            <?php if ($time_max) echo 'max="' . $time_max . '"'; ?> step="<?php echo $time_step; ?>" />
+                    </div>
+
+                    <span class="time-delimiter">
+                        <span class="time-unit">
+                            <?php							
+                                $time_unit = __( 'day', 'woocommerce' );
+                                if ( $time_units && count( $time_units ) > 0 )
+                                    $time_unit = __( $time_units[0], 'woocommerce' );
+
+                                echo $time_unit;
+
+                            ?>
+                        </span>,
+                    </span>
+                </div>
+            </div>
+
+            <div class="row-component">
+                <div class="form-label">
+                    <label>Từ <?php echo __( 'day', 'woocommerce' ); ?>:</label>
+                    <div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
+                </div>
+
+                <div class="form-input">
+
+                    <?php
+                        $hold_date = $product->get_meta( 'date_hold_to' );
+                        if ( $hold_date )
+                        {
+                            $hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
+                            $date_now = new DateTime();
+                            if ( $hold_date > $date_now )
+                                $hold_date_str = $hold_date->format( 'Y.m.d' );
+                        }
+                    ?>
+
+                    <?php $booking_time = $product->get_meta( 'booking_time' ); ?>
+                    <?php if ( $booking_time ) : ?>
+                    <?php foreach ( $booking_time as $key => $booking ): ?>
+                    <?php
+                                $start_date = DateTime::createFromFormat( 'd/m/Y', $booking['start'] );
+                                $end_date = DateTime::createFromFormat( 'd/m/Y', $booking['end'] );
+                            ?>
+                    <input type="hidden" class="booking-time" booking-id="<?php echo $key ?>"
+                        start-date="<?php echo $start_date->format('Y/m/d') ?>"
+                        end-date="<?php echo $end_date->format('Y/m/d') ?>" />
+                    <?php endforeach ?>
+                    <?php endif ?>
+
+
+                    <input type="text" id="date-from" name="_date_from" value=""
+                        <?php if ($hold_date_str) echo 'date-hold-to="' . $hold_date_str . '"' ?> placeholder="Ngày"
+                        autocomplete="off" />
+
+
+                </div>
+            </div>
+            
         </div>
 
         <div class="form-row">
-            <div class="form-label">
-                <label>Từ <?php echo __( 'day', 'woocommerce' ); ?>:</label>
-                <div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
-            </div>
+            <?php //if ( $product->is_in_stock() ) : ?>
+                <div class="price-wrapper d-flex">
 
-            <div class="form-input">
+                    <?php
+                        $security_deposit = $product->get_meta( 'rental_terms' );
 
-                <?php
-					$hold_date = $product->get_meta( 'date_hold_to' );
-					if ( $hold_date )
-					{
-						$hold_date = DateTime::createFromFormat( 'd/m/Y', $hold_date );
-						$date_now = new DateTime();
-						if ( $hold_date > $date_now )
-							$hold_date_str = $hold_date->format( 'Y.m.d' );
-					}
-				?>
+                        $display_security_deposit = !empty( $security_deposit ) && is_numeric($security_deposit);
+                    
+                    ?>
 
-                <?php $booking_time = $product->get_meta( 'booking_time' ); ?>
-                <?php if ( $booking_time ) : ?>
-                <?php foreach ( $booking_time as $key => $booking ): ?>
-                <?php
-							$start_date = DateTime::createFromFormat( 'd/m/Y', $booking['start'] );
-							$end_date = DateTime::createFromFormat( 'd/m/Y', $booking['end'] );
-						?>
-                <input type="hidden" class="booking-time" booking-id="<?php echo $key ?>"
-                    start-date="<?php echo $start_date->format('Y/m/d') ?>"
-                    end-date="<?php echo $end_date->format('Y/m/d') ?>" />
-                <?php endforeach ?>
-                <?php endif ?>
+                    <?php if ( $display_security_deposit ): ?>
+                    <div class="price-item deposit">
+                        
+                        <div class="price-item-title">
+                            <span><?php echo __( 'Security deposit', 'aharent' ); ?></span>
+                            <div class="loading-price">
+                                <div class="loading-icon">
+                                    <img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="price-item-value">
+                            <?php echo wc_price( $security_deposit ) ?>
+                        </div>
+                    </div>
+                    <?php endif ?>
+
+                    <div class="price-item">
+                        
+                        <div class="price-item-title">
+                            <span><?php echo __('Rental fee', 'aharent'); ?></span>
+                            <div class="loading-price">
+                                <div class="loading-icon">
+                                    <img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="price-item-value rental">
+
+                            -
+                            
+                        </div>
+                    </div>
 
 
-                <input type="text" id="date-from" name="_date_from" value=""
-                    <?php if ($hold_date_str) echo 'date-hold-to="' . $hold_date_str . '"' ?> placeholder="Ngày"
-                    autocomplete="off" />
-
-
-            </div>
+                </div>
+            <?php //endif ?>
         </div>
-
 
         <div class="form-row">
             <div class="form-label">
@@ -285,13 +341,13 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 do_action( 'woocommerce_after_add_to_cart_form' );
 ?>
 
-<?php else: ?>
+<?php //else: ?>
 
 
 <!-- Out of stock -->
-<div class="stock-status">
+<!-- <div class="stock-status">
     <?php echo wc_get_stock_html( $product ); // WPCS: XSS ok. ?>
-</div>
+</div> -->
 
 
-<?php endif ?>
+<?php //endif ?>

@@ -22,15 +22,15 @@ global $vendor;
 
 if ( !$vendor) $vendor = get_product_vendor ( $post );
 
-$product_rental_terms = get_post_meta( $post->ID, 'rental_terms' );
-if ( !empty( $product_rental_terms) )
-{
-    $product_rental_terms = strip_style( $product_rental_terms[0] );
-    if ( is_numeric( $product_rental_terms) )
-        echo '<p>' . esc_html( 'Security deposit', 'woocommerce' ) . ': ' . wc_price( $product_rental_terms ) . '</p>';
-    else
-        echo $product_rental_terms . '<br />';
-}
+// $product_rental_terms = get_post_meta( $post->ID, 'rental_terms' );
+// if ( !empty( $product_rental_terms) )
+// {
+//     $product_rental_terms = strip_style( $product_rental_terms[0] );
+//     if ( is_numeric( $product_rental_terms) )
+//         echo '<p>' . esc_html( 'Security deposit', 'woocommerce' ) . ': ' . wc_price( $product_rental_terms ) . '</p>';
+//     else
+//         echo $product_rental_terms . '<br />';
+// }
 
 $vendor_rental_terms = get_user_meta( $vendor, 'vendor_rental_terms', true );
 if ( !empty( $vendor_rental_terms) )

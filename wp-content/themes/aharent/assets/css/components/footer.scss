@@ -52,6 +52,7 @@ footer {
 
     .footer-col {
         margin: 0 10px;
+        max-width: 23%;
     }
 
     .payment-links {
@@ -93,6 +94,20 @@ footer {
             &.hotline {
                 color: $validation-text;
             }
+        }
+
+        .company-info {
+            font-weight: normal;
+
+            p {
+                font-size: .8rem;
+                
+                &.info-item {
+                    font-weight: bold;
+                    margin: 15px 0;
+                }
+            }
+
         }
     }
 

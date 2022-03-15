@@ -241,6 +241,10 @@
 
                 margin: 20px 0;
 
+                .row-component {
+                    margin-right: 20px;
+                }
+
                 
 
                 .form-label {
@@ -254,7 +258,6 @@
                 .form-input {
                     width: 100%;
                     display: flex;
-
                     // max-width: 80%;
                     // margin-left: 30px;
 
@@ -265,11 +268,13 @@
                     }
                     
                     input.number-spinner {
-                        max-width: 50px;
+                        max-width: 30px;
+                        padding: 0;
+                        line-height: 0.8;
                     }
 
                     .time-delimiter {
-                        margin: 0 10px;
+                        margin-left: 10px;
                         display: flex;
                         align-items: center;
                     }
@@ -277,7 +282,7 @@
                     &.time-period {
 
                         input.date {
-                            max-width: 170px;
+                            max-width: 150px;
                             // margin-right: 20px;
 
                             font-size: 16px;
@@ -286,6 +291,10 @@
                                 margin: 10px 20px 10px 0;
                             }
                         }
+                    }
+
+                    input#date-from {
+                        width: 120px;
                     }
 
                 }
@@ -323,6 +332,10 @@
             .note {
                 width: 100%;
                 margin-bottom: 10px;
+                
+                p {
+                    margin: 0;
+                }
             }
 
 

@@ -9,7 +9,7 @@ function security_deposit_tab( $tabs )
 	// Adds the new tab
 	
 	$tabs['security_deposit_tab'] = array(
-		'title' 	=> __( 'Điều khoản đặt cọc', 'woocommerce' ),
+		'title' 	=> __( 'Security deposit', 'woocommerce' ),
 		'priority' 	=> 50,
 		'callback' 	=> 'security_deposit_tab_content'
 	);

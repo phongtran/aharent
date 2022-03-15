@@ -16,7 +16,8 @@ function get_product_price() {
 
     $new_price = get_new_price( $product_id, $date_from, $duration, $time_unit );
 
-    $new_price['price'] = $new_price['price'] - $new_price['deposit'];
+    // $new_price['price'] = $new_price['price'] - $new_price['deposit'];
+    $new_price['price'] = $new_price['price'];
 
     $product = wc_get_product( $product_id );
     $discount = get_discount( $product );

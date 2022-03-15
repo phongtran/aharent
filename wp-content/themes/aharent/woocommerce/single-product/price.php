@@ -34,7 +34,7 @@ if ( !isset($prices) )
 		<?php if ( $product->is_type( 'simple' )) : ?>
 			
 			<?php
-				$time_unit = __( 'day', 'woocommerce' );
+				$time_unit = __('day', 'aharent');
 				$time_block = $product->get_meta( 'time_unit' );
 				if ( !empty( $time_block) )
 					$time_unit = __( $time_block, 'woocommerce' );
@@ -42,15 +42,13 @@ if ( !isset($prices) )
 
 			<table>
 				<thead>
-					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
-					<th><?php echo __( 'Giá thuê', 'woocommerce' ) ?></th>
-					<!-- <th><?php echo __( 'Deposit', 'woocommerce' ) ?></th> -->
+					<th><?php echo ucfirst(__('Time', 'aharent')) ?></th>
+					<th><?php echo __( 'Rental fee', 'aharent' ) ?></th>
 				</thead>
 				<tbody>
 					<tr>
 						<td><?php echo '1 ' . __( $time_unit, 'woocommerce' ) ?></td>
 						<td><?php echo wc_price( $product->price )  ?>/<?php echo __( $time_unit, 'woocommerce' ) ?></td>
-						<!-- <td><?php echo get_product_deposit_percentage( $product ) ?>%</td> -->
 					</tr>
 				</tbody>
 			</table>
@@ -58,12 +56,11 @@ if ( !isset($prices) )
 		<?php else: ?>
 			<table>
 				<thead>
-					<th><?php echo ucfirst(__( 'Time', 'woocommerce' )) ?></th>
-					<th><?php echo __( 'Giá thuê', 'woocommerce' ) ?></th>
-					<!-- <th rowspan="<?php echo 1 + count($prices, COUNT_RECURSIVE) ?>"><?php echo __( 'Deposit', 'woocommerce' ) ?></th> -->
+					<th><?php echo ucfirst(__( 'Time', 'aharent' )) ?></th>
+					<th><?php echo ucfirst(__( 'Rental fee', 'aharent' )) ?></th>
 				</thead>
 				<tbody>
-					<?php $deposit = get_product_deposit_percentage( $product ); $incre = 0; ?>
+					<?php $deposit = get_product_deposit_percentage( $product ); //$incre = 0; ?>
 					<?php foreach ( $prices as $time_unit => $price ) :?>
 						<?php $level = 1;?>
 						<?php foreach ( $price as $duration => $value ) : ?>
@@ -74,23 +71,23 @@ if ( !isset($prices) )
 										{
 											if ( $value['block_price'] )
 											{
-												echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+												echo $duration . ' ' . __( $time_unit, 'aharent' );
 											}
 											else
 											{
 												if ( $level < $duration )
-													echo $level . ' - ' . $duration . ' ' . __( $time_unit, 'woocommerce' );
+													echo $level . ' - ' . $duration . ' ' . __( $time_unit, 'aharent' );
 												else
-													echo $duration . ' ' . __( $time_unit, 'woocommerce' );
+													echo $duration . ' ' . __( $time_unit, 'aharent' );
 											}
 											
 										}
 										else
 										{
-											if ( in_array( $duration, array( 'more', 'extra' )) && !empty($value['more_label']))
-												echo ucfirst(__( $value['more_label'], 'woocommerce' ));
+											if ( in_array( $duration, array( 'more', 'extra' )) )
+												echo 'Nhiều hơn';//ucfirst(__( $value['more_label'], 'woocommerce' ));
 											elseif ( 'single' == $duration )	
-												echo ucfirst(__( $time_unit, 'woocommerce' ));
+												echo ucfirst(__( $time_unit, 'aharent' ));
 											else
 												echo ucfirst( __( $duration, 'woocommerce') );
 										}
@@ -103,7 +100,7 @@ if ( !isset($prices) )
 									<?php echo wc_price( $value['price'] )  ?>
 									<?php
 										if ( isset( $value['block_price']) && !$value['block_price'] )
-											echo '/' . __( $time_unit, 'woocommerce' )
+											echo '/' . __( $time_unit, 'aharent' )
 									?>
 								</td>
 								
@@ -120,69 +117,25 @@ if ( !isset($prices) )
 	</div>
 </div>
 
-<?php if ( $product->is_in_stock() ) : ?>
+<?php //if ( $product->is_in_stock() ) : ?>
 <div class="price-wrapper d-flex">
 
-	<div class="note">
-		<span>Chọn thông tin bên dưới để tính giá thuê.</span>
-	</div>
-
-	<div class="price-item deposit">
-		
-		<div class="price-item-title">
-			<span>Phí trả trước</span>
-			<div class="loading-price">
-				<div class="loading-icon">
-					<img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
-				</div>
-			</div>
-		</div>
-		
-		<div class="price-item-value">
-			-
-		</div>
-	</div>
-
-	<div class="price-item">
-		
-		<div class="price-item-title">
-			<span>Thanh toán khi nhận hàng</span>
-			<div class="loading-price">
-				<div class="loading-icon">
-					<img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
-				</div>
-			</div>
-		</div>
-
-		<div class="price-item-value rental">
-
-			-
-			
-		</div>
-	</div>
-
-
 	<?php
-		$_security_deposit = $product->get_meta( '_security_deposit_amount' );
-		
-		if ( !empty($_security_deposit) && ($_security_deposit > 0) ) :
+		$security_deposit = $product->get_meta( 'rental_terms' );
+
+		$display_security_deposit = !empty( $security_deposit ) && is_numeric($security_deposit);
+	
 	?>
 
-	<div class="price-item">
-		
-		<div class="price-item-title">
-			<span>Thế chân</span>
-		</div>
-		
-		<div class="price-item-value">
-			<?php echo wc_price( $product->get_meta( '_security_deposit_amount' )); ?>
-		</div>
+
+	<div class="note">
+		<p>Chọn thông tin bên dưới để tính giá thuê.</p>
+		<p>Giá thuê có thể thay đổi và phụ thuộc vào tình trạng xe sẵn có tại thời điểm đặt xe.</p>
+		<?php if ( !$display_security_deposit ): ?>
+			<p>Số tiền cọc sẽ được thông báo đến Khách hàng khi xác nhận đơn hàng.</p>
+		<?php endif ?>
 	</div>
-
-	<?php endif ?>
-
-
 	
 
 </div>
-<?php endif ?>
+<?php //endif ?>

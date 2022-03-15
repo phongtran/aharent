@@ -9,7 +9,7 @@ function receive_return_tab( $tabs )
 	// Adds the new tab
 	
 	$tabs['receive_return_tab'] = array(
-		'title' 	=> __( 'Receive/Return', 'woocommerce' ),
+		'title' 	=> __( 'Receive/Return', 'aharent' ),
 		'priority' 	=> 50,
 		'callback' 	=> 'receive_return_tab_content'
 	);
