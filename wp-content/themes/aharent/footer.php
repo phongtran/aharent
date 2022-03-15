@@ -8,9 +8,15 @@
 
                     <div class="col-items">
                         <div class="company-name">
-                            <p>Công ty TNHH Tale</p>
+                            <p>CÔNG TY TNHH TALE TECHNOLOGIES VIỆT NAM</p>
+<p>Địa chỉ trụ sở: 69A Đường 43, Phường Tân Quy, Quận 7, Thành phố Hồ Chí Minh, Việt Nam</p>
+<p>Giấy ĐKDN số: 0316362084 do Sở Kế hoạch và Đầu tư TP. Hồ Chí Minh cấp ngày 01/7/2020</p>
+<p>Số điện thoại/Zalo: 0909.293.265</p>
+<p>Email: hello@aharent.com</p>
+
+                            <!-- <p>Công ty TNHH Tale</p>
                             <p>Technologies Việt Nam</p>
-                            <p class="hotline">Hotline: (+84) 867 051 437</p>
+                            <p class="hotline">Hotline: (+84) 867 051 437</p> -->
                         </div>
 
                         <div class="copyright">

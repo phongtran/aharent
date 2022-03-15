@@ -27,7 +27,7 @@ if ( !empty( $product_rental_terms) )
 {
     $product_rental_terms = strip_style( $product_rental_terms[0] );
     if ( is_numeric( $product_rental_terms) )
-        echo '<p>Phí thế chân: ' . wc_price( $product_rental_terms ) . '</p>';
+        echo '<p>' . esc_html( 'Security deposit', 'woocommerce' ) . ': ' . wc_price( $product_rental_terms ) . '</p>';
     else
         echo $product_rental_terms . '<br />';
 }

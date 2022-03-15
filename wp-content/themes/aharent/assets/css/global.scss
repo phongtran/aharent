@@ -501,6 +501,10 @@ button[type="submit"].aha-button, button[type="button"].aha-button {
 .about-content {
     margin: 20px 100px 0 100px;
 
+    b {
+        color: $main-button-color;
+    }
+
     .about-title {
         color: $main-button-color;
     }

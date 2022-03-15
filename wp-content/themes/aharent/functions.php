@@ -177,9 +177,11 @@ function basic_scripts()
 
 	
 	// JS queue
-	wp_enqueue_script( 'loading-bar' );
-	wp_enqueue_script( 'page-loading' );
+	// wp_enqueue_script( 'loading-bar' );
+	// wp_enqueue_script( 'page-loading' );
 	wp_enqueue_script( 'header' );
+
+	wp_enqueue_script( 'bootstrap-bundle-js-min' );
 
 	wp_deregister_script( 'wp-embed' );
 
