@@ -188,18 +188,18 @@ do_action( 'woocommerce_before_cart' ); ?>
                                                         <span class="time-unit" data-key="<?php echo $cart_item_key ?>">
                                                             <?php
 																if (isset($cart_item['time-unit']))
-																	$time_unit = __( $cart_item['time-unit'], 'woocommerce' );
+																	$time_unit = __( $cart_item['time-unit'], 'aharent' );
 																else
 																{
-																	$time_unit = __( 'day', 'woocommerce' );
+																	$time_unit = __( 'day', 'aharent' );
 																	$time_block = $_product->get_meta( '_time_block' );
 																	if ( !empty( $time_block) )
-																		$time_unit = __( $time_block, 'woocommerce' );
+																		$time_unit = __( $time_block, 'aharent' );
 																}
 
 																echo $time_unit;
 															?>
-                                                        </span>, từ <?php echo __( 'day', 'woocommerce' ); ?>
+                                                        </span>, từ <?php echo __( 'day', 'aharent' ); ?>
                                                     </span>
 
                                                     <div class="date-picker-input">
@@ -233,21 +233,21 @@ do_action( 'woocommerce_before_cart' ); ?>
                                                 <div class="radio-options">
                                                     <?php if ( $delivery_terms ): ?>
                                                     <div class='radio-option-row'>
-                                                        <input id="delivery_option_delivery" type="radio"
+                                                        <input id="delivery_option_delivery<?php echo $product_id ?>" type="radio"
                                                             name="cart[<?php echo $cart_item_key ?>][delivery_option]"
                                                             value="delivery"
                                                             <?php echo ('delivery' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
-                                                        <label for="delivery_option_delivery">Giao hàng tận nơi.</label>
+                                                        <label for="delivery_option_delivery<?php echo $product_id ?>">Giao hàng tận nơi.</label>
                                                     </div>
                                                     <?php endif ?>
 
                                                     <?php if ( !empty( $address )): ?>
                                                     <div class='radio-option-row'>
-                                                        <input id="delivery_option_pick-up" type="radio"
+                                                        <input id="delivery_option_pick-up<?php echo $product_id ?>" type="radio"
                                                             name="cart[<?php echo $cart_item_key ?>][delivery_option]"
                                                             value="pick-up"
                                                             <?php echo ('pick-up' == $cart_item['delivery-option']) ? 'checked' : ''  ?> />
-                                                        <label for="delivery_option_pick-up">Nhận hàng tại
+                                                        <label for="delivery_option_pick-up<?php echo $product_id ?>">Nhận hàng tại
                                                             <?php echo $address ?>.</label>
                                                     </div>
                                                     <?php endif ?>

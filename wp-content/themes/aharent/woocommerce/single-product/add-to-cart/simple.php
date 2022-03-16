@@ -79,7 +79,7 @@ if ( ! $product->is_purchasable() ) {
 
 						<span class="time-delimiter">
 							<span class="time-unit">
-								<?php echo $time_unit; ?>
+								<?php echo __( $time_unit, 'aharent'); ?>
 							</span>, 
 						</span>
 					

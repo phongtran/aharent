@@ -120,9 +120,9 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                     <span class="time-delimiter">
                         <span class="time-unit">
                             <?php							
-                                $time_unit = __( 'day', 'woocommerce' );
+                                $time_unit = __( 'day', 'aharent' );
                                 if ( $time_units && count( $time_units ) > 0 )
-                                    $time_unit = __( $time_units[0], 'woocommerce' );
+                                    $time_unit = __( $time_units[0], 'aharent' );
 
                                 echo $time_unit;
 
