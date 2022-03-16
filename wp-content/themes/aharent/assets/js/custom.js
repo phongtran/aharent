@@ -32,6 +32,8 @@
 		dateFromMinDate = dateHoldTo;
 	}
 
+	var savedDate = '';
+
 	$('.add-to-cart :input[name="_date_from"]').datetimepicker({
 		format: dateFormat,
 		timepicker: false,
@@ -47,11 +49,16 @@
 				if ( !isDateAvailable(d) )
 					$(dates[i]).addClass('xdsoft_disabled');
 			}
-		}
+		},
 	}).change(function(e) {
-		
 		e.preventDefault();
-		getProductPrice();
+
+		if (savedDate != $(this).val()) {
+			getProductPrice();
+			savedDate = $(this).val();
+		}
+		
+
 	});
 
 	$('.date-picker-input input').datetimepicker({

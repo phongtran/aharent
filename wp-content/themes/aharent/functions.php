@@ -1117,7 +1117,7 @@ function wc_add_to_cart_message_filter($message, $product_id = null)
                     esc_html( $added_text ),
                     esc_url( wc_get_page_permalink( 'cart' ) ),
                     esc_html__( 'View cart', 'woocommerce' ),
-					esc_html__( 'Continue renting', 'woocommerce' )
+					__( 'Continue renting', 'aharent' )
 				);
 
     return $message;

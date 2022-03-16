@@ -276,7 +276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <?php if ( strpos( $message, 'close-message button wc-forward' ) ) : ?>
                             <div class="message-wrapper">
                                 <div class="arrow-up"></div>
-                                <div class="add-to-cart-message">    
+                                <div class="add-to-cart-message">
                                     <?php echo $message; ?>
 
                                     <script type="text/javascript">
