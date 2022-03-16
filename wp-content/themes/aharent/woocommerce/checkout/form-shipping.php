@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php
 					woocommerce_form_field( 'order_vat', array(
 						'type'		=> 'checkbox',
-						'label'		=> __( 'Tax receipt', 'woocommerce' ),
+						'label'		=> __( 'Tax receipt', 'aharent' ),
 
 					)); 
 				?>
@@ -83,21 +83,21 @@ defined( 'ABSPATH' ) || exit;
 					<?php
 						woocommerce_form_field( 'order_vat_company', array(
 							'type'		=> 'text',
-							'label'		=> __( 'Company name', 'woocommerce' ),
+							'label'		=> __( 'Company name', 'aharent' ),
 							'custom_attributes'	=> array( 'disabled' => 'disabled' ),
 							
 						));
 
 						woocommerce_form_field( 'order_vat_code', array(
 							'type'		=> 'text',
-							'label'		=> __( 'Tax code', 'woocommerce' ),
+							'label'		=> __( 'Tax code', 'aharent' ),
 							'custom_attributes'	=> array( 'disabled' => 'disabled' ),
 							
 						));
 
 						woocommerce_form_field( 'order_vat_address', array(
 							'type'		=> 'text',
-							'label'		=> __( 'Address', 'woocommerce' ),
+							'label'		=> __( 'Address', 'aharent' ),
 							'custom_attributes'	=> array( 'disabled' => 'disabled' ),
 							
 						));

@@ -134,7 +134,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
             <div class="row-component">
                 <div class="form-label">
-                    <label>Từ <?php echo __( 'day', 'woocommerce' ); ?>:</label>
+                    <label>Từ <?php echo __( 'day', 'aharent' ); ?>:</label>
                     <div class="validate"><span>(*Vui lòng chọn ngày)</span></div>
                 </div>
 

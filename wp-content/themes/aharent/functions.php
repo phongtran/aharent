@@ -676,24 +676,25 @@ add_filter( 'woocommerce_add_to_cart_validation', 'add_the_date_validation', 10,
 function customize_checkout_billing_kyc( $fields )
 {
 	unset($fields['billing']['billing_first_name']['class']);
-	unset($fields['billing']['billing_last_name']['class']);
+	// unset($fields['billing']['billing_last_name']['class']);
 
+	unset($fields['billing']['billing_last_name']);
 	unset($fields['billing']['billing_company']);
     unset($fields['billing']['billing_city']);
 	unset($fields['billing']['billing_postcode']);
 	unset($fields['billing']['billing_country']);
 	
 
-	$fields['billing']['billing_state'] = array(
-		'label'		=>  __( 'Province', 'woocommerce' ),
-		'type'		=>	'text',
-		'required'	=>	true,
-		'default'	=> 'Hồ Chí Minh',
-		'value'		=> 'Hồ Chí Minh',
-		'custom_attributes'	=> array( 'readonly' => 'readonly' ),
-		'priority'	=> 65,
-		'class'		=> array( 'form-row-wide', 'address-field' )
-	);
+	// $fields['billing']['billing_state'] = array(
+	// 	'label'		=>  __( 'Province', 'woocommerce' ),
+	// 	'type'		=>	'text',
+	// 	'required'	=>	true,
+	// 	'default'	=> 'Hồ Chí Minh',
+	// 	'value'		=> 'Hồ Chí Minh',
+	// 	'custom_attributes'	=> array( 'readonly' => 'readonly' ),
+	// 	'priority'	=> 65,
+	// 	'class'		=> array( 'form-row-wide', 'address-field' )
+	// );
 
     return $fields;
 }

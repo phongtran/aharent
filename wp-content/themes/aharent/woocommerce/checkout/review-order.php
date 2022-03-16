@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 	<thead>
 		<tr>
 			<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-name"><?php esc_html_e( 'Duration', 'woocommerce' ); ?></th>
-			<th class="product-name"><?php esc_html_e( 'From date', 'woocommerce' ); ?></th>
+			<th class="product-name"><?php echo __( 'Duration', 'aharent' ); ?></th>
+			<th class="product-name"><?php echo __( 'From date', 'aharent' ); ?></th>
 			<?php $payment_method = WC()->session->get( 'chosen_payment_method' ); ?>
-			<?php if ( 'cod' == $payment_method ) : ?>
-				<th class="product-name"><?php esc_html_e( 'Giá thuê', 'woocommerce' ); ?></th>
+			<?php if ( empty($payment_method) || 'cod' == $payment_method ) : ?>
+				<th class="product-name"><?php echo __( 'Rental fee', 'aharent' ); ?></th>
 			<?php else: ?>
 				<th class="product-name"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
 				<th class="product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
@@ -47,12 +47,12 @@ defined( 'ABSPATH' ) || exit;
 						<?php // echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</td>
 					<td>
-						<?php echo $cart_item['duration'] . ' ' . __( $cart_item['time-unit'] ? $cart_item['time-unit'] : 'day', 'woocommerce' );  ?>
+						<?php echo $cart_item['duration'] . ' ' . __( $cart_item['time-unit'] ? $cart_item['time-unit'] : 'day', 'aharent' );  ?>
 					</td>
 					<td>
 						<?php echo $cart_item['date-from'] ?>
 					</td>
-					<?php if ( 'cod' == $payment_method ) : ?>
+					<?php if ( !$payment_method || 'cod' == $payment_method ) : ?>
 						<td>
 							<?php
 								$amount = $cart_item['rental_price'];
@@ -153,7 +153,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<tr class="order-total">
-			<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+			<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php echo __( 'Total rental fees', 'aharent' ); ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 
