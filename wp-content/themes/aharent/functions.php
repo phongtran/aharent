@@ -380,7 +380,11 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 		$cart_item_data['delivery-option'] = $_POST['delivery_option'];
 	
 	$product = wc_get_product( $product_id );
-	$cart_item_data['security_deposit'] = $product->get_meta( '_security_deposit_amount' );
+	$security_deposit = $product->get_meta( 'security_deposit' );
+	if ( !empty($security_deposit) && is_numeric( $security_deposit ))
+		$cart_item_data['security_deposit'] = $security_deposit;
+	else
+		$cart_item_data['security_deposit'] = 0;
 
 	$discount = get_discount( $product );
 	if ( $discount )
@@ -569,7 +573,7 @@ function set_cart_calculation( $cart )
 	$payment_method = WC()->session->get( 'chosen_payment_method' );
 	foreach ( $cart->get_cart() as $cart_item )
 	{	
-		if ( 'cod' == $payment_method )
+		if ( !$payment_method || 'cod' == $payment_method )
 		{
 			$amount = $cart_item['rental_price'];
 			
@@ -612,9 +616,6 @@ function calculate_cart_total_rental_fee()
 		$_total_rental_fee += $amount;
 	}
 		
-
-	
-
 	return $_total_rental_fee;
 }
 

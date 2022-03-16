@@ -130,7 +130,7 @@ if ( ! $product->is_purchasable() ) {
 			<div class="price-wrapper d-flex">
 
 			<?php
-				$security_deposit = $product->get_meta( 'rental_terms' );
+				$security_deposit = $product->get_meta( 'security_deposit' );
 
 				$display_security_deposit = !empty( $security_deposit ) && is_numeric($security_deposit);
 

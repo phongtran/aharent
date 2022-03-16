@@ -266,62 +266,27 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 
                                 <div class="deposit-price">
-                                    <span class="label"><?php echo __( 'Deposit', 'woocommerce' ) ?></span>
-                                    <h2 class="price">
-                                        <?php
-											$amount = $cart_item['deposit'] * $cart_item['quantity'];
-
-											$discount = $cart_item['discount'];
-											if ( $discount )
-											{
-												if ( 'percentage' == $discount['type'] )
-													echo '<div class="original-price"><s>' .  wc_price( $amount ) . '</s></div>' . wc_price( $amount * (100 - $discount['value']) / 100 );
-											}
-											else
-												echo wc_price( $amount );
-											
-										?>
-                                    </h2>
+                                    <span class="label"><?php echo __( 'Security deposit', 'aharent' ) ?></span>
+                                    <?php
+                                        $amount = $cart_item['security_deposit'] * $cart_item['quantity'];
+                                        if ( 0 === $amount )
+                                            echo '<p class="note">*Thông báo khi xác nhận đơn hàng</p>';
+                                        else
+                                            echo '<h2 class="price">' . wc_price( $amount ) . '</h2>';
+                                        
+                                    ?>
                                 </div>
 
                                 <div class="rental-price">
-                                    <span class="label">Trả sau</span>
+                                    <span class="label"><?php echo __('Rental fee', 'aharent') ?></span>
                                     <h3 class="price">
                                         <?php
-											$amount = ( $cart_item['rental_price'] - $cart_item['deposit']) * $cart_item['quantity'];
-
-											if ( $discount )
-											{
-												if ( 'percentage' == $discount['type'] )
-													echo '<div class="original-price"><s>' .  wc_price( $amount ) . '</s></div>' . wc_price( $amount * (100 - $discount['value']) / 100 );
-											}
-											else
-												echo wc_price( $amount );
+											$amount = $cart_item['rental_price']  * $cart_item['quantity'];
+											echo wc_price( $amount );
 										?>
                                     </h3>
                                 </div>
-
-
-                                <!-- <table>
-											<tr>
-												<td>Giá thuê:</td>
-												<td>
-													<?php echo wc_price( $cart_item['rental_price'] * $cart_item['quantity'] * $cart_item['duration'] ); ?>
-												</td>
-											</tr>
-											<tr>
-												<td>Đặt cọc:</td>
-												<td>
-													<?php echo wc_price( $cart_item['deposit'] * $cart_item['quantity'] * $cart_item['duration']); ?>
-												</td>
-											</tr>
-										</table> -->
                             </div>
-
-
-
-
-
 
                         </div>
 
