@@ -27,7 +27,9 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 <?php /* translators: %s: Customer first name */ ?>
 <p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $order->get_billing_first_name() ) ); ?></p>
 <?php /* translators: %s: Order number */ ?>
-<p><?php printf( esc_html__( 'Just to let you know &mdash; we\'ve received your order #%s, and it is now being processed:', 'woocommerce' ), esc_html( $order->get_order_number() ) ); ?></p>
+<p><?php printf( __( 'Aharent đã nhận được yêu cầu đặt hàng của bạn và đang xử lý. Số đơn hàng của bạn là #%s.', 'aharent' ), esc_html( $order->get_order_number() ) ); ?></p>
+<p>Cảm ơn bạn đã tin tưởng và lựa chọn đồng hành cùng Aharent!</p>
+<p>Hẹn gặp lại ở những đơn thuê mới!</p>
 
 <?php
 

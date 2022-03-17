@@ -25,9 +25,27 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 
 $payment_method = $order->get_payment_method();
 
-$delivery = $item->get_meta( 'delivery-option' ) == 'delivery';
+global $delivery;
+global $pickup;
+$delivery = false;
+$delivery_option = $item->get_meta( 'delivery-option' );
+if ( $delivery_option == 'delivery')
+	$delivery = true;
+elseif ( $delivery_option == 'pick-up' )
+{
+	if ( !$pickup)
+		$pickup = array();
 
+	// Get vendor address
+	$vendor_login = $item->get_product()->get_meta( 'vendor' );
+	
+	$vendor_profiles = get_vendor_profiles( $vendor_login );
+	$address = $vendor_profiles['address']['street_1'] . ', ' . $vendor_profiles['address']['street_2'] . ', ' . $vendor_profiles['address']['city'];
+	$pickup[$item->get_name()] = $address;
+}
 ?>
+
+
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
 	<td class="woocommerce-table__product-name product-name">
@@ -88,12 +106,6 @@ $delivery = $item->get_meta( 'delivery-option' ) == 'delivery';
 	<?php endif ?>
 
 </tr>
-
-<?php if ( $delivery ) : ?>
-<tr>
-	<td colspan="5"><span class="note">*<?php echo __( 'Phí vận chuyển sẽ được thông báo khi xác nhận đơn hàng', 'aharent' ) ?></span></td>
-</tr>
-<?php endif ?>
 
 <?php if ( $show_purchase_note && $purchase_note ) : ?>
 

@@ -24,7 +24,12 @@ echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 /* translators: %s: Customer first name */
 echo sprintf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $order->get_billing_first_name() ) ) . "\n\n";
 /* translators: %s: Order number */
-echo sprintf( esc_html__( 'Just to let you know &mdash; we\'ve received your order #%s, and it is now being processed:', 'woocommerce' ), esc_html( $order->get_order_number() ) ) . "\n\n";
+// echo sprintf( esc_html__( 'Just to let you know &mdash; we\'ve received your order #%s, and it is now being processed:', 'woocommerce' ), esc_html( $order->get_order_number() ) ) . "\n\n";
+echo sprintf( "Aharent đã nhận được yêu cầu đặt hàng của bạn và đang xử lý. Số đơn hàng của bạn là #%s.", esc_html( $order->get_order_number() ) ) . "\n\n";
+echo sprintf( "Cảm ơn bạn đã tin tưởng và lựa chọn đồng hành cùng Aharent!") . "\n\n";
+echo sprintf( "Hẹn gặp lại ở những đơn thuê mới!") . "\n\n";
+
+
 
 /*
  * @hooked WC_Emails::order_details() Shows the order details table.

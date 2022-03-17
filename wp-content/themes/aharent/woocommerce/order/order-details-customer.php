@@ -61,6 +61,36 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 
 	<?php endif; ?>
 
+	<?php global $pickup; ?>
+	<?php if ( $pickup ): ?>
+
+		<br />
+
+		<h2 class="woocommerce-column__title"><?php esc_html_e( 'Địa chỉ nhận hàng', 'woocommerce' ); ?></h2>
+
+		<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+
+			<thead>
+				<tr>
+					<th class="woocommerce-table__product-name product-name"><?php echo __( 'Product', 'aharent' ); ?></th>
+					<th class="woocommerce-table__product-table product-total"><?php echo __( 'Address', 'aharent' ); ?></th>
+				</tr>
+			</thead>
+
+			
+
+			<tbody>
+				<?php foreach ( $pickup as $item_name => $address ) : ?>
+				<tr>
+					<td><?php echo $item_name  ?></td>
+					<td><?php echo $address ?></td>
+				</tr>
+				<?php endforeach ?>
+			</tbody>
+		</table>
+
+	<?php endif ?>
+
 	<?php do_action( 'woocommerce_order_details_after_customer_details', $order ); ?>
 
 </section>

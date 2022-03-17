@@ -85,6 +85,13 @@ if ( $show_downloads ) {
 
 			do_action( 'woocommerce_order_details_after_order_table_items', $order );
 			?>
+
+			<?php global $delivery; ?>
+			<?php if ( $delivery ) : ?>
+			<tr>
+				<td colspan="5"><span class="note">*<?php echo __( 'Phí vận chuyển sẽ được thông báo khi xác nhận đơn hàng', 'aharent' ) ?></span></td>
+			</tr>
+			<?php endif ?>
 		</tbody>
 
 		<tfoot>

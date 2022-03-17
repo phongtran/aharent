@@ -17,7 +17,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-echo "\n" . esc_html( wc_strtoupper( esc_html__( 'Billing address', 'woocommerce' ) ) ) . "\n\n";
+// echo "\n" . esc_html( wc_strtoupper( esc_html__( 'Billing address', 'woocommerce' ) ) ) . "\n\n";
+echo "\n" . esc_html( wc_strtoupper( esc_html__( 'Customer details', 'woocommerce' ) ) ) . "\n\n";
 echo preg_replace( '#<br\s*/?>#i', "\n", $order->get_formatted_billing_address() ) . "\n"; // WPCS: XSS ok.
 
 if ( $order->get_billing_phone() ) {

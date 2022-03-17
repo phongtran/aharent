@@ -118,9 +118,11 @@ defined( 'ABSPATH' ) || exit;
 		do_action( 'woocommerce_review_order_after_cart_contents' );
 		?>
 
+		<?php if ( $delivery ): ?>
 		<tr>
 			<td colspan="5"><span class="note">*<?php echo __( 'Phí vận chuyển sẽ được thông báo khi xác nhận đơn hàng', 'aharent' ); ?></span></td>
 		</tr>
+		<?php endif ?>
 	</tbody>
 	<tfoot>
 

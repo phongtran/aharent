@@ -91,6 +91,15 @@ foreach ( $items as $item_id => $item ) :
 		</td>
 		<?php if ('cod' == $payment_method): ?>
 			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
+				<?php
+					$security_deposit = $item->get_meta( 'security-deposit' );
+					if ( !$security_deposit )
+						echo '<span class="note">*Thông báo khi xác nhận đơn hàng</span>';
+					else
+						echo wc_price( $security_deposit * $qty );	
+				?>
+			</td>
+			<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>; vertical-align:middle; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;">
 				<?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?>
 			</td>
 		<?php else: ?>
