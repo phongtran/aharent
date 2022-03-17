@@ -1,0 +1,169 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Aharent Site Theme\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-17 04:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.5; wp-5.7.2\n"
+"X-Domain: aharent"
+
+#: woocommerce/checkout/form-shipping.php:100
+msgid "Address"
+msgstr ""
+
+#. Name of the theme
+msgid "Aharent Site Theme"
+msgstr ""
+
+#. Author of the theme
+msgid "Aharent Team"
+msgstr ""
+
+#: woocommerce/checkout/form-shipping.php:86
+msgid "Company name"
+msgstr ""
+
+#: functions.php:1135
+msgid "Continue renting"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:58
+msgid "Date"
+msgstr ""
+
+#: woocommerce/checkout/review-order.php:51 woocommerce/cart/cart.php:194
+#: woocommerce/cart/cart.php:202 woocommerce/single-product/price.php:37
+#: woocommerce/single-product/add-to-cart/variable.php:123
+#: woocommerce/single-product/add-to-cart/variable.php:137
+#: woocommerce/single-product/add-to-cart/simple.php:91
+msgid "day"
+msgstr ""
+
+#: inc/product-tabs/add-tabs.php:48
+msgid "Delivery policy"
+msgstr ""
+
+#: woocommerce/order/order-details.php:54
+#: woocommerce/checkout/review-order.php:24
+msgid "Duration"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:64
+msgid "Email"
+msgstr ""
+
+#. Name of the template
+msgid "Example Template"
+msgstr ""
+
+#: functions.php:103
+msgid "Footer Social Links"
+msgstr ""
+
+#: woocommerce/order/order-details.php:55
+#: woocommerce/checkout/review-order.php:25
+msgid "From date"
+msgstr ""
+
+#. Name of the template
+msgid "Most Rented Template"
+msgstr ""
+
+#. Name of the template
+msgid "My Orders"
+msgstr ""
+
+#: woocommerce/order/order-details-customer.php:37
+msgid "National ID number"
+msgstr ""
+
+#: woocommerce/order/order-details.php:102
+msgid "Notes"
+msgstr ""
+
+#: woocommerce/order/order-details.php:47
+msgid "Order details"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:53
+msgid "Order number"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:76
+msgid "Payment method"
+msgstr ""
+
+#: woocommerce/order/order-details.php:53
+msgid "Product"
+msgstr ""
+
+#: inc/product-tabs/receive-return-tab.php:12 inc/product-tabs/add-tabs.php:29
+msgid "Receive/Return"
+msgstr ""
+
+#: woocommerce/order/order-details.php:57
+#: woocommerce/checkout/review-order.php:29 woocommerce/cart/cart.php:281
+#: woocommerce/single-product/price.php:46
+#: woocommerce/single-product/price.php:60
+#: woocommerce/single-product/add-to-cart/variable.php:210
+#: woocommerce/single-product/add-to-cart/simple.php:160
+msgid "Rental fee"
+msgstr ""
+
+#. Name of the template
+msgid "Sale Products Archives"
+msgstr ""
+
+#: woocommerce/checkout/review-order.php:28 woocommerce/cart/cart.php:269
+#: inc/product-tabs/add-tabs.php:12
+#: woocommerce/single-product/add-to-cart/variable.php:193
+#: woocommerce/single-product/add-to-cart/simple.php:143
+msgid "Security deposit"
+msgstr ""
+
+#: woocommerce/cart/cart-totals.php:37
+msgid "Security deposit available upon per product"
+msgstr ""
+
+#: functions.php:94
+msgid "Shop Sidebar"
+msgstr ""
+
+#: inc/product-tabs/add-tabs.php:66
+msgid "Specification"
+msgstr ""
+
+#: woocommerce/checkout/form-shipping.php:93
+msgid "Tax code"
+msgstr ""
+
+#: woocommerce/checkout/form-shipping.php:77
+msgid "Tax receipt"
+msgstr ""
+
+#: woocommerce/single-product/price.php:45
+#: woocommerce/single-product/price.php:59
+msgid "Time"
+msgstr ""
+
+#: woocommerce/checkout/review-order.php:169
+#: woocommerce/checkout/thankyou.php:70 woocommerce/cart/cart-totals.php:129
+msgid "Total rental fees"
+msgstr ""
+
+#: woocommerce/cart/cart-totals.php:33
+msgid "Total security deposit"
+msgstr ""
+
+#. Name of the template
+msgid "Woocommerce Template"
+msgstr ""
