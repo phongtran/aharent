@@ -25,6 +25,7 @@ defined( 'ABSPATH' ) || exit;
 			<th class="product-name"><?php echo __( 'From date', 'aharent' ); ?></th>
 			<?php $payment_method = WC()->session->get( 'chosen_payment_method' ); ?>
 			<?php if ( empty($payment_method) || 'cod' == $payment_method ) : ?>
+				<th class="product-name"><?php echo __( 'Security deposit', 'aharent' ); ?></th>
 				<th class="product-name"><?php echo __( 'Rental fee', 'aharent' ); ?></th>
 			<?php else: ?>
 				<th class="product-name"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
@@ -36,7 +37,13 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 		do_action( 'woocommerce_review_order_before_cart_contents' );
 
+		$delivery = false;
+
 		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			
+			if ( 'delivery' === $cart_item['delivery-option'] )
+				$delivery = true;
+
 			$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				?>
@@ -53,6 +60,18 @@ defined( 'ABSPATH' ) || exit;
 						<?php echo $cart_item['date-from'] ?>
 					</td>
 					<?php if ( !$payment_method || 'cod' == $payment_method ) : ?>
+						<td>
+							<?php
+								$security_deposit = $cart_item['security-deposit'];
+
+								if ( $security_deposit && is_numeric( $security_deposit ))
+									echo wc_price($security_deposit * $cart_item['quantity']);
+								else
+									echo '<span class="note">Thông báo khi xác nhận đơn hàng</span>'
+
+							?>
+						</td>
+						
 						<td>
 							<?php
 								$amount = $cart_item['rental_price'];
@@ -98,19 +117,23 @@ defined( 'ABSPATH' ) || exit;
 
 		do_action( 'woocommerce_review_order_after_cart_contents' );
 		?>
+
+		<tr>
+			<td colspan="5"><span class="note">*<?php echo __( 'Phí vận chuyển sẽ được thông báo khi xác nhận đơn hàng', 'aharent' ); ?></span></td>
+		</tr>
 	</tbody>
 	<tfoot>
 
 		<?php if ( !WC()->customer->is_vat_exempt() ): ?>
 		<tr class="cart-subtotal">
-			<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+			<th colspan="<?php echo ('cod' == $payment_method) ? '4' : '4'; ?>"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
 			<td><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
 		<?php endif ?>
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
 			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-				<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
+				<th colspan="<?php echo ('cod' == $payment_method) ? '4' : '4'; ?>"><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
 				<td><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
 			</tr>
 		<?php endforeach; ?>
@@ -138,7 +161,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) : ?>
 				<?php foreach ( WC()->cart->get_tax_totals() as $code => $tax ) : // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited ?>
 					<tr class="tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-						<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php echo esc_html( $tax->label ); ?></th>
+						<th colspan="<?php echo ('cod' == $payment_method) ? '4' : '4'; ?>"><?php echo esc_html( $tax->label ); ?></th>
 						<td><?php echo wp_kses_post( $tax->formatted_amount ); ?></td>
 					</tr>
 				<?php endforeach; ?>
@@ -152,8 +175,10 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
+		
+
 		<tr class="order-total">
-			<th colspan="<?php echo ('cod' == $payment_method) ? '3' : '4'; ?>"><?php echo __( 'Total rental fees', 'aharent' ); ?></th>
+			<th colspan="<?php echo ('cod' == $payment_method) ? '4' : '4'; ?>"><?php echo __( 'Total rental fees', 'aharent' ); ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 

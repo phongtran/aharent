@@ -143,6 +143,13 @@ add_filter('script_loader_tag', 'attribute_script_loader_tag', 10, 3);
 
 function basic_scripts()
 {
+	global $wp_scripts;
+
+	// Replace local jquery with cdn
+	wp_deregister_script( 'jquery-core' );
+	wp_register_script( 'jquery-core', "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js", array(), null, false );
+
+
 	// CSS Registration
 	wp_register_style ( 'bootstrap', get_template_directory_uri() . '/assets/vendors/bootstrap-5.0.2/dist/css/bootstrap.min.css', '', '5.0.2', false );
 	wp_register_style( 'datetimepicker', get_template_directory_uri() . '/assets/vendors/datetimepicker/build/jquery.datetimepicker.min.css', '', '1', false );
@@ -163,17 +170,16 @@ function basic_scripts()
 	wp_register_script( 'custom-script', get_template_directory_uri() . '/assets/js/custom.js', array(), '1', true );
 	wp_register_script( 'home-script', get_template_directory_uri() . '/assets/js/home.js', array(), '1', true );
 
-
 	// CSS queue
     wp_enqueue_style( 'bootstrap' );
     wp_enqueue_style( 'app' );
 
-	wp_dequeue_style( 'dashicons' );
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'wc-block-vendors-style' );
-	wp_dequeue_style( 'wc-block-style' );
+	// wp_dequeue_style( 'dashicons' );
+	// wp_dequeue_style( 'wp-block-library' );
+	// wp_dequeue_style( 'wc-block-vendors-style' );
+	// wp_dequeue_style( 'wc-block-style' );
 
-	wp_dequeue_style( 'font-awesome' );
+	// wp_dequeue_style( 'font-awesome' );
 
 	
 	// JS queue
@@ -183,14 +189,51 @@ function basic_scripts()
 
 	wp_enqueue_script( 'bootstrap-bundle-js-min' );
 
-	wp_deregister_script( 'wp-embed' );
+	// wp_deregister_script( 'wp-embed' );
 
 	
 
-	wp_dequeue_script( 'woo-viet-provinces-script' );
+	// wp_dequeue_script( 'woo-viet-provinces-script' );
 
 
-	if ( is_single() )
+	if (is_front_page())
+	{
+
+		// turn off dokan
+		// wp_dequeue_script( 'dokan-script' );
+		// wp_deregister_script( 'dokan-i18n-jed' );
+		// wp_deregister_script( 'dokan-tooltip' );
+		// wp_deregister_script( 'dokan-form-validate' );
+		// wp_deregister_script( 'speaking-url' );
+		// wp_deregister_script( 'dokan-select2-js' );
+		// wp_dequeue_script( 'dokan-util-helper' );
+		// wp_dequeue_script( 'dokan-login-form-popup' );
+		// wp_dequeue_script( 'dokan-popup' );
+		// wp_dequeue_style( 'dokan-style' );
+		// wp_dequeue_style( 'dokan-fontawesome' );
+
+		// wp_deregister_script( 'underscore' );
+		// wp_deregister_script( 'wp-embed' );
+		// wp_dequeue_style( 'berocket_aapf_widget-style' );
+		// wp_dequeue_style( 'wapf-frontend-css' );
+		// wp_dequeue_style( 'woocommerce-layout' );
+		// wp_dequeue_style( 'woocommerce-general' );
+		// wp_dequeue_style( 'woo-viet-provinces-style' );
+		// wp_enqueue_style( 'fontawesome-cdn' );
+		// wp_dequeue_script( 'woocommerce' );
+
+		// wp_dequeue_script( 'wc-cart-fragments' );
+		// wp_dequeue_script( 'wc-single-product' );
+
+		// wp_deregister_script( 'jquery-ui-slider' );
+		// wp_deregister_script( 'jquery-ui-mouse' );
+		// wp_deregister_script( 'jquery-ui-core' );
+
+		wp_enqueue_script( 'home-script' );
+
+
+	}
+	else if ( is_single() )
 	{
 		// Load swipe for image slider
 		// Swipe CSS
@@ -199,7 +242,7 @@ function basic_scripts()
 		wp_enqueue_style( 'swipe-style' );
 		wp_enqueue_style( 'datetimepicker' );
 
-		wp_dequeue_style( 'dokan-select2-css' );
+		// wp_dequeue_style( 'dokan-select2-css' );
 
 		// Swipe JS
 		
@@ -210,15 +253,15 @@ function basic_scripts()
 		wp_enqueue_script( 'single-product-script' );
 		wp_enqueue_script( 'custom-script' );
 
-		wp_deregister_script( 'jquery-ui-core' );
+		// wp_deregister_script( 'jquery-ui-core' );
 
 
-		wp_dequeue_script( 'dokan-script' );
-		wp_deregister_script( 'dokan-i18n-jed' );
-		wp_deregister_script( 'dokan-tooltip' );
-		wp_deregister_script( 'dokan-form-validate' );
-		wp_deregister_script( 'speaking-url' );
-		wp_deregister_script( 'dokan-select2-js' );
+		// wp_dequeue_script( 'dokan-script' );
+		// wp_deregister_script( 'dokan-i18n-jed' );
+		// wp_deregister_script( 'dokan-tooltip' );
+		// wp_deregister_script( 'dokan-form-validate' );
+		// wp_deregister_script( 'speaking-url' );
+		// wp_deregister_script( 'dokan-select2-js' );
 		
 			
 	}
@@ -242,7 +285,7 @@ function basic_scripts()
 			wp_enqueue_script( 'datetimepicker' );
 			wp_enqueue_script( 'custom-script' );
 
-			wp_dequeue_script( 'wc-cart' );
+			// wp_dequeue_script( 'wc-cart' );
 
 
 		}
@@ -253,37 +296,7 @@ function basic_scripts()
 		}
 		elseif (is_front_page())
 		{
-			wp_deregister_script( 'underscore' );
-			wp_deregister_script( 'wp-embed' );
-
-			wp_dequeue_style( 'berocket_aapf_widget-style' );
-			wp_dequeue_style( 'wapf-frontend-css' );
-
-			wp_dequeue_style( 'woocommerce-layout' );
-			wp_dequeue_style( 'woocommerce-general' );
-
-			wp_dequeue_style( 'woo-viet-provinces-style' );
-			wp_dequeue_style( 'dokan-style' );
-			wp_dequeue_style( 'dokan-fontawesome' );
-
-			wp_enqueue_style( 'fontawesome-cdn' );
-
 			
-			// JS
-			wp_dequeue_script( 'woocommerce' );
-
-			wp_dequeue_script( 'wc-cart-fragments' );
-			wp_dequeue_script( 'wc-single-product' );
-
-			wp_deregister_script( 'jquery-ui-slider' );
-			wp_deregister_script( 'jquery-ui-mouse' );
-			wp_deregister_script( 'jquery-ui-core' );
-
-			wp_dequeue_script( 'dokan-util-helper' );
-			wp_dequeue_script( 'dokan-login-form-popup' );
-			wp_dequeue_script( 'dokan-popup' );
-
-			wp_enqueue_script( 'home-script' );
 
 			
 		}
@@ -382,9 +395,9 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 	$product = wc_get_product( $product_id );
 	$security_deposit = $product->get_meta( 'security_deposit' );
 	if ( !empty($security_deposit) && is_numeric( $security_deposit ))
-		$cart_item_data['security_deposit'] = $security_deposit;
+		$cart_item_data['security-deposit'] = $security_deposit;
 	else
-		$cart_item_data['security_deposit'] = 0;
+		$cart_item_data['security-deposit'] = 0;
 
 	$discount = get_discount( $product );
 	if ( $discount )
@@ -450,6 +463,8 @@ function save_order_custom_values_of_items( $item, $cart_item_key, $values, $ord
 		$item->update_meta_data( 'duration', $values['duration']);
 	else
 		$item->add_meta_data( 'duration', $values['duration'] );
+
+	$item->add_meta_data( 'security-deposit', $values['security-deposit']);
 
 	if ($values['discount'])
 		$item->add_meta_data( 'discount', $values['discount'] );

@@ -44,20 +44,21 @@ if ( $show_downloads ) {
 <section class="woocommerce-order-details">
 	<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
 
-	<h2 class="woocommerce-order-details__title"><?php esc_html_e( 'Chi tiết đơn đặt thuê:', 'woocommerce' ); ?></h2>
+	<h2 class="woocommerce-order-details__title"><?php echo __( 'Order details', 'aharent' ); ?></h2>
 
 	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
 
 		<thead>
 			<tr>
-				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Duration', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'From date', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-name product-name"><?php echo __( 'Product', 'aharent' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php echo __( 'Duration', 'aharent' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php echo __( 'From date', 'aharent' ); ?></th>
 				<?php if ( 'cod' == $payment_method ): ?>
-					<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Giá thuê', 'woocommerce' ); ?></th>
+					<th class="woocommerce-table__product-table product-total"><?php echo __( 'Security deposit', 'aharent' ); ?></th>
+					<th class="woocommerce-table__product-table product-total"><?php echo __( 'Rental fee', 'aharent' ); ?></th>
 				<?php else: ?>
-					<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
-					<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Deposit', 'woocommerce' ); ?></th>
+					<th class="woocommerce-table__product-table product-total"><?php echo __( 'Price', 'woocommerce' ); ?></th>
+					<th class="woocommerce-table__product-table product-total"><?php echo __( 'Deposit', 'woocommerce' ); ?></th>
 				<?php endif ?>
 			</tr>
 		</thead>
@@ -91,7 +92,7 @@ if ( $show_downloads ) {
 			foreach ( $order->get_order_item_totals() as $key => $total ) {
 				?>
 					<tr>
-						<th scope="row" colspan="<?php echo ('cod' == $payment_method)? '3' : '4'; ?>"><?php echo esc_html( $total['label'] ); ?></th>
+						<th scope="row" colspan="<?php echo ('cod' == $payment_method)? '4' : '4'; ?>"><?php echo esc_html( $total['label'] ); ?></th>
 						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 					</tr>
 					<?php
@@ -99,7 +100,7 @@ if ( $show_downloads ) {
 			?>
 			<?php if ( $order->get_customer_note() ) : ?>
 				<tr>
-					<th colspan="<?php echo ('cod' == $payment_method)? '3' : '4'; ?>"><?php esc_html_e( 'Ghi chú:', 'woocommerce' ); ?></th>
+					<th colspan="<?php echo ('cod' == $payment_method)? '4' : '4'; ?>"><?php echo __( 'Notes', 'aharent' ); ?></th>
 					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
 				</tr>
 			<?php endif; ?>

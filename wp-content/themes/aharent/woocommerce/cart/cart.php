@@ -268,7 +268,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                                 <div class="deposit-price">
                                     <span class="label"><?php echo __( 'Security deposit', 'aharent' ) ?></span>
                                     <?php
-                                        $amount = $cart_item['security_deposit'] * $cart_item['quantity'];
+                                        $amount = $cart_item['security-deposit'] * $cart_item['quantity'];
                                         if ( 0 === $amount )
                                             echo '<p class="note">*Thông báo khi xác nhận đơn hàng</p>';
                                         else

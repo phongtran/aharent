@@ -54,11 +54,11 @@ defined( 'ABSPATH' ) || exit;
 					
 						<button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
 						
-						<?php do_action( 'woocommerce_cart_coupon' ); ?>
+						<?php //do_action( 'woocommerce_cart_coupon' ); ?>
 
-						<?php do_action( 'woocommerce_cart_actions' ); ?>
+						<?php //do_action( 'woocommerce_cart_actions' ); ?>
 
-						<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
+						<?php //wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>
 					</div>
 				</td>
 			</form>

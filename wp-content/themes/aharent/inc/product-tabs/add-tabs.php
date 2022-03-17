@@ -54,10 +54,32 @@ function delivery_tab( $tabs )
 
 }
 
+/**
+ * Add receive return tab for product
+ */
+function product_specification_tab( $tabs )
+{
+	
+	// Adds the new tab
+	
+	$tabs['specification_tab'] = array(
+		'title' 	=> __( 'Specification', 'aharent' ),
+		'priority' 	=> 50,
+		'callback' 	=> 'product_specification_tab_content'
+	);
+
+	return $tabs;
+
+}
+
 global $product;
 
 $vendor_login = $product->get_meta( 'vendor' );
 $vendor = get_user_by( 'login', $vendor_login );
+
+$product_specification = $product->get_meta('specification');
+if ( !empty($product_specification) )
+	add_filter('woocommerce_product_tabs', 'product_specification_tab' );
 
 $product_rental_terms = $product->get_meta( 'rental_terms' );
 $vendor_rental_terms = get_user_meta ( $vendor->ID, 'vendor_rental_terms', true );
@@ -89,6 +111,11 @@ function receive_return_tab_content()
 function delivery_tab_content()
 {
 	wc_get_template_part( 'single-product/tabs/vendor', 'delivery' );	
+}
+
+function product_specification_tab_content()
+{
+	wc_get_template_part( 'single-product/tabs/product', 'specification' );	
 }
 
 ?>

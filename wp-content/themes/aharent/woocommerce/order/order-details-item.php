@@ -25,6 +25,8 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 
 $payment_method = $order->get_payment_method();
 
+$delivery = $item->get_meta( 'delivery-option' ) == 'delivery';
+
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
@@ -55,7 +57,7 @@ $payment_method = $order->get_payment_method();
 	</td>
 
 	<td class="woocommerce-table__product-total product-total">
-		<?php echo $item->get_meta( 'duration' ) . ' ' . __( $item->get_meta( 'time-unit', 'woocommerce' )); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo $item->get_meta( 'duration' ) . ' ' . __( $item->get_meta( 'time-unit' ), 'aharent' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</td>
 
 	<td class="woocommerce-table__product-total product-total">
@@ -63,6 +65,15 @@ $payment_method = $order->get_payment_method();
 	</td>
 
 	<?php if ( 'cod' == $payment_method ): ?>
+		<td class="woocommerce-table__product-total product-total">
+			<?php
+				$security_deposit = $item->get_meta( 'security-deposit' );
+				if ( !$security_deposit )
+					echo '<span class="note">*Thông báo khi xác nhận đơn hàng</span>';
+				else
+					echo wc_price( $security_deposit * $qty );
+			?>
+		</td>
 		<td class="woocommerce-table__product-total product-total">
 			<?php echo $order->get_formatted_line_subtotal( $item ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		</td>
@@ -77,6 +88,12 @@ $payment_method = $order->get_payment_method();
 	<?php endif ?>
 
 </tr>
+
+<?php if ( $delivery ) : ?>
+<tr>
+	<td colspan="5"><span class="note">*<?php echo __( 'Phí vận chuyển sẽ được thông báo khi xác nhận đơn hàng', 'aharent' ) ?></span></td>
+</tr>
+<?php endif ?>
 
 <?php if ( $show_purchase_note && $purchase_note ) : ?>
 

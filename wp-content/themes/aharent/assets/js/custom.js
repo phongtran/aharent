@@ -24,7 +24,7 @@
 	var dateFormat = "d/m/Y"; // "d/m/Y H:i";
 
 	jQuery.datetimepicker.setLocale('vi');
-	
+
 	var dateFromMinDate = 0,
 		dateHoldTo = $('.add-to-cart :input[name="_date_from"]').attr('date-hold-to');
 
@@ -253,8 +253,6 @@
 			$( '#place_order' ).text( $( '#place_order' ).data( 'value' ) );
 		}
 	});
-	
-	console.log( $( 'a.woocommerce-remove-coupon' ).data( 'events' ) );
 
 })(jQuery);
 

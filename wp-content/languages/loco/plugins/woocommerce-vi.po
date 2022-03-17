@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2021-06-10T07:56:47+00:00\n"
-"PO-Revision-Date: 2021-12-02 14:12+0000\n"
+"PO-Revision-Date: 2022-03-17 04:46+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: woocommerce\n"
 "Language: vi\n"
@@ -27066,7 +27066,7 @@ msgstr ""
 #: packages/woocommerce-blocks/build/reviews-by-product.js:1
 #: packages/woocommerce-blocks/build/single-product.js:1
 msgid "Product"
-msgstr ""
+msgstr "Sản phẩm"
 
 #: packages/woocommerce-admin/dist/chunks/analytics-report-categories.js:1
 #: packages/woocommerce-admin/dist/chunks/analytics-report-orders.js:1
