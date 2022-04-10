@@ -42,7 +42,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 				<?php $prices = get_product_prices( $product ); ?>
 				<?php foreach ( $prices as $time_unit => $price ) : ?>
 					<div class="time-unit-price">
-						<?php echo wc_price( $price[ array_key_first( $price )]['price'] ) ?>/<?php echo __( $time_unit, 'woocommerce' ); ?>
+						<?php echo wc_price( $price[ array_key_first( $price )]['price'] ) ?>/<?php echo __( $time_unit, 'aharent' ); ?>
 					</div>
 				<?php endforeach ?>
 			</div>

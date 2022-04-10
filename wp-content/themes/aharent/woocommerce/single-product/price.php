@@ -60,9 +60,9 @@ if ( !isset($prices) )
 					<th><?php echo ucfirst(__( 'Rental fee', 'aharent' )) ?></th>
 				</thead>
 				<tbody>
-					<?php $deposit = get_product_deposit_percentage( $product ); //$incre = 0; ?>
+					<?php $deposit = get_product_deposit_percentage( $product ); $incre = 0; ?>
 					<?php foreach ( $prices as $time_unit => $price ) :?>
-						<?php $level = 1;?>
+						<?php $level = 1; ?>
 						<?php foreach ( $price as $duration => $value ) : ?>
 							<tr>
 								<td>
@@ -80,20 +80,20 @@ if ( !isset($prices) )
 												else
 													echo $duration . ' ' . __( $time_unit, 'aharent' );
 											}
-											
+
+											$level = $duration + 1;
 										}
 										else
 										{
 											if ( in_array( $duration, array( 'more', 'extra' )) )
 												echo 'Nhiều hơn';//ucfirst(__( $value['more_label'], 'woocommerce' ));
-											elseif ( 'single' == $duration )	
+											elseif ( 'single' == $duration ) { 
 												echo ucfirst(__( $time_unit, 'aharent' ));
+											}
 											else
-												echo ucfirst( __( $duration, 'woocommerce') );
+												echo ucfirst( __( $duration, 'aharent') );
 										}
 											
-										
-										$level = $duration + 1;
 									?>
 								</td>
 								<td>
@@ -105,7 +105,7 @@ if ( !isset($prices) )
 								</td>
 								
 								<?php //if ( $incre == 0 ) : $incre++; ?>
-									<!-- <td rowspan="0"><?php echo $deposit ?>%</td> -->
+									<!-- <td rowspan="0"><?php //echo $deposit ?>%</td> -->
 								<?php //endif ?>
 							</tr>
 						<?php endforeach ?>

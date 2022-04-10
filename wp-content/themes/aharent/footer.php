@@ -15,9 +15,9 @@
                                 <p class="info-item">Giấy ĐKDN số:</p>
                                 <p>0316362084 do Sở Kế hoạch và Đầu tư TP. Hồ Chí Minh cấp ngày 01/7/2020</p>
                                 <p class="info-item">Số điện thoại/Zalo:</p>
-                                <p>0909.293.265</p>
+                                <p>0867.051.437</p>
                                 <p class="info-item">Email:</p>
-                                <p> hello@aharent.com</p>
+                                <p> cskh@aharent.com</p>
                             </div>
 
                             <!-- <p>Công ty TNHH Tale</p>
@@ -101,7 +101,7 @@
     <?php wp_footer(); ?>
 
 
-    <div class="chat-area">
+    <div class="chat-area-1">
         <!-- <div class="zalo">
             <div class="zalo-chat-widget" data-oaid="1959065384440068544" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
 

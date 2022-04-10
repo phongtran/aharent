@@ -124,6 +124,8 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php do_action( 'woocommerce_cart_totals_before_order_total' ); ?>
 
+		
+
 		<tr class="order-total">
 			<th>
 				<p><?php echo __( 'Total rental fees', 'aharent' ); ?></p>
