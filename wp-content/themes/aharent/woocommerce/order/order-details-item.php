@@ -93,7 +93,10 @@ elseif ( $delivery_option == 'pick-up' )
 			?>
 		</td>
 		<td class="woocommerce-table__product-total product-total">
-			<?php echo $order->get_formatted_line_subtotal( $item ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php
+				echo wc_price( $item->get_meta('deposit') * $qty );
+				// echo $order->get_formatted_line_subtotal( $item ) ; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
 		</td>
 	<?php else: ?>
 		<td class="woocommerce-table__product-total product-total">

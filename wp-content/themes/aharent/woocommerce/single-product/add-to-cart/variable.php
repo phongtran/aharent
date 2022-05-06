@@ -191,11 +191,6 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                         
                         <div class="price-item-title">
                             <span><?php echo __( 'Security deposit', 'aharent' ); ?></span>
-                            <div class="loading-price">
-                                <div class="loading-icon">
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/img/loading.gif" />
-                                </div>
-                            </div>
                         </div>
                         
                         <div class="price-item-value">

@@ -409,7 +409,7 @@ function add_cart_item_data_with_optional_prices( $cart_item_data, $product_id, 
 		$new_price = get_new_price( $product_id, $cart_item_data['date-from'], $cart_item_data['duration'] );
 	
 	$cart_item_data['rental_price'] = $new_price['price'];
-	$cart_item_data['deposit'] = $new_price['deposit'];
+	$cart_item_data['deposit'] = $new_price['price'];
 
 	WC()->customer->set_is_vat_exempt(true);
 
@@ -451,11 +451,7 @@ add_action( 'woocommerce_update_cart_action_cart_updated', 'update_cart_meta', 1
 function save_order_custom_values_of_items( $item, $cart_item_key, $values, $order )
 {
 	$payment_method = $order->get_payment_method();
-	if ( 'cod' == $payment_method )
-		$item->add_meta_data( 'deposit', 0 );
-	else
-		$item->add_meta_data( 'deposit', $values['deposit'] );
-
+	$item->add_meta_data( 'deposit', $values['deposit'] );
 	$item->add_meta_data( '_rental_price', $values['rental_price'] );
 	
 	$duration = $item->get_meta_data( 'duration' );
@@ -596,7 +592,7 @@ function set_cart_calculation( $cart )
 				if ('percentage' == $cart_item['discount']['type'])
 					$amount = $amount * (100 - $cart_item['discount']['value']) / 100;
 
-			$cart_item['data']->set_price( $amount );
+			$cart_item['data']->set_price( $amount + $cart_item['security-deposit'] );
 		}
 		else
 		{
@@ -606,7 +602,7 @@ function set_cart_calculation( $cart )
 				if ('percentage' == $cart_item['discount']['type'])
 					$amount = $amount * (100 - $cart_item['discount']['value']) / 100;
 			
-			$cart_item['data']->set_price( $amount );
+			$cart_item['data']->set_price( $amount + $cart_item['security-deposit'] );
 		}
 			
 	}
@@ -1157,7 +1153,7 @@ function define_default_payment_gateway()
     if( is_checkout() && ! is_wc_endpoint_url() )
 	{
         // HERE define the default payment gateway ID
-        $default_payment_id = 'stripe';
+        $default_payment_id = 'cod';
 
         WC()->session->set( 'chosen_payment_method', $default_payment_id );
     }

@@ -183,7 +183,7 @@
 			wp.ajax.post( "get_product_price", postData )
 				.done(function(response) {
 					$(".price-item-value.rental").first().html( response['data']['price']);
-					$(".deposit .price-item-value").first().html( response['data']['deposit']);
+					// $(".deposit .price-item-value").first().html( response['data']['deposit']);
 					$(".deposit").attr( "style", "display: flex !important; ");
 
 					$('.woocommerce-cart-form .quantity input').removeClass('validate-enabled');
