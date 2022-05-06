@@ -89,7 +89,7 @@ $payment_method = $order->get_payment_method();
 			if ( $order->get_customer_note() ) {
 				?>
 				<tr>
-					<th class="td" scope="row" colspan="<?php echo ( 'cod' == $payment_method )? '5' : '5'; ?>" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
+					<th class="td" scope="row" colspan="<?php echo ( 'cod' == $payment_method )? '5' : '5'; ?>" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php echo __( 'Notes', 'aharent' ); ?></th>
 					<td class="td" style="text-align:<?php echo esc_attr( $text_align ); ?>;"><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
 				</tr>
 				<?php
