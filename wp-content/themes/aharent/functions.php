@@ -966,7 +966,7 @@ function get_featured_products_query()
 		// 'meta_key' => 'total_sales',
 		// 'orderby' => 'meta_value_num',
 		'orderby'	=> 'rand',
-		'stock'       => 1,
+		// 'stock'       => 1,
 		'showposts'   => 12,
 	);
 }
@@ -974,6 +974,26 @@ function get_featured_products_query()
 function get_most_rented_products_query()
 {
 	$featured_categories = array( 'da-ngoai', 'laptop', 'dsrl-camera-camcorders', 'xe-may', 'o-to' );
+
+	return array(
+		'post_type' => 'product',
+		// 'tax_query'	=> array(
+		// 	array(
+		// 		'taxonomy' 	=> 'product_cat',
+		// 		'field' 	=> 'slug',
+		// 		'terms' 	=> $featured_categories,
+		// 	)
+		// ),
+		'meta_key' => 'total_sales',
+		'orderby' => 'meta_value_num',
+		// 'stock'       => 1,
+		'showposts'   => 12,
+	);
+}
+
+function get_car_products_query()
+{
+	$featured_categories = array( 'o-to' );
 
 	return array(
 		'post_type' => 'product',
@@ -986,7 +1006,7 @@ function get_most_rented_products_query()
 		),
 		'meta_key' => 'total_sales',
 		'orderby' => 'meta_value_num',
-		'stock'       => 1,
+		// 'stock'       => 1,
 		'showposts'   => 12,
 	);
 }
@@ -1016,7 +1036,7 @@ function get_recommended_products_query()
 		// 'meta_key' => 'total_sales',
 		// 'orderby' => 'meta_value_num',
 		'orderby'	=> 'rand',
-		'stock'       => 1,
+		// 'stock'       => 1,
 		'showposts'   => 18,
 	);
 }
@@ -1320,6 +1340,5 @@ function filter_woocommerce_cart_totals_coupon_html( $coupon_html, $coupon, $dis
     return $coupon_html;
 }
 //add_filter( 'woocommerce_cart_totals_coupon_html', 'filter_woocommerce_cart_totals_coupon_html', 10, 3 );
-
 
 ?>

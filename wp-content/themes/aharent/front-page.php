@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php  get_header(); ?>
 
 
 <div class="mega-sale">
@@ -158,6 +158,41 @@
 
             </div>
 
+
+        </div>
+
+        <div class="popular-products">
+            <div class="title-bar">
+                <h3>Ô TÔ</h3>
+            </div>
+
+            <?php
+                    woocommerce_product_loop_start();
+
+                    $args = get_car_products_query();
+
+                    $loop = new WP_Query( $args );
+                    shuffle( $loop->posts );
+                    
+
+                    while ( $loop->have_posts() ) :
+                        $loop->the_post();
+                        
+                        wc_get_template_part( 'content', 'product' );
+                    endwhile;
+
+                    wp_reset_query();
+
+                    woocommerce_product_loop_end();
+
+                    
+                ?>
+
+            <div class="button-more">
+                <a href="/danh-muc/o-to">
+                    <button class="aha-button" type="button">Xem thêm</button>
+                </a>
+            </div>
 
         </div>
 

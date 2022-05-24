@@ -37,19 +37,19 @@
 	$('.add-to-cart :input[name="_date_from"]').datetimepicker({
 		format: dateFormat,
 		timepicker: false,
-		minDate: dateFromMinDate,
-		onGenerate: function( ct ) {
-			var dates = $(this).find('.xdsoft_date');	
-			for ( let i = 0; i < dates.length; i++) {
-				var year = $(dates[i]).attr('data-year'),
-					month =  parseInt( $(dates[i]).attr('data-month')) + 1,
-					day = $(dates[i]).attr('data-date'),
-					d = year + '/' + month + '/' + day;
+		minDate: 0,
+		// onGenerate: function( ct ) {
+		// 	var dates = $(this).find('.xdsoft_date');	
+		// 	for ( let i = 0; i < dates.length; i++) {
+		// 		var year = $(dates[i]).attr('data-year'),
+		// 			month =  parseInt( $(dates[i]).attr('data-month')) + 1,
+		// 			day = $(dates[i]).attr('data-date'),
+		// 			d = year + '/' + month + '/' + day;
 				
-				if ( !isDateAvailable(d) )
-					$(dates[i]).addClass('xdsoft_disabled');
-			}
-		},
+		// 		if ( !isDateAvailable(d) )
+		// 			$(dates[i]).addClass('xdsoft_disabled');
+		// 	}
+		// },
 	}).change(function(e) {
 		e.preventDefault();
 
