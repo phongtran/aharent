@@ -764,8 +764,6 @@ function get_product_prices($product)
 					'block_price'	=>	!empty($block_price) && $block_price[0]
 				);
 
-				
-
 					if (
 						!isset($prices[$variation['attributes']['attribute_time_unit']]) ||
 						(isset($prices[$variation['attributes']['attribute_time_unit']]) &&
